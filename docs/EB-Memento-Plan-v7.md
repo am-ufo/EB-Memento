@@ -4,7 +4,7 @@
 
 ## VISION
 
-The formula notepad every EB student builds by hand, made searchable and always in your pocket. Every maths and physics formula on the syllabus, in your language section, in under two seconds, on any device, online or off. What IB and A-Level students have and EB students never got.
+The formula notepad every EB student builds by hand, made searchable and always in your pocket. Every maths and physics formula on the syllabus, in under two seconds, on any device, online or off. What IB and A-Level students have and EB students never got.
 
 ## TARGET
 
@@ -20,7 +20,7 @@ Keep `courses[]` in the data from day one; no picker UI until it earns one.
 - **vs. the paper memento** — searchable, complete, never lost, never left at home
 - **vs. the PDF booklet** — instant, no pinch-zoom, usable one-handed
 - **vs. ChatGPT** — syllabus-exact, no hallucinated formulas, offline, zero typing
-- **vs. anything else** — multilingual search across EN/FR/DE section vocabulary. Nothing does this. This is the moat.
+- **vs. anything else** — syllabus-exact, searchable, offline. Keep the product one language so it actually ships.
 
 ## WHEN — real usage moments
 
@@ -57,7 +57,7 @@ Not an app you "open to study." A memento you flick open mid-problem, take one a
 ## WHAT — scope ladder
 
 - **v1** — search → rendered formula → tap for variable meanings. Topic browse fallback. Offline. Home-screen install. No picker, nothing more.
-- **v2** — Maths 5P; worked example per formula; multilingual aliases complete; course picker if the mixed content warrants it
+- **v2** — Maths 5P; worked example per formula; course picker if the mixed content warrants it
 - **v3** — Physics 4P; past-paper index linking to the official eursc.eu archive (no rehosting)
 - **v4** — Flashcards generated from existing content; optional Telegram Mini App wrapper
 
