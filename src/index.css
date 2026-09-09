@@ -243,8 +243,18 @@ h1 {
 }
 
 .sheet-name {
-  width: 7.5rem;
+  width: 9.5rem;
   font-weight: 600;
+}
+
+.sheet-course {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .sheet-mean {

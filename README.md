@@ -2,7 +2,7 @@
 
 Syllabus-exact maths formulas for European Baccalaureate students. Flick it open mid-homework, take one answer, close. Offline, no login, no backend.
 
-v1 target: **S5 Maths 6P** (covers the 4P cohort too). Course tags live on every formula; there is no course picker yet.
+Catalog: syllabus-exact formulas from the five EB programmes in `docs/eb-curriculumn/`, each tagged with a course. There is no course picker yet — search by title, topic, or course tag (e.g. `S5`, `physics`).
 
 ## Run locally
 
@@ -33,4 +33,4 @@ Output directory: `dist`
 
 ## First useful change
 
-Open `src/data/formulas.json` and add one formula you actually needed this week. Keep `courses: ["S5-Maths-6P"]`, add a title, aliases, KaTeX, and variable meanings, then search for it.
+Open `src/data/formulas.json` and add a formula from the syllabus. Set `courses` to the year-programme tag in [docs/curriculum/README.md](docs/curriculum/README.md), add a title, aliases, KaTeX, and variable meanings, then search for it.

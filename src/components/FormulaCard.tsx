@@ -14,7 +14,11 @@ export function FormulaCard({ formula, selected, saved, onToggle, onToggleSaved 
   return (
     <article className="card">
       <div className="card-head">
-        <p className="card-topic">{formula.topic}</p>
+        <p className="card-topic">
+          {formula.topic}
+          {" · "}
+          {formula.courses.map((course) => course.replaceAll("-", " ")).join(" · ")}
+        </p>
         <FavouriteButton saved={saved} label={formula.title} onToggle={onToggleSaved} />
       </div>
       <button type="button" className="card-hit" onClick={onToggle} aria-expanded={selected}>

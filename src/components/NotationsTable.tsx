@@ -33,7 +33,12 @@ export function NotationsTable({ notations, isSaved, onToggleSaved }: Props) {
               <td className="sheet-sym">
                 <Katex tex={row.symbol} display={false} />
               </td>
-              <td className="sheet-name">{row.name}</td>
+              <td className="sheet-name">
+                {row.name}
+                <span className="sheet-course">
+                  {row.courses.map((course) => course.replaceAll("-", " ")).join(" · ")}
+                </span>
+              </td>
               <td className="sheet-mean">{row.meaning}</td>
               <td className="sheet-fav">
                 <FavouriteButton

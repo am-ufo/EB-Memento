@@ -1,112 +1,1930 @@
 [
   {
-    "id": "quadratic-formula",
-    "courses": ["S5-Maths-6P"],
+    "id": "radical-product",
+    "courses": [
+      "S4-Maths-6P"
+    ],
     "topic": "Algebra",
-    "title": "Quadratic formula",
-    "aliases": ["quadratic equation", "roots of ax^2+bx+c", "abc formula"],
-    "katex": "x = \\dfrac{-b \\pm \\sqrt{b^{2} - 4ac}}{2a}",
+    "title": "Product of square roots",
+    "aliases": [
+      "surds",
+      "radicals multiply"
+    ],
+    "katex": "\\sqrt{a}\\,\\sqrt{b} = \\sqrt{ab}",
     "variables": [
       {
-        "symbol": "x",
-        "meaning": "The roots of the equation"
-      },
-      {
-        "symbol": "a, b, c",
-        "meaning": "Coefficients in ax² + bx + c = 0, with a ≠ 0"
+        "symbol": "a, b",
+        "meaning": "Non-negative reals"
       }
     ]
   },
   {
-    "id": "discriminant",
-    "courses": ["S5-Maths-6P"],
+    "id": "radical-quotient",
+    "courses": [
+      "S4-Maths-6P"
+    ],
     "topic": "Algebra",
-    "title": "Discriminant",
-    "aliases": ["delta", "number of roots"],
-    "katex": "\\Delta = b^{2} - 4ac",
+    "title": "Quotient of square roots",
+    "aliases": [
+      "surds divide",
+      "radicals divide"
+    ],
+    "katex": "\\dfrac{\\sqrt{a}}{\\sqrt{b}} = \\sqrt{\\dfrac{a}{b}}",
     "variables": [
       {
-        "symbol": "\\Delta",
-        "meaning": "Discriminant: > 0 two real roots, = 0 one root, < 0 none (over reals)"
+        "symbol": "a",
+        "meaning": "Non-negative real"
+      },
+      {
+        "symbol": "b",
+        "meaning": "Positive real"
+      }
+    ]
+  },
+  {
+    "id": "radical-absolute",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Square root of a square",
+    "aliases": [
+      "sqrt a squared",
+      "modulus"
+    ],
+    "katex": "\\sqrt{a^{2}} = \\lvert a \\rvert",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Any real number"
+      }
+    ]
+  },
+  {
+    "id": "rationalise-surd",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Rationalise a single surd",
+    "aliases": [
+      "rationalize denominator",
+      "1 over sqrt"
+    ],
+    "katex": "\\dfrac{1}{\\sqrt{a}} = \\dfrac{\\sqrt{a}}{a}",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Positive real"
+      }
+    ]
+  },
+  {
+    "id": "rationalise-binomial",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Rationalise a binomial surd",
+    "aliases": [
+      "conjugate denominator"
+    ],
+    "katex": "\\dfrac{1}{b \\pm \\sqrt{a}} = \\dfrac{b \\mp \\sqrt{a}}{b^{2} - a}",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Positive integer under the root"
+      },
+      {
+        "symbol": "b",
+        "meaning": "Integer"
+      }
+    ]
+  },
+  {
+    "id": "index-product",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Product of powers",
+    "aliases": [
+      "index laws",
+      "exponent add"
+    ],
+    "katex": "a^{m}\\,a^{n} = a^{m+n}",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Non-zero base"
+      },
+      {
+        "symbol": "m, n",
+        "meaning": "Integers in S4; reals later"
+      }
+    ]
+  },
+  {
+    "id": "index-power",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Power of a power",
+    "aliases": [
+      "index laws",
+      "exponent multiply"
+    ],
+    "katex": "(a^{m})^{n} = a^{mn}",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Non-zero base"
+      },
+      {
+        "symbol": "m, n",
+        "meaning": "Integers in S4"
+      }
+    ]
+  },
+  {
+    "id": "index-negative",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Negative index",
+    "aliases": [
+      "reciprocal power",
+      "a to the minus n"
+    ],
+    "katex": "a^{-n} = \\dfrac{1}{a^{n}}",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Non-zero base"
+      },
+      {
+        "symbol": "n",
+        "meaning": "Positive integer in S4"
+      }
+    ]
+  },
+  {
+    "id": "direct-proportion",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Direct proportion",
+    "aliases": [
+      "y = kx",
+      "proportional"
+    ],
+    "katex": "y = k \\cdot x",
+    "variables": [
+      {
+        "symbol": "k",
+        "meaning": "Constant of proportion"
+      },
+      {
+        "symbol": "x, y",
+        "meaning": "The two quantities"
+      }
+    ]
+  },
+  {
+    "id": "inverse-proportion",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Inverse proportion",
+    "aliases": [
+      "y = k/x",
+      "inversely proportional"
+    ],
+    "katex": "y = \\dfrac{k}{x}",
+    "variables": [
+      {
+        "symbol": "k",
+        "meaning": "Constant of proportion"
+      },
+      {
+        "symbol": "x",
+        "meaning": "Non-zero"
+      }
+    ]
+  },
+  {
+    "id": "line-slope-intercept",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Equation of a line",
+    "aliases": [
+      "y = mx + p",
+      "slope intercept"
+    ],
+    "katex": "y = mx + p",
+    "variables": [
+      {
+        "symbol": "m",
+        "meaning": "Gradient"
+      },
+      {
+        "symbol": "p",
+        "meaning": "y-intercept"
+      }
+    ]
+  },
+  {
+    "id": "linear-function",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Linear function",
+    "aliases": [
+      "f(x) = mx + p",
+      "affine"
+    ],
+    "katex": "f(x) = mx + p",
+    "variables": [
+      {
+        "symbol": "m",
+        "meaning": "Gradient"
+      },
+      {
+        "symbol": "p",
+        "meaning": "Value at x = 0"
+      }
+    ]
+  },
+  {
+    "id": "line-general",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "General equation of a line",
+    "aliases": [
+      "ax + by + c = 0",
+      "cartesian line"
+    ],
+    "katex": "ax + by + c = 0",
+    "variables": [
+      {
+        "symbol": "a, b, c",
+        "meaning": "Coefficients, with (a, b) ≠ (0, 0)"
+      }
+    ]
+  },
+  {
+    "id": "binomial-square",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Square of a binomial",
+    "aliases": [
+      "(a+b)^2",
+      "perfect square"
+    ],
+    "katex": "(a \\pm b)^{2} = a^{2} \\pm 2ab + b^{2}",
+    "variables": [
+      {
+        "symbol": "a, b",
+        "meaning": "Any numbers or terms"
+      }
+    ]
+  },
+  {
+    "id": "difference-of-squares",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Difference of squares",
+    "aliases": [
+      "a^2 - b^2",
+      "factorise"
+    ],
+    "katex": "(a + b)(a - b) = a^{2} - b^{2}",
+    "variables": [
+      {
+        "symbol": "a, b",
+        "meaning": "Any numbers or terms"
+      }
+    ]
+  },
+  {
+    "id": "binomial-theorem-s4",
+    "courses": [
+      "S4-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Binomial expansion",
+    "aliases": [
+      "pascal triangle",
+      "newton binomial",
+      "(a+b)^n"
+    ],
+    "katex": "(a + b)^{n} = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^{k}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Non-negative integer"
+      }
+    ]
+  },
+  {
+    "id": "power-function",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Power function",
+    "aliases": [
+      "y = ax^n",
+      "monomial"
+    ],
+    "katex": "y = a x^{n}",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Coefficient"
+      },
+      {
+        "symbol": "n",
+        "meaning": "Positive integer in S4"
       }
     ]
   },
   {
     "id": "pythagoras",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
     "topic": "Geometry",
     "title": "Pythagoras",
-    "aliases": ["right triangle", "hypotenuse"],
+    "aliases": [
+      "right triangle",
+      "hypotenuse"
+    ],
     "katex": "a^{2} + b^{2} = c^{2}",
     "variables": [
       {
         "symbol": "c",
-        "meaning": "Hypotenuse (side opposite the right angle)"
+        "meaning": "Hypotenuse"
       },
       {
         "symbol": "a, b",
-        "meaning": "The two legs of the right triangle"
+        "meaning": "The two legs"
       }
     ]
   },
   {
-    "id": "distance-2d",
-    "courses": ["S5-Maths-6P"],
+    "id": "trig-ratios",
+    "courses": [
+      "S4-Maths-6P"
+    ],
     "topic": "Geometry",
-    "title": "Distance between two points",
-    "aliases": ["length of a segment", "coordinate geometry"],
-    "katex": "d = \\sqrt{(x_{2} - x_{1})^{2} + (y_{2} - y_{1})^{2}}",
+    "title": "Sine, cosine, tangent",
+    "aliases": [
+      "soh cah toa",
+      "right triangle trig"
+    ],
+    "katex": "\\sin p = \\dfrac{\\text{opp}}{\\text{hyp}},\\quad \\cos p = \\dfrac{\\text{adj}}{\\text{hyp}},\\quad \\tan p = \\dfrac{\\text{opp}}{\\text{adj}}",
     "variables": [
       {
-        "symbol": "d",
-        "meaning": "Distance between the points"
-      },
-      {
-        "symbol": "(x_1, y_1), (x_2, y_2)",
-        "meaning": "Coordinates of the two points"
+        "symbol": "p",
+        "meaning": "Acute angle in a right-angled triangle"
       }
     ]
   },
   {
-    "id": "sine-rule",
-    "courses": ["S5-Maths-6P"],
-    "topic": "Trigonometry",
-    "title": "Sine rule",
-    "aliases": ["law of sines", "ASA", "SSA"],
-    "katex": "\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} = \\dfrac{c}{\\sin C}",
+    "id": "tan-from-sin-cos",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Tangent from sine and cosine",
+    "aliases": [
+      "tan = sin/cos"
+    ],
+    "katex": "\\tan p = \\dfrac{\\sin p}{\\cos p}",
+    "variables": [
+      {
+        "symbol": "p",
+        "meaning": "Angle with cosine not zero"
+      }
+    ]
+  },
+  {
+    "id": "circle-circumference",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Circumference of a circle",
+    "aliases": [
+      "perimeter circle",
+      "2 pi r"
+    ],
+    "katex": "C = 2\\pi r",
+    "variables": [
+      {
+        "symbol": "r",
+        "meaning": "Radius"
+      }
+    ]
+  },
+  {
+    "id": "circle-area",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Area of a circle",
+    "aliases": [
+      "pi r squared"
+    ],
+    "katex": "A = \\pi r^{2}",
+    "variables": [
+      {
+        "symbol": "r",
+        "meaning": "Radius"
+      }
+    ]
+  },
+  {
+    "id": "arc-length-degrees",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Arc length (degrees)",
+    "aliases": [
+      "length of an arc"
+    ],
+    "katex": "\\ell = \\dfrac{\\theta}{360} \\cdot 2\\pi r",
+    "variables": [
+      {
+        "symbol": "\\theta",
+        "meaning": "Central angle in degrees"
+      },
+      {
+        "symbol": "r",
+        "meaning": "Radius"
+      }
+    ]
+  },
+  {
+    "id": "sector-area-degrees",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Sector area (degrees)",
+    "aliases": [
+      "area of a sector"
+    ],
+    "katex": "A = \\dfrac{\\theta}{360} \\cdot \\pi r^{2}",
+    "variables": [
+      {
+        "symbol": "\\theta",
+        "meaning": "Central angle in degrees"
+      },
+      {
+        "symbol": "r",
+        "meaning": "Radius"
+      }
+    ]
+  },
+  {
+    "id": "intercept-theorem",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Intercept theorem",
+    "aliases": [
+      "thales",
+      "basic proportionality"
+    ],
+    "katex": "\\dfrac{DE}{BC} = \\dfrac{AD}{AB} = \\dfrac{AE}{AC}",
+    "variables": [
+      {
+        "symbol": "DE",
+        "meaning": "Line parallel to side BC, cutting AB and AC"
+      }
+    ]
+  },
+  {
+    "id": "position-vector",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Position vector",
+    "aliases": [
+      "OM = x OI + y OJ",
+      "coordinates as vectors"
+    ],
+    "katex": "\\overrightarrow{OM} = x\\,\\overrightarrow{OI} + y\\,\\overrightarrow{OJ}",
+    "variables": [
+      {
+        "symbol": "x, y",
+        "meaning": "Coordinates of M"
+      },
+      {
+        "symbol": "O, I, J",
+        "meaning": "Origin and axis unit points"
+      }
+    ]
+  },
+  {
+    "id": "parallelogram-vectors",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Parallelogram formula",
+    "aliases": [
+      "equal vectors",
+      "parallelogram law"
+    ],
+    "katex": "\\overrightarrow{AB} = \\overrightarrow{CD} \\iff \\overrightarrow{AC} = \\overrightarrow{BD}",
+    "variables": [
+      {
+        "symbol": "A, B, C, D",
+        "meaning": "Vertices; ABCD is a parallelogram when either equality holds"
+      }
+    ]
+  },
+  {
+    "id": "rational-index",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Rational index as a radical",
+    "aliases": [
+      "a^{1/n}",
+      "root as power"
+    ],
+    "katex": "a^{1/n} = \\sqrt[n]{a},\\quad a^{m/n} = \\sqrt[n]{a^{m}}",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Positive when n is even"
+      },
+      {
+        "symbol": "m, n",
+        "meaning": "Integers, n ≠ 0"
+      }
+    ]
+  },
+  {
+    "id": "quadratic-three-forms",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Three forms of a quadratic",
+    "aliases": [
+      "expanded factor completed square",
+      "parabola forms"
+    ],
+    "katex": "y = ax^{2} + bx + c = a(x - r)(x - s) = a(x - p)^{2} + q",
     "variables": [
       {
         "symbol": "a, b, c",
-        "meaning": "Side lengths opposite angles A, B, C"
+        "meaning": "Expanded coefficients"
+      },
+      {
+        "symbol": "r, s",
+        "meaning": "Roots"
+      },
+      {
+        "symbol": "(p, q)",
+        "meaning": "Vertex"
+      }
+    ]
+  },
+  {
+    "id": "quadratic-formula",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Quadratic formula",
+    "aliases": [
+      "roots of ax^2+bx+c",
+      "abc formula",
+      "general solution"
+    ],
+    "katex": "x = \\dfrac{-b \\pm \\sqrt{b^{2} - 4ac}}{2a}",
+    "variables": [
+      {
+        "symbol": "x",
+        "meaning": "The roots"
+      },
+      {
+        "symbol": "a, b, c",
+        "meaning": "Coefficients in ax² + bx + c = 0, a ≠ 0"
+      }
+    ]
+  },
+  {
+    "id": "discriminant",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Discriminant",
+    "aliases": [
+      "delta",
+      "number of roots"
+    ],
+    "katex": "\\Delta = b^{2} - 4ac",
+    "variables": [
+      {
+        "symbol": "\\Delta",
+        "meaning": "> 0 two real roots, = 0 one root, < 0 none over the reals"
+      }
+    ]
+  },
+  {
+    "id": "parabola-vertex",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Axis and vertex of a parabola",
+    "aliases": [
+      "axis of symmetry",
+      "turning point",
+      "-b/2a"
+    ],
+    "katex": "x = -\\dfrac{b}{2a},\\quad V = \\left(-\\dfrac{b}{2a},\\, f\\left(-\\dfrac{b}{2a}\\right)\\right)",
+    "variables": [
+      {
+        "symbol": "a, b",
+        "meaning": "From y = ax² + bx + c"
+      }
+    ]
+  },
+  {
+    "id": "exponential-model",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Standard exponential model",
+    "aliases": [
+      "growth decay",
+      "y = C a^x"
+    ],
+    "katex": "y = C \\cdot a^{x}",
+    "variables": [
+      {
+        "symbol": "C",
+        "meaning": "Initial value (x = 0)"
+      },
+      {
+        "symbol": "a",
+        "meaning": "Growth factor: a > 1 growth, 0 < a < 1 decay"
+      }
+    ]
+  },
+  {
+    "id": "log-definition",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Definition of a logarithm",
+    "aliases": [
+      "log as inverse of power",
+      "log_b a"
+    ],
+    "katex": "\\log_{b} a = c \\iff b^{c} = a",
+    "variables": [
+      {
+        "symbol": "b",
+        "meaning": "Positive integer base, b ≠ 1"
+      },
+      {
+        "symbol": "a",
+        "meaning": "Positive real"
+      }
+    ]
+  },
+  {
+    "id": "log-product",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Logarithm of a product",
+    "aliases": [
+      "log laws",
+      "log rules"
+    ],
+    "katex": "\\log(ab) = \\log a + \\log b",
+    "variables": [
+      {
+        "symbol": "a, b",
+        "meaning": "Positive reals"
+      }
+    ]
+  },
+  {
+    "id": "log-quotient",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Logarithm of a quotient",
+    "aliases": [
+      "log divide",
+      "log laws"
+    ],
+    "katex": "\\log\\dfrac{a}{b} = \\log a - \\log b",
+    "variables": [
+      {
+        "symbol": "a, b",
+        "meaning": "Positive reals"
+      }
+    ]
+  },
+  {
+    "id": "log-power",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Logarithm of a power",
+    "aliases": [
+      "n log",
+      "log laws"
+    ],
+    "katex": "\\log(a^{n}) = n \\log a",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Positive real"
+      },
+      {
+        "symbol": "n",
+        "meaning": "Real exponent"
+      }
+    ]
+  },
+  {
+    "id": "trig-on-reals",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Sine, cosine, tangent on the reals",
+    "aliases": [
+      "periodic models",
+      "trig functions"
+    ],
+    "katex": "y = \\sin x,\\quad y = \\cos x,\\quad y = \\tan x",
+    "variables": [
+      {
+        "symbol": "x",
+        "meaning": "Real number (radians in later work; degrees still used)"
+      }
+    ]
+  },
+  {
+    "id": "sine-transform",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Algebra",
+    "title": "Transformed sine",
+    "aliases": [
+      "a sin b(x+c) + d",
+      "wave parameters"
+    ],
+    "katex": "y = a \\cdot \\sin\\bigl(b(x + c)\\bigr) + d",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Amplitude"
+      },
+      {
+        "symbol": "b",
+        "meaning": "Affects period"
+      },
+      {
+        "symbol": "c",
+        "meaning": "Phase shift"
+      },
+      {
+        "symbol": "d",
+        "meaning": "Vertical shift"
+      }
+    ]
+  },
+  {
+    "id": "radians",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Degrees to radians",
+    "aliases": [
+      "radian measure",
+      "pi/180"
+    ],
+    "katex": "\\theta_{\\mathrm{rad}} = \\dfrac{\\pi}{180}\\,\\theta_{\\mathrm{deg}}",
+    "variables": [
+      {
+        "symbol": "\\theta",
+        "meaning": "The same angle in both units"
+      }
+    ]
+  },
+  {
+    "id": "complementary-angles",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Complementary angles",
+    "aliases": [
+      "cos = sin(90-q)",
+      "cofunction"
+    ],
+    "katex": "\\cos q = \\sin(90^{\\circ} - q) = \\sin\\left(\\dfrac{\\pi}{2} - q\\right)",
+    "variables": [
+      {
+        "symbol": "q",
+        "meaning": "Oriented angle"
+      }
+    ]
+  },
+  {
+    "id": "supplementary-angles",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Supplementary angles",
+    "aliases": [
+      "sin(180-q)",
+      "sine supplementary"
+    ],
+    "katex": "\\sin q = \\sin(180^{\\circ} - q) = \\sin(\\pi - q)",
+    "variables": [
+      {
+        "symbol": "q",
+        "meaning": "Oriented angle"
+      }
+    ]
+  },
+  {
+    "id": "pythagorean-identity",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Pythagorean identity",
+    "aliases": [
+      "sin^2 + cos^2 = 1",
+      "unit circle identity"
+    ],
+    "katex": "\\cos^{2} p + \\sin^{2} p = 1",
+    "variables": [
+      {
+        "symbol": "p",
+        "meaning": "Any angle"
+      }
+    ]
+  },
+  {
+    "id": "cos-addition",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Cosine of a sum or difference",
+    "aliases": [
+      "addition formula cosine",
+      "cos(a±b)"
+    ],
+    "katex": "\\cos(a \\pm b) = \\cos a\\cos b \\mp \\sin a\\sin b",
+    "variables": [
+      {
+        "symbol": "a, b",
+        "meaning": "Angles"
+      }
+    ]
+  },
+  {
+    "id": "sin-addition",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Sine of a sum or difference",
+    "aliases": [
+      "addition formula sine",
+      "sin(a±b)"
+    ],
+    "katex": "\\sin(a \\pm b) = \\sin a\\cos b \\pm \\cos a\\sin b",
+    "variables": [
+      {
+        "symbol": "a, b",
+        "meaning": "Angles"
+      }
+    ]
+  },
+  {
+    "id": "sin-double",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Double-angle sine",
+    "aliases": [
+      "sin 2a"
+    ],
+    "katex": "\\sin(2a) = 2\\sin a\\cos a",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Angle"
+      }
+    ]
+  },
+  {
+    "id": "cos-double",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Double-angle cosine",
+    "aliases": [
+      "cos 2a"
+    ],
+    "katex": "\\cos(2a) = \\cos^{2} a - \\sin^{2} a",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Angle"
       }
     ]
   },
   {
     "id": "cosine-rule",
-    "courses": ["S5-Maths-6P"],
-    "topic": "Trigonometry",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
     "title": "Cosine rule",
-    "aliases": ["law of cosines", "SAS", "SSS"],
-    "katex": "c^{2} = a^{2} + b^{2} - 2ab\\cos C",
+    "aliases": [
+      "law of cosines",
+      "SAS",
+      "SSS"
+    ],
+    "katex": "a^{2} = b^{2} + c^{2} - 2bc\\cos\\alpha",
     "variables": [
       {
-        "symbol": "C",
-        "meaning": "The included angle, opposite side c"
+        "symbol": "\\alpha",
+        "meaning": "Angle opposite side a"
+      }
+    ]
+  },
+  {
+    "id": "sine-rule",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Sine rule",
+    "aliases": [
+      "law of sines",
+      "ASA",
+      "SSA"
+    ],
+    "katex": "\\dfrac{a}{\\sin\\alpha} = \\dfrac{b}{\\sin\\beta} = \\dfrac{c}{\\sin\\gamma}",
+    "variables": [
+      {
+        "symbol": "a, b, c",
+        "meaning": "Sides opposite angles α, β, γ"
+      }
+    ]
+  },
+  {
+    "id": "triangle-area-sas",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Area of a triangle (SAS)",
+    "aliases": [
+      "1/2 bc sin A",
+      "two sides included angle"
+    ],
+    "katex": "A = \\dfrac{1}{2} bc\\sin\\alpha",
+    "variables": [
+      {
+        "symbol": "\\alpha",
+        "meaning": "Included angle between sides b and c"
+      }
+    ]
+  },
+  {
+    "id": "vector-magnitude",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Magnitude of a vector",
+    "aliases": [
+      "norm",
+      "length of a vector",
+      "modulus vector"
+    ],
+    "katex": "\\lVert \\vec{u} \\rVert = \\sqrt{\\vec{u}\\cdot\\vec{u}}",
+    "variables": [
+      {
+        "symbol": "\\vec{u}",
+        "meaning": "A vector"
+      }
+    ]
+  },
+  {
+    "id": "scalar-product-angle",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Scalar product from an angle",
+    "aliases": [
+      "dot product cosine",
+      "u·v = |u||v|cos"
+    ],
+    "katex": "\\vec{u}\\cdot\\vec{v} = \\lVert\\vec{u}\\rVert\\,\\lVert\\vec{v}\\rVert\\cos\\theta",
+    "variables": [
+      {
+        "symbol": "\\theta",
+        "meaning": "Angle between the two vectors"
+      }
+    ]
+  },
+  {
+    "id": "distance-2d",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Distance between two points",
+    "aliases": [
+      "length of a segment",
+      "coordinate geometry",
+      "AB squared"
+    ],
+    "katex": "AB^{2} = \\lVert\\overrightarrow{AB}\\rVert^{2} = (x_{2}-x_{1})^{2} + (y_{2}-y_{1})^{2}",
+    "variables": [
+      {
+        "symbol": "A(x_1, y_1), B(x_2, y_2)",
+        "meaning": "The two points"
+      }
+    ]
+  },
+  {
+    "id": "scalar-product-orthonormal",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Geometry",
+    "title": "Scalar product in an orthonormal basis",
+    "aliases": [
+      "dot product coordinates",
+      "u·v = x1x2+y1y2"
+    ],
+    "katex": "\\vec{u}\\cdot\\vec{v} = x_{1}x_{2} + y_{1}y_{2}",
+    "variables": [
+      {
+        "symbol": "(x_1, y_1), (x_2, y_2)",
+        "meaning": "Components in an orthonormal basis"
+      }
+    ]
+  },
+  {
+    "id": "probability-bounds",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Probability bounds",
+    "aliases": [
+      "0 to 1",
+      "probability between"
+    ],
+    "katex": "0 \\le \\mathrm{P}(A) \\le 1",
+    "variables": [
+      {
+        "symbol": "A",
+        "meaning": "An event"
+      }
+    ]
+  },
+  {
+    "id": "complement-probability",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Complementary event",
+    "aliases": [
+      "1 - P(A)",
+      "not A"
+    ],
+    "katex": "\\mathrm{P}(\\overline{A}) = 1 - \\mathrm{P}(A)",
+    "variables": [
+      {
+        "symbol": "A",
+        "meaning": "An event"
+      }
+    ]
+  },
+  {
+    "id": "addition-rule",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Addition rule",
+    "aliases": [
+      "P(A or B)",
+      "inclusion exclusion"
+    ],
+    "katex": "\\mathrm{P}(A \\cup B) = \\mathrm{P}(A) + \\mathrm{P}(B) - \\mathrm{P}(A \\cap B)",
+    "variables": [
+      {
+        "symbol": "A, B",
+        "meaning": "Events"
+      }
+    ]
+  },
+  {
+    "id": "addition-exclusive",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Mutually exclusive addition",
+    "aliases": [
+      "disjoint events",
+      "A cap B empty"
+    ],
+    "katex": "\\mathrm{P}(A \\cup B) = \\mathrm{P}(A) + \\mathrm{P}(B)\\quad\\text{when }A \\cap B = \\emptyset",
+    "variables": [
+      {
+        "symbol": "A, B",
+        "meaning": "Mutually exclusive events"
+      }
+    ]
+  },
+  {
+    "id": "conditional-probability",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Conditional probability",
+    "aliases": [
+      "P(A|B)",
+      "P_B(A)",
+      "given that"
+    ],
+    "katex": "\\mathrm{P}_{B}(A) = \\mathrm{P}(A \\mid B) = \\dfrac{\\mathrm{P}(A \\cap B)}{\\mathrm{P}(B)}",
+    "variables": [
+      {
+        "symbol": "B",
+        "meaning": "Conditioning event, P(B) ≠ 0"
+      }
+    ]
+  },
+  {
+    "id": "independent-events",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Independent events",
+    "aliases": [
+      "multiplication rule",
+      "P(A and B) = P(A)P(B)"
+    ],
+    "katex": "\\mathrm{P}(A \\cap B) = \\mathrm{P}(A)\\,\\mathrm{P}(B)",
+    "variables": [
+      {
+        "symbol": "A, B",
+        "meaning": "Independent events"
+      }
+    ]
+  },
+  {
+    "id": "std-dev-mean-form",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Standard deviation",
+    "aliases": [
+      "sigma",
+      "spread",
+      "population sd"
+    ],
+    "katex": "\\sigma = \\sqrt{\\dfrac{1}{n}\\sum_{i=1}^{n}(x_{i} - \\bar{x})^{2}}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Sample size, n ≤ 6 by hand"
+      },
+      {
+        "symbol": "\\bar{x}",
+        "meaning": "Mean"
+      }
+    ]
+  },
+  {
+    "id": "std-dev-raw-form",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Standard deviation (raw scores)",
+    "aliases": [
+      "computational formula",
+      "variance identity"
+    ],
+    "katex": "\\sigma = \\sqrt{\\dfrac{1}{n}\\sum_{i=1}^{n} x_{i}^{2} - \\bar{x}^{2}}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Sample size, n ≤ 6 by hand"
+      }
+    ]
+  },
+  {
+    "id": "complex-algebraic",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Complex number",
+    "aliases": [
+      "a + ib",
+      "real imaginary part"
+    ],
+    "katex": "z = a + \\mathrm{i}b",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Real part"
+      },
+      {
+        "symbol": "b",
+        "meaning": "Imaginary part"
+      }
+    ]
+  },
+  {
+    "id": "sequence-explicit",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Explicit sequence",
+    "aliases": [
+      "u_n = f(n)",
+      "closed form sequence"
+    ],
+    "katex": "u_{n} = f(n)",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Index, from 0 or 1 as defined"
+      }
+    ]
+  },
+  {
+    "id": "sequence-recursive",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Recursive sequence",
+    "aliases": [
+      "recurrence",
+      "u_{n+1} = f(u_n)"
+    ],
+    "katex": "u_{n+1} = f(u_{n}),\\quad u_{0}\\text{ (or }u_{1}\\text{) given}",
+    "variables": [
+      {
+        "symbol": "f",
+        "meaning": "The recurrence rule"
+      }
+    ]
+  },
+  {
+    "id": "derivative-definition",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Derivative at a point",
+    "aliases": [
+      "first principles",
+      "gradient",
+      "limit definition"
+    ],
+    "katex": "f'(x) = \\lim_{h \\to 0}\\dfrac{f(x+h) - f(x)}{h}",
+    "variables": [
+      {
+        "symbol": "h",
+        "meaning": "Increment, h ≠ 0"
+      }
+    ]
+  },
+  {
+    "id": "power-rule",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Power rule",
+    "aliases": [
+      "derivative of x^n",
+      "differentiation"
+    ],
+    "katex": "\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\, x^{n} = n x^{n-1}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Real exponent (x > 0 when n is not an integer)"
+      }
+    ]
+  },
+  {
+    "id": "second-derivative",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Second derivative",
+    "aliases": [
+      "f''",
+      "convexity"
+    ],
+    "katex": "f''(x) = \\bigl(f'(x)\\bigr)'",
+    "variables": [
+      {
+        "symbol": "f''",
+        "meaning": "Rate of change of the gradient"
+      }
+    ]
+  },
+  {
+    "id": "tangent-line",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Tangent to a graph",
+    "aliases": [
+      "equation of tangent"
+    ],
+    "katex": "y - f(a) = f'(a)\\,(x - a)",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Point of contact, x = a"
+      }
+    ]
+  },
+  {
+    "id": "exp-base-e",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Exponential of base e",
+    "aliases": [
+      "natural exponential",
+      "y' = y"
+    ],
+    "katex": "y = \\mathrm{e}^{x},\\quad y' = y,\\quad y(0) = 1",
+    "variables": [
+      {
+        "symbol": "\\mathrm{e}",
+        "meaning": "Base of the natural exponential"
+      }
+    ]
+  },
+  {
+    "id": "natural-log",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Natural logarithm",
+    "aliases": [
+      "ln inverse of exp"
+    ],
+    "katex": "\\ln x = \\log_{\\mathrm{e}} x,\\quad \\ln(\\mathrm{e}^{x}) = x",
+    "variables": [
+      {
+        "symbol": "x",
+        "meaning": "Positive real"
+      }
+    ]
+  },
+  {
+    "id": "index-log-rules",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Index and logarithm rules",
+    "aliases": [
+      "log laws base a",
+      "properties of indices"
+    ],
+    "katex": "\\log_{a}(uv) = \\log_{a}u + \\log_{a}v,\\quad a^{p}a^{q} = a^{p+q}",
+    "variables": [
+      {
+        "symbol": "a, u, v",
+        "meaning": "Positive, a ≠ 1"
+      }
+    ]
+  },
+  {
+    "id": "line-vector",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Vector equation of a line",
+    "aliases": [
+      "parametric line",
+      "point and direction"
+    ],
+    "katex": "\\vec{r} = \\vec{a} + t\\,\\vec{d}",
+    "variables": [
+      {
+        "symbol": "\\vec{a}",
+        "meaning": "Position of a known point"
+      },
+      {
+        "symbol": "\\vec{d}",
+        "meaning": "Direction vector"
+      },
+      {
+        "symbol": "t",
+        "meaning": "Real parameter"
+      }
+    ]
+  },
+  {
+    "id": "circle-equation",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Equation of a circle",
+    "aliases": [
+      "(x-a)^2+(y-b)^2=r^2"
+    ],
+    "katex": "(x - a)^{2} + (y - b)^{2} = r^{2}",
+    "variables": [
+      {
+        "symbol": "(a, b)",
+        "meaning": "Centre"
+      },
+      {
+        "symbol": "r",
+        "meaning": "Radius"
+      }
+    ]
+  },
+  {
+    "id": "angle-two-lines",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Angle between two lines",
+    "aliases": [
+      "intersecting lines angle"
+    ],
+    "katex": "\\cos\\theta = \\dfrac{\\lvert \\vec{u}\\cdot\\vec{v} \\rvert}{\\lVert\\vec{u}\\rVert\\,\\lVert\\vec{v}\\rVert}",
+    "variables": [
+      {
+        "symbol": "\\vec{u}, \\vec{v}",
+        "meaning": "Direction vectors of the lines"
+      }
+    ]
+  },
+  {
+    "id": "point-line-distance",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Distance from a point to a line",
+    "aliases": [
+      "point to line",
+      "parallel lines distance"
+    ],
+    "katex": "d = \\dfrac{\\lvert ax_{0} + by_{0} + c \\rvert}{\\sqrt{a^{2} + b^{2}}}",
+    "variables": [
+      {
+        "symbol": "ax+by+c=0",
+        "meaning": "Cartesian equation of the line"
+      },
+      {
+        "symbol": "(x_0, y_0)",
+        "meaning": "The point"
+      }
+    ]
+  },
+  {
+    "id": "permutations-n",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Permutations of n objects",
+    "aliases": [
+      "n factorial",
+      "n!"
+    ],
+    "katex": "n!",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Number of distinct objects"
+      }
+    ]
+  },
+  {
+    "id": "permutations-k-from-n",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Permutations of k from n",
+    "aliases": [
+      "P(n,k)",
+      "nPk without repetition"
+    ],
+    "katex": "\\dfrac{n!}{(n-k)!}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Total"
+      },
+      {
+        "symbol": "k",
+        "meaning": "Taken, no repetition"
+      }
+    ]
+  },
+  {
+    "id": "permutations-repetition",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Permutations with repetition",
+    "aliases": [
+      "n^k",
+      "words passwords"
+    ],
+    "katex": "n^{k}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Choices each time"
+      },
+      {
+        "symbol": "k",
+        "meaning": "Length"
+      }
+    ]
+  },
+  {
+    "id": "combinations",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Combinations",
+    "aliases": [
+      "n choose k",
+      "binomial coefficient"
+    ],
+    "katex": "\\binom{n}{k} = \\dfrac{n!}{k!\\,(n-k)!}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Total"
+      },
+      {
+        "symbol": "k",
+        "meaning": "Chosen, unordered, no repetition"
+      }
+    ]
+  },
+  {
+    "id": "combinations-repetition",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Combinations with repetition",
+    "aliases": [
+      "stars and bars",
+      "n+k-1 choose k"
+    ],
+    "katex": "\\binom{n+k-1}{k} = \\dfrac{(n+k-1)!}{k!\\,(n-1)!}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Types"
+      },
+      {
+        "symbol": "k",
+        "meaning": "Chosen with repetition allowed"
+      }
+    ]
+  },
+  {
+    "id": "binomial-identities",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Binomial identities",
+    "aliases": [
+      "combinational formulas",
+      "symmetry pascal"
+    ],
+    "katex": "\\binom{n}{k} = \\binom{n}{n-k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}",
+    "variables": [
+      {
+        "symbol": "n, k",
+        "meaning": "Non-negative integers, k ≤ n"
+      }
+    ]
+  },
+  {
+    "id": "total-probability",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Total probability",
+    "aliases": [
+      "law of total probability",
+      "partition"
+    ],
+    "katex": "\\mathrm{P}(B) = \\mathrm{P}(A_{1})\\mathrm{P}(B \\mid A_{1}) + \\mathrm{P}(A_{2})\\mathrm{P}(B \\mid A_{2})",
+    "variables": [
+      {
+        "symbol": "A_1, A_2",
+        "meaning": "A partition of the sample space"
+      }
+    ]
+  },
+  {
+    "id": "bayes-theorem",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Bayes' theorem",
+    "aliases": [
+      "bayes",
+      "inverse probability"
+    ],
+    "katex": "\\mathrm{P}(A_{k} \\mid B) = \\dfrac{\\mathrm{P}(A_{k})\\,\\mathrm{P}(B \\mid A_{k})}{\\mathrm{P}(B)}",
+    "variables": [
+      {
+        "symbol": "k",
+        "meaning": "1 or 2 in the syllabus restriction"
+      }
+    ]
+  },
+  {
+    "id": "expected-value-discrete",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Expected value (discrete)",
+    "aliases": [
+      "E(X)",
+      "mean of a random variable"
+    ],
+    "katex": "\\mathrm{E}(X) = \\sum_{k} x_{k}\\,\\mathrm{P}(X = x_{k})",
+    "variables": [
+      {
+        "symbol": "X",
+        "meaning": "Finite discrete random variable"
+      }
+    ]
+  },
+  {
+    "id": "variance-discrete",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Variance (discrete)",
+    "aliases": [
+      "Var(X)",
+      "standard deviation sigma"
+    ],
+    "katex": "\\mathrm{Var}(X) = \\mathrm{E}(X^{2}) - \\bigl(\\mathrm{E}(X)\\bigr)^{2},\\quad \\sigma(X) = \\sqrt{\\mathrm{Var}(X)}",
+    "variables": [
+      {
+        "symbol": "X",
+        "meaning": "Discrete random variable"
+      }
+    ]
+  },
+  {
+    "id": "binomial-probability",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Binomial probability",
+    "aliases": [
+      "bernoulli formula",
+      "P(X=k)"
+    ],
+    "katex": "\\mathrm{P}(X = k) = \\binom{n}{k} p^{k}(1-p)^{n-k}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Number of independent trials"
+      },
+      {
+        "symbol": "p",
+        "meaning": "Success probability"
+      },
+      {
+        "symbol": "k",
+        "meaning": "Number of successes"
+      }
+    ]
+  },
+  {
+    "id": "binomial-mean-var",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Binomial mean and variance",
+    "aliases": [
+      "np",
+      "npq"
+    ],
+    "katex": "\\mathrm{E}(X) = np,\\quad \\mathrm{Var}(X) = np(1-p)",
+    "variables": [
+      {
+        "symbol": "n, p",
+        "meaning": "Binomial parameters"
+      }
+    ]
+  },
+  {
+    "id": "complex-modulus",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Modulus of a complex number",
+    "aliases": [
+      "|z|",
+      "absolute value complex"
+    ],
+    "katex": "\\lvert z \\rvert = \\sqrt{a^{2} + b^{2}}\\quad(z = a + \\mathrm{i}b)",
+    "variables": [
+      {
+        "symbol": "a, b",
+        "meaning": "Real and imaginary parts"
+      }
+    ]
+  },
+  {
+    "id": "complex-argument",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Argument of a complex number",
+    "aliases": [
+      "arg z",
+      "theta polar"
+    ],
+    "katex": "z = \\lvert z \\rvert\\,(\\cos\\theta + \\mathrm{i}\\sin\\theta),\\quad \\theta = \\arg z \\in (-\\pi,\\pi]",
+    "variables": [
+      {
+        "symbol": "\\theta",
+        "meaning": "Argument"
+      }
+    ]
+  },
+  {
+    "id": "complex-exponential",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Exponential form",
+    "aliases": [
+      "re^{i theta}",
+      "euler form"
+    ],
+    "katex": "z = r\\,\\mathrm{e}^{\\mathrm{i}\\theta}",
+    "variables": [
+      {
+        "symbol": "r",
+        "meaning": "Modulus, r > 0"
+      },
+      {
+        "symbol": "\\theta",
+        "meaning": "Argument"
+      }
+    ]
+  },
+  {
+    "id": "complex-nth-root",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "nth roots of a complex number",
+    "aliases": [
+      "z^n = a",
+      "de moivre roots"
+    ],
+    "katex": "z_{k} = r^{1/n}\\exp\\left(\\mathrm{i}\\dfrac{\\theta + 2k\\pi}{n}\\right),\\quad k = 0,\\ldots,n-1",
+    "variables": [
+      {
+        "symbol": "r, \\theta",
+        "meaning": "Modulus and argument of a"
+      },
+      {
+        "symbol": "n",
+        "meaning": "Integer ≥ 2"
       }
     ]
   },
   {
     "id": "arithmetic-nth",
-    "courses": ["S5-Maths-6P"],
-    "topic": "Sequences",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Algebra",
     "title": "Arithmetic sequence — nth term",
-    "aliases": ["AP", "common difference"],
-    "katex": "u_{n} = u_{1} + (n - 1)d",
+    "aliases": [
+      "AP",
+      "common difference"
+    ],
+    "katex": "u_{n} = u_{1} + (n-1)d",
     "variables": [
-      {
-        "symbol": "u_n",
-        "meaning": "The nth term"
-      },
       {
         "symbol": "d",
         "meaning": "Common difference"
@@ -114,30 +1932,2158 @@
     ]
   },
   {
-    "id": "power-rule",
-    "courses": ["S5-Maths-6P"],
-    "topic": "Calculus",
-    "title": "Power rule",
-    "aliases": ["derivative of x^n", "differentiation"],
-    "katex": "\\dfrac{d}{dx}\\, x^{n} = n x^{n-1}",
+    "id": "geometric-nth",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Geometric sequence — nth term",
+    "aliases": [
+      "GP",
+      "common ratio"
+    ],
+    "katex": "u_{n} = u_{1}\\,r^{n-1}",
     "variables": [
       {
-        "symbol": "n",
-        "meaning": "A real exponent (for x > 0 when n is not an integer)"
+        "symbol": "r",
+        "meaning": "Common ratio"
       }
     ]
   },
   {
-    "id": "log-product",
-    "courses": ["S5-Maths-6P"],
+    "id": "arithmetic-sum",
+    "courses": [
+      "S7-Maths-5P"
+    ],
     "topic": "Algebra",
-    "title": "Logarithm of a product",
-    "aliases": ["log laws", "log rules"],
-    "katex": "\\log(ab) = \\log a + \\log b",
+    "title": "Sum of an arithmetic sequence",
+    "aliases": [
+      "sum AP",
+      "n/2 (2a+(n-1)d)"
+    ],
+    "katex": "S_{n} = \\dfrac{n}{2}\\bigl(2u_{1} + (n-1)d\\bigr)",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Number of terms"
+      }
+    ]
+  },
+  {
+    "id": "geometric-sum",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Algebra",
+    "title": "Sum of a geometric sequence",
+    "aliases": [
+      "sum GP",
+      "geometric series"
+    ],
+    "katex": "S_{n} = u_{1}\\dfrac{1-r^{n}}{1-r}\\quad(r \\ne 1)",
+    "variables": [
+      {
+        "symbol": "r",
+        "meaning": "Common ratio"
+      }
+    ]
+  },
+  {
+    "id": "oblique-asymptote",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Oblique asymptote",
+    "aliases": [
+      "slant asymptote",
+      "y = mx + p"
+    ],
+    "katex": "m = \\lim_{x \\to \\infty}\\dfrac{f(x)}{x},\\quad p = \\lim_{x \\to \\infty}\\bigl(f(x) - mx\\bigr)",
+    "variables": [
+      {
+        "symbol": "y = mx + p",
+        "meaning": "The oblique asymptote when both limits exist"
+      }
+    ]
+  },
+  {
+    "id": "definite-integral",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Definite integral",
+    "aliases": [
+      "fundamental theorem",
+      "F(b)-F(a)"
+    ],
+    "katex": "\\int_{a}^{b} f(x)\\,\\mathrm{d}x = F(b) - F(a)",
+    "variables": [
+      {
+        "symbol": "F",
+        "meaning": "An antiderivative of f"
+      }
+    ]
+  },
+  {
+    "id": "integral-linearity",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Linearity of the integral",
+    "aliases": [
+      "integral properties"
+    ],
+    "katex": "\\int_{a}^{b}(\\lambda f + \\mu g) = \\lambda\\int_{a}^{b} f + \\mu\\int_{a}^{b} g",
+    "variables": [
+      {
+        "symbol": "\\lambda, \\mu",
+        "meaning": "Constants"
+      }
+    ]
+  },
+  {
+    "id": "integral-additivity",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Additivity of interval",
+    "aliases": [
+      "split integral",
+      "Chasles"
+    ],
+    "katex": "\\int_{a}^{b} f + \\int_{b}^{c} f = \\int_{a}^{c} f",
+    "variables": [
+      {
+        "symbol": "a, b, c",
+        "meaning": "Limits in the domain"
+      }
+    ]
+  },
+  {
+    "id": "volume-revolution",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Analysis",
+    "title": "Volume of revolution",
+    "aliases": [
+      "solid of revolution",
+      "pi y^2 dx"
+    ],
+    "katex": "V = \\pi\\int_{a}^{b}\\bigl(f(x)\\bigr)^{2}\\,\\mathrm{d}x",
+    "variables": [
+      {
+        "symbol": "f",
+        "meaning": "Rotated about the x-axis from a to b"
+      }
+    ]
+  },
+  {
+    "id": "line-3d",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Line in 3D",
+    "aliases": [
+      "parametric 3d line",
+      "vector equation line"
+    ],
+    "katex": "\\vec{r} = \\vec{a} + t\\,\\vec{d}",
+    "variables": [
+      {
+        "symbol": "\\vec{a}",
+        "meaning": "A point on the line"
+      },
+      {
+        "symbol": "\\vec{d}",
+        "meaning": "Direction"
+      }
+    ]
+  },
+  {
+    "id": "vector-product",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Vector product",
+    "aliases": [
+      "cross product",
+      "i j k"
+    ],
+    "katex": "\\vec{u}\\times\\vec{v} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ u_{x} & u_{y} & u_{z} \\\\ v_{x} & v_{y} & v_{z} \\end{vmatrix}",
+    "variables": [
+      {
+        "symbol": "\\vec{u}, \\vec{v}",
+        "meaning": "Vectors in an orthonormal basis"
+      }
+    ]
+  },
+  {
+    "id": "plane-cartesian",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Cartesian equation of a plane",
+    "aliases": [
+      "ax+by+cz+d=0"
+    ],
+    "katex": "ax + by + cz + d = 0",
+    "variables": [
+      {
+        "symbol": "(a, b, c)",
+        "meaning": "A normal vector"
+      }
+    ]
+  },
+  {
+    "id": "plane-vector",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Vector equation of a plane",
+    "aliases": [
+      "point and two directions"
+    ],
+    "katex": "\\vec{r} = \\vec{a} + \\lambda\\vec{u} + \\mu\\vec{v}",
+    "variables": [
+      {
+        "symbol": "\\vec{u}, \\vec{v}",
+        "meaning": "Two non-parallel directions in the plane"
+      }
+    ]
+  },
+  {
+    "id": "point-plane-distance",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Distance from a point to a plane",
+    "aliases": [
+      "3d distances"
+    ],
+    "katex": "d = \\dfrac{\\lvert ax_{0}+by_{0}+cz_{0}+d \\rvert}{\\sqrt{a^{2}+b^{2}+c^{2}}}",
+    "variables": [
+      {
+        "symbol": "(x_0,y_0,z_0)",
+        "meaning": "The point"
+      }
+    ]
+  },
+  {
+    "id": "angle-two-planes",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Geometry",
+    "title": "Angle between two planes",
+    "aliases": [
+      "3d angles",
+      "normals"
+    ],
+    "katex": "\\cos\\theta = \\dfrac{\\lvert \\vec{n}_{1}\\cdot\\vec{n}_{2} \\rvert}{\\lVert\\vec{n}_{1}\\rVert\\,\\lVert\\vec{n}_{2}\\rVert}",
+    "variables": [
+      {
+        "symbol": "\\vec{n}_1, \\vec{n}_2",
+        "meaning": "Normals to the planes"
+      }
+    ]
+  },
+  {
+    "id": "pearson-r",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Pearson correlation",
+    "aliases": [
+      "r correlation",
+      "linear association"
+    ],
+    "katex": "r = \\dfrac{\\sum(x_{i}-\\bar{x})(y_{i}-\\bar{y})}{\\sqrt{\\sum(x_{i}-\\bar{x})^{2}\\sum(y_{i}-\\bar{y})^{2}}}",
+    "variables": [
+      {
+        "symbol": "r",
+        "meaning": "In [-1, 1]; sign is the direction, size is the strength"
+      }
+    ]
+  },
+  {
+    "id": "least-squares",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Least-squares regression",
+    "aliases": [
+      "line of best fit",
+      "y on x"
+    ],
+    "katex": "y - \\bar{y} = b(x - \\bar{x}),\\quad b = \\dfrac{\\sum(x_{i}-\\bar{x})(y_{i}-\\bar{y})}{\\sum(x_{i}-\\bar{x})^{2}}",
+    "variables": [
+      {
+        "symbol": "b",
+        "meaning": "Gradient of the regression of y on x"
+      }
+    ]
+  },
+  {
+    "id": "expected-continuous",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Expected value (continuous)",
+    "aliases": [
+      "E(X) density"
+    ],
+    "katex": "\\mathrm{E}(X) = \\int_{-\\infty}^{\\infty} x f(x)\\,\\mathrm{d}x",
+    "variables": [
+      {
+        "symbol": "f",
+        "meaning": "Probability density"
+      }
+    ]
+  },
+  {
+    "id": "normal-density",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Normal density",
+    "aliases": [
+      "gaussian",
+      "bell curve"
+    ],
+    "katex": "f(x) = \\dfrac{1}{\\sigma\\sqrt{2\\pi}}\\exp\\left(-\\dfrac{(x-\\mu)^{2}}{2\\sigma^{2}}\\right)",
+    "variables": [
+      {
+        "symbol": "\\mu",
+        "meaning": "Mean"
+      },
+      {
+        "symbol": "\\sigma",
+        "meaning": "Standard deviation"
+      }
+    ]
+  },
+  {
+    "id": "standardise-normal",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "topic": "Statistics and Probability",
+    "title": "Standardisation",
+    "aliases": [
+      "z-score",
+      "Y = (X-mu)/sigma"
+    ],
+    "katex": "Y = \\dfrac{X - \\mu}{\\sigma}",
+    "variables": [
+      {
+        "symbol": "Y",
+        "meaning": "Standard normal when X is N(μ, σ²)"
+      }
+    ]
+  },
+  {
+    "id": "euclidean-division",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "topic": "Arithmetic",
+    "title": "Euclidean division",
+    "aliases": [
+      "division algorithm",
+      "a = bq + r"
+    ],
+    "katex": "a = bq + r,\\quad 0 \\le r < \\lvert b \\rvert",
+    "variables": [
+      {
+        "symbol": "q",
+        "meaning": "Quotient"
+      },
+      {
+        "symbol": "r",
+        "meaning": "Remainder"
+      }
+    ]
+  },
+  {
+    "id": "bezout-identity",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "topic": "Arithmetic",
+    "title": "Bézout's identity",
+    "aliases": [
+      "ax + by = gcd"
+    ],
+    "katex": "\\exists\\, x,y \\in \\mathbb{Z}:\\ ax + by = \\gcd(a,b)",
     "variables": [
       {
         "symbol": "a, b",
-        "meaning": "Positive real numbers"
+        "meaning": "Integers"
+      }
+    ]
+  },
+  {
+    "id": "bachet-bezout",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "topic": "Arithmetic",
+    "title": "Bachet–Bézout theorem",
+    "aliases": [
+      "coprime ax+by=1"
+    ],
+    "katex": "\\gcd(a,b) = 1 \\iff \\exists\\, x,y:\\ ax + by = 1",
+    "variables": [
+      {
+        "symbol": "a, b",
+        "meaning": "Integers"
+      }
+    ]
+  },
+  {
+    "id": "fermat-little",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "topic": "Arithmetic",
+    "title": "Fermat's little theorem",
+    "aliases": [
+      "a^{p-1} ≡ 1 mod p"
+    ],
+    "katex": "a^{p-1} \\equiv 1 \\pmod{p}",
+    "variables": [
+      {
+        "symbol": "p",
+        "meaning": "Prime not dividing a"
+      }
+    ]
+  },
+  {
+    "id": "matrix-product",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "topic": "Linear Algebra",
+    "title": "Product of matrices",
+    "aliases": [
+      "matrix multiply",
+      "row by column"
+    ],
+    "katex": "(AB)_{ij} = \\sum_{k} a_{ik} b_{kj}",
+    "variables": [
+      {
+        "symbol": "A",
+        "meaning": "m × n"
+      },
+      {
+        "symbol": "B",
+        "meaning": "n × p"
+      }
+    ]
+  },
+  {
+    "id": "matrix-inverse-2x2",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "topic": "Linear Algebra",
+    "title": "Inverse of a 2×2 matrix",
+    "aliases": [
+      "adjugate 2x2"
+    ],
+    "katex": "\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}^{-1} = \\dfrac{1}{ad-bc}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}",
+    "variables": [
+      {
+        "symbol": "ad-bc",
+        "meaning": "Determinant, must be non-zero"
+      }
+    ]
+  },
+  {
+    "id": "inverse-function-derivative",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "topic": "Analysis",
+    "title": "Derivative of an inverse",
+    "aliases": [
+      "(f^{-1})'"
+    ],
+    "katex": "(f^{-1})'(x) = \\dfrac{1}{f'\\bigl(f^{-1}(x)\\bigr)}",
+    "variables": [
+      {
+        "symbol": "f",
+        "meaning": "Differentiable and invertible near the point"
+      }
+    ]
+  },
+  {
+    "id": "mean-value-theorem",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "topic": "Analysis",
+    "title": "Mean value theorem",
+    "aliases": [
+      "lagrange mvt"
+    ],
+    "katex": "f'(c) = \\dfrac{f(b) - f(a)}{b - a}",
+    "variables": [
+      {
+        "symbol": "c",
+        "meaning": "Some point in (a, b)"
+      }
+    ]
+  },
+  {
+    "id": "det-2x2",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Linear Algebra",
+    "title": "2×2 determinant",
+    "aliases": [
+      "ad-bc",
+      "sarrus 2x2"
+    ],
+    "katex": "\\det\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} = ad - bc",
+    "variables": [
+      {
+        "symbol": "a, b, c, d",
+        "meaning": "Entries"
+      }
+    ]
+  },
+  {
+    "id": "cofactor-expansion",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Linear Algebra",
+    "title": "Cofactor expansion",
+    "aliases": [
+      "minors",
+      "laplace expansion"
+    ],
+    "katex": "\\det A = \\sum_{j} a_{ij}\\,C_{ij}",
+    "variables": [
+      {
+        "symbol": "C_{ij}",
+        "meaning": "Cofactor (−1)^{i+j} times the minor"
+      }
+    ]
+  },
+  {
+    "id": "inverse-adjugate",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Linear Algebra",
+    "title": "Inverse from the adjugate",
+    "aliases": [
+      "A^{-1} = (1/det) adj"
+    ],
+    "katex": "A^{-1} = \\dfrac{1}{\\det A}\\,\\mathrm{adj}\\,A",
+    "variables": [
+      {
+        "symbol": "\\mathrm{adj}\\,A",
+        "meaning": "Transpose of the cofactor matrix"
+      }
+    ]
+  },
+  {
+    "id": "rouche-frobenius",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Linear Algebra",
+    "title": "Rouché–Fröbenius",
+    "aliases": [
+      "consistent system",
+      "rank of augmented matrix"
+    ],
+    "katex": "Ax = b\\text{ is consistent} \\iff \\operatorname{rank} A = \\operatorname{rank}[A \\mid b]",
+    "variables": [
+      {
+        "symbol": "A",
+        "meaning": "Coefficient matrix"
+      },
+      {
+        "symbol": "[A \\mid b]",
+        "meaning": "Augmented matrix"
+      }
+    ]
+  },
+  {
+    "id": "cramer-rule",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Linear Algebra",
+    "title": "Cramer's rule",
+    "aliases": [
+      "solve by determinants"
+    ],
+    "katex": "x_{i} = \\dfrac{\\det A_{i}}{\\det A}",
+    "variables": [
+      {
+        "symbol": "A_i",
+        "meaning": "A with column i replaced by the right-hand side"
+      }
+    ]
+  },
+  {
+    "id": "taylor-polynomial",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Analysis",
+    "title": "Taylor polynomial",
+    "aliases": [
+      "expansion of order n"
+    ],
+    "katex": "T_{n}(x) = \\sum_{k=0}^{n} \\dfrac{f^{(k)}(a)}{k!}(x-a)^{k}",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Expansion point"
+      }
+    ]
+  },
+  {
+    "id": "lagrange-remainder",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Analysis",
+    "title": "Lagrange remainder",
+    "aliases": [
+      "taylor error"
+    ],
+    "katex": "R_{n}(x) = \\dfrac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}",
+    "variables": [
+      {
+        "symbol": "c",
+        "meaning": "Some point between a and x"
+      }
+    ]
+  },
+  {
+    "id": "maclaurin",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Analysis",
+    "title": "Maclaurin polynomial",
+    "aliases": [
+      "taylor at 0"
+    ],
+    "katex": "T_{n}(x) = \\sum_{k=0}^{n} \\dfrac{f^{(k)}(0)}{k!} x^{k}",
+    "variables": [
+      {
+        "symbol": "0",
+        "meaning": "Expansion at the origin"
+      }
+    ]
+  },
+  {
+    "id": "homog-de-first",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Analysis",
+    "title": "First-order homogeneous linear DE",
+    "aliases": [
+      "y' + ay = 0"
+    ],
+    "katex": "y' + ay = 0 \\implies y = C\\mathrm{e}^{-ax}",
+    "variables": [
+      {
+        "symbol": "C",
+        "meaning": "Constant from initial conditions"
+      }
+    ]
+  },
+  {
+    "id": "homog-de-second",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "topic": "Analysis",
+    "title": "Second-order homogeneous linear DE",
+    "aliases": [
+      "characteristic equation",
+      "y'' + py' + qy = 0"
+    ],
+    "katex": "r^{2} + pr + q = 0 \\text{ then } y \\text{ from the roots } r",
+    "variables": [
+      {
+        "symbol": "p, q",
+        "meaning": "Constant coefficients"
+      }
+    ]
+  },
+  {
+    "id": "current",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Electricity",
+    "title": "Current",
+    "aliases": [
+      "I = Q/t",
+      "charge flow"
+    ],
+    "katex": "I = \\dfrac{Q}{t}",
+    "variables": [
+      {
+        "symbol": "Q",
+        "meaning": "Charge passed"
+      },
+      {
+        "symbol": "t",
+        "meaning": "Time"
+      }
+    ]
+  },
+  {
+    "id": "voltage",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Electricity",
+    "title": "Voltage",
+    "aliases": [
+      "U = E/Q",
+      "energy per coulomb",
+      "potential difference"
+    ],
+    "katex": "U = \\dfrac{E}{Q}",
+    "variables": [
+      {
+        "symbol": "E",
+        "meaning": "Energy transferred"
+      },
+      {
+        "symbol": "Q",
+        "meaning": "Charge"
+      }
+    ]
+  },
+  {
+    "id": "resistance",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Electricity",
+    "title": "Resistance",
+    "aliases": [
+      "ohm",
+      "R = U/I"
+    ],
+    "katex": "R = \\dfrac{U}{I}",
+    "variables": [
+      {
+        "symbol": "U",
+        "meaning": "Potential difference"
+      },
+      {
+        "symbol": "I",
+        "meaning": "Current"
+      }
+    ]
+  },
+  {
+    "id": "series-circuit",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Electricity",
+    "title": "Series circuit",
+    "aliases": [
+      "resistors in series"
+    ],
+    "katex": "I_{\\mathrm{tot}} = I_{1} = I_{2},\\quad U_{\\mathrm{tot}} = U_{1} + U_{2},\\quad R_{\\mathrm{tot}} = R_{1} + R_{2}",
+    "variables": [
+      {
+        "symbol": "I, U, R",
+        "meaning": "Current, voltage, resistance"
+      }
+    ]
+  },
+  {
+    "id": "parallel-circuit",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Electricity",
+    "title": "Parallel circuit",
+    "aliases": [
+      "resistors in parallel"
+    ],
+    "katex": "I_{\\mathrm{tot}} = I_{1} + I_{2},\\quad U_{\\mathrm{tot}} = U_{1} = U_{2},\\quad \\dfrac{1}{R_{\\mathrm{tot}}} = \\dfrac{1}{R_{1}} + \\dfrac{1}{R_{2}}",
+    "variables": [
+      {
+        "symbol": "I, U, R",
+        "meaning": "Current, voltage, resistance"
+      }
+    ]
+  },
+  {
+    "id": "electric-power",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Electricity",
+    "title": "Electrical power",
+    "aliases": [
+      "P = UI"
+    ],
+    "katex": "P = UI",
+    "variables": [
+      {
+        "symbol": "U",
+        "meaning": "Voltage"
+      },
+      {
+        "symbol": "I",
+        "meaning": "Current"
+      }
+    ]
+  },
+  {
+    "id": "electric-energy",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Electricity",
+    "title": "Electrical energy",
+    "aliases": [
+      "E = Pt"
+    ],
+    "katex": "E = Pt",
+    "variables": [
+      {
+        "symbol": "P",
+        "meaning": "Power"
+      },
+      {
+        "symbol": "t",
+        "meaning": "Time"
+      }
+    ]
+  },
+  {
+    "id": "speed",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Speed",
+    "aliases": [
+      "v = ds/dt",
+      "delta s over delta t"
+    ],
+    "katex": "v = \\dfrac{\\Delta s}{\\Delta t}",
+    "variables": [
+      {
+        "symbol": "\\Delta s",
+        "meaning": "Distance (or displacement for velocity)"
+      }
+    ]
+  },
+  {
+    "id": "acceleration-s4",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Acceleration from rest",
+    "aliases": [
+      "a = dv/dt",
+      "s = 1/2 a t^2"
+    ],
+    "katex": "a = \\dfrac{\\Delta v}{\\Delta t},\\quad s = \\dfrac{1}{2} a t^{2}",
+    "variables": [
+      {
+        "symbol": "s",
+        "meaning": "Distance from rest under constant a"
+      }
+    ]
+  },
+  {
+    "id": "weight",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Weight",
+    "aliases": [
+      "gravitational force",
+      "Fg = mg"
+    ],
+    "katex": "F_{G} = mg",
+    "variables": [
+      {
+        "symbol": "m",
+        "meaning": "Mass"
+      },
+      {
+        "symbol": "g",
+        "meaning": "Gravitational field strength"
+      }
+    ]
+  },
+  {
+    "id": "newton-2",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Newton's second law",
+    "aliases": [
+      "F = ma",
+      "net force"
+    ],
+    "katex": "F = ma",
+    "variables": [
+      {
+        "symbol": "F",
+        "meaning": "Resultant force on a given mass"
+      },
+      {
+        "symbol": "a",
+        "meaning": "Acceleration"
+      }
+    ]
+  },
+  {
+    "id": "frequency-period",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Waves",
+    "title": "Frequency and period",
+    "aliases": [
+      "f = 1/T"
+    ],
+    "katex": "f = \\dfrac{1}{T}",
+    "variables": [
+      {
+        "symbol": "T",
+        "meaning": "Period"
+      }
+    ]
+  },
+  {
+    "id": "wave-speed",
+    "courses": [
+      "S4-Physics"
+    ],
+    "topic": "Waves",
+    "title": "Wave speed",
+    "aliases": [
+      "v = f lambda",
+      "s = vt"
+    ],
+    "katex": "v = \\lambda f,\\quad s = vt",
+    "variables": [
+      {
+        "symbol": "\\lambda",
+        "meaning": "Wavelength"
+      },
+      {
+        "symbol": "f",
+        "meaning": "Frequency"
+      }
+    ]
+  },
+  {
+    "id": "work",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Mechanical work",
+    "aliases": [
+      "W = Fs"
+    ],
+    "katex": "W = Fs",
+    "variables": [
+      {
+        "symbol": "s",
+        "meaning": "Distance moved parallel to F"
+      }
+    ]
+  },
+  {
+    "id": "gpe",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Gravitational potential energy",
+    "aliases": [
+      "mgh",
+      "delta Ep"
+    ],
+    "katex": "\\Delta E_{\\mathrm{p}} = mg\\,\\Delta h",
+    "variables": [
+      {
+        "symbol": "\\Delta h",
+        "meaning": "Change in height"
+      }
+    ]
+  },
+  {
+    "id": "kinetic-energy",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Kinetic energy",
+    "aliases": [
+      "1/2 mv^2"
+    ],
+    "katex": "E_{\\mathrm{k}} = \\dfrac{1}{2} mv^{2}",
+    "variables": [
+      {
+        "symbol": "v",
+        "meaning": "Speed"
+      }
+    ]
+  },
+  {
+    "id": "energy-conservation",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Conservation of energy",
+    "aliases": [
+      "sum E before = after"
+    ],
+    "katex": "\\sum E_{\\mathrm{before}} = \\sum E_{\\mathrm{after}}",
+    "variables": [
+      {
+        "symbol": "E",
+        "meaning": "All forms of energy in the closed system"
+      }
+    ]
+  },
+  {
+    "id": "specific-heat",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Matter and Heat",
+    "title": "Heat to change temperature",
+    "aliases": [
+      "Q = mc ΔT",
+      "specific heat capacity"
+    ],
+    "katex": "Q = mc\\,\\Delta T",
+    "variables": [
+      {
+        "symbol": "c",
+        "meaning": "Specific heat capacity"
+      },
+      {
+        "symbol": "\\Delta T",
+        "meaning": "Temperature change"
+      }
+    ]
+  },
+  {
+    "id": "latent-heat",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Matter and Heat",
+    "title": "Latent heat",
+    "aliases": [
+      "Q = ml",
+      "change of state"
+    ],
+    "katex": "Q = ml",
+    "variables": [
+      {
+        "symbol": "l",
+        "meaning": "Specific latent heat"
+      }
+    ]
+  },
+  {
+    "id": "momentum",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Momentum",
+    "aliases": [
+      "p = mv"
+    ],
+    "katex": "p = mv",
+    "variables": [
+      {
+        "symbol": "m",
+        "meaning": "Mass"
+      },
+      {
+        "symbol": "v",
+        "meaning": "Velocity"
+      }
+    ]
+  },
+  {
+    "id": "momentum-conservation",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Mechanics",
+    "title": "Conservation of momentum",
+    "aliases": [
+      "closed system collisions"
+    ],
+    "katex": "\\sum p_{\\mathrm{before}} = \\sum p_{\\mathrm{after}}",
+    "variables": [
+      {
+        "symbol": "p",
+        "meaning": "Momentum in a closed system"
+      }
+    ]
+  },
+  {
+    "id": "half-life",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Atomic and Nuclear Physics",
+    "title": "Quantity after n half-lives",
+    "aliases": [
+      "activity half-life",
+      "radioactive remaining"
+    ],
+    "katex": "N = \\dfrac{N_{0}}{2^{n}}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Whole number of half-lives"
+      },
+      {
+        "symbol": "N_0",
+        "meaning": "Initial quantity"
+      }
+    ]
+  },
+  {
+    "id": "mass-energy",
+    "courses": [
+      "S5-Physics"
+    ],
+    "topic": "Atomic and Nuclear Physics",
+    "title": "Mass–energy",
+    "aliases": [
+      "E = mc^2"
+    ],
+    "katex": "E = mc^{2}",
+    "variables": [
+      {
+        "symbol": "c",
+        "meaning": "Speed of light"
+      }
+    ]
+  },
+  {
+    "id": "elementary-charge",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Elementary charge",
+    "aliases": [
+      "e = 1.6e-19",
+      "electron charge"
+    ],
+    "katex": "e = 1.6 \\times 10^{-19}\\,\\mathrm{C}",
+    "variables": [
+      {
+        "symbol": "e",
+        "meaning": "Magnitude of the charge on a proton or electron"
+      }
+    ]
+  },
+  {
+    "id": "coulomb-force",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Force between point charges",
+    "aliases": [
+      "coulomb law",
+      "kQq/r^2"
+    ],
+    "katex": "F = k\\dfrac{Q_{1}Q_{2}}{r^{2}},\\quad k = \\dfrac{1}{4\\pi\\varepsilon_{0}}",
+    "variables": [
+      {
+        "symbol": "r",
+        "meaning": "Separation"
+      }
+    ]
+  },
+  {
+    "id": "electric-field-strength",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Electric field strength",
+    "aliases": [
+      "E = F/q"
+    ],
+    "katex": "E = \\dfrac{F}{q}",
+    "variables": [
+      {
+        "symbol": "F",
+        "meaning": "Force on test charge q"
+      }
+    ]
+  },
+  {
+    "id": "radial-electric-field",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Radial electric field",
+    "aliases": [
+      "point charge field"
+    ],
+    "katex": "E = k\\dfrac{Q}{r^{2}}",
+    "variables": [
+      {
+        "symbol": "Q",
+        "meaning": "Source charge"
+      }
+    ]
+  },
+  {
+    "id": "uniform-electric-field",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Uniform field between plates",
+    "aliases": [
+      "E = U/d"
+    ],
+    "katex": "E = \\dfrac{U}{d}",
+    "variables": [
+      {
+        "symbol": "d",
+        "meaning": "Plate separation"
+      },
+      {
+        "symbol": "U",
+        "meaning": "Potential difference"
+      }
+    ]
+  },
+  {
+    "id": "capacitor-charge",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Capacitor charge",
+    "aliases": [
+      "Q = CU"
+    ],
+    "katex": "Q = CU",
+    "variables": [
+      {
+        "symbol": "C",
+        "meaning": "Capacitance"
+      }
+    ]
+  },
+  {
+    "id": "capacitor-energy",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Energy stored in a capacitor",
+    "aliases": [
+      "1/2 CU^2"
+    ],
+    "katex": "W = \\dfrac{1}{2} CU^{2}",
+    "variables": [
+      {
+        "symbol": "C",
+        "meaning": "Capacitance"
+      },
+      {
+        "symbol": "U",
+        "meaning": "Voltage"
+      }
+    ]
+  },
+  {
+    "id": "solenoid-field",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Field inside a solenoid",
+    "aliases": [
+      "B = mu n I"
+    ],
+    "katex": "B = \\mu n I,\\quad n = N/\\ell",
+    "variables": [
+      {
+        "symbol": "N",
+        "meaning": "Turns"
+      },
+      {
+        "symbol": "\\ell",
+        "meaning": "Length"
+      }
+    ]
+  },
+  {
+    "id": "newton-gravity",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Newton's law of gravitation",
+    "aliases": [
+      "universal gravitation",
+      "G m1 m2 / r^2"
+    ],
+    "katex": "F_{G} = G\\dfrac{m_{1}m_{2}}{r^{2}}",
+    "variables": [
+      {
+        "symbol": "G",
+        "meaning": "Universal gravitational constant"
+      }
+    ]
+  },
+  {
+    "id": "g-field-strength",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Gravitational field strength",
+    "aliases": [
+      "g = F/m"
+    ],
+    "katex": "g = \\dfrac{F_{G}}{m}",
+    "variables": [
+      {
+        "symbol": "m",
+        "meaning": "Test mass"
+      }
+    ]
+  },
+  {
+    "id": "radial-g-field",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Radial gravitational field",
+    "aliases": [
+      "g = GM/r^2"
+    ],
+    "katex": "g = \\dfrac{GM}{r^{2}}",
+    "variables": [
+      {
+        "symbol": "M",
+        "meaning": "Source mass"
+      }
+    ]
+  },
+  {
+    "id": "suvat-s",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Interactions",
+    "title": "Displacement against time",
+    "aliases": [
+      "suvat",
+      "s = s0 + v0 t + 1/2 at^2"
+    ],
+    "katex": "s(t) = s_{0} + v_{0} t + \\dfrac{1}{2} a t^{2}",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Constant acceleration"
+      }
+    ]
+  },
+  {
+    "id": "suvat-v",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Interactions",
+    "title": "Velocity against time",
+    "aliases": [
+      "v = v0 + at"
+    ],
+    "katex": "v(t) = v_{0} + at",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Constant acceleration"
+      }
+    ]
+  },
+  {
+    "id": "angular-velocity",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Interactions",
+    "title": "Angular velocity",
+    "aliases": [
+      "omega = v/r"
+    ],
+    "katex": "\\omega = \\dfrac{\\Delta\\theta}{\\Delta t} = \\dfrac{v}{r}",
+    "variables": [
+      {
+        "symbol": "v",
+        "meaning": "Linear speed on the circle"
+      }
+    ]
+  },
+  {
+    "id": "centripetal-acc",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Interactions",
+    "title": "Centripetal acceleration",
+    "aliases": [
+      "v^2/r",
+      "omega^2 r"
+    ],
+    "katex": "a_{\\mathrm{c}} = \\dfrac{v^{2}}{r} = \\omega^{2} r",
+    "variables": [
+      {
+        "symbol": "r",
+        "meaning": "Radius of the circle"
+      }
+    ]
+  },
+  {
+    "id": "angular-frequency",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Angular frequency",
+    "aliases": [
+      "omega = 2 pi f"
+    ],
+    "katex": "f = \\dfrac{1}{T},\\quad \\omega = 2\\pi f",
+    "variables": [
+      {
+        "symbol": "T",
+        "meaning": "Period"
+      }
+    ]
+  },
+  {
+    "id": "wave-speed-s6",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Wave speed",
+    "aliases": [
+      "v = f lambda",
+      "speed of propagation"
+    ],
+    "katex": "v = f\\lambda",
+    "variables": [
+      {
+        "symbol": "\\lambda",
+        "meaning": "Wavelength"
+      },
+      {
+        "symbol": "f",
+        "meaning": "Frequency"
+      }
+    ]
+  },
+  {
+    "id": "shm-force",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "SHM restoring force",
+    "aliases": [
+      "F = -ky",
+      "hooke oscillator"
+    ],
+    "katex": "F = -ky",
+    "variables": [
+      {
+        "symbol": "y",
+        "meaning": "Displacement from equilibrium"
+      },
+      {
+        "symbol": "k",
+        "meaning": "Constant"
+      }
+    ]
+  },
+  {
+    "id": "shm-acceleration",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "SHM acceleration",
+    "aliases": [
+      "a = -omega^2 y"
+    ],
+    "katex": "a = -\\omega^{2} y",
+    "variables": [
+      {
+        "symbol": "y",
+        "meaning": "Displacement from equilibrium"
+      }
+    ]
+  },
+  {
+    "id": "shm-displacement",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "SHM displacement",
+    "aliases": [
+      "y = A sin omega t"
+    ],
+    "katex": "y = A\\sin(\\omega t)",
+    "variables": [
+      {
+        "symbol": "A",
+        "meaning": "Amplitude"
+      }
+    ]
+  },
+  {
+    "id": "inductor-energy",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Energy in an inductor",
+    "aliases": [
+      "1/2 LI^2",
+      "magnetic field energy"
+    ],
+    "katex": "W = \\dfrac{1}{2} L I^{2}",
+    "variables": [
+      {
+        "symbol": "L",
+        "meaning": "Inductance"
+      }
+    ]
+  },
+  {
+    "id": "lc-frequency",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Natural frequency of an LC circuit",
+    "aliases": [
+      "omega0 = 1/sqrt(LC)",
+      "resonance LC"
+    ],
+    "katex": "\\omega_{0} = \\dfrac{1}{\\sqrt{LC}}",
+    "variables": [
+      {
+        "symbol": "L, C",
+        "meaning": "Inductance and capacitance"
+      }
+    ]
+  },
+  {
+    "id": "wave-function",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Sinusoidal wave",
+    "aliases": [
+      "y(x,t)",
+      "wave equation sinusoid"
+    ],
+    "katex": "y(x,t) = A\\sin\\left(2\\pi\\left(\\dfrac{t}{T} - \\dfrac{x}{\\lambda}\\right)\\right)",
+    "variables": [
+      {
+        "symbol": "A",
+        "meaning": "Amplitude"
+      },
+      {
+        "symbol": "T",
+        "meaning": "Period"
+      },
+      {
+        "symbol": "\\lambda",
+        "meaning": "Wavelength"
+      }
+    ]
+  },
+  {
+    "id": "doppler-observer",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Doppler effect — moving observer",
+    "aliases": [
+      "moving observer frequency"
+    ],
+    "katex": "f' = f\\dfrac{v \\pm u_{\\mathrm{o}}}{v}",
+    "variables": [
+      {
+        "symbol": "u_o",
+        "meaning": "Observer speed; + towards the source"
+      }
+    ]
+  },
+  {
+    "id": "doppler-source",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Doppler effect — moving source",
+    "aliases": [
+      "moving source frequency"
+    ],
+    "katex": "f' = f\\dfrac{v}{v \\pm u_{\\mathrm{s}}}",
+    "variables": [
+      {
+        "symbol": "u_s",
+        "meaning": "Source speed; + when the source recedes"
+      }
+    ]
+  },
+  {
+    "id": "reflection",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Reflection",
+    "aliases": [
+      "angle of incidence",
+      "i = r"
+    ],
+    "katex": "\\alpha_{\\mathrm{i}} = \\alpha_{\\mathrm{r}}",
+    "variables": [
+      {
+        "symbol": "\\alpha_i, \\alpha_r",
+        "meaning": "Angles of incidence and reflection"
+      }
+    ]
+  },
+  {
+    "id": "refraction",
+    "courses": [
+      "S6-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Refraction (Snell)",
+    "aliases": [
+      "snell descartes",
+      "n1 sin = n2 sin"
+    ],
+    "katex": "\\dfrac{\\sin\\alpha_{1}}{\\sin\\alpha_{2}} = \\dfrac{n_{2}}{n_{1}} = \\dfrac{c_{1}}{c_{2}}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Refractive index"
+      },
+      {
+        "symbol": "c",
+        "meaning": "Wave speed in that medium"
+      }
+    ]
+  },
+  {
+    "id": "young-double-slit",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Young's double slit",
+    "aliases": [
+      "fringe spacing",
+      "lambda D / d"
+    ],
+    "katex": "\\dfrac{\\Delta y}{D} = \\dfrac{\\lambda}{d}",
+    "variables": [
+      {
+        "symbol": "\\Delta y",
+        "meaning": "Fringe spacing"
+      },
+      {
+        "symbol": "D",
+        "meaning": "Slits to screen"
+      },
+      {
+        "symbol": "d",
+        "meaning": "Slit separation"
+      }
+    ]
+  },
+  {
+    "id": "grating",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Grating formula",
+    "aliases": [
+      "n lambda = d sin"
+    ],
+    "katex": "n\\lambda = d\\sin\\alpha",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Order"
+      },
+      {
+        "symbol": "d",
+        "meaning": "Spacing of the grating"
+      }
+    ]
+  },
+  {
+    "id": "standing-string",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Standing wave on a string",
+    "aliases": [
+      "both ends fixed",
+      "L = n lambda/2"
+    ],
+    "katex": "L = n\\dfrac{\\lambda}{2},\\quad n = 1,2,3,\\ldots",
+    "variables": [
+      {
+        "symbol": "L",
+        "meaning": "Length; also a pipe open or closed at both ends"
+      }
+    ]
+  },
+  {
+    "id": "standing-pipe-odd",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Oscillations and Waves",
+    "title": "Standing wave in a closed pipe",
+    "aliases": [
+      "one end open",
+      "lambda/4"
+    ],
+    "katex": "L = n\\dfrac{\\lambda}{4},\\quad n = 1,3,5,\\ldots",
+    "variables": [
+      {
+        "symbol": "L",
+        "meaning": "Length of a pipe with different ends"
+      }
+    ]
+  },
+  {
+    "id": "electric-potential-diff",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Electric potential difference",
+    "aliases": [
+      "delta V = delta Ep / q"
+    ],
+    "katex": "\\Delta V = \\dfrac{\\Delta E_{\\mathrm{p}}}{q}",
+    "variables": [
+      {
+        "symbol": "q",
+        "meaning": "Positive test charge"
+      }
+    ]
+  },
+  {
+    "id": "point-charge-potential",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Potential of a point charge",
+    "aliases": [
+      "V = kQ/r"
+    ],
+    "katex": "V = k\\dfrac{Q}{r}",
+    "variables": [
+      {
+        "symbol": "V = 0",
+        "meaning": "At infinity"
+      }
+    ]
+  },
+  {
+    "id": "work-on-charge",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Work on a charge in a uniform field",
+    "aliases": [
+      "W = QU"
+    ],
+    "katex": "W = QU",
+    "variables": [
+      {
+        "symbol": "U",
+        "meaning": "Potential difference moved through"
+      }
+    ]
+  },
+  {
+    "id": "force-on-wire",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Force on a current-carrying wire",
+    "aliases": [
+      "F = BIL sin"
+    ],
+    "katex": "F = B I \\ell \\sin\\theta",
+    "variables": [
+      {
+        "symbol": "\\theta",
+        "meaning": "Angle between the wire and B"
+      }
+    ]
+  },
+  {
+    "id": "lorentz-force",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Lorentz force",
+    "aliases": [
+      "F = Bqv sin",
+      "magnetic force on charge"
+    ],
+    "katex": "F = B q v \\sin\\theta",
+    "variables": [
+      {
+        "symbol": "\\theta",
+        "meaning": "Angle between v and B"
+      }
+    ]
+  },
+  {
+    "id": "magnetic-flux",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Magnetic flux",
+    "aliases": [
+      "phi = B A"
+    ],
+    "katex": "\\Phi = B_{\\perp} A",
+    "variables": [
+      {
+        "symbol": "B_\\perp",
+        "meaning": "Component of B normal to the area"
+      }
+    ]
+  },
+  {
+    "id": "faraday",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Electromagnetic induction",
+    "aliases": [
+      "faraday",
+      "emf = -dphi/dt"
+    ],
+    "katex": "\\varepsilon = -\\dfrac{\\Delta\\Phi}{\\Delta t}",
+    "variables": [
+      {
+        "symbol": "\\varepsilon",
+        "meaning": "Induced emf"
+      }
+    ]
+  },
+  {
+    "id": "grav-potential-diff",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Gravitational potential difference",
+    "aliases": [
+      "delta V = delta Ep / m"
+    ],
+    "katex": "\\Delta V = \\dfrac{\\Delta E_{\\mathrm{p}}}{m}",
+    "variables": [
+      {
+        "symbol": "m",
+        "meaning": "Test mass"
+      }
+    ]
+  },
+  {
+    "id": "grav-potential-radial",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Gravitational potential (radial)",
+    "aliases": [
+      "V = -GM/r"
+    ],
+    "katex": "V = -\\dfrac{GM}{r}",
+    "variables": [
+      {
+        "symbol": "V = 0",
+        "meaning": "At infinity"
+      }
+    ]
+  },
+  {
+    "id": "gpe-uniform",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Fields",
+    "title": "Change of GPE in a uniform field",
+    "aliases": [
+      "mgh again"
+    ],
+    "katex": "\\Delta E_{\\mathrm{p}} = mg\\,\\Delta h",
+    "variables": [
+      {
+        "symbol": "\\Delta h",
+        "meaning": "Change in height"
+      }
+    ]
+  },
+  {
+    "id": "photon-energy",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Quantum Physics",
+    "title": "Energy of a photon",
+    "aliases": [
+      "E = hf",
+      "planck"
+    ],
+    "katex": "E = hf",
+    "variables": [
+      {
+        "symbol": "h",
+        "meaning": "Planck's constant"
+      },
+      {
+        "symbol": "f",
+        "meaning": "Frequency"
+      }
+    ]
+  },
+  {
+    "id": "einstein-photoelectric",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Quantum Physics",
+    "title": "Einstein's equation",
+    "aliases": [
+      "photoelectric",
+      "hf = phi + Ek"
+    ],
+    "katex": "E_{\\mathrm{k}} = hf - W_{0}",
+    "variables": [
+      {
+        "symbol": "W_0",
+        "meaning": "Work function"
+      },
+      {
+        "symbol": "E_k",
+        "meaning": "Maximum kinetic energy of a photoelectron"
+      }
+    ]
+  },
+  {
+    "id": "photon-momentum",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Quantum Physics",
+    "title": "Momentum of a photon",
+    "aliases": [
+      "p = h/lambda"
+    ],
+    "katex": "p = \\dfrac{h}{\\lambda}",
+    "variables": [
+      {
+        "symbol": "\\lambda",
+        "meaning": "Wavelength"
+      }
+    ]
+  },
+  {
+    "id": "de-broglie",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Quantum Physics",
+    "title": "de Broglie wavelength",
+    "aliases": [
+      "matter wave",
+      "lambda = h/p"
+    ],
+    "katex": "\\lambda = \\dfrac{h}{p}",
+    "variables": [
+      {
+        "symbol": "p",
+        "meaning": "Momentum of the particle"
+      }
+    ]
+  },
+  {
+    "id": "heisenberg-xp",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Quantum Physics",
+    "title": "Uncertainty — position and momentum",
+    "aliases": [
+      "delta x delta p",
+      "heisenberg"
+    ],
+    "katex": "\\Delta x\\,\\Delta p \\ge \\dfrac{h}{4\\pi}",
+    "variables": [
+      {
+        "symbol": "\\Delta x, \\Delta p",
+        "meaning": "Uncertainties"
+      }
+    ]
+  },
+  {
+    "id": "heisenberg-et",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Quantum Physics",
+    "title": "Uncertainty — energy and time",
+    "aliases": [
+      "delta E delta t"
+    ],
+    "katex": "\\Delta E\\,\\Delta t \\ge \\dfrac{h}{4\\pi}",
+    "variables": [
+      {
+        "symbol": "\\Delta E, \\Delta t",
+        "meaning": "Uncertainties"
+      }
+    ]
+  },
+  {
+    "id": "infinite-well",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Quantum Physics",
+    "title": "Infinite square well",
+    "aliases": [
+      "particle in a box",
+      "En = n^2 h^2 / 8mL^2"
+    ],
+    "katex": "E_{n} = \\dfrac{h^{2}}{8mL^{2}}n^{2},\\quad n = 1,2,3,\\ldots",
+    "variables": [
+      {
+        "symbol": "L",
+        "meaning": "Width of the well"
+      },
+      {
+        "symbol": "n=1",
+        "meaning": "Ground state"
+      }
+    ]
+  },
+  {
+    "id": "hydrogen-levels",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Quantum Physics",
+    "title": "Hydrogen energy levels",
+    "aliases": [
+      "-13.6 / n^2"
+    ],
+    "katex": "E_{n} = -\\dfrac{13.6\\,\\mathrm{eV}}{n^{2}}",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Principal quantum number"
+      }
+    ]
+  },
+  {
+    "id": "spectral-line",
+    "courses": [
+      "S7-Physics"
+    ],
+    "topic": "Quantum Physics",
+    "title": "Emission and absorption",
+    "aliases": [
+      "hf = |En - Em|",
+      "line spectra"
+    ],
+    "katex": "hf = \\lvert E_{n} - E_{m} \\rvert",
+    "variables": [
+      {
+        "symbol": "n, m",
+        "meaning": "Two energy states"
       }
     ]
   }

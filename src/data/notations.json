@@ -1,290 +1,2498 @@
 [
   {
     "id": "set-naturals",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-3P-Adv"
+    ],
     "category": "Numbers",
     "symbol": "\\mathbb{N}",
     "name": "Natural numbers",
     "meaning": "Counting numbers 0, 1, 2, … (check whether your class includes 0).",
-    "aliases": ["N", "naturals", "whole numbers"]
+    "aliases": [
+      "N",
+      "naturals",
+      "whole numbers"
+    ]
   },
   {
     "id": "set-naturals-star",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
     "category": "Numbers",
     "symbol": "\\mathbb{N}^{*}",
     "name": "Positive integers",
     "meaning": "Natural numbers except 0; used as a denominator in a fraction.",
-    "aliases": ["N*", "N star", "nonzero naturals"]
+    "aliases": [
+      "N*",
+      "N star",
+      "nonzero naturals"
+    ]
   },
   {
     "id": "set-integers",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-3P-Adv"
+    ],
     "category": "Numbers",
     "symbol": "\\mathbb{Z}",
     "name": "Integers",
     "meaning": "…, −2, −1, 0, 1, 2, …",
-    "aliases": ["Z", "integers", "whole numbers signed"]
+    "aliases": [
+      "Z",
+      "integers",
+      "whole numbers signed"
+    ]
   },
   {
     "id": "set-rationals",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-3P-Adv"
+    ],
     "category": "Numbers",
     "symbol": "\\mathbb{Q}",
     "name": "Rational numbers",
     "meaning": "Numbers that can be written a/b with a integer and b a positive integer.",
-    "aliases": ["Q", "rationals", "fractions"]
+    "aliases": [
+      "Q",
+      "rationals",
+      "fractions"
+    ]
   },
   {
     "id": "set-reals",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-3P-Adv"
+    ],
     "category": "Numbers",
     "symbol": "\\mathbb{R}",
     "name": "Real numbers",
     "meaning": "All rationals and irrationals; every point on the number line.",
-    "aliases": ["R", "reals", "real line"]
+    "aliases": [
+      "R",
+      "reals",
+      "real line"
+    ]
+  },
+  {
+    "id": "set-reals-plus",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "category": "Numbers",
+    "symbol": "\\mathbb{R}^{+}",
+    "name": "Positive reals",
+    "meaning": "Real numbers strictly greater than 0. Bases of logs and many roots live here.",
+    "aliases": [
+      "R+",
+      "positive reals"
+    ]
+  },
+  {
+    "id": "set-complex",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P",
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Numbers",
+    "symbol": "\\mathbb{C}",
+    "name": "Complex numbers",
+    "meaning": "Numbers z = a + ib with a, b real. S6 introduces the algebraic form.",
+    "aliases": [
+      "C",
+      "complex"
+    ]
   },
   {
     "id": "set-membership",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-3P-Adv"
+    ],
     "category": "Numbers",
     "symbol": "\\in",
     "name": "Element of",
     "meaning": "x ∈ A means x belongs to the set A.",
-    "aliases": ["in", "belongs", "member"]
+    "aliases": [
+      "in",
+      "belongs",
+      "member"
+    ]
+  },
+  {
+    "id": "set-not-member",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Numbers",
+    "symbol": "\\notin",
+    "name": "Not an element",
+    "meaning": "x ∉ A means x does not belong to A. Example from S4: √2 ∉ ℚ.",
+    "aliases": [
+      "notin",
+      "not in"
+    ]
+  },
+  {
+    "id": "empty-set",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Numbers",
+    "symbol": "\\emptyset",
+    "name": "Empty set",
+    "meaning": "The set with no elements. Also called the null set.",
+    "aliases": [
+      "empty",
+      "null set",
+      "void"
+    ]
+  },
+  {
+    "id": "subset",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Numbers",
+    "symbol": "A \\subset B",
+    "name": "Subset",
+    "meaning": "Every element of A is an element of B.",
+    "aliases": [
+      "subset",
+      "included"
+    ]
+  },
+  {
+    "id": "set-complement",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Numbers",
+    "symbol": "A^{c}",
+    "name": "Set complement",
+    "meaning": "Elements of the universal set that are not in A.",
+    "aliases": [
+      "complement of a set",
+      "A complement"
+    ]
+  },
+  {
+    "id": "cartesian-product",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Numbers",
+    "symbol": "A \\times B",
+    "name": "Cartesian product",
+    "meaning": "Ordered pairs (a, b) with a in A and b in B.",
+    "aliases": [
+      "product of sets",
+      "pairs"
+    ]
+  },
+  {
+    "id": "cardinal",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Numbers",
+    "symbol": "|A|",
+    "name": "Cardinal number",
+    "meaning": "How many elements a finite set has. Power set of a finite set has 2^|A| subsets.",
+    "aliases": [
+      "cardinality",
+      "size of a set"
+    ]
   },
   {
     "id": "const-pi",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
     "category": "Numbers",
     "symbol": "\\pi",
     "name": "Pi",
     "meaning": "Circle constant; also the radian measure of a half-turn (180°).",
-    "aliases": ["pi", "circle", "180 degrees"]
+    "aliases": [
+      "pi",
+      "circle",
+      "180 degrees"
+    ]
+  },
+  {
+    "id": "const-e",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Numbers",
+    "symbol": "\\mathrm{e}",
+    "name": "Base e",
+    "meaning": "Base of the natural exponential; y = e^x solves y' = y with y(0) = 1.",
+    "aliases": [
+      "e",
+      "euler",
+      "napier"
+    ]
+  },
+  {
+    "id": "infinity",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Numbers",
+    "symbol": "\\infty",
+    "name": "Infinity",
+    "meaning": "Used in limits, improper integrals, and unbounded intervals.",
+    "aliases": [
+      "infinity",
+      "infinite"
+    ]
   },
   {
     "id": "interval-closed",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
     "category": "Algebra",
     "symbol": "[a, b]",
     "name": "Closed interval",
     "meaning": "All reals from a to b, including both ends.",
-    "aliases": ["closed interval", "segment", "inclusive"]
+    "aliases": [
+      "closed interval",
+      "segment",
+      "inclusive"
+    ]
   },
   {
     "id": "interval-open",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
     "category": "Algebra",
     "symbol": "]a, b[",
     "name": "Open interval",
     "meaning": "All reals strictly between a and b. EB uses reversed brackets, not (a, b).",
-    "aliases": ["open interval", "(a,b)", "exclusive"]
+    "aliases": [
+      "open interval",
+      "(a,b)",
+      "exclusive"
+    ]
   },
   {
     "id": "interval-half",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
     "category": "Algebra",
     "symbol": "[a, b[",
     "name": "Half-open interval",
     "meaning": "From a up to but not including b. ]a, b] excludes a and includes b.",
-    "aliases": ["half-open", "half-closed", "semi-open"]
+    "aliases": [
+      "half-open",
+      "half-closed",
+      "semi-open"
+    ]
   },
   {
     "id": "delta-discriminant",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P"
+    ],
     "category": "Algebra",
     "symbol": "\\Delta",
     "name": "Discriminant",
     "meaning": "For ax² + bx + c: Δ = b² − 4ac. Sign of Δ tells how many real roots.",
-    "aliases": ["delta", "discriminant", "quadratic"]
+    "aliases": [
+      "delta",
+      "discriminant",
+      "quadratic"
+    ]
   },
   {
     "id": "delta-difference",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S4-Physics",
+      "S5-Physics",
+      "S6-Physics"
+    ],
     "category": "Algebra",
     "symbol": "\\Delta",
     "name": "Difference",
     "meaning": "Change in a quantity: Δx = x₂ − x₁.",
-    "aliases": ["delta", "difference", "change"]
+    "aliases": [
+      "delta",
+      "difference",
+      "change"
+    ]
   },
   {
     "id": "sigma-sum",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
     "category": "Algebra",
     "symbol": "\\sum",
     "name": "Summation",
     "meaning": "Σ adds a list of terms, from a start index to an end index.",
-    "aliases": ["sigma", "sum", "series"]
+    "aliases": [
+      "sigma",
+      "sum",
+      "series"
+    ]
   },
   {
     "id": "fn-of-x",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
     "category": "Algebra",
     "symbol": "f(x)",
     "name": "Function value",
     "meaning": "Output of f at input x. Also written x ↦ f(x).",
-    "aliases": ["function", "f of x", "mapping"]
+    "aliases": [
+      "function",
+      "f of x",
+      "mapping"
+    ]
+  },
+  {
+    "id": "maps-to",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "category": "Algebra",
+    "symbol": "x \\mapsto f(x)",
+    "name": "Maps to",
+    "meaning": "The rule that sends input x to output f(x).",
+    "aliases": [
+      "mapsto",
+      "mapping",
+      "arrow function"
+    ]
   },
   {
     "id": "abs-value",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
     "category": "Algebra",
     "symbol": "|a|",
     "name": "Absolute value",
     "meaning": "Distance from 0; √(a²) = |a|.",
-    "aliases": ["modulus", "absolute", "abs"]
+    "aliases": [
+      "modulus",
+      "absolute",
+      "abs"
+    ]
+  },
+  {
+    "id": "sqrt",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\sqrt{a}",
+    "name": "Square root",
+    "meaning": "Non-negative number whose square is a. Inverse of squaring on [0, ∞[.",
+    "aliases": [
+      "root",
+      "surd",
+      "radical"
+    ]
+  },
+  {
+    "id": "nth-root",
+    "courses": [
+      "S5-Maths-6P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\sqrt[n]{a}",
+    "name": "nth root",
+    "meaning": "Number whose nth power is a. Same as a^{1/n}.",
+    "aliases": [
+      "cube root",
+      "root n"
+    ]
+  },
+  {
+    "id": "scientific-notation",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "category": "Algebra",
+    "symbol": "a \\times 10^{n}",
+    "name": "Scientific notation",
+    "meaning": "A number written as a product of a coefficient and a power of ten.",
+    "aliases": [
+      "standard form",
+      "index notation",
+      "powers of ten"
+    ]
   },
   {
     "id": "logarithm",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
     "category": "Algebra",
     "symbol": "\\log_{b} a",
     "name": "Logarithm",
     "meaning": "The exponent that turns b into a. S5 uses a positive integer base.",
-    "aliases": ["log", "logarithm", "index"]
+    "aliases": [
+      "log",
+      "logarithm",
+      "index"
+    ]
+  },
+  {
+    "id": "log10",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\log a",
+    "name": "Common logarithm",
+    "meaning": "Logarithm base 10. S6 lists log, ln and lb among the basic functions.",
+    "aliases": [
+      "log10",
+      "common log",
+      "base 10"
+    ]
+  },
+  {
+    "id": "natural-log",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\ln a",
+    "name": "Natural logarithm",
+    "meaning": "Logarithm base e; inverse of the natural exponential.",
+    "aliases": [
+      "ln",
+      "log e",
+      "natural log"
+    ]
+  },
+  {
+    "id": "lb",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\mathrm{lb}\\, a",
+    "name": "Binary logarithm",
+    "meaning": "Logarithm base 2. Named lb in the S6 5P basic-function list.",
+    "aliases": [
+      "lb",
+      "log2",
+      "binary log"
+    ]
+  },
+  {
+    "id": "approx",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\approx",
+    "name": "Approximately equal",
+    "meaning": "Used when a value is rounded or a model is not exact.",
+    "aliases": [
+      "approximately",
+      "approx",
+      "almost equal"
+    ]
+  },
+  {
+    "id": "not-equal",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\ne",
+    "name": "Not equal",
+    "meaning": "The two sides are different.",
+    "aliases": [
+      "not equal",
+      "neq",
+      "unequal"
+    ]
+  },
+  {
+    "id": "factorial",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "n!",
+    "name": "Factorial",
+    "meaning": "Product 1 × 2 × … × n. Counts permutations of n distinct objects.",
+    "aliases": [
+      "factorial",
+      "n factorial"
+    ]
+  },
+  {
+    "id": "binomial-coeff",
+    "courses": [
+      "S4-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\binom{n}{k}",
+    "name": "Binomial coefficient",
+    "meaning": "n choose k: ways to choose k from n, unordered. Also Pascal’s triangle entries.",
+    "aliases": [
+      "n choose k",
+      "combination",
+      "pascal"
+    ]
+  },
+  {
+    "id": "sequence-term",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "u_{n}",
+    "name": "Term of a sequence",
+    "meaning": "The nth term. May start at u_0 or u_1, as defined. Explicit: u_n = f(n).",
+    "aliases": [
+      "sequence",
+      "u_n",
+      "term"
+    ]
+  },
+  {
+    "id": "imaginary-unit",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\mathrm{i}",
+    "name": "Imaginary unit",
+    "meaning": "i² = −1. A complex number is written z = a + ib.",
+    "aliases": [
+      "i",
+      "imaginary"
+    ]
+  },
+  {
+    "id": "complex-conjugate",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\bar{z}",
+    "name": "Complex conjugate",
+    "meaning": "If z = a + ib then z̄ = a − ib.",
+    "aliases": [
+      "conjugate",
+      "z bar"
+    ]
+  },
+  {
+    "id": "complex-modulus",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\lvert z \\rvert",
+    "name": "Modulus of z",
+    "meaning": "Distance from 0 in the complex plane: |z| = √(a² + b²).",
+    "aliases": [
+      "modulus",
+      "abs z",
+      "r"
+    ]
+  },
+  {
+    "id": "complex-arg",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\arg z",
+    "name": "Argument of z",
+    "meaning": "Angle of z in (−π, π]. Polar form uses r (cos θ + i sin θ).",
+    "aliases": [
+      "arg",
+      "argument",
+      "theta"
+    ]
+  },
+  {
+    "id": "re-im",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Algebra",
+    "symbol": "\\mathrm{Re}\\, z,\\; \\mathrm{Im}\\, z",
+    "name": "Real and imaginary parts",
+    "meaning": "Re(a + ib) = a and Im(a + ib) = b.",
+    "aliases": [
+      "real part",
+      "imaginary part"
+    ]
   },
   {
     "id": "angle-degree",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
     "category": "Geometry",
     "symbol": "1^{\\circ}",
     "name": "Degree",
     "meaning": "1/360 of a full turn. Full turn = 360°.",
-    "aliases": ["degree", "degrees", "360"]
+    "aliases": [
+      "degree",
+      "degrees",
+      "360"
+    ]
   },
   {
     "id": "angle-radian",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P"
+    ],
     "category": "Geometry",
     "symbol": "1\\ \\mathrm{rad}",
     "name": "Radian",
     "meaning": "Angle that cuts an arc equal to the radius. Full turn = 2π rad.",
-    "aliases": ["radian", "radians", "rad"]
+    "aliases": [
+      "radian",
+      "radians",
+      "rad"
+    ]
+  },
+  {
+    "id": "angle-mark",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "category": "Geometry",
+    "symbol": "\\angle ABC",
+    "name": "Angle",
+    "meaning": "The angle at B formed by points A, B, C.",
+    "aliases": [
+      "angle",
+      "vertex"
+    ]
+  },
+  {
+    "id": "parallel",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
+    "category": "Geometry",
+    "symbol": "\\parallel",
+    "name": "Parallel",
+    "meaning": "Same direction; never meet. Two vectors are parallel when one is a scalar times the other.",
+    "aliases": [
+      "parallel",
+      "parallels"
+    ]
+  },
+  {
+    "id": "perpendicular",
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Geometry",
+    "symbol": "\\perp",
+    "name": "Perpendicular",
+    "meaning": "Orthogonal; meet at a right angle. Two vectors: u · v = 0.",
+    "aliases": [
+      "perpendicular",
+      "orthogonal",
+      "right angle"
+    ]
+  },
+  {
+    "id": "similar",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "category": "Geometry",
+    "symbol": "\\sim",
+    "name": "Similar",
+    "meaning": "Same shape, possibly different size. Matching angles equal; sides in proportion.",
+    "aliases": [
+      "similar",
+      "similarity"
+    ]
+  },
+  {
+    "id": "congruent",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "category": "Geometry",
+    "symbol": "\\equiv",
+    "name": "Congruent",
+    "meaning": "Same shape and size. Can be matched by a rigid motion.",
+    "aliases": [
+      "congruent",
+      "congruence triangles"
+    ]
   },
   {
     "id": "trig-ratios",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
     "category": "Geometry",
     "symbol": "\\sin,\\ \\cos,\\ \\tan",
     "name": "Sine, cosine, tangent",
     "meaning": "Trig ratios of an oriented angle; on the unit circle the domain is all reals.",
-    "aliases": ["sin", "cos", "tan", "trig", "sine", "cosine", "tangent"]
+    "aliases": [
+      "sin",
+      "cos",
+      "tan",
+      "trig",
+      "sine",
+      "cosine",
+      "tangent"
+    ]
+  },
+  {
+    "id": "inv-trig",
+    "courses": [
+      "S6-Maths-3P-Adv",
+      "S7-Maths-3P-Adv"
+    ],
+    "category": "Geometry",
+    "symbol": "\\arcsin,\\; \\arccos,\\; \\arctan",
+    "name": "Inverse trig",
+    "meaning": "Inverse sine, cosine and tangent. S7 AM uses them to integrate.",
+    "aliases": [
+      "arcsin",
+      "arccos",
+      "arctan",
+      "asin",
+      "acos",
+      "atan"
+    ]
   },
   {
     "id": "vector",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
     "category": "Geometry",
     "symbol": "\\overrightarrow{AB}",
     "name": "Vector",
     "meaning": "Directed segment from A to B; in the plane it matches an ordered pair of reals.",
-    "aliases": ["vector", "arrow", "directed"]
+    "aliases": [
+      "vector",
+      "arrow",
+      "directed"
+    ]
+  },
+  {
+    "id": "free-vector",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "category": "Geometry",
+    "symbol": "\\vec{u}",
+    "name": "Free vector",
+    "meaning": "A translation: equal directed segments represent the same free vector.",
+    "aliases": [
+      "free vector",
+      "translation"
+    ]
   },
   {
     "id": "vector-magnitude",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
     "category": "Geometry",
     "symbol": "\\|\\vec{u}\\|",
     "name": "Magnitude",
     "meaning": "Length of a vector. Distance AB is the magnitude of AB.",
-    "aliases": ["norm", "length", "modulus of a vector"]
+    "aliases": [
+      "norm",
+      "length",
+      "modulus of a vector"
+    ]
   },
   {
     "id": "scalar-product",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
     "category": "Geometry",
     "symbol": "\\vec{u}\\cdot\\vec{v}",
     "name": "Scalar product",
     "meaning": "Dot product. Zero means the vectors are orthogonal.",
-    "aliases": ["dot product", "inner product", "orthogonal"]
+    "aliases": [
+      "dot product",
+      "inner product",
+      "orthogonal"
+    ]
+  },
+  {
+    "id": "vector-product",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "category": "Geometry",
+    "symbol": "\\vec{u}\\times\\vec{v}",
+    "name": "Vector product",
+    "meaning": "Cross product in 3D. Direction by the right-hand rule; magnitude is the parallelogram area.",
+    "aliases": [
+      "cross product",
+      "vector product"
+    ]
+  },
+  {
+    "id": "unit-vectors",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "category": "Geometry",
+    "symbol": "\\mathbf{i},\\;\\mathbf{j},\\;\\mathbf{k}",
+    "name": "Unit vectors",
+    "meaning": "Orthonormal basis of 3D space along the x, y and z axes.",
+    "aliases": [
+      "i j k",
+      "basis vectors",
+      "standard basis"
+    ]
+  },
+  {
+    "id": "line-parameter",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Geometry",
+    "symbol": "t",
+    "name": "Line parameter",
+    "meaning": "Real number in r = a + t d. Each t is a point on the line.",
+    "aliases": [
+      "parameter",
+      "parametric"
+    ]
+  },
+  {
+    "id": "limit",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Analysis",
+    "symbol": "\\lim_{x \\to a} f(x)",
+    "name": "Limit",
+    "meaning": "Value that f(x) approaches as x approaches a (or ±∞).",
+    "aliases": [
+      "limit",
+      "tends to"
+    ]
+  },
+  {
+    "id": "derivative",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P",
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Analysis",
+    "symbol": "f'(x)",
+    "name": "Derivative",
+    "meaning": "Gradient function. Also written dy/dx. At a point it is the gradient of the tangent.",
+    "aliases": [
+      "f prime",
+      "derivative",
+      "gradient"
+    ]
+  },
+  {
+    "id": "leibniz-deriv",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Analysis",
+    "symbol": "\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}",
+    "name": "Leibniz derivative",
+    "meaning": "Same as f'(x). Used from first principles in S6.",
+    "aliases": [
+      "dy/dx",
+      "leibniz"
+    ]
+  },
+  {
+    "id": "second-deriv",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Analysis",
+    "symbol": "f''(x)",
+    "name": "Second derivative",
+    "meaning": "Derivative of f'. Sign tells convexity; zeros can be points of inflexion.",
+    "aliases": [
+      "f double prime",
+      "second derivative"
+    ]
+  },
+  {
+    "id": "nth-deriv",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "category": "Analysis",
+    "symbol": "f^{(n)}(x)",
+    "name": "nth derivative",
+    "meaning": "Result of differentiating n times. Used in Taylor polynomials.",
+    "aliases": [
+      "higher derivative",
+      "f n"
+    ]
+  },
+  {
+    "id": "indefinite-integral",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "category": "Analysis",
+    "symbol": "\\int f(x)\\,\\mathrm{d}x",
+    "name": "Indefinite integral",
+    "meaning": "The family of antiderivatives of f: F' = f, written F(x) + C.",
+    "aliases": [
+      "indefinite",
+      "antiderivative",
+      "primitive"
+    ]
+  },
+  {
+    "id": "definite-integral",
+    "courses": [
+      "S7-Maths-5P",
+      "S7-Maths-3P-Adv"
+    ],
+    "category": "Analysis",
+    "symbol": "\\int_{a}^{b} f(x)\\,\\mathrm{d}x",
+    "name": "Definite integral",
+    "meaning": "F(b) − F(a) when F' = f. Area under a non-negative graph from a to b.",
+    "aliases": [
+      "definite",
+      "area under curve"
+    ]
   },
   {
     "id": "sample-space",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
     "category": "Probability",
     "symbol": "\\Omega",
     "name": "Sample space",
     "meaning": "Set of all possible outcomes of a random experiment.",
-    "aliases": ["omega", "outcomes", "universe"]
+    "aliases": [
+      "omega",
+      "outcomes",
+      "universe"
+    ]
   },
   {
     "id": "prob-event",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
     "category": "Probability",
     "symbol": "P(A)",
     "name": "Probability of A",
     "meaning": "Number in [0, 1] giving how likely event A is.",
-    "aliases": ["P(A)", "probability", "chance"]
+    "aliases": [
+      "P(A)",
+      "probability",
+      "chance"
+    ]
   },
   {
     "id": "prob-complement",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
     "category": "Probability",
     "symbol": "\\bar{A}",
     "name": "Complement",
     "meaning": "Outcomes not in A. P(Ā) = 1 − P(A).",
-    "aliases": ["complement", "not A", "bar A", "A bar"]
+    "aliases": [
+      "complement",
+      "not A",
+      "bar A",
+      "A bar"
+    ]
   },
   {
     "id": "prob-conditional",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
     "category": "Probability",
     "symbol": "P(A\\mid B)",
     "name": "Conditional probability",
     "meaning": "Probability of A given that B has occurred: P(A ∩ B) / P(B).",
-    "aliases": ["given", "conditional", "P(A|B)", "bayes"]
+    "aliases": [
+      "given",
+      "conditional",
+      "P(A|B)",
+      "bayes"
+    ]
   },
   {
     "id": "prob-conditional-index",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P"
+    ],
     "category": "Probability",
     "symbol": "P_{B}(A)",
     "name": "Conditional (index)",
     "meaning": "Same as P(A | B); the EB syllabus writes both.",
-    "aliases": ["PB(A)", "P_B(A)", "conditional index"]
+    "aliases": [
+      "PB(A)",
+      "P_B(A)",
+      "conditional index"
+    ]
   },
   {
     "id": "set-union",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S6-Maths-3P-Adv"
+    ],
     "category": "Probability",
     "symbol": "A \\cup B",
     "name": "Union",
     "meaning": "A or B (or both). If mutually exclusive, P(A ∪ B) = P(A) + P(B).",
-    "aliases": ["union", "or", "cup"]
+    "aliases": [
+      "union",
+      "or",
+      "cup"
+    ]
   },
   {
     "id": "set-intersection",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S6-Maths-3P-Adv"
+    ],
     "category": "Probability",
     "symbol": "A \\cap B",
     "name": "Intersection",
     "meaning": "A and B. Independent events: P(A ∩ B) = P(A) P(B).",
-    "aliases": ["intersection", "and", "cap", "independent"]
+    "aliases": [
+      "intersection",
+      "and",
+      "cap",
+      "independent"
+    ]
+  },
+  {
+    "id": "random-var",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Probability",
+    "symbol": "X",
+    "name": "Random variable",
+    "meaning": "A number attached to each outcome. Discrete in S6; continuous in S7.",
+    "aliases": [
+      "random variable",
+      "RV"
+    ]
+  },
+  {
+    "id": "pdf-discrete",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "category": "Probability",
+    "symbol": "f(x_i) = P(X = x_i)",
+    "name": "Probability mass",
+    "meaning": "Probability that a discrete random variable equals a listed value.",
+    "aliases": [
+      "pmf",
+      "density discrete"
+    ]
+  },
+  {
+    "id": "cdf",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Probability",
+    "symbol": "F(x) = P(X \\le x)",
+    "name": "Cumulative distribution",
+    "meaning": "Probability that X is at most x.",
+    "aliases": [
+      "cdf",
+      "cumulative"
+    ]
+  },
+  {
+    "id": "expected-value",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Probability",
+    "symbol": "E(X)",
+    "name": "Expected value",
+    "meaning": "Mean of a random variable. For a binomial, np.",
+    "aliases": [
+      "expectation",
+      "E(X)",
+      "mean of X"
+    ]
+  },
+  {
+    "id": "variance",
+    "courses": [
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
+    "category": "Probability",
+    "symbol": "\\mathrm{Var}(X)",
+    "name": "Variance",
+    "meaning": "Spread of a random variable. Standard deviation is √Var(X).",
+    "aliases": [
+      "variance",
+      "Var"
+    ]
+  },
+  {
+    "id": "bernoulli-p",
+    "courses": [
+      "S6-Maths-5P"
+    ],
+    "category": "Probability",
+    "symbol": "p",
+    "name": "Success probability",
+    "meaning": "Probability of success in one Bernoulli trial; binomial parameter.",
+    "aliases": [
+      "p",
+      "success"
+    ]
+  },
+  {
+    "id": "normal-mu",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "category": "Probability",
+    "symbol": "\\mu",
+    "name": "Mean of a normal",
+    "meaning": "Expected value of a normal (or other continuous) distribution.",
+    "aliases": [
+      "mu",
+      "mean continuous"
+    ]
+  },
+  {
+    "id": "standard-normal",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "category": "Probability",
+    "symbol": "Y = \\dfrac{X-\\mu}{\\sigma}",
+    "name": "Standardised variable",
+    "meaning": "Turns X ~ N(μ, σ²) into a standard normal.",
+    "aliases": [
+      "z score",
+      "standardise",
+      "standard normal"
+    ]
+  },
+  {
+    "id": "pearson-r",
+    "courses": [
+      "S7-Maths-5P"
+    ],
+    "category": "Probability",
+    "symbol": "r",
+    "name": "Pearson correlation",
+    "meaning": "Linear association of a bivariate sample, in [−1, 1]. Calculated with technology.",
+    "aliases": [
+      "correlation",
+      "pearson",
+      "r"
+    ]
   },
   {
     "id": "stat-mean",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
     "category": "Statistics",
     "symbol": "\\bar{x}",
     "name": "Sample mean",
     "meaning": "Average of the observed values in a sample.",
-    "aliases": ["mean", "average", "x bar"]
+    "aliases": [
+      "mean",
+      "average",
+      "x bar"
+    ]
+  },
+  {
+    "id": "stat-median",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "category": "Statistics",
+    "symbol": "M",
+    "name": "Median",
+    "meaning": "Middle value once the data are ordered. Half the observations lie on each side.",
+    "aliases": [
+      "median",
+      "middle"
+    ]
+  },
+  {
+    "id": "stat-mode",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "category": "Statistics",
+    "symbol": "\\mathrm{Mo}",
+    "name": "Mode",
+    "meaning": "Most frequent value in the data set.",
+    "aliases": [
+      "mode",
+      "most frequent"
+    ]
+  },
+  {
+    "id": "stat-quartile",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "category": "Statistics",
+    "symbol": "Q_1,\\; Q_3",
+    "name": "Quartiles",
+    "meaning": "Q₁ is the median of the lower half; Q₃ of the upper half.",
+    "aliases": [
+      "quartiles",
+      "Q1",
+      "Q3",
+      "lower upper"
+    ]
+  },
+  {
+    "id": "stat-iqr",
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
+    "category": "Statistics",
+    "symbol": "Q_3 - Q_1",
+    "name": "Interquartile range",
+    "meaning": "Spread of the middle 50% of the data. Used with a boxplot.",
+    "aliases": [
+      "IQR",
+      "interquartile"
+    ]
+  },
+  {
+    "id": "stat-range",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "category": "Statistics",
+    "symbol": "x_{\\max} - x_{\\min}",
+    "name": "Range",
+    "meaning": "Largest observation minus smallest.",
+    "aliases": [
+      "range",
+      "spread"
+    ]
   },
   {
     "id": "stat-stdev",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S5-Maths-6P",
+      "S6-Maths-5P",
+      "S7-Maths-5P"
+    ],
     "category": "Statistics",
     "symbol": "\\sigma",
     "name": "Standard deviation",
-    "meaning": "Spread of a data set around the mean.",
-    "aliases": ["sigma", "sd", "standard deviation", "variance"]
+    "meaning": "Spread of a data set around the mean. S5 computes it by hand for n ≤ 6.",
+    "aliases": [
+      "sigma",
+      "sd",
+      "standard deviation",
+      "variance"
+    ]
   },
   {
     "id": "stat-n",
-    "courses": ["S5-Maths-6P"],
+    "courses": [
+      "S4-Maths-6P",
+      "S5-Maths-6P"
+    ],
     "category": "Statistics",
     "symbol": "n",
     "name": "Sample size",
     "meaning": "Number of observations in the sample.",
-    "aliases": ["n", "sample size", "count"]
+    "aliases": [
+      "n",
+      "sample size",
+      "count"
+    ]
+  },
+  {
+    "id": "stat-freq-abs",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "category": "Statistics",
+    "symbol": "n_i",
+    "name": "Absolute frequency",
+    "meaning": "How many times a value (or class) occurs.",
+    "aliases": [
+      "frequency",
+      "count",
+      "absolute"
+    ]
+  },
+  {
+    "id": "stat-freq-rel",
+    "courses": [
+      "S4-Maths-6P"
+    ],
+    "category": "Statistics",
+    "symbol": "f_i",
+    "name": "Relative frequency",
+    "meaning": "Absolute frequency divided by n; a proportion or a percentage.",
+    "aliases": [
+      "relative frequency",
+      "proportion"
+    ]
+  },
+  {
+    "id": "congruence",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Arithmetic",
+    "symbol": "a \\equiv b \\pmod{n}",
+    "name": "Congruence",
+    "meaning": "a and b leave the same remainder on division by n (n ≥ 2).",
+    "aliases": [
+      "mod",
+      "modulo",
+      "congruent integers"
+    ]
+  },
+  {
+    "id": "gcd",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Arithmetic",
+    "symbol": "\\gcd(a,b)",
+    "name": "Greatest common divisor",
+    "meaning": "Largest positive integer that divides both a and b. Found by Euclid’s algorithm.",
+    "aliases": [
+      "gcd",
+      "hcf",
+      "highest common factor"
+    ]
+  },
+  {
+    "id": "lcm",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Arithmetic",
+    "symbol": "\\mathrm{lcm}(a,b)",
+    "name": "Least common multiple",
+    "meaning": "Smallest positive common multiple. For integers, gcd(a,b) · lcm(a,b) = |ab|.",
+    "aliases": [
+      "lcm",
+      "lowest common multiple"
+    ]
+  },
+  {
+    "id": "matrix",
+    "courses": [
+      "S6-Maths-3P-Adv",
+      "S7-Maths-3P-Adv"
+    ],
+    "category": "Linear Algebra",
+    "symbol": "(a_{ij})",
+    "name": "Matrix entry",
+    "meaning": "a_ij sits in row i and column j of an m × n matrix.",
+    "aliases": [
+      "matrix",
+      "entry",
+      "element"
+    ]
+  },
+  {
+    "id": "det",
+    "courses": [
+      "S7-Maths-3P-Adv"
+    ],
+    "category": "Linear Algebra",
+    "symbol": "\\det A",
+    "name": "Determinant",
+    "meaning": "A scalar attached to a square matrix. Non-zero means A is invertible.",
+    "aliases": [
+      "det",
+      "determinant"
+    ]
+  },
+  {
+    "id": "matrix-inverse",
+    "courses": [
+      "S6-Maths-3P-Adv",
+      "S7-Maths-3P-Adv"
+    ],
+    "category": "Linear Algebra",
+    "symbol": "A^{-1}",
+    "name": "Inverse matrix",
+    "meaning": "Square matrix with A A^{-1} = I. Exists only when A is non-singular.",
+    "aliases": [
+      "inverse",
+      "A inverse"
+    ]
+  },
+  {
+    "id": "matrix-transpose",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Linear Algebra",
+    "symbol": "A^{\\mathrm{T}}",
+    "name": "Transpose",
+    "meaning": "Rows become columns.",
+    "aliases": [
+      "transpose",
+      "A T"
+    ]
+  },
+  {
+    "id": "rank",
+    "courses": [
+      "S6-Maths-3P-Adv",
+      "S7-Maths-3P-Adv"
+    ],
+    "category": "Linear Algebra",
+    "symbol": "\\operatorname{rank} A",
+    "name": "Rank",
+    "meaning": "Dimension of the column space; also the size of the largest non-zero minor.",
+    "aliases": [
+      "rank"
+    ]
+  },
+  {
+    "id": "identity-matrix",
+    "courses": [
+      "S6-Maths-3P-Adv",
+      "S7-Maths-3P-Adv"
+    ],
+    "category": "Linear Algebra",
+    "symbol": "I",
+    "name": "Identity matrix",
+    "meaning": "Square matrix with 1s on the diagonal and 0s elsewhere.",
+    "aliases": [
+      "identity",
+      "unit matrix"
+    ]
+  },
+  {
+    "id": "and-or",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Logic",
+    "symbol": "\\land,\\; \\lor",
+    "name": "And, or",
+    "meaning": "Conjunction and disjunction of propositions. Truth tables in S6 AM.",
+    "aliases": [
+      "and",
+      "or",
+      "conjunction",
+      "disjunction"
+    ]
+  },
+  {
+    "id": "not",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Logic",
+    "symbol": "\\lnot p",
+    "name": "Negation",
+    "meaning": "The proposition that is true exactly when p is false.",
+    "aliases": [
+      "not",
+      "negation"
+    ]
+  },
+  {
+    "id": "implies",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Logic",
+    "symbol": "p \\Rightarrow q",
+    "name": "Implication",
+    "meaning": "If p then q. False only when p is true and q is false.",
+    "aliases": [
+      "implies",
+      "if then",
+      "sufficient"
+    ]
+  },
+  {
+    "id": "iff",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Logic",
+    "symbol": "p \\Leftrightarrow q",
+    "name": "Equivalence",
+    "meaning": "p if and only if q. Both true or both false.",
+    "aliases": [
+      "iff",
+      "if and only if",
+      "equivalence"
+    ]
+  },
+  {
+    "id": "forall",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Logic",
+    "symbol": "\\forall",
+    "name": "For all",
+    "meaning": "Universal quantifier. Negating ∀x P(x) gives ∃x ¬P(x).",
+    "aliases": [
+      "forall",
+      "universal",
+      "for every"
+    ]
+  },
+  {
+    "id": "exists",
+    "courses": [
+      "S6-Maths-3P-Adv"
+    ],
+    "category": "Logic",
+    "symbol": "\\exists",
+    "name": "There exists",
+    "meaning": "Existential quantifier. Negating ∃x P(x) gives ∀x ¬P(x).",
+    "aliases": [
+      "exists",
+      "existential",
+      "there is"
+    ]
+  },
+  {
+    "id": "phys-charge",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics"
+    ],
+    "category": "Electricity",
+    "symbol": "Q",
+    "name": "Charge",
+    "meaning": "Quantity of charge. SI unit: coulomb (C).",
+    "aliases": [
+      "charge",
+      "Q"
+    ]
+  },
+  {
+    "id": "phys-current",
+    "courses": [
+      "S4-Physics"
+    ],
+    "category": "Electricity",
+    "symbol": "I",
+    "name": "Current",
+    "meaning": "Charge flow per unit time, I = Q / t. SI unit: ampere (A).",
+    "aliases": [
+      "current",
+      "amp",
+      "I"
+    ]
+  },
+  {
+    "id": "phys-voltage",
+    "courses": [
+      "S4-Physics"
+    ],
+    "category": "Electricity",
+    "symbol": "U",
+    "name": "Voltage",
+    "meaning": "Energy per coulomb. EB writes U, not V, in S4 circuits. SI unit: volt (V).",
+    "aliases": [
+      "voltage",
+      "pd",
+      "potential difference",
+      "U"
+    ]
+  },
+  {
+    "id": "phys-resistance",
+    "courses": [
+      "S4-Physics"
+    ],
+    "category": "Electricity",
+    "symbol": "R",
+    "name": "Resistance",
+    "meaning": "R = U / I. SI unit: ohm (Ω).",
+    "aliases": [
+      "resistance",
+      "ohm",
+      "R"
+    ]
+  },
+  {
+    "id": "phys-power",
+    "courses": [
+      "S4-Physics"
+    ],
+    "category": "Electricity",
+    "symbol": "P",
+    "name": "Power",
+    "meaning": "Rate of energy transfer, P = U I. SI unit: watt (W).",
+    "aliases": [
+      "power",
+      "watt",
+      "P"
+    ]
+  },
+  {
+    "id": "phys-elem-charge",
+    "courses": [
+      "S6-Physics"
+    ],
+    "category": "Electricity",
+    "symbol": "e",
+    "name": "Elementary charge",
+    "meaning": "Magnitude of the charge on a proton or electron: 1.6 × 10^{-19} C.",
+    "aliases": [
+      "e",
+      "elementary charge"
+    ]
+  },
+  {
+    "id": "phys-capacitance",
+    "courses": [
+      "S6-Physics"
+    ],
+    "category": "Electricity",
+    "symbol": "C",
+    "name": "Capacitance",
+    "meaning": "Q = C U. SI unit: farad (F).",
+    "aliases": [
+      "capacitance",
+      "farad",
+      "capacitor"
+    ]
+  },
+  {
+    "id": "phys-s",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "s",
+    "name": "Displacement",
+    "meaning": "Position along a line, or distance moved. Vector or scalar as stated.",
+    "aliases": [
+      "displacement",
+      "distance",
+      "s"
+    ]
+  },
+  {
+    "id": "phys-v",
+    "courses": [
+      "S4-Physics",
+      "S5-Physics",
+      "S6-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "v",
+    "name": "Velocity",
+    "meaning": "Rate of change of displacement. Speed is the scalar version.",
+    "aliases": [
+      "velocity",
+      "speed",
+      "v"
+    ]
+  },
+  {
+    "id": "phys-a",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "a",
+    "name": "Acceleration",
+    "meaning": "Rate of change of velocity.",
+    "aliases": [
+      "acceleration",
+      "a"
+    ]
+  },
+  {
+    "id": "phys-force",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "F",
+    "name": "Force",
+    "meaning": "A vector that can change motion. Weight is written F_G = m g.",
+    "aliases": [
+      "force",
+      "F",
+      "newton"
+    ]
+  },
+  {
+    "id": "phys-mass",
+    "courses": [
+      "S4-Physics",
+      "S5-Physics",
+      "S6-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "m",
+    "name": "Mass",
+    "meaning": "How hard it is for a given force to change the motion. SI unit: kilogram.",
+    "aliases": [
+      "mass",
+      "kg",
+      "m"
+    ]
+  },
+  {
+    "id": "phys-g",
+    "courses": [
+      "S4-Physics",
+      "S5-Physics",
+      "S6-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "g",
+    "name": "Gravitational field strength",
+    "meaning": "Force per unit mass. Near Earth, about 9.81 N/kg; also the free-fall acceleration.",
+    "aliases": [
+      "g",
+      "gravity",
+      "field strength"
+    ]
+  },
+  {
+    "id": "phys-work",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "W",
+    "name": "Work",
+    "meaning": "Energy transferred by a force, W = F s when s is parallel to F. SI unit: joule.",
+    "aliases": [
+      "work",
+      "W"
+    ]
+  },
+  {
+    "id": "phys-ek",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "E_{\\mathrm{k}}",
+    "name": "Kinetic energy",
+    "meaning": "Energy of motion, ½ m v².",
+    "aliases": [
+      "kinetic",
+      "Ek"
+    ]
+  },
+  {
+    "id": "phys-ep",
+    "courses": [
+      "S5-Physics",
+      "S7-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "E_{\\mathrm{p}}",
+    "name": "Potential energy",
+    "meaning": "Stored energy. Gravitational: ΔE_p = m g Δh in a uniform field.",
+    "aliases": [
+      "potential energy",
+      "Ep",
+      "GPE"
+    ]
+  },
+  {
+    "id": "phys-momentum",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "p",
+    "name": "Momentum",
+    "meaning": "Quantity of motion, p = m v. Conserved in a closed system.",
+    "aliases": [
+      "momentum",
+      "p"
+    ]
+  },
+  {
+    "id": "phys-specific-heat",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Matter and Heat",
+    "symbol": "c",
+    "name": "Specific heat capacity",
+    "meaning": "Heat per kilogram per kelvin in Q = m c ΔT.",
+    "aliases": [
+      "specific heat",
+      "c",
+      "heat capacity"
+    ]
+  },
+  {
+    "id": "phys-latent",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Matter and Heat",
+    "symbol": "l",
+    "name": "Specific latent heat",
+    "meaning": "Heat per kilogram to change state, Q = m l.",
+    "aliases": [
+      "latent heat",
+      "l",
+      "melting boiling"
+    ]
+  },
+  {
+    "id": "phys-heat",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Matter and Heat",
+    "symbol": "Q",
+    "name": "Heat",
+    "meaning": "Energy transferred because of a temperature difference. Same letter as charge; context tells them apart.",
+    "aliases": [
+      "heat",
+      "Q heat",
+      "thermal energy"
+    ]
+  },
+  {
+    "id": "phys-omega",
+    "courses": [
+      "S6-Physics"
+    ],
+    "category": "Mechanics",
+    "symbol": "\\omega",
+    "name": "Angular velocity",
+    "meaning": "Rate of change of angle, also 2π f in oscillations. SI unit: rad/s.",
+    "aliases": [
+      "omega",
+      "angular"
+    ]
+  },
+  {
+    "id": "phys-period",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics"
+    ],
+    "category": "Waves",
+    "symbol": "T",
+    "name": "Period",
+    "meaning": "Time for one oscillation. f = 1 / T.",
+    "aliases": [
+      "period",
+      "T"
+    ]
+  },
+  {
+    "id": "phys-frequency",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics"
+    ],
+    "category": "Waves",
+    "symbol": "f",
+    "name": "Frequency",
+    "meaning": "Oscillations per second. SI unit: hertz (Hz).",
+    "aliases": [
+      "frequency",
+      "hertz",
+      "f"
+    ]
+  },
+  {
+    "id": "phys-lambda",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics",
+      "S7-Physics"
+    ],
+    "category": "Waves",
+    "symbol": "\\lambda",
+    "name": "Wavelength",
+    "meaning": "Distance between neighbouring corresponding points on a wave.",
+    "aliases": [
+      "lambda",
+      "wavelength"
+    ]
+  },
+  {
+    "id": "phys-amplitude",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics"
+    ],
+    "category": "Waves",
+    "symbol": "A",
+    "name": "Amplitude",
+    "meaning": "Maximum displacement from equilibrium.",
+    "aliases": [
+      "amplitude",
+      "A"
+    ]
+  },
+  {
+    "id": "phys-E",
+    "courses": [
+      "S6-Physics",
+      "S7-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "E",
+    "name": "Electric field strength",
+    "meaning": "Force per unit charge, E = F / q. SI unit: N/C or V/m.",
+    "aliases": [
+      "electric field",
+      "E"
+    ]
+  },
+  {
+    "id": "phys-B",
+    "courses": [
+      "S6-Physics",
+      "S7-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "B",
+    "name": "Magnetic flux density",
+    "meaning": "Magnetic field. Force on a wire is B I ℓ sin θ. SI unit: tesla (T).",
+    "aliases": [
+      "magnetic field",
+      "B",
+      "flux density"
+    ]
+  },
+  {
+    "id": "phys-k",
+    "courses": [
+      "S6-Physics",
+      "S7-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "k",
+    "name": "Coulomb constant",
+    "meaning": "k = 1 / (4π ε_0) in Coulomb’s law and radial E and V.",
+    "aliases": [
+      "k",
+      "coulomb constant"
+    ]
+  },
+  {
+    "id": "phys-eps0",
+    "courses": [
+      "S6-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "\\varepsilon_{0}",
+    "name": "Permittivity of free space",
+    "meaning": "Constant in k = 1 / (4π ε_0).",
+    "aliases": [
+      "epsilon 0",
+      "permittivity"
+    ]
+  },
+  {
+    "id": "phys-mu",
+    "courses": [
+      "S6-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "\\mu",
+    "name": "Permeability (solenoid)",
+    "meaning": "In B = μ n I inside a solenoid; n = N / ℓ.",
+    "aliases": [
+      "mu",
+      "permeability"
+    ]
+  },
+  {
+    "id": "phys-G",
+    "courses": [
+      "S6-Physics",
+      "S7-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "G",
+    "name": "Gravitational constant",
+    "meaning": "Newton’s G in F_G = G m₁ m₂ / r².",
+    "aliases": [
+      "big G",
+      "universal G"
+    ]
+  },
+  {
+    "id": "phys-V-potential",
+    "courses": [
+      "S7-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "V",
+    "name": "Potential",
+    "meaning": "Work per unit charge (electric) or per unit mass (gravitational). ΔV = ΔE_p / q or / m.",
+    "aliases": [
+      "potential",
+      "V"
+    ]
+  },
+  {
+    "id": "phys-flux",
+    "courses": [
+      "S7-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "\\Phi",
+    "name": "Magnetic flux",
+    "meaning": "Φ = B_⊥ A. SI unit: weber (Wb).",
+    "aliases": [
+      "flux",
+      "phi"
+    ]
+  },
+  {
+    "id": "phys-emf",
+    "courses": [
+      "S7-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "\\varepsilon",
+    "name": "Electromotive force",
+    "meaning": "Induced emf ε = −ΔΦ / Δt. SI unit: volt.",
+    "aliases": [
+      "emf",
+      "electromotive",
+      "epsilon"
+    ]
+  },
+  {
+    "id": "phys-L",
+    "courses": [
+      "S6-Physics"
+    ],
+    "category": "Fields",
+    "symbol": "L",
+    "name": "Inductance",
+    "meaning": "Energy in an inductor is ½ L I². SI unit: henry (H).",
+    "aliases": [
+      "inductance",
+      "henry",
+      "L"
+    ]
+  },
+  {
+    "id": "phys-activity",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Quantum",
+    "symbol": "A",
+    "name": "Activity",
+    "meaning": "Decays per unit time. S5 uses whole numbers of half-lives, no exponentials.",
+    "aliases": [
+      "activity",
+      "becquerel",
+      "radioactivity"
+    ]
+  },
+  {
+    "id": "phys-half-life",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Quantum",
+    "symbol": "T_{1/2}",
+    "name": "Half-life",
+    "meaning": "Time for half the nuclei (or the activity) to remain.",
+    "aliases": [
+      "half-life",
+      "half life"
+    ]
+  },
+  {
+    "id": "phys-h",
+    "courses": [
+      "S7-Physics"
+    ],
+    "category": "Quantum",
+    "symbol": "h",
+    "name": "Planck's constant",
+    "meaning": "E = h f for a photon; also in de Broglie and uncertainty.",
+    "aliases": [
+      "planck",
+      "h"
+    ]
+  },
+  {
+    "id": "phys-eV",
+    "courses": [
+      "S7-Physics"
+    ],
+    "category": "Quantum",
+    "symbol": "\\mathrm{eV}",
+    "name": "Electronvolt",
+    "meaning": "Energy unit: work on one elementary charge through 1 V.",
+    "aliases": [
+      "eV",
+      "electron volt",
+      "electronvolt"
+    ]
+  },
+  {
+    "id": "phys-photon",
+    "courses": [
+      "S7-Physics"
+    ],
+    "category": "Quantum",
+    "symbol": "hf",
+    "name": "Photon energy",
+    "meaning": "A quantum of electromagnetic energy.",
+    "aliases": [
+      "photon",
+      "quantum"
+    ]
+  },
+  {
+    "id": "phys-work-fn",
+    "courses": [
+      "S7-Physics"
+    ],
+    "category": "Quantum",
+    "symbol": "W_{0}",
+    "name": "Work function",
+    "meaning": "Minimum energy to free an electron from a metal surface.",
+    "aliases": [
+      "work function",
+      "W0",
+      "threshold"
+    ]
+  },
+  {
+    "id": "phys-n-quantum",
+    "courses": [
+      "S7-Physics"
+    ],
+    "category": "Quantum",
+    "symbol": "n",
+    "name": "Quantum number",
+    "meaning": "Positive integer labelling energy states (infinite well, hydrogen).",
+    "aliases": [
+      "n",
+      "principal",
+      "level"
+    ]
+  },
+  {
+    "id": "nuclide",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Quantum",
+    "symbol": "{}^{A}_{Z}\\mathrm{X}",
+    "name": "Nuclide",
+    "meaning": "A is mass number, Z is atomic number, X is the element.",
+    "aliases": [
+      "isotope",
+      "nucleus",
+      "AZX"
+    ]
+  },
+  {
+    "id": "phys-c-light",
+    "courses": [
+      "S5-Physics",
+      "S7-Physics"
+    ],
+    "category": "Quantum",
+    "symbol": "c",
+    "name": "Speed of light",
+      "meaning": "Speed of electromagnetic waves in vacuum. In S5: E = m c².",
+    "aliases": [
+      "speed of light",
+      "c",
+      "light"
+    ]
+  },
+  {
+    "id": "unit-coulomb",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\mathrm{C}",
+    "name": "Coulomb",
+    "meaning": "SI unit of charge.",
+    "aliases": [
+      "coulomb",
+      "C"
+    ]
+  },
+  {
+    "id": "unit-ampere",
+    "courses": [
+      "S4-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\mathrm{A}",
+    "name": "Ampere",
+    "meaning": "SI unit of current.",
+    "aliases": [
+      "ampere",
+      "amp",
+      "A"
+    ]
+  },
+  {
+    "id": "unit-volt",
+    "courses": [
+      "S4-Physics",
+      "S7-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\mathrm{V}",
+    "name": "Volt",
+    "meaning": "SI unit of voltage and of emf.",
+    "aliases": [
+      "volt",
+      "V"
+    ]
+  },
+  {
+    "id": "unit-ohm",
+    "courses": [
+      "S4-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\Omega",
+    "name": "Ohm",
+    "meaning": "SI unit of resistance. Same glyph as sample space Ω; context tells them apart.",
+    "aliases": [
+      "ohm",
+      "omega unit"
+    ]
+  },
+  {
+    "id": "unit-joule",
+    "courses": [
+      "S4-Physics",
+      "S5-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\mathrm{J}",
+    "name": "Joule",
+    "meaning": "SI unit of energy and work. 1 kWh is a commercial energy unit in S4.",
+    "aliases": [
+      "joule",
+      "J",
+      "kWh"
+    ]
+  },
+  {
+    "id": "unit-watt",
+    "courses": [
+      "S4-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\mathrm{W}",
+    "name": "Watt",
+    "meaning": "SI unit of power: 1 W = 1 J/s.",
+    "aliases": [
+      "watt",
+      "W"
+    ]
+  },
+  {
+    "id": "unit-newton",
+    "courses": [
+      "S4-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\mathrm{N}",
+    "name": "Newton",
+    "meaning": "SI unit of force: 1 N = 1 kg·m/s².",
+    "aliases": [
+      "newton",
+      "N"
+    ]
+  },
+  {
+    "id": "unit-hertz",
+    "courses": [
+      "S4-Physics",
+      "S6-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\mathrm{Hz}",
+    "name": "Hertz",
+    "meaning": "SI unit of frequency: 1 Hz = 1 s⁻¹.",
+    "aliases": [
+      "hertz",
+      "Hz"
+    ]
+  },
+  {
+    "id": "unit-tesla",
+    "courses": [
+      "S6-Physics",
+      "S7-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\mathrm{T}",
+    "name": "Tesla",
+    "meaning": "SI unit of magnetic flux density B.",
+    "aliases": [
+      "tesla",
+      "T"
+    ]
+  },
+  {
+    "id": "unit-kelvin",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Units",
+    "symbol": "\\mathrm{K}",
+    "name": "Kelvin",
+    "meaning": "SI temperature. Absolute zero is 0 K; T(K) = θ(°C) + 273.",
+    "aliases": [
+      "kelvin",
+      "absolute zero",
+      "K"
+    ]
+  },
+  {
+    "id": "unit-celsius",
+    "courses": [
+      "S5-Physics"
+    ],
+    "category": "Units",
+    "symbol": "^{\\circ}\\mathrm{C}",
+    "name": "Degree Celsius",
+    "meaning": "Everyday temperature scale in S5 heat.",
+    "aliases": [
+      "celsius",
+      "centigrade"
+    ]
   }
 ]

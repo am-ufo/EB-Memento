@@ -2,7 +2,7 @@
 
 Offline PWA: syllabus-exact maths formulas for European Baccalaureate students. Open, search, take one answer, close. No login, no backend.
 
-v1 is **S5 Maths 6P** (also covers 4P). Course tags exist on every formula; there is no course picker yet.
+The catalog covers the five EB syllabi in `docs/eb-curriculumn/`. Course tags exist on every formula; there is no course picker yet.
 
 ## Commands
 
@@ -27,7 +27,7 @@ Production: Cloudflare Pages, output `dist`.
 
 ## Formulas
 
-Keep `courses: ["S5-Maths-6P"]` unless mixed-year content is actually needed. Each entry needs a stable `id`, `topic`, `title`, search `aliases`, KaTeX in `katex`, and `variables` with symbol + meaning. Match the EB syllabus; do not invent “helpful” extras.
+Set `courses` to the year-programme tags in [docs/curriculum/README.md](docs/curriculum/README.md). Each entry needs a stable `id`, `topic`, `title`, search `aliases`, KaTeX in `katex`, and `variables` with symbol + meaning. Match the EB syllabus; do not invent “helpful” extras. Use syllabus topic names (Algebra, Geometry, Fields, …), not invented ones.
 
 Stay client-only. Do not add auth, APIs, or a database.
 

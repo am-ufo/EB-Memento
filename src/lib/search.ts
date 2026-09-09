@@ -11,6 +11,8 @@ function haystack(formula: Formula): string {
   const parts = [
     formula.title,
     formula.topic,
+    ...formula.courses,
+    ...formula.courses.map((course) => course.replaceAll("-", " ")),
     ...formula.aliases,
     ...formula.variables.map((variable) => variable.meaning),
   ];
@@ -41,7 +43,16 @@ export function topicsOf(formulas: Formula[]): string[] {
 }
 
 function notationHaystack(notation: Notation): string {
-  return fold([notation.name, notation.meaning, notation.category, ...notation.aliases].join(" "));
+  return fold(
+    [
+      notation.name,
+      notation.meaning,
+      notation.category,
+      ...notation.courses,
+      ...notation.courses.map((course) => course.replaceAll("-", " ")),
+      ...notation.aliases,
+    ].join(" "),
+  );
 }
 
 export function searchNotations(notations: Notation[], query: string): Notation[] {

@@ -70,7 +70,7 @@ export function App() {
   return (
     <div className="shell">
       <header className="top">
-        <p className="eyebrow">EB · S5 Maths 6P</p>
+        <p className="eyebrow">EB · Maths & Physics</p>
         <h1>Memento</h1>
       </header>
 
