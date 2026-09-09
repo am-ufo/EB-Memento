@@ -1,0 +1,290 @@
+[
+  {
+    "id": "set-naturals",
+    "courses": ["S5-Maths-6P"],
+    "category": "Numbers",
+    "symbol": "\\mathbb{N}",
+    "name": "Natural numbers",
+    "meaning": "Counting numbers 0, 1, 2, … (check whether your class includes 0).",
+    "aliases": ["N", "naturals", "whole numbers"]
+  },
+  {
+    "id": "set-naturals-star",
+    "courses": ["S5-Maths-6P"],
+    "category": "Numbers",
+    "symbol": "\\mathbb{N}^{*}",
+    "name": "Positive integers",
+    "meaning": "Natural numbers except 0; used as a denominator in a fraction.",
+    "aliases": ["N*", "N star", "nonzero naturals"]
+  },
+  {
+    "id": "set-integers",
+    "courses": ["S5-Maths-6P"],
+    "category": "Numbers",
+    "symbol": "\\mathbb{Z}",
+    "name": "Integers",
+    "meaning": "…, −2, −1, 0, 1, 2, …",
+    "aliases": ["Z", "integers", "whole numbers signed"]
+  },
+  {
+    "id": "set-rationals",
+    "courses": ["S5-Maths-6P"],
+    "category": "Numbers",
+    "symbol": "\\mathbb{Q}",
+    "name": "Rational numbers",
+    "meaning": "Numbers that can be written a/b with a integer and b a positive integer.",
+    "aliases": ["Q", "rationals", "fractions"]
+  },
+  {
+    "id": "set-reals",
+    "courses": ["S5-Maths-6P"],
+    "category": "Numbers",
+    "symbol": "\\mathbb{R}",
+    "name": "Real numbers",
+    "meaning": "All rationals and irrationals; every point on the number line.",
+    "aliases": ["R", "reals", "real line"]
+  },
+  {
+    "id": "set-membership",
+    "courses": ["S5-Maths-6P"],
+    "category": "Numbers",
+    "symbol": "\\in",
+    "name": "Element of",
+    "meaning": "x ∈ A means x belongs to the set A.",
+    "aliases": ["in", "belongs", "member"]
+  },
+  {
+    "id": "const-pi",
+    "courses": ["S5-Maths-6P"],
+    "category": "Numbers",
+    "symbol": "\\pi",
+    "name": "Pi",
+    "meaning": "Circle constant; also the radian measure of a half-turn (180°).",
+    "aliases": ["pi", "circle", "180 degrees"]
+  },
+  {
+    "id": "interval-closed",
+    "courses": ["S5-Maths-6P"],
+    "category": "Algebra",
+    "symbol": "[a, b]",
+    "name": "Closed interval",
+    "meaning": "All reals from a to b, including both ends.",
+    "aliases": ["closed interval", "segment", "inclusive"]
+  },
+  {
+    "id": "interval-open",
+    "courses": ["S5-Maths-6P"],
+    "category": "Algebra",
+    "symbol": "]a, b[",
+    "name": "Open interval",
+    "meaning": "All reals strictly between a and b. EB uses reversed brackets, not (a, b).",
+    "aliases": ["open interval", "(a,b)", "exclusive"]
+  },
+  {
+    "id": "interval-half",
+    "courses": ["S5-Maths-6P"],
+    "category": "Algebra",
+    "symbol": "[a, b[",
+    "name": "Half-open interval",
+    "meaning": "From a up to but not including b. ]a, b] excludes a and includes b.",
+    "aliases": ["half-open", "half-closed", "semi-open"]
+  },
+  {
+    "id": "delta-discriminant",
+    "courses": ["S5-Maths-6P"],
+    "category": "Algebra",
+    "symbol": "\\Delta",
+    "name": "Discriminant",
+    "meaning": "For ax² + bx + c: Δ = b² − 4ac. Sign of Δ tells how many real roots.",
+    "aliases": ["delta", "discriminant", "quadratic"]
+  },
+  {
+    "id": "delta-difference",
+    "courses": ["S5-Maths-6P"],
+    "category": "Algebra",
+    "symbol": "\\Delta",
+    "name": "Difference",
+    "meaning": "Change in a quantity: Δx = x₂ − x₁.",
+    "aliases": ["delta", "difference", "change"]
+  },
+  {
+    "id": "sigma-sum",
+    "courses": ["S5-Maths-6P"],
+    "category": "Algebra",
+    "symbol": "\\sum",
+    "name": "Summation",
+    "meaning": "Σ adds a list of terms, from a start index to an end index.",
+    "aliases": ["sigma", "sum", "series"]
+  },
+  {
+    "id": "fn-of-x",
+    "courses": ["S5-Maths-6P"],
+    "category": "Algebra",
+    "symbol": "f(x)",
+    "name": "Function value",
+    "meaning": "Output of f at input x. Also written x ↦ f(x).",
+    "aliases": ["function", "f of x", "mapping"]
+  },
+  {
+    "id": "abs-value",
+    "courses": ["S5-Maths-6P"],
+    "category": "Algebra",
+    "symbol": "|a|",
+    "name": "Absolute value",
+    "meaning": "Distance from 0; √(a²) = |a|.",
+    "aliases": ["modulus", "absolute", "abs"]
+  },
+  {
+    "id": "logarithm",
+    "courses": ["S5-Maths-6P"],
+    "category": "Algebra",
+    "symbol": "\\log_{b} a",
+    "name": "Logarithm",
+    "meaning": "The exponent that turns b into a. S5 uses a positive integer base.",
+    "aliases": ["log", "logarithm", "index"]
+  },
+  {
+    "id": "angle-degree",
+    "courses": ["S5-Maths-6P"],
+    "category": "Geometry",
+    "symbol": "1^{\\circ}",
+    "name": "Degree",
+    "meaning": "1/360 of a full turn. Full turn = 360°.",
+    "aliases": ["degree", "degrees", "360"]
+  },
+  {
+    "id": "angle-radian",
+    "courses": ["S5-Maths-6P"],
+    "category": "Geometry",
+    "symbol": "1\\ \\mathrm{rad}",
+    "name": "Radian",
+    "meaning": "Angle that cuts an arc equal to the radius. Full turn = 2π rad.",
+    "aliases": ["radian", "radians", "rad"]
+  },
+  {
+    "id": "trig-ratios",
+    "courses": ["S5-Maths-6P"],
+    "category": "Geometry",
+    "symbol": "\\sin,\\ \\cos,\\ \\tan",
+    "name": "Sine, cosine, tangent",
+    "meaning": "Trig ratios of an oriented angle; on the unit circle the domain is all reals.",
+    "aliases": ["sin", "cos", "tan", "trig", "sine", "cosine", "tangent"]
+  },
+  {
+    "id": "vector",
+    "courses": ["S5-Maths-6P"],
+    "category": "Geometry",
+    "symbol": "\\overrightarrow{AB}",
+    "name": "Vector",
+    "meaning": "Directed segment from A to B; in the plane it matches an ordered pair of reals.",
+    "aliases": ["vector", "arrow", "directed"]
+  },
+  {
+    "id": "vector-magnitude",
+    "courses": ["S5-Maths-6P"],
+    "category": "Geometry",
+    "symbol": "\\|\\vec{u}\\|",
+    "name": "Magnitude",
+    "meaning": "Length of a vector. Distance AB is the magnitude of AB.",
+    "aliases": ["norm", "length", "modulus of a vector"]
+  },
+  {
+    "id": "scalar-product",
+    "courses": ["S5-Maths-6P"],
+    "category": "Geometry",
+    "symbol": "\\vec{u}\\cdot\\vec{v}",
+    "name": "Scalar product",
+    "meaning": "Dot product. Zero means the vectors are orthogonal.",
+    "aliases": ["dot product", "inner product", "orthogonal"]
+  },
+  {
+    "id": "sample-space",
+    "courses": ["S5-Maths-6P"],
+    "category": "Probability",
+    "symbol": "\\Omega",
+    "name": "Sample space",
+    "meaning": "Set of all possible outcomes of a random experiment.",
+    "aliases": ["omega", "outcomes", "universe"]
+  },
+  {
+    "id": "prob-event",
+    "courses": ["S5-Maths-6P"],
+    "category": "Probability",
+    "symbol": "P(A)",
+    "name": "Probability of A",
+    "meaning": "Number in [0, 1] giving how likely event A is.",
+    "aliases": ["P(A)", "probability", "chance"]
+  },
+  {
+    "id": "prob-complement",
+    "courses": ["S5-Maths-6P"],
+    "category": "Probability",
+    "symbol": "\\bar{A}",
+    "name": "Complement",
+    "meaning": "Outcomes not in A. P(Ā) = 1 − P(A).",
+    "aliases": ["complement", "not A", "bar A", "A bar"]
+  },
+  {
+    "id": "prob-conditional",
+    "courses": ["S5-Maths-6P"],
+    "category": "Probability",
+    "symbol": "P(A\\mid B)",
+    "name": "Conditional probability",
+    "meaning": "Probability of A given that B has occurred: P(A ∩ B) / P(B).",
+    "aliases": ["given", "conditional", "P(A|B)", "bayes"]
+  },
+  {
+    "id": "prob-conditional-index",
+    "courses": ["S5-Maths-6P"],
+    "category": "Probability",
+    "symbol": "P_{B}(A)",
+    "name": "Conditional (index)",
+    "meaning": "Same as P(A | B); the EB syllabus writes both.",
+    "aliases": ["PB(A)", "P_B(A)", "conditional index"]
+  },
+  {
+    "id": "set-union",
+    "courses": ["S5-Maths-6P"],
+    "category": "Probability",
+    "symbol": "A \\cup B",
+    "name": "Union",
+    "meaning": "A or B (or both). If mutually exclusive, P(A ∪ B) = P(A) + P(B).",
+    "aliases": ["union", "or", "cup"]
+  },
+  {
+    "id": "set-intersection",
+    "courses": ["S5-Maths-6P"],
+    "category": "Probability",
+    "symbol": "A \\cap B",
+    "name": "Intersection",
+    "meaning": "A and B. Independent events: P(A ∩ B) = P(A) P(B).",
+    "aliases": ["intersection", "and", "cap", "independent"]
+  },
+  {
+    "id": "stat-mean",
+    "courses": ["S5-Maths-6P"],
+    "category": "Statistics",
+    "symbol": "\\bar{x}",
+    "name": "Sample mean",
+    "meaning": "Average of the observed values in a sample.",
+    "aliases": ["mean", "average", "x bar"]
+  },
+  {
+    "id": "stat-stdev",
+    "courses": ["S5-Maths-6P"],
+    "category": "Statistics",
+    "symbol": "\\sigma",
+    "name": "Standard deviation",
+    "meaning": "Spread of a data set around the mean.",
+    "aliases": ["sigma", "sd", "standard deviation", "variance"]
+  },
+  {
+    "id": "stat-n",
+    "courses": ["S5-Maths-6P"],
+    "category": "Statistics",
+    "symbol": "n",
+    "name": "Sample size",
+    "meaning": "Number of observations in the sample.",
+    "aliases": ["n", "sample size", "count"]
+  }
+]

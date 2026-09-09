@@ -1,4 +1,4 @@
-import type { Formula } from "../types";
+import type { Formula, Notation } from "../types";
 
 function fold(value: string): string {
   return value
@@ -38,4 +38,31 @@ export function searchFormulas(formulas: Formula[], query: string): Formula[] {
 
 export function topicsOf(formulas: Formula[]): string[] {
   return [...new Set(formulas.map((formula) => formula.topic))];
+}
+
+function notationHaystack(notation: Notation): string {
+  return fold([notation.name, notation.meaning, notation.category, ...notation.aliases].join(" "));
+}
+
+export function searchNotations(notations: Notation[], query: string): Notation[] {
+  const q = fold(query.trim());
+  if (!q) return notations;
+
+  const tokens = q.split(/\s+/).filter(Boolean);
+
+  return notations
+    .map((notation) => {
+      const text = notationHaystack(notation);
+      const nameHit = fold(notation.name).includes(q);
+      const allTokens = tokens.every((token) => text.includes(token));
+      if (!allTokens) return null;
+      return { notation, rank: nameHit ? 0 : 1 };
+    })
+    .filter((row): row is { notation: Notation; rank: number } => row !== null)
+    .sort((a, b) => a.rank - b.rank)
+    .map((row) => row.notation);
+}
+
+export function categoriesOf(notations: Notation[]): string[] {
+  return [...new Set(notations.map((notation) => notation.category))];
 }

@@ -13,3 +13,13 @@ export type Formula = {
   katex: string;
   variables: Variable[];
 };
+
+export type Notation = {
+  id: string;
+  courses: string[];
+  category: string;
+  symbol: string;
+  name: string;
+  meaning: string;
+  aliases: string[];
+};
