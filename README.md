@@ -25,7 +25,7 @@ Output directory: `dist`
 | Path | Role |
 | --- | --- |
 | `src/data/formulas.json` | All content. Add formulas here. |
-| `src/types.ts` | Shape of a formula (`courses[]`, title, aliases, KaTeX, variables) |
+| `src/types.ts` | Shape of a formula (`courses[]`, title, aliases, KaTeX, `useWhen`, variables) |
 | `src/lib/search.ts` | Client-side search |
 | `src/App.tsx` | Search → list → tap for variable meanings |
 | `src/components/Katex.tsx` | Renders `katex` strings |
@@ -33,4 +33,4 @@ Output directory: `dist`
 
 ## First useful change
 
-Open `src/data/formulas.json` and add a formula from the syllabus. Set `courses` to the year-programme tag in [docs/curriculum/README.md](docs/curriculum/README.md), add a title, aliases, KaTeX, and variable meanings, then search for it.
+Open `src/data/formulas.json` and add a formula from the syllabus. Set `courses` to the year-programme tag in [docs/curriculum/README.md](docs/curriculum/README.md), add a title, aliases, KaTeX, a one-sentence `useWhen` cue, and variable meanings, then search for it.

@@ -14,6 +14,7 @@ function haystack(formula: Formula): string {
     ...formula.courses,
     ...formula.courses.map((course) => course.replaceAll("-", " ")),
     ...formula.aliases,
+    formula.useWhen,
     ...formula.variables.map((variable) => variable.meaning),
   ];
   return fold(parts.join(" "));

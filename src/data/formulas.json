@@ -11,6 +11,7 @@
       "radicals multiply"
     ],
     "katex": "\\sqrt{a}\\,\\sqrt{b} = \\sqrt{ab}",
+    "useWhen": "Two square roots to multiply, or a product to write as a single root.",
     "variables": [
       {
         "symbol": "a, b",
@@ -30,6 +31,7 @@
       "radicals divide"
     ],
     "katex": "\\dfrac{\\sqrt{a}}{\\sqrt{b}} = \\sqrt{\\dfrac{a}{b}}",
+    "useWhen": "A quotient of square roots, or a root of a fraction to split.",
     "variables": [
       {
         "symbol": "a",
@@ -53,6 +55,7 @@
       "modulus"
     ],
     "katex": "\\sqrt{a^{2}} = \\lvert a \\rvert",
+    "useWhen": "A square root of a square, and the inside may be negative.",
     "variables": [
       {
         "symbol": "a",
@@ -72,6 +75,7 @@
       "1 over sqrt"
     ],
     "katex": "\\dfrac{1}{\\sqrt{a}} = \\dfrac{\\sqrt{a}}{a}",
+    "useWhen": "A single square root sitting in a denominator.",
     "variables": [
       {
         "symbol": "a",
@@ -90,6 +94,7 @@
       "conjugate denominator"
     ],
     "katex": "\\dfrac{1}{b \\pm \\sqrt{a}} = \\dfrac{b \\mp \\sqrt{a}}{b^{2} - a}",
+    "useWhen": "A denominator that is an integer plus or minus a square root.",
     "variables": [
       {
         "symbol": "a",
@@ -114,6 +119,7 @@
       "exponent add"
     ],
     "katex": "a^{m}\\,a^{n} = a^{m+n}",
+    "useWhen": "Powers of the same base to multiply, or a product to turn into one power.",
     "variables": [
       {
         "symbol": "a",
@@ -138,6 +144,7 @@
       "exponent multiply"
     ],
     "katex": "(a^{m})^{n} = a^{mn}",
+    "useWhen": "A power already raised to another power, to collapse into one index.",
     "variables": [
       {
         "symbol": "a",
@@ -162,6 +169,7 @@
       "a to the minus n"
     ],
     "katex": "a^{-n} = \\dfrac{1}{a^{n}}",
+    "useWhen": "A negative index to rewrite as a reciprocal, or the reverse.",
     "variables": [
       {
         "symbol": "a",
@@ -185,6 +193,7 @@
       "proportional"
     ],
     "katex": "y = k \\cdot x",
+    "useWhen": "Two quantities that stay in a constant ratio.",
     "variables": [
       {
         "symbol": "k",
@@ -208,6 +217,7 @@
       "inversely proportional"
     ],
     "katex": "y = \\dfrac{k}{x}",
+    "useWhen": "Two quantities whose product stays constant as one grows and the other shrinks.",
     "variables": [
       {
         "symbol": "k",
@@ -231,6 +241,7 @@
       "slope intercept"
     ],
     "katex": "y = mx + p",
+    "useWhen": "A straight line when you know the gradient and the y-intercept.",
     "variables": [
       {
         "symbol": "m",
@@ -254,6 +265,7 @@
       "affine"
     ],
     "katex": "f(x) = mx + p",
+    "useWhen": "A graph or mapping that is a straight line through a given slope.",
     "variables": [
       {
         "symbol": "m",
@@ -277,6 +289,7 @@
       "cartesian line"
     ],
     "katex": "ax + by + c = 0",
+    "useWhen": "A line given as ax + by + c = 0, not in slope form.",
     "variables": [
       {
         "symbol": "a, b, c",
@@ -296,6 +309,7 @@
       "perfect square"
     ],
     "katex": "(a \\pm b)^{2} = a^{2} \\pm 2ab + b^{2}",
+    "useWhen": "A sum or difference to square without expanding the long way.",
     "variables": [
       {
         "symbol": "a, b",
@@ -315,6 +329,7 @@
       "factorise"
     ],
     "katex": "(a + b)(a - b) = a^{2} - b^{2}",
+    "useWhen": "A difference of two squares to factor, or a product of conjugates.",
     "variables": [
       {
         "symbol": "a, b",
@@ -336,6 +351,7 @@
       "(a+b)^n"
     ],
     "katex": "(a + b)^{n} = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^{k}",
+    "useWhen": "A binomial raised to a small whole-number power.",
     "variables": [
       {
         "symbol": "n",
@@ -355,6 +371,7 @@
       "monomial"
     ],
     "katex": "y = a x^{n}",
+    "useWhen": "A model or graph of the form y = k x^n.",
     "variables": [
       {
         "symbol": "a",
@@ -379,6 +396,7 @@
       "hypotenuse"
     ],
     "katex": "a^{2} + b^{2} = c^{2}",
+    "useWhen": "A right-angled triangle when you know two sides and need the third.",
     "variables": [
       {
         "symbol": "c",
@@ -402,6 +420,7 @@
       "right triangle trig"
     ],
     "katex": "\\sin p = \\dfrac{\\text{opp}}{\\text{hyp}},\\quad \\cos p = \\dfrac{\\text{adj}}{\\text{hyp}},\\quad \\tan p = \\dfrac{\\text{opp}}{\\text{adj}}",
+    "useWhen": "A right-angled triangle: opposite, adjacent or hypotenuse with an acute angle.",
     "variables": [
       {
         "symbol": "p",
@@ -420,6 +439,7 @@
       "tan = sin/cos"
     ],
     "katex": "\\tan p = \\dfrac{\\sin p}{\\cos p}",
+    "useWhen": "You already have sine and cosine of the same angle and need tangent.",
     "variables": [
       {
         "symbol": "p",
@@ -439,6 +459,7 @@
       "2 pi r"
     ],
     "katex": "C = 2\\pi r",
+    "useWhen": "Distance around a circle from its radius or diameter.",
     "variables": [
       {
         "symbol": "r",
@@ -457,6 +478,7 @@
       "pi r squared"
     ],
     "katex": "A = \\pi r^{2}",
+    "useWhen": "The area inside a full circle, from its radius.",
     "variables": [
       {
         "symbol": "r",
@@ -475,6 +497,7 @@
       "length of an arc"
     ],
     "katex": "\\ell = \\dfrac{\\theta}{360} \\cdot 2\\pi r",
+    "useWhen": "A circular arc when the angle is given in degrees.",
     "variables": [
       {
         "symbol": "\\theta",
@@ -497,6 +520,7 @@
       "area of a sector"
     ],
     "katex": "A = \\dfrac{\\theta}{360} \\cdot \\pi r^{2}",
+    "useWhen": "A pizza-slice of a circle when the angle is in degrees.",
     "variables": [
       {
         "symbol": "\\theta",
@@ -520,6 +544,7 @@
       "basic proportionality"
     ],
     "katex": "\\dfrac{DE}{BC} = \\dfrac{AD}{AB} = \\dfrac{AE}{AC}",
+    "useWhen": "Parallel lines cutting two rays, and you need matching length ratios.",
     "variables": [
       {
         "symbol": "DE",
@@ -539,6 +564,7 @@
       "coordinates as vectors"
     ],
     "katex": "\\overrightarrow{OM} = x\\,\\overrightarrow{OI} + y\\,\\overrightarrow{OJ}",
+    "useWhen": "A point given from the origin as a vector.",
     "variables": [
       {
         "symbol": "x, y",
@@ -562,6 +588,7 @@
       "parallelogram law"
     ],
     "katex": "\\overrightarrow{AB} = \\overrightarrow{CD} \\iff \\overrightarrow{AC} = \\overrightarrow{BD}",
+    "useWhen": "The diagonal of a parallelogram built from two vectors.",
     "variables": [
       {
         "symbol": "A, B, C, D",
@@ -581,6 +608,7 @@
       "root as power"
     ],
     "katex": "a^{1/n} = \\sqrt[n]{a},\\quad a^{m/n} = \\sqrt[n]{a^{m}}",
+    "useWhen": "A fractional index to write as a root, or a root to write as a power.",
     "variables": [
       {
         "symbol": "a",
@@ -604,6 +632,7 @@
       "parabola forms"
     ],
     "katex": "y = ax^{2} + bx + c = a(x - r)(x - s) = a(x - p)^{2} + q",
+    "useWhen": "A quadratic to rewrite between expanded, factorised and completed-square form.",
     "variables": [
       {
         "symbol": "a, b, c",
@@ -632,6 +661,7 @@
       "general solution"
     ],
     "katex": "x = \\dfrac{-b \\pm \\sqrt{b^{2} - 4ac}}{2a}",
+    "useWhen": "A quadratic that will not factor, or you need exact roots.",
     "variables": [
       {
         "symbol": "x",
@@ -655,6 +685,7 @@
       "number of roots"
     ],
     "katex": "\\Delta = b^{2} - 4ac",
+    "useWhen": "How many real roots a quadratic has, before solving it.",
     "variables": [
       {
         "symbol": "\\Delta",
@@ -675,6 +706,7 @@
       "-b/2a"
     ],
     "katex": "x = -\\dfrac{b}{2a},\\quad V = \\left(-\\dfrac{b}{2a},\\, f\\left(-\\dfrac{b}{2a}\\right)\\right)",
+    "useWhen": "The turning point or axis of symmetry of y = ax^2 + bx + c.",
     "variables": [
       {
         "symbol": "a, b",
@@ -694,6 +726,7 @@
       "y = C a^x"
     ],
     "katex": "y = C \\cdot a^{x}",
+    "useWhen": "Growth or decay of the form y = k a^x.",
     "variables": [
       {
         "symbol": "C",
@@ -717,6 +750,7 @@
       "log_b a"
     ],
     "katex": "\\log_{b} a = c \\iff b^{c} = a",
+    "useWhen": "Changing between b^x = a and a logarithm, or the reverse.",
     "variables": [
       {
         "symbol": "b",
@@ -741,6 +775,7 @@
       "log rules"
     ],
     "katex": "\\log(ab) = \\log a + \\log b",
+    "useWhen": "A log of a product to split, or a sum of logs of the same base.",
     "variables": [
       {
         "symbol": "a, b",
@@ -761,6 +796,7 @@
       "log laws"
     ],
     "katex": "\\log\\dfrac{a}{b} = \\log a - \\log b",
+    "useWhen": "A log of a quotient to split, or a difference of logs of the same base.",
     "variables": [
       {
         "symbol": "a, b",
@@ -781,6 +817,7 @@
       "log laws"
     ],
     "katex": "\\log(a^{n}) = n \\log a",
+    "useWhen": "A log of a power, or a coefficient in front of a log to move.",
     "variables": [
       {
         "symbol": "a",
@@ -804,6 +841,7 @@
       "trig functions"
     ],
     "katex": "y = \\sin x,\\quad y = \\cos x,\\quad y = \\tan x",
+    "useWhen": "Sine, cosine or tangent of any real angle, not only an acute one.",
     "variables": [
       {
         "symbol": "x",
@@ -823,6 +861,7 @@
       "wave parameters"
     ],
     "katex": "y = a \\cdot \\sin\\bigl(b(x + c)\\bigr) + d",
+    "useWhen": "A sine graph that has been stretched, shifted or both.",
     "variables": [
       {
         "symbol": "a",
@@ -854,6 +893,7 @@
       "pi/180"
     ],
     "katex": "\\theta_{\\mathrm{rad}} = \\dfrac{\\pi}{180}\\,\\theta_{\\mathrm{deg}}",
+    "useWhen": "An angle to convert between degrees and radians.",
     "variables": [
       {
         "symbol": "\\theta",
@@ -873,6 +913,7 @@
       "cofunction"
     ],
     "katex": "\\cos q = \\sin(90^{\\circ} - q) = \\sin\\left(\\dfrac{\\pi}{2} - q\\right)",
+    "useWhen": "Two angles that add to 90°, and you need sine or cosine of one from the other.",
     "variables": [
       {
         "symbol": "q",
@@ -892,6 +933,7 @@
       "sine supplementary"
     ],
     "katex": "\\sin q = \\sin(180^{\\circ} - q) = \\sin(\\pi - q)",
+    "useWhen": "Two angles that add to 180°, and you need sine of one from the other.",
     "variables": [
       {
         "symbol": "q",
@@ -911,6 +953,7 @@
       "unit circle identity"
     ],
     "katex": "\\cos^{2} p + \\sin^{2} p = 1",
+    "useWhen": "You know sin or cos of an angle and need the other, without a triangle.",
     "variables": [
       {
         "symbol": "p",
@@ -930,6 +973,7 @@
       "cos(a±b)"
     ],
     "katex": "\\cos(a \\pm b) = \\cos a\\cos b \\mp \\sin a\\sin b",
+    "useWhen": "Cosine of a sum or difference of two angles.",
     "variables": [
       {
         "symbol": "a, b",
@@ -949,6 +993,7 @@
       "sin(a±b)"
     ],
     "katex": "\\sin(a \\pm b) = \\sin a\\cos b \\pm \\cos a\\sin b",
+    "useWhen": "Sine of a sum or difference of two angles.",
     "variables": [
       {
         "symbol": "a, b",
@@ -967,6 +1012,7 @@
       "sin 2a"
     ],
     "katex": "\\sin(2a) = 2\\sin a\\cos a",
+    "useWhen": "Sine of twice an angle, from sin and cos of the single angle.",
     "variables": [
       {
         "symbol": "a",
@@ -985,6 +1031,7 @@
       "cos 2a"
     ],
     "katex": "\\cos(2a) = \\cos^{2} a - \\sin^{2} a",
+    "useWhen": "Cosine of twice an angle, from sin or cos of the single angle.",
     "variables": [
       {
         "symbol": "a",
@@ -1005,6 +1052,7 @@
       "SSS"
     ],
     "katex": "a^{2} = b^{2} + c^{2} - 2bc\\cos\\alpha",
+    "useWhen": "A triangle with two sides and the included angle, or all three sides.",
     "variables": [
       {
         "symbol": "\\alpha",
@@ -1025,6 +1073,7 @@
       "SSA"
     ],
     "katex": "\\dfrac{a}{\\sin\\alpha} = \\dfrac{b}{\\sin\\beta} = \\dfrac{c}{\\sin\\gamma}",
+    "useWhen": "A triangle with a side and its opposite angle, plus one more piece.",
     "variables": [
       {
         "symbol": "a, b, c",
@@ -1044,6 +1093,7 @@
       "two sides included angle"
     ],
     "katex": "A = \\dfrac{1}{2} bc\\sin\\alpha",
+    "useWhen": "Area of a triangle from two sides and the included angle.",
     "variables": [
       {
         "symbol": "\\alpha",
@@ -1064,6 +1114,7 @@
       "modulus vector"
     ],
     "katex": "\\lVert \\vec{u} \\rVert = \\sqrt{\\vec{u}\\cdot\\vec{u}}",
+    "useWhen": "The length of a vector from its components.",
     "variables": [
       {
         "symbol": "\\vec{u}",
@@ -1083,6 +1134,7 @@
       "u·v = |u||v|cos"
     ],
     "katex": "\\vec{u}\\cdot\\vec{v} = \\lVert\\vec{u}\\rVert\\,\\lVert\\vec{v}\\rVert\\cos\\theta",
+    "useWhen": "The angle between two vectors, or a projection, from their lengths.",
     "variables": [
       {
         "symbol": "\\theta",
@@ -1104,6 +1156,7 @@
       "AB squared"
     ],
     "katex": "AB^{2} = \\lVert\\overrightarrow{AB}\\rVert^{2} = (x_{2}-x_{1})^{2} + (y_{2}-y_{1})^{2}",
+    "useWhen": "The distance between two points given by coordinates.",
     "variables": [
       {
         "symbol": "A(x_1, y_1), B(x_2, y_2)",
@@ -1123,6 +1176,7 @@
       "u·v = x1x2+y1y2"
     ],
     "katex": "\\vec{u}\\cdot\\vec{v} = x_{1}x_{2} + y_{1}y_{2}",
+    "useWhen": "A dot product from components in an orthonormal basis.",
     "variables": [
       {
         "symbol": "(x_1, y_1), (x_2, y_2)",
@@ -1142,6 +1196,7 @@
       "probability between"
     ],
     "katex": "0 \\le \\mathrm{P}(A) \\le 1",
+    "useWhen": "A probability that must lie between 0 and 1.",
     "variables": [
       {
         "symbol": "A",
@@ -1162,6 +1217,7 @@
       "not A"
     ],
     "katex": "\\mathrm{P}(\\overline{A}) = 1 - \\mathrm{P}(A)",
+    "useWhen": "The chance that an event does not happen.",
     "variables": [
       {
         "symbol": "A",
@@ -1182,6 +1238,7 @@
       "inclusion exclusion"
     ],
     "katex": "\\mathrm{P}(A \\cup B) = \\mathrm{P}(A) + \\mathrm{P}(B) - \\mathrm{P}(A \\cap B)",
+    "useWhen": "The chance of A or B when the events may overlap.",
     "variables": [
       {
         "symbol": "A, B",
@@ -1202,6 +1259,7 @@
       "A cap B empty"
     ],
     "katex": "\\mathrm{P}(A \\cup B) = \\mathrm{P}(A) + \\mathrm{P}(B)\\quad\\text{when }A \\cap B = \\emptyset",
+    "useWhen": "The chance of A or B when the events cannot happen together.",
     "variables": [
       {
         "symbol": "A, B",
@@ -1223,6 +1281,7 @@
       "given that"
     ],
     "katex": "\\mathrm{P}_{B}(A) = \\mathrm{P}(A \\mid B) = \\dfrac{\\mathrm{P}(A \\cap B)}{\\mathrm{P}(B)}",
+    "useWhen": "The chance of A given that B has already happened.",
     "variables": [
       {
         "symbol": "B",
@@ -1243,6 +1302,7 @@
       "P(A and B) = P(A)P(B)"
     ],
     "katex": "\\mathrm{P}(A \\cap B) = \\mathrm{P}(A)\\,\\mathrm{P}(B)",
+    "useWhen": "Two events that do not affect each other, and you need P(A and B).",
     "variables": [
       {
         "symbol": "A, B",
@@ -1263,6 +1323,7 @@
       "population sd"
     ],
     "katex": "\\sigma = \\sqrt{\\dfrac{1}{n}\\sum_{i=1}^{n}(x_{i} - \\bar{x})^{2}}",
+    "useWhen": "Spread of a data set when you already have the mean.",
     "variables": [
       {
         "symbol": "n",
@@ -1286,6 +1347,7 @@
       "variance identity"
     ],
     "katex": "\\sigma = \\sqrt{\\dfrac{1}{n}\\sum_{i=1}^{n} x_{i}^{2} - \\bar{x}^{2}}",
+    "useWhen": "Spread of a data set from the raw scores, without listing deviations.",
     "variables": [
       {
         "symbol": "n",
@@ -1305,6 +1367,7 @@
       "real imaginary part"
     ],
     "katex": "z = a + \\mathrm{i}b",
+    "useWhen": "A complex number written as a + bi.",
     "variables": [
       {
         "symbol": "a",
@@ -1328,6 +1391,7 @@
       "closed form sequence"
     ],
     "katex": "u_{n} = f(n)",
+    "useWhen": "The nth term given directly as a formula in n.",
     "variables": [
       {
         "symbol": "n",
@@ -1347,6 +1411,7 @@
       "u_{n+1} = f(u_n)"
     ],
     "katex": "u_{n+1} = f(u_{n}),\\quad u_{0}\\text{ (or }u_{1}\\text{) given}",
+    "useWhen": "A term defined from the previous one, plus a starting value.",
     "variables": [
       {
         "symbol": "f",
@@ -1367,6 +1432,7 @@
       "limit definition"
     ],
     "katex": "f'(x) = \\lim_{h \\to 0}\\dfrac{f(x+h) - f(x)}{h}",
+    "useWhen": "The gradient of a curve at a point from first principles.",
     "variables": [
       {
         "symbol": "h",
@@ -1386,6 +1452,7 @@
       "differentiation"
     ],
     "katex": "\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\, x^{n} = n x^{n-1}",
+    "useWhen": "The derivative of x^n, or a polynomial term by term.",
     "variables": [
       {
         "symbol": "n",
@@ -1405,6 +1472,7 @@
       "convexity"
     ],
     "katex": "f''(x) = \\bigl(f'(x)\\bigr)'",
+    "useWhen": "Concavity, or whether a stationary point is a max or min.",
     "variables": [
       {
         "symbol": "f''",
@@ -1423,6 +1491,7 @@
       "equation of tangent"
     ],
     "katex": "y - f(a) = f'(a)\\,(x - a)",
+    "useWhen": "The equation of the tangent to y = f(x) at a given point.",
     "variables": [
       {
         "symbol": "a",
@@ -1442,6 +1511,7 @@
       "y' = y"
     ],
     "katex": "y = \\mathrm{e}^{x},\\quad y' = y,\\quad y(0) = 1",
+    "useWhen": "Growth or decay with base e, or the derivative of e^x.",
     "variables": [
       {
         "symbol": "\\mathrm{e}",
@@ -1460,6 +1530,7 @@
       "ln inverse of exp"
     ],
     "katex": "\\ln x = \\log_{\\mathrm{e}} x,\\quad \\ln(\\mathrm{e}^{x}) = x",
+    "useWhen": "The inverse of e^x, or a log with base e.",
     "variables": [
       {
         "symbol": "x",
@@ -1479,6 +1550,7 @@
       "properties of indices"
     ],
     "katex": "\\log_{a}(uv) = \\log_{a}u + \\log_{a}v,\\quad a^{p}a^{q} = a^{p+q}",
+    "useWhen": "Switching between index form and log form, or simplifying mixed logs.",
     "variables": [
       {
         "symbol": "a, u, v",
@@ -1498,6 +1570,7 @@
       "point and direction"
     ],
     "katex": "\\vec{r} = \\vec{a} + t\\,\\vec{d}",
+    "useWhen": "A line in the plane given by a point and a direction vector.",
     "variables": [
       {
         "symbol": "\\vec{a}",
@@ -1524,6 +1597,7 @@
       "(x-a)^2+(y-b)^2=r^2"
     ],
     "katex": "(x - a)^{2} + (y - b)^{2} = r^{2}",
+    "useWhen": "A circle from its centre and radius, or to read those from the equation.",
     "variables": [
       {
         "symbol": "(a, b)",
@@ -1546,6 +1620,7 @@
       "intersecting lines angle"
     ],
     "katex": "\\cos\\theta = \\dfrac{\\lvert \\vec{u}\\cdot\\vec{v} \\rvert}{\\lVert\\vec{u}\\rVert\\,\\lVert\\vec{v}\\rVert}",
+    "useWhen": "The angle between two lines from their gradients or direction vectors.",
     "variables": [
       {
         "symbol": "\\vec{u}, \\vec{v}",
@@ -1565,6 +1640,7 @@
       "parallel lines distance"
     ],
     "katex": "d = \\dfrac{\\lvert ax_{0} + by_{0} + c \\rvert}{\\sqrt{a^{2} + b^{2}}}",
+    "useWhen": "The shortest distance from a point to a line ax + by + c = 0.",
     "variables": [
       {
         "symbol": "ax+by+c=0",
@@ -1588,6 +1664,7 @@
       "n!"
     ],
     "katex": "n!",
+    "useWhen": "The number of ways to arrange n distinct objects.",
     "variables": [
       {
         "symbol": "n",
@@ -1607,6 +1684,7 @@
       "nPk without repetition"
     ],
     "katex": "\\dfrac{n!}{(n-k)!}",
+    "useWhen": "Ordered selections of k objects from n, without repetition.",
     "variables": [
       {
         "symbol": "n",
@@ -1630,6 +1708,7 @@
       "words passwords"
     ],
     "katex": "n^{k}",
+    "useWhen": "Ordered selections of k from n when objects may be repeated.",
     "variables": [
       {
         "symbol": "n",
@@ -1653,6 +1732,7 @@
       "binomial coefficient"
     ],
     "katex": "\\binom{n}{k} = \\dfrac{n!}{k!\\,(n-k)!}",
+    "useWhen": "Unordered selections of k objects from n, without repetition.",
     "variables": [
       {
         "symbol": "n",
@@ -1676,6 +1756,7 @@
       "n+k-1 choose k"
     ],
     "katex": "\\binom{n+k-1}{k} = \\dfrac{(n+k-1)!}{k!\\,(n-1)!}",
+    "useWhen": "Unordered selections of k from n when objects may be repeated.",
     "variables": [
       {
         "symbol": "n",
@@ -1699,6 +1780,7 @@
       "symmetry pascal"
     ],
     "katex": "\\binom{n}{k} = \\binom{n}{n-k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}",
+    "useWhen": "A binomial-coefficient identity, or a Pascal-triangle relation to prove.",
     "variables": [
       {
         "symbol": "n, k",
@@ -1718,6 +1800,7 @@
       "partition"
     ],
     "katex": "\\mathrm{P}(B) = \\mathrm{P}(A_{1})\\mathrm{P}(B \\mid A_{1}) + \\mathrm{P}(A_{2})\\mathrm{P}(B \\mid A_{2})",
+    "useWhen": "P(A) by splitting into cases that partition the sample space.",
     "variables": [
       {
         "symbol": "A_1, A_2",
@@ -1737,6 +1820,7 @@
       "inverse probability"
     ],
     "katex": "\\mathrm{P}(A_{k} \\mid B) = \\dfrac{\\mathrm{P}(A_{k})\\,\\mathrm{P}(B \\mid A_{k})}{\\mathrm{P}(B)}",
+    "useWhen": "You know P(B|A) and need the reverse, P(A|B).",
     "variables": [
       {
         "symbol": "k",
@@ -1756,6 +1840,7 @@
       "mean of a random variable"
     ],
     "katex": "\\mathrm{E}(X) = \\sum_{k} x_{k}\\,\\mathrm{P}(X = x_{k})",
+    "useWhen": "The long-run average of a discrete random variable.",
     "variables": [
       {
         "symbol": "X",
@@ -1775,6 +1860,7 @@
       "standard deviation sigma"
     ],
     "katex": "\\mathrm{Var}(X) = \\mathrm{E}(X^{2}) - \\bigl(\\mathrm{E}(X)\\bigr)^{2},\\quad \\sigma(X) = \\sqrt{\\mathrm{Var}(X)}",
+    "useWhen": "The spread of a discrete random variable about its mean.",
     "variables": [
       {
         "symbol": "X",
@@ -1794,6 +1880,7 @@
       "P(X=k)"
     ],
     "katex": "\\mathrm{P}(X = k) = \\binom{n}{k} p^{k}(1-p)^{n-k}",
+    "useWhen": "A fixed number of independent yes/no trials, same probability each time.",
     "variables": [
       {
         "symbol": "n",
@@ -1821,6 +1908,7 @@
       "npq"
     ],
     "katex": "\\mathrm{E}(X) = np,\\quad \\mathrm{Var}(X) = np(1-p)",
+    "useWhen": "Mean or variance of a binomial count, without listing every outcome.",
     "variables": [
       {
         "symbol": "n, p",
@@ -1840,6 +1928,7 @@
       "absolute value complex"
     ],
     "katex": "\\lvert z \\rvert = \\sqrt{a^{2} + b^{2}}\\quad(z = a + \\mathrm{i}b)",
+    "useWhen": "The distance of a complex number from the origin.",
     "variables": [
       {
         "symbol": "a, b",
@@ -1859,6 +1948,7 @@
       "theta polar"
     ],
     "katex": "z = \\lvert z \\rvert\\,(\\cos\\theta + \\mathrm{i}\\sin\\theta),\\quad \\theta = \\arg z \\in (-\\pi,\\pi]",
+    "useWhen": "The angle a complex number makes with the positive real axis.",
     "variables": [
       {
         "symbol": "\\theta",
@@ -1878,6 +1968,7 @@
       "euler form"
     ],
     "katex": "z = r\\,\\mathrm{e}^{\\mathrm{i}\\theta}",
+    "useWhen": "A complex number in modulus-argument form, or multiplying by rotating.",
     "variables": [
       {
         "symbol": "r",
@@ -1901,6 +1992,7 @@
       "de moivre roots"
     ],
     "katex": "z_{k} = r^{1/n}\\exp\\left(\\mathrm{i}\\dfrac{\\theta + 2k\\pi}{n}\\right),\\quad k = 0,\\ldots,n-1",
+    "useWhen": "The n distinct nth roots of a complex number.",
     "variables": [
       {
         "symbol": "r, \\theta",
@@ -1924,6 +2016,7 @@
       "common difference"
     ],
     "katex": "u_{n} = u_{1} + (n-1)d",
+    "useWhen": "The nth term of a sequence with a constant difference.",
     "variables": [
       {
         "symbol": "d",
@@ -1943,6 +2036,7 @@
       "common ratio"
     ],
     "katex": "u_{n} = u_{1}\\,r^{n-1}",
+    "useWhen": "The nth term of a sequence with a constant ratio.",
     "variables": [
       {
         "symbol": "r",
@@ -1962,6 +2056,7 @@
       "n/2 (2a+(n-1)d)"
     ],
     "katex": "S_{n} = \\dfrac{n}{2}\\bigl(2u_{1} + (n-1)d\\bigr)",
+    "useWhen": "The sum of the first n terms of an arithmetic sequence.",
     "variables": [
       {
         "symbol": "n",
@@ -1981,6 +2076,7 @@
       "geometric series"
     ],
     "katex": "S_{n} = u_{1}\\dfrac{1-r^{n}}{1-r}\\quad(r \\ne 1)",
+    "useWhen": "The sum of the first n terms of a geometric sequence.",
     "variables": [
       {
         "symbol": "r",
@@ -2000,6 +2096,7 @@
       "y = mx + p"
     ],
     "katex": "m = \\lim_{x \\to \\infty}\\dfrac{f(x)}{x},\\quad p = \\lim_{x \\to \\infty}\\bigl(f(x) - mx\\bigr)",
+    "useWhen": "A slanted asymptote of a rational function, not a horizontal one.",
     "variables": [
       {
         "symbol": "y = mx + p",
@@ -2019,6 +2116,7 @@
       "F(b)-F(a)"
     ],
     "katex": "\\int_{a}^{b} f(x)\\,\\mathrm{d}x = F(b) - F(a)",
+    "useWhen": "Net signed area under a curve between two x-values.",
     "variables": [
       {
         "symbol": "F",
@@ -2037,6 +2135,7 @@
       "integral properties"
     ],
     "katex": "\\int_{a}^{b}(\\lambda f + \\mu g) = \\lambda\\int_{a}^{b} f + \\mu\\int_{a}^{b} g",
+    "useWhen": "An integral of a sum or scalar multiple, to split or factor.",
     "variables": [
       {
         "symbol": "\\lambda, \\mu",
@@ -2056,6 +2155,7 @@
       "Chasles"
     ],
     "katex": "\\int_{a}^{b} f + \\int_{b}^{c} f = \\int_{a}^{c} f",
+    "useWhen": "An integral split at an interior point, or two adjacent intervals joined.",
     "variables": [
       {
         "symbol": "a, b, c",
@@ -2075,6 +2175,7 @@
       "pi y^2 dx"
     ],
     "katex": "V = \\pi\\int_{a}^{b}\\bigl(f(x)\\bigr)^{2}\\,\\mathrm{d}x",
+    "useWhen": "The volume of a solid made by rotating a curve about the x-axis.",
     "variables": [
       {
         "symbol": "f",
@@ -2094,6 +2195,7 @@
       "vector equation line"
     ],
     "katex": "\\vec{r} = \\vec{a} + t\\,\\vec{d}",
+    "useWhen": "A line in space from a point and a direction vector.",
     "variables": [
       {
         "symbol": "\\vec{a}",
@@ -2117,6 +2219,7 @@
       "i j k"
     ],
     "katex": "\\vec{u}\\times\\vec{v} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ u_{x} & u_{y} & u_{z} \\\\ v_{x} & v_{y} & v_{z} \\end{vmatrix}",
+    "useWhen": "A vector perpendicular to two given vectors, or the area of the parallelogram.",
     "variables": [
       {
         "symbol": "\\vec{u}, \\vec{v}",
@@ -2135,6 +2238,7 @@
       "ax+by+cz+d=0"
     ],
     "katex": "ax + by + cz + d = 0",
+    "useWhen": "A plane as ax + by + cz + d = 0, and you need a normal.",
     "variables": [
       {
         "symbol": "(a, b, c)",
@@ -2153,6 +2257,7 @@
       "point and two directions"
     ],
     "katex": "\\vec{r} = \\vec{a} + \\lambda\\vec{u} + \\mu\\vec{v}",
+    "useWhen": "A plane from a point and two non-parallel directions in it.",
     "variables": [
       {
         "symbol": "\\vec{u}, \\vec{v}",
@@ -2171,6 +2276,7 @@
       "3d distances"
     ],
     "katex": "d = \\dfrac{\\lvert ax_{0}+by_{0}+cz_{0}+d \\rvert}{\\sqrt{a^{2}+b^{2}+c^{2}}}",
+    "useWhen": "The shortest distance from a point to a plane.",
     "variables": [
       {
         "symbol": "(x_0,y_0,z_0)",
@@ -2190,6 +2296,7 @@
       "normals"
     ],
     "katex": "\\cos\\theta = \\dfrac{\\lvert \\vec{n}_{1}\\cdot\\vec{n}_{2} \\rvert}{\\lVert\\vec{n}_{1}\\rVert\\,\\lVert\\vec{n}_{2}\\rVert}",
+    "useWhen": "The angle between two planes, from their normals.",
     "variables": [
       {
         "symbol": "\\vec{n}_1, \\vec{n}_2",
@@ -2209,6 +2316,7 @@
       "linear association"
     ],
     "katex": "r = \\dfrac{\\sum(x_{i}-\\bar{x})(y_{i}-\\bar{y})}{\\sqrt{\\sum(x_{i}-\\bar{x})^{2}\\sum(y_{i}-\\bar{y})^{2}}}",
+    "useWhen": "How strongly two numerical variables follow a straight line.",
     "variables": [
       {
         "symbol": "r",
@@ -2228,6 +2336,7 @@
       "y on x"
     ],
     "katex": "y - \\bar{y} = b(x - \\bar{x}),\\quad b = \\dfrac{\\sum(x_{i}-\\bar{x})(y_{i}-\\bar{y})}{\\sum(x_{i}-\\bar{x})^{2}}",
+    "useWhen": "The straight line of best fit for predicting y from x.",
     "variables": [
       {
         "symbol": "b",
@@ -2246,6 +2355,7 @@
       "E(X) density"
     ],
     "katex": "\\mathrm{E}(X) = \\int_{-\\infty}^{\\infty} x f(x)\\,\\mathrm{d}x",
+    "useWhen": "The mean of a continuous random variable from its density.",
     "variables": [
       {
         "symbol": "f",
@@ -2265,6 +2375,7 @@
       "bell curve"
     ],
     "katex": "f(x) = \\dfrac{1}{\\sigma\\sqrt{2\\pi}}\\exp\\left(-\\dfrac{(x-\\mu)^{2}}{2\\sigma^{2}}\\right)",
+    "useWhen": "A bell-shaped continuous model with a given mean and spread.",
     "variables": [
       {
         "symbol": "\\mu",
@@ -2288,6 +2399,7 @@
       "Y = (X-mu)/sigma"
     ],
     "katex": "Y = \\dfrac{X - \\mu}{\\sigma}",
+    "useWhen": "A normal value to convert into a z-score, or the reverse.",
     "variables": [
       {
         "symbol": "Y",
@@ -2307,6 +2419,7 @@
       "a = bq + r"
     ],
     "katex": "a = bq + r,\\quad 0 \\le r < \\lvert b \\rvert",
+    "useWhen": "Dividing integers with a remainder strictly smaller than the divisor.",
     "variables": [
       {
         "symbol": "q",
@@ -2329,6 +2442,7 @@
       "ax + by = gcd"
     ],
     "katex": "\\exists\\, x,y \\in \\mathbb{Z}:\\ ax + by = \\gcd(a,b)",
+    "useWhen": "Writing gcd(a, b) as an integer combination of a and b.",
     "variables": [
       {
         "symbol": "a, b",
@@ -2347,6 +2461,7 @@
       "coprime ax+by=1"
     ],
     "katex": "\\gcd(a,b) = 1 \\iff \\exists\\, x,y:\\ ax + by = 1",
+    "useWhen": "Whether ax + by = 1 has integer solutions, i.e. whether a and b are coprime.",
     "variables": [
       {
         "symbol": "a, b",
@@ -2365,6 +2480,7 @@
       "a^{p-1} ≡ 1 mod p"
     ],
     "katex": "a^{p-1} \\equiv 1 \\pmod{p}",
+    "useWhen": "A power modulo a prime that does not divide the base.",
     "variables": [
       {
         "symbol": "p",
@@ -2384,6 +2500,7 @@
       "row by column"
     ],
     "katex": "(AB)_{ij} = \\sum_{k} a_{ik} b_{kj}",
+    "useWhen": "The product of two matrices whose inner sizes match.",
     "variables": [
       {
         "symbol": "A",
@@ -2406,6 +2523,7 @@
       "adjugate 2x2"
     ],
     "katex": "\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}^{-1} = \\dfrac{1}{ad-bc}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}",
+    "useWhen": "The inverse of a 2×2 matrix with non-zero determinant.",
     "variables": [
       {
         "symbol": "ad-bc",
@@ -2424,6 +2542,7 @@
       "(f^{-1})'"
     ],
     "katex": "(f^{-1})'(x) = \\dfrac{1}{f'\\bigl(f^{-1}(x)\\bigr)}",
+    "useWhen": "The gradient of an inverse function at a point.",
     "variables": [
       {
         "symbol": "f",
@@ -2442,6 +2561,7 @@
       "lagrange mvt"
     ],
     "katex": "f'(c) = \\dfrac{f(b) - f(a)}{b - a}",
+    "useWhen": "A point where the instantaneous gradient equals the chord from a to b.",
     "variables": [
       {
         "symbol": "c",
@@ -2461,6 +2581,7 @@
       "sarrus 2x2"
     ],
     "katex": "\\det\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} = ad - bc",
+    "useWhen": "The determinant of a 2×2 matrix, or whether it is invertible.",
     "variables": [
       {
         "symbol": "a, b, c, d",
@@ -2480,6 +2601,7 @@
       "laplace expansion"
     ],
     "katex": "\\det A = \\sum_{j} a_{ij}\\,C_{ij}",
+    "useWhen": "The determinant of a larger matrix, expanded along a row or column.",
     "variables": [
       {
         "symbol": "C_{ij}",
@@ -2498,6 +2620,7 @@
       "A^{-1} = (1/det) adj"
     ],
     "katex": "A^{-1} = \\dfrac{1}{\\det A}\\,\\mathrm{adj}\\,A",
+    "useWhen": "The inverse of an n×n matrix from det A and the adjugate.",
     "variables": [
       {
         "symbol": "\\mathrm{adj}\\,A",
@@ -2517,6 +2640,7 @@
       "rank of augmented matrix"
     ],
     "katex": "Ax = b\\text{ is consistent} \\iff \\operatorname{rank} A = \\operatorname{rank}[A \\mid b]",
+    "useWhen": "Whether a linear system Ax = b has any solutions.",
     "variables": [
       {
         "symbol": "A",
@@ -2539,6 +2663,7 @@
       "solve by determinants"
     ],
     "katex": "x_{i} = \\dfrac{\\det A_{i}}{\\det A}",
+    "useWhen": "Solving a square invertible system using determinants, one unknown at a time.",
     "variables": [
       {
         "symbol": "A_i",
@@ -2557,6 +2682,7 @@
       "expansion of order n"
     ],
     "katex": "T_{n}(x) = \\sum_{k=0}^{n} \\dfrac{f^{(k)}(a)}{k!}(x-a)^{k}",
+    "useWhen": "A polynomial that matches f and its derivatives at a chosen point a.",
     "variables": [
       {
         "symbol": "a",
@@ -2575,6 +2701,7 @@
       "taylor error"
     ],
     "katex": "R_{n}(x) = \\dfrac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}",
+    "useWhen": "The error after replacing f by its Taylor polynomial of degree n.",
     "variables": [
       {
         "symbol": "c",
@@ -2593,6 +2720,7 @@
       "taylor at 0"
     ],
     "katex": "T_{n}(x) = \\sum_{k=0}^{n} \\dfrac{f^{(k)}(0)}{k!} x^{k}",
+    "useWhen": "A Taylor polynomial expanded at 0, not at a general point a.",
     "variables": [
       {
         "symbol": "0",
@@ -2611,6 +2739,7 @@
       "y' + ay = 0"
     ],
     "katex": "y' + ay = 0 \\implies y = C\\mathrm{e}^{-ax}",
+    "useWhen": "A first-order equation y' + a y = 0 with constant a.",
     "variables": [
       {
         "symbol": "C",
@@ -2630,6 +2759,7 @@
       "y'' + py' + qy = 0"
     ],
     "katex": "r^{2} + pr + q = 0 \\text{ then } y \\text{ from the roots } r",
+    "useWhen": "A second-order equation y'' + p y' + q y = 0 with constant coefficients.",
     "variables": [
       {
         "symbol": "p, q",
@@ -2649,6 +2779,7 @@
       "charge flow"
     ],
     "katex": "I = \\dfrac{Q}{t}",
+    "useWhen": "Charge passing a point in a circuit, per unit time.",
     "variables": [
       {
         "symbol": "Q",
@@ -2673,6 +2804,7 @@
       "potential difference"
     ],
     "katex": "U = \\dfrac{E}{Q}",
+    "useWhen": "Energy transferred per unit charge, or potential difference.",
     "variables": [
       {
         "symbol": "E",
@@ -2696,6 +2828,7 @@
       "R = U/I"
     ],
     "katex": "R = \\dfrac{U}{I}",
+    "useWhen": "How much a component opposes current, from voltage and current.",
     "variables": [
       {
         "symbol": "U",
@@ -2718,6 +2851,7 @@
       "resistors in series"
     ],
     "katex": "I_{\\mathrm{tot}} = I_{1} = I_{2},\\quad U_{\\mathrm{tot}} = U_{1} + U_{2},\\quad R_{\\mathrm{tot}} = R_{1} + R_{2}",
+    "useWhen": "Components on a single loop: same current, voltages add.",
     "variables": [
       {
         "symbol": "I, U, R",
@@ -2736,6 +2870,7 @@
       "resistors in parallel"
     ],
     "katex": "I_{\\mathrm{tot}} = I_{1} + I_{2},\\quad U_{\\mathrm{tot}} = U_{1} = U_{2},\\quad \\dfrac{1}{R_{\\mathrm{tot}}} = \\dfrac{1}{R_{1}} + \\dfrac{1}{R_{2}}",
+    "useWhen": "Components side by side: same voltage, currents add.",
     "variables": [
       {
         "symbol": "I, U, R",
@@ -2754,6 +2889,7 @@
       "P = UI"
     ],
     "katex": "P = UI",
+    "useWhen": "The rate of electrical energy transfer from voltage and current.",
     "variables": [
       {
         "symbol": "U",
@@ -2776,6 +2912,7 @@
       "E = Pt"
     ],
     "katex": "E = Pt",
+    "useWhen": "Electrical energy from power and the time it runs.",
     "variables": [
       {
         "symbol": "P",
@@ -2799,6 +2936,7 @@
       "delta s over delta t"
     ],
     "katex": "v = \\dfrac{\\Delta s}{\\Delta t}",
+    "useWhen": "How fast something moves, from distance and time.",
     "variables": [
       {
         "symbol": "\\Delta s",
@@ -2818,6 +2956,7 @@
       "s = 1/2 a t^2"
     ],
     "katex": "a = \\dfrac{\\Delta v}{\\Delta t},\\quad s = \\dfrac{1}{2} a t^{2}",
+    "useWhen": "Changing speed, or distance from rest under constant acceleration.",
     "variables": [
       {
         "symbol": "s",
@@ -2837,6 +2976,7 @@
       "Fg = mg"
     ],
     "katex": "F_{G} = mg",
+    "useWhen": "The gravitational force on a mass near Earth.",
     "variables": [
       {
         "symbol": "m",
@@ -2860,6 +3000,7 @@
       "net force"
     ],
     "katex": "F = ma",
+    "useWhen": "The resultant force on a mass, or the acceleration it produces.",
     "variables": [
       {
         "symbol": "F",
@@ -2882,6 +3023,7 @@
       "f = 1/T"
     ],
     "katex": "f = \\dfrac{1}{T}",
+    "useWhen": "How often a cycle repeats, or the time for one cycle.",
     "variables": [
       {
         "symbol": "T",
@@ -2901,6 +3043,7 @@
       "s = vt"
     ],
     "katex": "v = \\lambda f,\\quad s = vt",
+    "useWhen": "How fast a wave travels, from frequency and wavelength.",
     "variables": [
       {
         "symbol": "\\lambda",
@@ -2923,6 +3066,7 @@
       "W = Fs"
     ],
     "katex": "W = Fs",
+    "useWhen": "Energy transferred by a force moving along its own direction.",
     "variables": [
       {
         "symbol": "s",
@@ -2942,6 +3086,7 @@
       "delta Ep"
     ],
     "katex": "\\Delta E_{\\mathrm{p}} = mg\\,\\Delta h",
+    "useWhen": "Energy stored by lifting a mass in a uniform gravitational field.",
     "variables": [
       {
         "symbol": "\\Delta h",
@@ -2960,6 +3105,7 @@
       "1/2 mv^2"
     ],
     "katex": "E_{\\mathrm{k}} = \\dfrac{1}{2} mv^{2}",
+    "useWhen": "Energy due to motion, from mass and speed.",
     "variables": [
       {
         "symbol": "v",
@@ -2978,6 +3124,7 @@
       "sum E before = after"
     ],
     "katex": "\\sum E_{\\mathrm{before}} = \\sum E_{\\mathrm{after}}",
+    "useWhen": "A closed system: total energy before equals total energy after.",
     "variables": [
       {
         "symbol": "E",
@@ -2997,6 +3144,7 @@
       "specific heat capacity"
     ],
     "katex": "Q = mc\\,\\Delta T",
+    "useWhen": "Heat that changes temperature, with no change of state.",
     "variables": [
       {
         "symbol": "c",
@@ -3020,6 +3168,7 @@
       "change of state"
     ],
     "katex": "Q = ml",
+    "useWhen": "Heat that melts or boils a substance with no temperature change.",
     "variables": [
       {
         "symbol": "l",
@@ -3038,6 +3187,7 @@
       "p = mv"
     ],
     "katex": "p = mv",
+    "useWhen": "Mass times velocity, before looking at a collision.",
     "variables": [
       {
         "symbol": "m",
@@ -3060,6 +3210,7 @@
       "closed system collisions"
     ],
     "katex": "\\sum p_{\\mathrm{before}} = \\sum p_{\\mathrm{after}}",
+    "useWhen": "A collision or explosion in a closed system, no external force.",
     "variables": [
       {
         "symbol": "p",
@@ -3079,6 +3230,7 @@
       "radioactive remaining"
     ],
     "katex": "N = \\dfrac{N_{0}}{2^{n}}",
+    "useWhen": "How much of a radioactive sample remains after whole half-lives.",
     "variables": [
       {
         "symbol": "n",
@@ -3101,6 +3253,7 @@
       "E = mc^2"
     ],
     "katex": "E = mc^{2}",
+    "useWhen": "Energy equivalent to a change of mass, as in nuclear reactions.",
     "variables": [
       {
         "symbol": "c",
@@ -3120,6 +3273,7 @@
       "electron charge"
     ],
     "katex": "e = 1.6 \\times 10^{-19}\\,\\mathrm{C}",
+    "useWhen": "The magnitude of the charge on a proton or electron.",
     "variables": [
       {
         "symbol": "e",
@@ -3139,6 +3293,7 @@
       "kQq/r^2"
     ],
     "katex": "F = k\\dfrac{Q_{1}Q_{2}}{r^{2}},\\quad k = \\dfrac{1}{4\\pi\\varepsilon_{0}}",
+    "useWhen": "The force between two point charges in a vacuum.",
     "variables": [
       {
         "symbol": "r",
@@ -3157,6 +3312,7 @@
       "E = F/q"
     ],
     "katex": "E = \\dfrac{F}{q}",
+    "useWhen": "Force per unit charge on a small test charge.",
     "variables": [
       {
         "symbol": "F",
@@ -3175,6 +3331,7 @@
       "point charge field"
     ],
     "katex": "E = k\\dfrac{Q}{r^{2}}",
+    "useWhen": "The electric field around a single point charge, not parallel plates.",
     "variables": [
       {
         "symbol": "Q",
@@ -3193,6 +3350,7 @@
       "E = U/d"
     ],
     "katex": "E = \\dfrac{U}{d}",
+    "useWhen": "The field between parallel plates from voltage and separation.",
     "variables": [
       {
         "symbol": "d",
@@ -3215,6 +3373,7 @@
       "Q = CU"
     ],
     "katex": "Q = CU",
+    "useWhen": "Charge stored on a capacitor from capacitance and voltage.",
     "variables": [
       {
         "symbol": "C",
@@ -3233,6 +3392,7 @@
       "1/2 CU^2"
     ],
     "katex": "W = \\dfrac{1}{2} CU^{2}",
+    "useWhen": "The energy stored in a capacitor once it is charged.",
     "variables": [
       {
         "symbol": "C",
@@ -3255,6 +3415,7 @@
       "B = mu n I"
     ],
     "katex": "B = \\mu n I,\\quad n = N/\\ell",
+    "useWhen": "The uniform magnetic field inside a long solenoid.",
     "variables": [
       {
         "symbol": "N",
@@ -3278,6 +3439,7 @@
       "G m1 m2 / r^2"
     ],
     "katex": "F_{G} = G\\dfrac{m_{1}m_{2}}{r^{2}}",
+    "useWhen": "The attractive force between two point masses, anywhere in space.",
     "variables": [
       {
         "symbol": "G",
@@ -3296,6 +3458,7 @@
       "g = F/m"
     ],
     "katex": "g = \\dfrac{F_{G}}{m}",
+    "useWhen": "Gravitational force per unit mass on a test mass.",
     "variables": [
       {
         "symbol": "m",
@@ -3314,6 +3477,7 @@
       "g = GM/r^2"
     ],
     "katex": "g = \\dfrac{GM}{r^{2}}",
+    "useWhen": "g due to a spherical mass, outside it, from GM/r^2.",
     "variables": [
       {
         "symbol": "M",
@@ -3333,6 +3497,7 @@
       "s = s0 + v0 t + 1/2 at^2"
     ],
     "katex": "s(t) = s_{0} + v_{0} t + \\dfrac{1}{2} a t^{2}",
+    "useWhen": "Position against time when acceleration is constant, from s0 and v0.",
     "variables": [
       {
         "symbol": "a",
@@ -3351,6 +3516,7 @@
       "v = v0 + at"
     ],
     "katex": "v(t) = v_{0} + at",
+    "useWhen": "Speed against time when acceleration is constant, from a starting v0.",
     "variables": [
       {
         "symbol": "a",
@@ -3369,6 +3535,7 @@
       "omega = v/r"
     ],
     "katex": "\\omega = \\dfrac{\\Delta\\theta}{\\Delta t} = \\dfrac{v}{r}",
+    "useWhen": "How fast an angle changes, or linear speed on a circle.",
     "variables": [
       {
         "symbol": "v",
@@ -3388,6 +3555,7 @@
       "omega^2 r"
     ],
     "katex": "a_{\\mathrm{c}} = \\dfrac{v^{2}}{r} = \\omega^{2} r",
+    "useWhen": "Acceleration toward the centre for uniform circular motion.",
     "variables": [
       {
         "symbol": "r",
@@ -3406,6 +3574,7 @@
       "omega = 2 pi f"
     ],
     "katex": "f = \\dfrac{1}{T},\\quad \\omega = 2\\pi f",
+    "useWhen": "Oscillations: linking period, frequency and angular frequency omega.",
     "variables": [
       {
         "symbol": "T",
@@ -3425,6 +3594,7 @@
       "speed of propagation"
     ],
     "katex": "v = f\\lambda",
+    "useWhen": "Speed of a progressive wave from frequency and wavelength.",
     "variables": [
       {
         "symbol": "\\lambda",
@@ -3448,6 +3618,7 @@
       "hooke oscillator"
     ],
     "katex": "F = -ky",
+    "useWhen": "The restoring force toward equilibrium, proportional to displacement.",
     "variables": [
       {
         "symbol": "y",
@@ -3470,6 +3641,7 @@
       "a = -omega^2 y"
     ],
     "katex": "a = -\\omega^{2} y",
+    "useWhen": "Acceleration in SHM from omega and the displacement from equilibrium.",
     "variables": [
       {
         "symbol": "y",
@@ -3488,6 +3660,7 @@
       "y = A sin omega t"
     ],
     "katex": "y = A\\sin(\\omega t)",
+    "useWhen": "Position against time in SHM, from amplitude and omega.",
     "variables": [
       {
         "symbol": "A",
@@ -3507,6 +3680,7 @@
       "magnetic field energy"
     ],
     "katex": "W = \\dfrac{1}{2} L I^{2}",
+    "useWhen": "Energy stored in an inductor's magnetic field, from L and I.",
     "variables": [
       {
         "symbol": "L",
@@ -3526,6 +3700,7 @@
       "resonance LC"
     ],
     "katex": "\\omega_{0} = \\dfrac{1}{\\sqrt{LC}}",
+    "useWhen": "The natural frequency of an undamped LC circuit.",
     "variables": [
       {
         "symbol": "L, C",
@@ -3545,6 +3720,7 @@
       "wave equation sinusoid"
     ],
     "katex": "y(x,t) = A\\sin\\left(2\\pi\\left(\\dfrac{t}{T} - \\dfrac{x}{\\lambda}\\right)\\right)",
+    "useWhen": "Displacement of a sinusoidal wave as a function of x and t.",
     "variables": [
       {
         "symbol": "A",
@@ -3571,6 +3747,7 @@
       "moving observer frequency"
     ],
     "katex": "f' = f\\dfrac{v \\pm u_{\\mathrm{o}}}{v}",
+    "useWhen": "The heard frequency when the observer moves and the source is still.",
     "variables": [
       {
         "symbol": "u_o",
@@ -3589,6 +3766,7 @@
       "moving source frequency"
     ],
     "katex": "f' = f\\dfrac{v}{v \\pm u_{\\mathrm{s}}}",
+    "useWhen": "The heard frequency when the source moves and the observer is still.",
     "variables": [
       {
         "symbol": "u_s",
@@ -3608,6 +3786,7 @@
       "i = r"
     ],
     "katex": "\\alpha_{\\mathrm{i}} = \\alpha_{\\mathrm{r}}",
+    "useWhen": "A wave bouncing off a boundary: angle in equals angle out.",
     "variables": [
       {
         "symbol": "\\alpha_i, \\alpha_r",
@@ -3627,6 +3806,7 @@
       "n1 sin = n2 sin"
     ],
     "katex": "\\dfrac{\\sin\\alpha_{1}}{\\sin\\alpha_{2}} = \\dfrac{n_{2}}{n_{1}} = \\dfrac{c_{1}}{c_{2}}",
+    "useWhen": "A wave changing speed as it crosses into another medium.",
     "variables": [
       {
         "symbol": "n",
@@ -3650,6 +3830,7 @@
       "lambda D / d"
     ],
     "katex": "\\dfrac{\\Delta y}{D} = \\dfrac{\\lambda}{d}",
+    "useWhen": "Fringe spacing from two slits, wavelength, and screen distance.",
     "variables": [
       {
         "symbol": "\\Delta y",
@@ -3676,6 +3857,7 @@
       "n lambda = d sin"
     ],
     "katex": "n\\lambda = d\\sin\\alpha",
+    "useWhen": "Bright spots from a diffraction grating, order n.",
     "variables": [
       {
         "symbol": "n",
@@ -3699,6 +3881,7 @@
       "L = n lambda/2"
     ],
     "katex": "L = n\\dfrac{\\lambda}{2},\\quad n = 1,2,3,\\ldots",
+    "useWhen": "A standing wave with the same condition at both ends.",
     "variables": [
       {
         "symbol": "L",
@@ -3718,6 +3901,7 @@
       "lambda/4"
     ],
     "katex": "L = n\\dfrac{\\lambda}{4},\\quad n = 1,3,5,\\ldots",
+    "useWhen": "A standing wave in a pipe with one end open and one closed.",
     "variables": [
       {
         "symbol": "L",
@@ -3736,6 +3920,7 @@
       "delta V = delta Ep / q"
     ],
     "katex": "\\Delta V = \\dfrac{\\Delta E_{\\mathrm{p}}}{q}",
+    "useWhen": "Change in electrical potential energy per unit charge.",
     "variables": [
       {
         "symbol": "q",
@@ -3754,6 +3939,7 @@
       "V = kQ/r"
     ],
     "katex": "V = k\\dfrac{Q}{r}",
+    "useWhen": "Electrical potential around a point charge, zero at infinity.",
     "variables": [
       {
         "symbol": "V = 0",
@@ -3772,6 +3958,7 @@
       "W = QU"
     ],
     "katex": "W = QU",
+    "useWhen": "Work to move a charge through a potential difference.",
     "variables": [
       {
         "symbol": "U",
@@ -3790,6 +3977,7 @@
       "F = BIL sin"
     ],
     "katex": "F = B I \\ell \\sin\\theta",
+    "useWhen": "The force on a current-carrying wire in a magnetic field.",
     "variables": [
       {
         "symbol": "\\theta",
@@ -3809,6 +3997,7 @@
       "magnetic force on charge"
     ],
     "katex": "F = B q v \\sin\\theta",
+    "useWhen": "The force on a moving charge in a magnetic field.",
     "variables": [
       {
         "symbol": "\\theta",
@@ -3827,6 +4016,7 @@
       "phi = B A"
     ],
     "katex": "\\Phi = B_{\\perp} A",
+    "useWhen": "How much magnetic field passes through an area.",
     "variables": [
       {
         "symbol": "B_\\perp",
@@ -3846,6 +4036,7 @@
       "emf = -dphi/dt"
     ],
     "katex": "\\varepsilon = -\\dfrac{\\Delta\\Phi}{\\Delta t}",
+    "useWhen": "An induced emf from a magnetic flux that is changing.",
     "variables": [
       {
         "symbol": "\\varepsilon",
@@ -3864,6 +4055,7 @@
       "delta V = delta Ep / m"
     ],
     "katex": "\\Delta V = \\dfrac{\\Delta E_{\\mathrm{p}}}{m}",
+    "useWhen": "Change in gravitational potential energy per unit mass.",
     "variables": [
       {
         "symbol": "m",
@@ -3882,6 +4074,7 @@
       "V = -GM/r"
     ],
     "katex": "V = -\\dfrac{GM}{r}",
+    "useWhen": "Gravitational potential around a point mass, zero at infinity.",
     "variables": [
       {
         "symbol": "V = 0",
@@ -3900,6 +4093,7 @@
       "mgh again"
     ],
     "katex": "\\Delta E_{\\mathrm{p}} = mg\\,\\Delta h",
+    "useWhen": "Change of gravitational potential energy in a uniform field, mgΔh.",
     "variables": [
       {
         "symbol": "\\Delta h",
@@ -3919,6 +4113,7 @@
       "planck"
     ],
     "katex": "E = hf",
+    "useWhen": "The energy of a photon from its frequency, not its momentum.",
     "variables": [
       {
         "symbol": "h",
@@ -3942,6 +4137,7 @@
       "hf = phi + Ek"
     ],
     "katex": "E_{\\mathrm{k}} = hf - W_{0}",
+    "useWhen": "Maximum kinetic energy of a photoelectron from hf and the work function.",
     "variables": [
       {
         "symbol": "W_0",
@@ -3964,6 +4160,7 @@
       "p = h/lambda"
     ],
     "katex": "p = \\dfrac{h}{\\lambda}",
+    "useWhen": "The momentum of a photon from its wavelength, not of a particle.",
     "variables": [
       {
         "symbol": "\\lambda",
@@ -3983,6 +4180,7 @@
       "lambda = h/p"
     ],
     "katex": "\\lambda = \\dfrac{h}{p}",
+    "useWhen": "The wavelength associated with a moving particle, not a photon.",
     "variables": [
       {
         "symbol": "p",
@@ -4002,6 +4200,7 @@
       "heisenberg"
     ],
     "katex": "\\Delta x\\,\\Delta p \\ge \\dfrac{h}{4\\pi}",
+    "useWhen": "A lower bound on how well position and momentum can be known together.",
     "variables": [
       {
         "symbol": "\\Delta x, \\Delta p",
@@ -4020,6 +4219,7 @@
       "delta E delta t"
     ],
     "katex": "\\Delta E\\,\\Delta t \\ge \\dfrac{h}{4\\pi}",
+    "useWhen": "A lower bound on how well energy and time can be known together.",
     "variables": [
       {
         "symbol": "\\Delta E, \\Delta t",
@@ -4039,6 +4239,7 @@
       "En = n^2 h^2 / 8mL^2"
     ],
     "katex": "E_{n} = \\dfrac{h^{2}}{8mL^{2}}n^{2},\\quad n = 1,2,3,\\ldots",
+    "useWhen": "Allowed energies of a particle trapped in a 1D infinite well.",
     "variables": [
       {
         "symbol": "L",
@@ -4061,6 +4262,7 @@
       "-13.6 / n^2"
     ],
     "katex": "E_{n} = -\\dfrac{13.6\\,\\mathrm{eV}}{n^{2}}",
+    "useWhen": "The energy of a hydrogen atom in level n.",
     "variables": [
       {
         "symbol": "n",
@@ -4080,6 +4282,7 @@
       "line spectra"
     ],
     "katex": "hf = \\lvert E_{n} - E_{m} \\rvert",
+    "useWhen": "A photon emitted or absorbed when an electron jumps between levels.",
     "variables": [
       {
         "symbol": "n, m",

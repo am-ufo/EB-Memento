@@ -19,7 +19,7 @@ Production: Cloudflare Pages, output `dist`.
 | Path | Role |
 | --- | --- |
 | `src/data/formulas.json` | All content. Prefer adding formulas here. |
-| `src/types.ts` | `Formula` / `Variable` shape |
+| `src/types.ts` | `Formula` / `Variable` shape (`useWhen` on every formula) |
 | `src/lib/search.ts` | Client-side search |
 | `src/App.tsx` | Search → list → tap for variable meanings |
 | `src/components/Katex.tsx` | Renders `katex` strings |
@@ -27,7 +27,7 @@ Production: Cloudflare Pages, output `dist`.
 
 ## Formulas
 
-Set `courses` to the year-programme tags in [docs/curriculum/README.md](docs/curriculum/README.md). Each entry needs a stable `id`, `topic`, `title`, search `aliases`, KaTeX in `katex`, and `variables` with symbol + meaning. Match the EB syllabus; do not invent “helpful” extras. Use syllabus topic names (Algebra, Geometry, Fields, …), not invented ones.
+Set `courses` to the year-programme tags in [docs/curriculum/README.md](docs/curriculum/README.md). Each entry needs a stable `id`, `topic`, `title`, search `aliases`, KaTeX in `katex`, a one-sentence `useWhen` cue (givens/unknown, not a restatement of the formula), and `variables` with symbol + meaning. Match the EB syllabus; do not invent “helpful” extras. Use syllabus topic names (Algebra, Geometry, Fields, …), not invented ones.
 
 Stay client-only. Do not add auth, APIs, or a database.
 

@@ -11,6 +11,7 @@ export type Formula = {
   title: string;
   aliases: string[];
   katex: string;
+  useWhen: string;
   variables: Variable[];
 };
 

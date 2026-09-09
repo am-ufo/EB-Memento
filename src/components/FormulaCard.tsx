@@ -25,6 +25,10 @@ export function FormulaCard({ formula, selected, saved, onToggle, onToggleSaved 
         <h2>{formula.title}</h2>
         <Katex tex={formula.katex} />
       </button>
+      <p className="use-when">
+        <span className="use-when-label">Use when</span>
+        {formula.useWhen}
+      </p>
       {selected ? (
         <dl className="vars">
           {formula.variables.map((variable) => (
