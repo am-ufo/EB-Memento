@@ -96,6 +96,34 @@ h1 {
   padding: 0.85rem 1rem 0.7rem;
 }
 
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.fav {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--muted);
+}
+
+.fav.on {
+  color: var(--accent);
+}
+
+.saved-notations {
+  margin-top: 0.75rem;
+}
+
 .card-hit {
   display: block;
   width: 100%;
@@ -221,6 +249,13 @@ h1 {
 
 .sheet-mean {
   color: var(--muted);
+}
+
+.sheet-fav {
+  width: 2.5rem;
+  padding-right: 0.25rem;
+  text-align: right;
+  vertical-align: middle;
 }
 
 .tabbar {
