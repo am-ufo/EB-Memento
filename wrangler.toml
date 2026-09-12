@@ -1,0 +1,6 @@
+name = "eb-memento"
+compatibility_date = "2026-09-09"
+pages_build_output_dir = "dist"
+
+[ai]
+binding = "AI"

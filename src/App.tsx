@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { Formula, Notation } from "./types";
+import { AskChat } from "./components/AskChat";
 import { FormulaCard } from "./components/FormulaCard";
 import { NotationsTable } from "./components/NotationsTable";
 import formulaCatalog from "./data/formulas.json" with { type: "json" };
@@ -13,7 +14,7 @@ const notations = notationCatalog as Notation[];
 const formulaById = new Map(formulas.map((formula) => [formula.id, formula]));
 const notationById = new Map(notations.map((notation) => [notation.id, notation]));
 
-type Tab = "formulas" | "notations" | "saved";
+type Tab = "formulas" | "ask" | "notations" | "saved";
 
 function pickByIds<T>(ids: string[], lookup: Map<string, T>): T[] {
   return ids.flatMap((id) => {
@@ -68,27 +69,29 @@ export function App() {
   const savedCatalogEmpty = favourites.formulaIds.length === 0 && favourites.notationIds.length === 0;
 
   return (
-    <div className="shell">
+    <div className={tab === "ask" ? "shell shell-ask" : "shell"}>
       <header className="top">
         <p className="eyebrow">EB · Maths & Physics</p>
         <h1>Memento</h1>
       </header>
 
-      <label className="search">
-        <span className="sr-only">{searchLabel}</span>
-        <input
-          value={query}
-          onChange={(event) => {
-            setQuery(event.target.value);
-            setOpenId(null);
-          }}
-          placeholder={searchPlaceholder}
-          autoCapitalize="none"
-          autoCorrect="off"
-          autoComplete="off"
-          enterKeyHint="search"
-        />
-      </label>
+      {tab !== "ask" ? (
+        <label className="search">
+          <span className="sr-only">{searchLabel}</span>
+          <input
+            value={query}
+            onChange={(event) => {
+              setQuery(event.target.value);
+              setOpenId(null);
+            }}
+            placeholder={searchPlaceholder}
+            autoCapitalize="none"
+            autoCorrect="off"
+            autoComplete="off"
+            enterKeyHint="search"
+          />
+        </label>
+      ) : null}
 
       {tab === "formulas" ? (
         <>
@@ -127,6 +130,10 @@ export function App() {
             )}
           </section>
         </>
+      ) : null}
+
+      {tab === "ask" ? (
+        <AskChat formulas={formulas} formulaById={formulaById} favourites={favourites} />
       ) : null}
 
       {tab === "notations" ? (
@@ -203,6 +210,14 @@ export function App() {
           onClick={() => setTab("formulas")}
         >
           Formulas
+        </button>
+        <button
+          type="button"
+          className={tab === "ask" ? "on" : undefined}
+          aria-current={tab === "ask" ? "page" : undefined}
+          onClick={() => setTab("ask")}
+        >
+          Ask
         </button>
         <button
           type="button"

@@ -29,6 +29,19 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,json,woff2}"],
+        navigateFallbackDenylist: [/^\/api\//],
+        runtimeCaching: [
+          {
+            urlPattern: /\/api\//,
+            handler: "NetworkOnly",
+            method: "GET",
+          },
+          {
+            urlPattern: /\/api\//,
+            handler: "NetworkOnly",
+            method: "POST",
+          },
+        ],
       },
     }),
   ],

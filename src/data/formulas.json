@@ -475,7 +475,9 @@
     "topic": "Geometry",
     "title": "Area of a circle",
     "aliases": [
-      "pi r squared"
+      "pi r squared",
+      "radius from area",
+      "find radius given area"
     ],
     "katex": "A = \\pi r^{2}",
     "useWhen": "The area inside a full circle, from its radius.",
