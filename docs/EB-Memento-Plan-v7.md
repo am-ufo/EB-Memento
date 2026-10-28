@@ -76,3 +76,16 @@ Not an app you "open to study." A memento you flick open mid-problem, take one a
 ## IMPLEMENTATION
 
 TypeScript + Vite + React + KaTeX, content as static JSON, PWA via `vite-plugin-pwa`, no backend, free on Cloudflare Pages. *(Details in separate plan.)*
+
+## Next phases
+1. Dark Mode
+2. Routhing for #math & physics
+3. Deployment with Vercel
+4. Own Custom Domain name `ebmemento.eu` (namecheap.com) - make virtual card
+5. Privacy Policy (short, human redable)
+6. Fast Feedback btn (resent.com) SMTP `feedback@ebmemento.eu`
+7. To think about Premium features aka AI search and Subscription (Strapi) plan
+8. PWA app to pack for Google Store
+9. PWA app to pack for App Store
+---
+10. Analytics step (option)
