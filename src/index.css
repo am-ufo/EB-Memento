@@ -6,7 +6,24 @@
   --card: #fffdf8;
   --line: #e4d9c8;
   --accent: #c45c26;
+  --shadow: 0 1px 1px rgba(28, 25, 22, 0.04), 0 10px 24px rgba(28, 25, 22, 0.06);
+  --grain-opacity: 0.16;
+  --grain-blend: multiply;
   font-family: "Iowan Old Style", Georgia, "Times New Roman", serif;
+}
+
+/* Warm charcoal — soft contrast, not OLED black */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #1b1915;
+  --ink: #ebe4d8;
+  --muted: #9a9186;
+  --card: #24211c;
+  --line: #3d372e;
+  --accent: #d4784a;
+  --shadow: 0 1px 1px rgba(0, 0, 0, 0.28), 0 10px 24px rgba(0, 0, 0, 0.35);
+  --grain-opacity: 0.07;
+  --grain-blend: soft-light;
 }
 
 * {
@@ -26,9 +43,9 @@ body::before {
   inset: 0;
   z-index: 4;
   pointer-events: none;
-  opacity: 0.16;
+  opacity: var(--grain-opacity);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
+  mix-blend-mode: var(--grain-blend);
 }
 
 #root {
@@ -76,7 +93,40 @@ body::before {
 }
 
 .top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
   margin-bottom: 1.1rem;
+}
+
+.top-copy {
+  min-width: 0;
+}
+
+.theme-toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-top: 0.15rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--card);
+  color: var(--muted);
+}
+
+.theme-toggle:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  color: var(--ink);
+}
+
+.theme-toggle svg {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
 }
 
 .eyebrow {
@@ -115,7 +165,7 @@ button.eyebrow {
   background: var(--card);
   color: var(--ink);
   text-align: left;
-  box-shadow: 0 1px 1px rgba(28, 25, 22, 0.04), 0 10px 24px rgba(28, 25, 22, 0.06);
+  box-shadow: var(--shadow);
   transition: border-color 160ms ease, transform 120ms ease;
 }
 
@@ -203,6 +253,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 0.9rem;
   background: var(--card);
+  color: var(--ink);
   margin-bottom: 0.85rem;
   transition: border-color 160ms ease;
 }
@@ -226,7 +277,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 1rem;
   padding: 0.85rem 1rem 0.7rem;
-  box-shadow: 0 1px 1px rgba(28, 25, 22, 0.04), 0 10px 24px rgba(28, 25, 22, 0.06);
+  box-shadow: var(--shadow);
 }
 
 .card-head {
@@ -525,6 +576,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 0.9rem;
   background: var(--card);
+  color: var(--ink);
   transition: border-color 160ms ease;
 }
 
@@ -583,7 +635,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 0.9rem;
   background: var(--card);
-  box-shadow: 0 1px 1px rgba(28, 25, 22, 0.04), 0 10px 24px rgba(28, 25, 22, 0.06);
+  box-shadow: var(--shadow);
 }
 
 .sheet {

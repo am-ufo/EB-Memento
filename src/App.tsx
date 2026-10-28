@@ -5,11 +5,13 @@ import { AskChat } from "./components/AskChat";
 import { FormulaCard } from "./components/FormulaCard";
 import { NotationsTable } from "./components/NotationsTable";
 import { SubjectPicker } from "./components/SubjectPicker";
+import { ThemeToggle } from "./components/ThemeToggle";
 import formulaCatalog from "./data/formulas.json" with { type: "json" };
 import notationCatalog from "./data/notations.json" with { type: "json" };
 import { useFavourites } from "./lib/favourites";
 import { categoriesOf, searchFormulas, searchNotations, topicsOf } from "./lib/search";
 import { formulasFor, notationsFor, searchPool, type Subject } from "./lib/subject";
+import { useTheme } from "./lib/theme";
 
 const formulas = formulaCatalog as Formula[];
 const notations = notationCatalog as Notation[];
@@ -50,6 +52,7 @@ export function App() {
   const [topic, setTopic] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
   const favourites = useFavourites();
+  const { theme, toggle: toggleTheme } = useTheme();
 
   const subjectFormulas = useMemo(() => (subject ? formulasFor(formulas, subject) : []), [subject]);
   const subjectNotations = useMemo(() => (subject ? notationsFor(notations, subject) : []), [subject]);
@@ -127,14 +130,17 @@ export function App() {
   return (
     <div className={tab === "ask" && subject ? "shell shell-ask" : "shell"}>
       <header className="top">
-        {subject ? (
-          <button type="button" className="eyebrow" onClick={clearSubject}>
-            EB · {subjectLabel}
-          </button>
-        ) : (
-          <p className="eyebrow">EB · Maths & Physics</p>
-        )}
-        <h1>Memento</h1>
+        <div className="top-copy">
+          {subject ? (
+            <button type="button" className="eyebrow" onClick={clearSubject}>
+              EB · {subjectLabel}
+            </button>
+          ) : (
+            <p className="eyebrow">EB · Maths & Physics</p>
+          )}
+          <h1>Memento</h1>
+        </div>
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
       </header>
 
       <div className="stage">

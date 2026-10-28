@@ -78,7 +78,7 @@ Not an app you "open to study." A memento you flick open mid-problem, take one a
 TypeScript + Vite + React + KaTeX, content as static JSON, PWA via `vite-plugin-pwa`, no backend, free on Cloudflare Pages. *(Details in separate plan.)*
 
 ## Next phases
-1. Dark Mode
+1. ~~Dark Mode~~ — done
 2. Routhing for #math & physics
 3. Deployment with Vercel
 4. Own Custom Domain name `ebmemento.eu` (namecheap.com) - make virtual card
