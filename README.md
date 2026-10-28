@@ -4,7 +4,7 @@ Syllabus-exact maths formulas for European Baccalaureate students. Flick it open
 
 Catalog: syllabus-exact formulas from the five EB programmes in `docs/eb-curriculumn/`, each tagged with a course. There is no course picker yet — search by title, topic, or course tag (e.g. `S5`, `physics`).
 
-On the **Ask** tab, describe a problem in chat (e.g. “I need to find the radius of a circle from its area”). Memento replies with which syllabus formula to use and shows those catalog cards. The Formulas search bar stays keyword search. Online, Ask can call a Cloudflare Pages Function (`/api/match`, Workers AI); offline and `npm run dev` fall back to a local suggestion. Cards always come from `formulas.json` — the model only picks IDs.
+On the **Ask** tab, describe a problem in chat (e.g. “I know the area of a circle and need the circumference”). Memento walks through which syllabus formulas to use, in order, and what to substitute. Follow-up messages stay on the same problem until you start a new one. You still do the arithmetic. The Formulas search bar stays keyword search. Online, Ask calls a Cloudflare Pages Function (`/api/match`, Workers AI). `npm run dev` uses that same model when Wrangler is logged in (`npx wrangler login`); those local calls count as Workers AI usage. Offline, or if the model is unavailable, Ask falls back to a local suggestion. Cards always come from `formulas.json` — the model only picks IDs.
 
 ## Run locally
 
@@ -17,7 +17,7 @@ npm run dev
 
 Open the URL Vite prints (usually http://localhost:5173). On a phone, use the same Wi-Fi address Vite shows, then “Add to Home Screen”.
 
-To try the online matcher locally (needs a Cloudflare account and the Workers AI binding from `wrangler.toml`):
+To run the production build locally (needs a Cloudflare account and the Workers AI binding from `wrangler.toml`):
 
 ```bash
 npm run preview:cf

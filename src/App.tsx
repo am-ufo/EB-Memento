@@ -1,12 +1,15 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
+import { flushSync } from "react-dom";
 import type { Formula, Notation } from "./types";
 import { AskChat } from "./components/AskChat";
 import { FormulaCard } from "./components/FormulaCard";
 import { NotationsTable } from "./components/NotationsTable";
+import { SubjectPicker } from "./components/SubjectPicker";
 import formulaCatalog from "./data/formulas.json" with { type: "json" };
 import notationCatalog from "./data/notations.json" with { type: "json" };
 import { useFavourites } from "./lib/favourites";
 import { categoriesOf, searchFormulas, searchNotations, topicsOf } from "./lib/search";
+import { formulasFor, notationsFor, searchPool, type Subject } from "./lib/subject";
 
 const formulas = formulaCatalog as Formula[];
 const notations = notationCatalog as Notation[];
@@ -15,6 +18,23 @@ const formulaById = new Map(formulas.map((formula) => [formula.id, formula]));
 const notationById = new Map(notations.map((notation) => [notation.id, notation]));
 
 type Tab = "formulas" | "ask" | "notations" | "saved";
+
+const TABS: Tab[] = ["formulas", "ask", "notations", "saved"];
+
+function withTransition(update: () => void) {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || typeof document.startViewTransition !== "function") {
+    update();
+    return;
+  }
+  try {
+    document.startViewTransition(() => {
+      flushSync(update);
+    });
+  } catch {
+    update();
+  }
+}
 
 function pickByIds<T>(ids: string[], lookup: Map<string, T>): T[] {
   return ids.flatMap((id) => {
@@ -25,26 +45,33 @@ function pickByIds<T>(ids: string[], lookup: Map<string, T>): T[] {
 
 export function App() {
   const [tab, setTab] = useState<Tab>("formulas");
+  const [subject, setSubject] = useState<Subject | null>(null);
   const [query, setQuery] = useState("");
   const [topic, setTopic] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
-  const [openId, setOpenId] = useState<string | null>(null);
   const favourites = useFavourites();
 
-  const topics = useMemo(() => topicsOf(formulas), []);
-  const categories = useMemo(() => categoriesOf(notations), []);
+  const subjectFormulas = useMemo(() => (subject ? formulasFor(formulas, subject) : []), [subject]);
+  const subjectNotations = useMemo(() => (subject ? notationsFor(notations, subject) : []), [subject]);
+  const formulaSearchPool = useMemo(() => (subject ? searchPool(formulas, subject) : []), [subject]);
+  const notationSearchPool = useMemo(() => (subject ? searchPool(notations, subject) : []), [subject]);
+
+  const topics = useMemo(() => topicsOf(subjectFormulas), [subjectFormulas]);
+  const categories = useMemo(() => categoriesOf(subjectNotations), [subjectNotations]);
 
   const formulaResults = useMemo(() => {
-    const found = searchFormulas(formulas, query);
+    const pool = query.trim() ? formulaSearchPool : subjectFormulas;
+    const found = searchFormulas(pool, query);
     if (!topic || query.trim()) return found;
     return found.filter((formula) => formula.topic === topic);
-  }, [query, topic]);
+  }, [formulaSearchPool, query, subjectFormulas, topic]);
 
   const notationResults = useMemo(() => {
-    const found = searchNotations(notations, query);
-    if (!category) return found;
+    const pool = query.trim() ? notationSearchPool : subjectNotations;
+    const found = searchNotations(pool, query);
+    if (!category || query.trim()) return found;
     return found.filter((row) => row.category === category);
-  }, [query, category]);
+  }, [category, notationSearchPool, query, subjectNotations]);
 
   const savedFormulas = useMemo(
     () => searchFormulas(pickByIds(favourites.formulaIds, formulaById), query),
@@ -67,22 +94,57 @@ export function App() {
 
   const savedEmpty = savedFormulas.length === 0 && savedNotations.length === 0;
   const savedCatalogEmpty = favourites.formulaIds.length === 0 && favourites.notationIds.length === 0;
+  const showPicker = !subject && tab !== "saved";
+  const subjectLabel = subject === "physics" ? "Physics" : "Maths";
+
+  function selectTab(next: Tab) {
+    if (next === tab) return;
+    withTransition(() => setTab(next));
+  }
+
+  function pickSubject(next: Subject) {
+    withTransition(() => {
+      setSubject(next);
+      setQuery("");
+      setTopic(null);
+      setCategory(null);
+      setTab("formulas");
+    });
+  }
+
+  function clearSubject() {
+    withTransition(() => {
+      setSubject(null);
+      setQuery("");
+      setTopic(null);
+      setCategory(null);
+      setTab("formulas");
+    });
+  }
+
+  const tabIndex = TABS.indexOf(tab);
 
   return (
-    <div className={tab === "ask" ? "shell shell-ask" : "shell"}>
+    <div className={tab === "ask" && subject ? "shell shell-ask" : "shell"}>
       <header className="top">
-        <p className="eyebrow">EB · Maths & Physics</p>
+        {subject ? (
+          <button type="button" className="eyebrow" onClick={clearSubject}>
+            EB · {subjectLabel}
+          </button>
+        ) : (
+          <p className="eyebrow">EB · Maths & Physics</p>
+        )}
         <h1>Memento</h1>
       </header>
 
-      {tab !== "ask" ? (
+      <div className="stage">
+      {tab !== "ask" && !showPicker ? (
         <label className="search">
           <span className="sr-only">{searchLabel}</span>
           <input
             value={query}
             onChange={(event) => {
               setQuery(event.target.value);
-              setOpenId(null);
             }}
             placeholder={searchPlaceholder}
             autoCapitalize="none"
@@ -93,7 +155,9 @@ export function App() {
         </label>
       ) : null}
 
-      {tab === "formulas" ? (
+      {showPicker ? <SubjectPicker onPick={pickSubject} /> : null}
+
+      {subject && tab === "formulas" ? (
         <>
           {!query.trim() ? (
             <nav className="topics" aria-label="Topics">
@@ -121,9 +185,7 @@ export function App() {
                 <FormulaCard
                   key={formula.id}
                   formula={formula}
-                  selected={openId === formula.id}
                   saved={favourites.isFormulaSaved(formula.id)}
-                  onToggle={() => setOpenId(openId === formula.id ? null : formula.id)}
                   onToggleSaved={() => favourites.toggleFormula(formula.id)}
                 />
               ))
@@ -132,11 +194,17 @@ export function App() {
         </>
       ) : null}
 
-      {tab === "ask" ? (
-        <AskChat formulas={formulas} formulaById={formulaById} favourites={favourites} />
+      {subject && tab === "ask" ? (
+        <AskChat
+          key={subject}
+          subject={subject}
+          formulas={formulaSearchPool}
+          formulaById={formulaById}
+          favourites={favourites}
+        />
       ) : null}
 
-      {tab === "notations" ? (
+      {subject && tab === "notations" ? (
         <>
           <nav className="topics" aria-label="Categories">
             <button
@@ -181,9 +249,7 @@ export function App() {
                   <FormulaCard
                     key={formula.id}
                     formula={formula}
-                    selected={openId === formula.id}
                     saved={favourites.isFormulaSaved(formula.id)}
-                    onToggle={() => setOpenId(openId === formula.id ? null : formula.id)}
                     onToggleSaved={() => favourites.toggleFormula(formula.id)}
                   />
                 ))}
@@ -201,13 +267,14 @@ export function App() {
           </>
         )
       ) : null}
+      </div>
 
-      <nav className="tabbar" aria-label="Sections">
+      <nav className="tabbar" style={{ "--tab": tabIndex } as CSSProperties} aria-label="Sections">
         <button
           type="button"
           className={tab === "formulas" ? "on" : undefined}
           aria-current={tab === "formulas" ? "page" : undefined}
-          onClick={() => setTab("formulas")}
+          onClick={() => selectTab("formulas")}
         >
           Formulas
         </button>
@@ -215,7 +282,7 @@ export function App() {
           type="button"
           className={tab === "ask" ? "on" : undefined}
           aria-current={tab === "ask" ? "page" : undefined}
-          onClick={() => setTab("ask")}
+          onClick={() => selectTab("ask")}
         >
           Ask
         </button>
@@ -223,7 +290,7 @@ export function App() {
           type="button"
           className={tab === "notations" ? "on" : undefined}
           aria-current={tab === "notations" ? "page" : undefined}
-          onClick={() => setTab("notations")}
+          onClick={() => selectTab("notations")}
         >
           Notations
         </button>
@@ -231,9 +298,9 @@ export function App() {
           type="button"
           className={tab === "saved" ? "on" : undefined}
           aria-current={tab === "saved" ? "page" : undefined}
-          onClick={() => setTab("saved")}
+          onClick={() => selectTab("saved")}
         >
-          Saved
+          Favourites
         </button>
       </nav>
     </div>

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type Props = {
   saved: boolean;
   label: string;
@@ -5,16 +7,20 @@ type Props = {
 };
 
 export function FavouriteButton({ saved, label, onToggle }: Props) {
+  const [pop, setPop] = useState(false);
+
   return (
     <button
       type="button"
-      className={saved ? "fav on" : "fav"}
+      className={pop ? (saved ? "fav on pop" : "fav pop") : saved ? "fav on" : "fav"}
       aria-pressed={saved}
       aria-label={saved ? `Remove ${label} from favourites` : `Save ${label} to favourites`}
       onClick={(event) => {
         event.stopPropagation();
+        if (!saved && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) setPop(true);
         onToggle();
       }}
+      onAnimationEnd={() => setPop(false)}
     >
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
         {saved ? (
