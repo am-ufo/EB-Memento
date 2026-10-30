@@ -13,7 +13,7 @@ npm run build       # tsc -b && vite build → dist/
 npm run preview:cf  # production build + Wrangler (Workers AI binding)
 ```
 
-Production: Cloudflare Pages, output `dist`. Ask online uses `functions/api/match.ts` (Workers AI); offline falls back to local ranking. Cards always come from `formulas.json`.
+Production: Vercel, output `dist` (`vercel.json`). Ask online uses `functions/api/match.ts` (Workers AI) in `npm run preview:cf`; the Vercel site has no Workers AI binding, so Ask falls back to local ranking. Cards always come from `formulas.json`.
 
 ## Layout
 
@@ -32,7 +32,8 @@ Production: Cloudflare Pages, output `dist`. Ask online uses `functions/api/matc
 | `src/components/Katex.tsx` | Renders `katex` strings |
 | `src/index.css` | Theme tokens (`:root` / `[data-theme="dark"]`) |
 | `vite.config.ts` | PWA / offline cache |
-| `wrangler.toml` | Pages + AI binding |
+| `vercel.json` | Production build on Vercel |
+| `wrangler.toml` | Local Ask preview + AI binding |
 
 ## Formulas
 

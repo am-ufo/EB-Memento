@@ -1,21 +1,15 @@
-import type { Subject } from "../lib/subject";
-
-type Props = {
-  onPick: (subject: Subject) => void;
-};
-
-export function SubjectPicker({ onPick }: Props) {
+export function SubjectPicker() {
   return (
     <nav className="subjects" aria-label="Subjects">
-      <button type="button" className="subject-card" onClick={() => onPick("maths")}>
+      <a className="subject-card" href="#math">
         <span className="subject-rule" aria-hidden="true" />
         <span className="subject-name">Maths</span>
         <span className="subject-hint">Algebra, geometry, analysis</span>
         <span className="subject-mark" aria-hidden="true">
           ∑
         </span>
-      </button>
-      <button type="button" className="subject-card" onClick={() => onPick("physics")}>
+      </a>
+      <a className="subject-card" href="#physics">
         <span className="subject-rule" aria-hidden="true" />
         <span className="subject-name">Physics</span>
         <span className="subject-hint">Mechanics, fields, waves</span>
@@ -30,7 +24,7 @@ export function SubjectPicker({ onPick }: Props) {
             />
           </svg>
         </span>
-      </button>
+      </a>
     </nav>
   );
 }

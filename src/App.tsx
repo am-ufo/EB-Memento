@@ -1,4 +1,4 @@
-import { useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { flushSync } from "react-dom";
 import type { Formula, Notation } from "./types";
 import { AskChat } from "./components/AskChat";
@@ -10,6 +10,7 @@ import formulaCatalog from "./data/formulas.json" with { type: "json" };
 import notationCatalog from "./data/notations.json" with { type: "json" };
 import { useFavourites } from "./lib/favourites";
 import { categoriesOf, searchFormulas, searchNotations, topicsOf } from "./lib/search";
+import { hashForSubject, homePath, subjectFromHash } from "./lib/route";
 import { formulasFor, notationsFor, searchPool, type Subject } from "./lib/subject";
 import { useTheme } from "./lib/theme";
 
@@ -47,12 +48,58 @@ function pickByIds<T>(ids: string[], lookup: Map<string, T>): T[] {
 
 export function App() {
   const [tab, setTab] = useState<Tab>("formulas");
-  const [subject, setSubject] = useState<Subject | null>(null);
+  const [subject, setSubject] = useState<Subject | null>(() => subjectFromHash(window.location.hash));
   const [query, setQuery] = useState("");
   const [topic, setTopic] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
   const favourites = useFavourites();
   const { theme, toggle: toggleTheme } = useTheme();
+  const subjectRef = useRef(subject);
+  subjectRef.current = subject;
+
+  const syncFromHash = useRef(() => {});
+  syncFromHash.current = () => {
+    const next = subjectFromHash(window.location.hash);
+    if (next === subjectRef.current) return;
+    subjectRef.current = next;
+    withTransition(() => {
+      setSubject(next);
+      setQuery("");
+      setTopic(null);
+      setCategory(null);
+      setTab("formulas");
+    });
+  };
+
+  useEffect(() => {
+    let canonicalizeTimer = 0;
+
+    const canonicalize = () => {
+      const canonical = hashForSubject(subjectFromHash(window.location.hash));
+      if (window.location.hash === canonical) return;
+      // The hash commits after hashchange, so rewrite aliases on the next turn.
+      window.clearTimeout(canonicalizeTimer);
+      canonicalizeTimer = window.setTimeout(() => {
+        const settled = hashForSubject(subjectFromHash(window.location.hash));
+        if (window.location.hash === settled) return;
+        history.replaceState(null, "", settled ? `${homePath()}${settled}` : homePath());
+      }, 0);
+    };
+
+    const onNavigate = () => {
+      canonicalize();
+      syncFromHash.current();
+    };
+
+    onNavigate();
+    window.addEventListener("hashchange", onNavigate);
+    window.addEventListener("popstate", onNavigate);
+    return () => {
+      window.clearTimeout(canonicalizeTimer);
+      window.removeEventListener("hashchange", onNavigate);
+      window.removeEventListener("popstate", onNavigate);
+    };
+  }, []);
 
   const subjectFormulas = useMemo(() => (subject ? formulasFor(formulas, subject) : []), [subject]);
   const subjectNotations = useMemo(() => (subject ? notationsFor(notations, subject) : []), [subject]);
@@ -105,26 +152,6 @@ export function App() {
     withTransition(() => setTab(next));
   }
 
-  function pickSubject(next: Subject) {
-    withTransition(() => {
-      setSubject(next);
-      setQuery("");
-      setTopic(null);
-      setCategory(null);
-      setTab("formulas");
-    });
-  }
-
-  function clearSubject() {
-    withTransition(() => {
-      setSubject(null);
-      setQuery("");
-      setTopic(null);
-      setCategory(null);
-      setTab("formulas");
-    });
-  }
-
   const tabIndex = TABS.indexOf(tab);
 
   return (
@@ -132,9 +159,9 @@ export function App() {
       <header className="top">
         <div className="top-copy">
           {subject ? (
-            <button type="button" className="eyebrow" onClick={clearSubject}>
+            <a className="eyebrow" href={homePath()} aria-label="All subjects">
               EB · {subjectLabel}
-            </button>
+            </a>
           ) : (
             <p className="eyebrow">EB · Maths & Physics</p>
           )}
@@ -161,7 +188,7 @@ export function App() {
         </label>
       ) : null}
 
-      {showPicker ? <SubjectPicker onPick={pickSubject} /> : null}
+      {showPicker ? <SubjectPicker /> : null}
 
       {subject && tab === "formulas" ? (
         <>

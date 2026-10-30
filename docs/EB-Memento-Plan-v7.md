@@ -79,8 +79,8 @@ TypeScript + Vite + React + KaTeX, content as static JSON, PWA via `vite-plugin-
 
 ## Next phases
 1. ~~Dark Mode~~ — done
-2. Routhing for #math & physics
-3. Deployment with Vercel
+2. ~~Routing for #math & physics~~ — done
+3. ~~Deployment with Vercel~~ — done
 4. Own Custom Domain name `ebmemento.eu` (namecheap.com) - make virtual card
 5. Privacy Policy (short, human redable)
 6. Fast Feedback btn (resent.com) SMTP `feedback@ebmemento.eu`

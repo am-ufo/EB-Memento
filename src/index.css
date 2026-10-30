@@ -137,7 +137,9 @@ body::before {
   color: var(--muted);
 }
 
-button.eyebrow {
+button.eyebrow,
+a.eyebrow {
+  display: inline-block;
   padding: 0;
   border: 0;
   background: transparent;
@@ -145,6 +147,19 @@ button.eyebrow {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a.subject-card {
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a.subject-card:active {
+  transform: scale(0.98);
 }
 
 .subjects {
@@ -766,6 +781,8 @@ button:active:not(:disabled) {
 }
 
 button:focus-visible,
+a.subject-card:focus-visible,
+a.eyebrow:focus-visible,
 .search input:focus-visible,
 .composer input:focus-visible {
   outline: 2px solid var(--accent);
@@ -785,7 +802,8 @@ button:focus-visible,
     transition: none !important;
   }
 
-  button:active:not(:disabled) {
+  button:active:not(:disabled),
+  a.subject-card:active {
     transform: none;
   }
 

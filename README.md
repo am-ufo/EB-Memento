@@ -23,10 +23,12 @@ To run the production build locally (needs a Cloudflare account and the Workers 
 npm run preview:cf
 ```
 
-## Production build (Cloudflare Pages)
+## Production (Vercel)
 
 Build command: `npm run build`  
 Output directory: `dist`
+
+Ask on the deployed site uses the on-device suggestion. The Workers AI path still runs locally with `npm run preview:cf`.
 
 ## Layout
 
@@ -39,6 +41,7 @@ Output directory: `dist`
 | `src/App.tsx` | Search → list → tap for variable meanings |
 | `src/components/Katex.tsx` | Renders `katex` strings |
 | `vite.config.ts` | PWA / offline cache |
+| `vercel.json` | Vercel build (`dist`) |
 
 ## First useful change
 
