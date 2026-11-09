@@ -4,6 +4,7 @@ import {
   cleanName,
   cleanUsername,
   coversNote,
+  usernameExample,
   isUpper,
   mathsChoices,
   type MathsPeriod,
@@ -57,6 +58,7 @@ export function ClassForm({
   const nameReady = !showName || (cleaned !== null && handle !== null && !taken);
   const nameStarted = name.trim().length > 0;
   const usernameStarted = username.trim().length > 0;
+  const example = usernameExample(name, year);
 
   return (
     <form
@@ -85,7 +87,7 @@ export function ClassForm({
             id="sign-in-name"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="First name"
+            placeholder="Artem"
             autoComplete="given-name"
             autoCapitalize="words"
             autoCorrect="off"
@@ -105,10 +107,10 @@ export function ClassForm({
           <input
             id="sign-in-username"
             value={username}
-            onChange={(event) => setUsername(event.target.value.toLowerCase())}
-            placeholder="artem"
+            onChange={(event) => setUsername(event.target.value)}
+            placeholder={example.placeholder}
             autoComplete="username"
-            autoCapitalize="none"
+            autoCapitalize="off"
             autoCorrect="off"
             spellCheck={false}
             maxLength={16}
@@ -120,7 +122,10 @@ export function ClassForm({
           ) : usernameStarted && !handle ? (
             <span className="settings-hint">Use 3–16 letters, numbers, or _. Start with a letter.</span>
           ) : (
-            <span className="settings-hint">Friends and people at your school find you by this. One person per username.</span>
+            <span className="settings-hint">
+              Friends and people at your school find you by this. Capitals stay. {example.hintName} and {example.hintFold}{" "}
+              are the same username.
+            </span>
           )}
         </label>
       ) : null}

@@ -6,7 +6,7 @@
 create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   name text not null check (char_length(name) between 1 and 24),
-  username text not null check (username ~ '^[a-z][a-z0-9_]{2,15}$'),
+  username text not null check (username ~ '^[A-Za-z][A-Za-z0-9_]{2,15}$'),
   year text not null check (year in ('S4', 'S5', 'S6', 'S7')),
   maths text not null check (maths in ('3', '4', '5', '6')),
   advanced boolean not null default false,
@@ -22,16 +22,14 @@ create table if not exists public.favourites (
 
 alter table public.profiles add column if not exists username text;
 
-do $$
-begin
-  if not exists (select 1 from pg_constraint where conname = 'profiles_username_format') then
-    alter table public.profiles
-      add constraint profiles_username_format
-      check (username is null or username ~ '^[a-z][a-z0-9_]{2,15}$');
-  end if;
-end $$;
+alter table public.profiles drop constraint if exists profiles_username_check;
+alter table public.profiles drop constraint if exists profiles_username_format;
+alter table public.profiles
+  add constraint profiles_username_format
+  check (username is null or username ~ '^[A-Za-z][A-Za-z0-9_]{2,15}$');
 
-create unique index if not exists profiles_username_key on public.profiles (username);
+drop index if exists public.profiles_username_key;
+create unique index profiles_username_key on public.profiles (lower(username));
 
 alter table public.profiles enable row level security;
 alter table public.favourites enable row level security;

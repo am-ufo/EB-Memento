@@ -1,6 +1,6 @@
 # Memento
 
-Offline PWA: syllabus-exact maths and physics formulas for European Baccalaureate students. Open, search, take one answer, close. Sign-in is an email and password. On this device the account is an email plus a password hash, a unique username, the class, and the stars, so the sheet still opens offline. First names can match. Usernames cannot. When `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set, that same account is stored in Supabase instead. Do not add a second login provider. Never put the Supabase service-role key in the client.
+Offline PWA: syllabus-exact maths and physics formulas for European Baccalaureate students. Open, search, take one answer, close. Sign-in is an email and password. On this device the account is an email plus a password hash, a unique username, the class, and the stars, so the sheet still opens offline. First names can match. Usernames cannot, and matching ignores case. Capitals in a username are kept. When `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set, that same account is stored in Supabase instead. Do not add a second login provider. Never put the Supabase service-role key in the client.
 
 The catalog covers the five EB syllabi in `docs/eb-curriculumn/`. Every formula and notation is tagged with `courses[]`. After email sign-in, the class screen asks for a name, year, and maths course, then a Maths / Physics subject picker when physics is on. Tabs: Formulas | Ask | Notations | Favourites. Light/dark theme (warm charcoal dark); preference in `localStorage` (`memento:theme`).
 

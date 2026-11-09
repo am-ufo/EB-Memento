@@ -32,7 +32,7 @@ Ask on the deployed site uses the on-device suggestion. The Workers AI path stil
 
 ## Accounts
 
-Sign-in works in the browser with no extra setup. The email and a hash of the password stay on the device, with the name, a unique username, the class, and the stars. First names can match. Usernames cannot.
+Sign-in works in the browser with no extra setup. The email and a hash of the password stay on the device, with the name, a unique username, the class, and the stars. First names can match. Usernames cannot, and matching ignores case. Capitals in a username are kept.
 
 To use that same login on another device, copy `.env.example` to `.env` and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (the anon key only). In the Supabase SQL editor, run `supabase/schema.sql` once. Under Authentication → URL configuration, add `http://localhost:5173` and the Vercel site URL so password-reset links can return. Put the same two variables in the Vercel project. The service-role key stays out of the app.
 

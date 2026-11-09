@@ -18,7 +18,9 @@ export function ThemeToggle({ theme, onToggle }: Props) {
       aria-label={toLight ? "Switch to light mode" : "Switch to dark mode"}
       title={toLight ? "Light mode" : "Dark mode"}
     >
-      {toLight ? <SunIcon /> : <MoonIcon />}
+      <span key={theme} className="theme-icon">
+        {toLight ? <SunIcon /> : <MoonIcon />}
+      </span>
     </button>
   );
 }

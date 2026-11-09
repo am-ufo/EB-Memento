@@ -2,8 +2,8 @@ import { ACCOUNTS_KEY } from "../data/notices";
 import type { MathsPeriod, Profile, Year } from "./profile";
 
 function storedUsername(value: string): string {
-  const username = value.trim().toLowerCase();
-  return /^[a-z][a-z0-9_]{2,15}$/.test(username) ? username : "";
+  const username = value.trim();
+  return /^[A-Za-z][A-Za-z0-9_]{2,15}$/.test(username) ? username : "";
 }
 
 export type LocalAccount = {
@@ -168,7 +168,10 @@ export async function setLocalPassword(id: string, password: string): Promise<Lo
 export function isUsernameTaken(username: string, exceptId: string | null): boolean {
   const clean = storedUsername(username);
   if (!clean) return false;
-  return readStore().accounts.some((account) => account.username === clean && account.id !== exceptId);
+  const key = clean.toLowerCase();
+  return readStore().accounts.some(
+    (account) => account.username.toLowerCase() === key && account.id !== exceptId,
+  );
 }
 
 export function saveLocalClass(
@@ -182,7 +185,8 @@ export function saveLocalClass(
   const store = readStore();
   const account = store.accounts.find((item) => item.id === id);
   if (!account) return null;
-  if (store.accounts.some((item) => item.username === clean && item.id !== id)) return "taken";
+  const key = clean.toLowerCase();
+  if (store.accounts.some((item) => item.username.toLowerCase() === key && item.id !== id)) return "taken";
   account.name = name;
   account.username = clean;
   account.profile = profile;

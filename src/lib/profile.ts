@@ -113,11 +113,33 @@ export function cleanName(value: string): string | null {
   return name;
 }
 
-/** Public handle. One person only, so friends and classmates can tell accounts apart. */
+/** Public handle. Capitals are kept. Matching ignores case, so one person owns both forms. */
 export function cleanUsername(value: string): string | null {
-  const username = value.trim().toLowerCase();
-  if (!/^[a-z][a-z0-9_]{2,15}$/.test(username)) return null;
+  const username = value.trim();
+  if (!/^[A-Za-z][A-Za-z0-9_]{2,15}$/.test(username)) return null;
   return username;
+}
+
+const SAMPLE_NAME = "Artem";
+
+/** A handle shaped like the first name, with a short suffix so it is not a copy of the name. */
+export function usernameExample(
+  name: string,
+  year?: Year | null,
+): { placeholder: string; hintName: string; hintFold: string } {
+  const suffix = year ? `_s${year.slice(1)}` : "_eb";
+  const first = name.trim().split(/\s+/)[0] ?? "";
+  let letters = first
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .replace(/[^A-Za-z]/g, "");
+  if (letters.length < 2) letters = SAMPLE_NAME;
+  letters = letters.slice(0, 16 - suffix.length);
+  const placeholder = `${letters}${suffix}`;
+  const hintFold = placeholder.toLowerCase();
+  const hintName =
+    placeholder === hintFold ? `${hintFold.charAt(0).toUpperCase()}${hintFold.slice(1)}` : placeholder;
+  return { placeholder, hintName, hintFold };
 }
 
 export function initials(name: string): string {

@@ -68,21 +68,9 @@ export function App() {
   const { size: textSize, setSize: setTextSize } = useTextSize();
   const subjectRef = useRef(subject);
   subjectRef.current = subject;
+  const pageRef = useRef(page);
+  pageRef.current = page;
   const paging = useRef(false);
-
-  const syncFromHash = useRef(() => {});
-  syncFromHash.current = () => {
-    const next = subjectFromHash(window.location.hash);
-    if (next === subjectRef.current) return;
-    subjectRef.current = next;
-    withTransition(() => {
-      setSubject(next);
-      setQuery("");
-      setTopic(null);
-      setCategory(null);
-      setTab("formulas");
-    });
-  };
 
   useEffect(() => {
     let canonicalizeTimer = 0;
@@ -102,8 +90,23 @@ export function App() {
     const onNavigate = () => {
       paging.current = false;
       canonicalize();
-      syncFromHash.current();
-      setPage(pageFromPath(window.location.pathname));
+      const nextSubject = subjectFromHash(window.location.hash);
+      const nextPage = pageFromPath(window.location.pathname);
+      const subjectChanged = nextSubject !== subjectRef.current;
+      const pageChanged = nextPage !== pageRef.current;
+      if (!subjectChanged && !pageChanged) return;
+      if (subjectChanged) subjectRef.current = nextSubject;
+      if (pageChanged) pageRef.current = nextPage;
+      withTransition(() => {
+        if (subjectChanged) {
+          setSubject(nextSubject);
+          setQuery("");
+          setTopic(null);
+          setCategory(null);
+          setTab("formulas");
+        }
+        if (pageChanged) setPage(nextPage);
+      });
     };
 
     onNavigate();
@@ -232,13 +235,13 @@ export function App() {
         }, 500);
         return;
       }
-      setPage("settings");
       window.scrollTo(0, 0);
+      withTransition(() => setPage("settings"));
       return;
     }
     pushPage(next);
-    setPage(next);
     window.scrollTo(0, 0);
+    withTransition(() => setPage(next));
   }
 
   function backPage() {
@@ -250,8 +253,8 @@ export function App() {
       }, 500);
       return;
     }
-    setPage("settings");
     window.scrollTo(0, 0);
+    withTransition(() => setPage("settings"));
   }
 
   function closePage() {
@@ -263,8 +266,8 @@ export function App() {
       }, 500);
       return;
     }
-    setPage(null);
     window.scrollTo(0, 0);
+    withTransition(() => setPage(null));
   }
 
   function onGear() {
