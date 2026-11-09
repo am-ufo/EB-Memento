@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
+import { THEME_KEY } from "../data/notices";
+import { clearedIds, DEVICE_CLEARED } from "./storage";
 
 export type Theme = "light" | "dark";
+export type ThemePreference = "system" | Theme;
 
-const STORAGE_KEY = "memento:theme";
 const LIGHT_THEME_COLOR = "#f4efe6";
 const DARK_THEME_COLOR = "#1b1915";
 
-function readStored(): Theme | null {
+function readStored(): ThemePreference {
   try {
-    const value = localStorage.getItem(STORAGE_KEY);
-    return value === "light" || value === "dark" ? value : null;
+    const value = localStorage.getItem(THEME_KEY);
+    if (value === "light" || value === "dark" || value === "system") return value;
   } catch {
-    return null;
+    // Private mode — follow the device.
   }
+  return "system";
 }
 
 function systemTheme(): Theme {
@@ -20,7 +23,8 @@ function systemTheme(): Theme {
 }
 
 export function getPreferredTheme(): Theme {
-  return readStored() ?? systemTheme();
+  const preference = readStored();
+  return preference === "system" ? systemTheme() : preference;
 }
 
 export function applyTheme(theme: Theme) {
@@ -30,12 +34,18 @@ export function applyTheme(theme: Theme) {
   if (meta) meta.setAttribute("content", theme === "dark" ? DARK_THEME_COLOR : LIGHT_THEME_COLOR);
 }
 
+function writePreference(preference: ThemePreference) {
+  try {
+    localStorage.setItem(THEME_KEY, preference);
+  } catch {
+    // Private mode — keep the choice for this visit.
+  }
+}
+
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const fromDom = document.documentElement.dataset.theme;
-    if (fromDom === "light" || fromDom === "dark") return fromDom;
-    return getPreferredTheme();
-  });
+  const [preference, setPreferenceState] = useState<ThemePreference>(readStored);
+  const [system, setSystem] = useState<Theme>(systemTheme);
+  const theme: Theme = preference === "system" ? system : preference;
 
   useEffect(() => {
     applyTheme(theme);
@@ -43,26 +53,29 @@ export function useTheme() {
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const onChange = () => {
-      if (readStored()) return;
-      const next = media.matches ? "dark" : "light";
-      setTheme(next);
-    };
+    const onChange = () => setSystem(media.matches ? "dark" : "light");
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
   }, []);
 
-  function toggle() {
-    setTheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark";
-      try {
-        localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        // Private mode — keep in-memory theme.
-      }
-      return next;
-    });
+  useEffect(() => {
+    const onCleared = (event: Event) => {
+      const ids = clearedIds(event);
+      if (ids && !ids.includes("theme")) return;
+      setPreferenceState(readStored());
+    };
+    window.addEventListener(DEVICE_CLEARED, onCleared);
+    return () => window.removeEventListener(DEVICE_CLEARED, onCleared);
+  }, []);
+
+  function setPreference(next: ThemePreference) {
+    setPreferenceState(next);
+    writePreference(next);
   }
 
-  return { theme, toggle };
+  function toggle() {
+    setPreference(theme === "dark" ? "light" : "dark");
+  }
+
+  return { theme, preference, setPreference, toggle };
 }

@@ -2,16 +2,23 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { flushSync } from "react-dom";
 import type { Formula, Notation } from "./types";
 import { AskChat } from "./components/AskChat";
+import { ClassGate, NewPassword, SignIn } from "./components/SignIn";
 import { FormulaCard } from "./components/FormulaCard";
+import { SettingsIcon } from "./components/icons/SettingsIcon";
 import { NotationsTable } from "./components/NotationsTable";
+import { SettingsScreen } from "./components/SettingsScreen";
 import { SubjectPicker } from "./components/SubjectPicker";
 import { ThemeToggle } from "./components/ThemeToggle";
 import formulaCatalog from "./data/formulas.json" with { type: "json" };
 import notationCatalog from "./data/notations.json" with { type: "json" };
+import { useAccount } from "./lib/account";
 import { useFavourites } from "./lib/favourites";
+import { forProfile } from "./lib/profile";
+import { backOne, closeToApp, PAGE_TITLE, pageFromPath, pushPage, showSettingsFromNotice, type Page } from "./lib/pages";
 import { categoriesOf, searchFormulas, searchNotations, topicsOf } from "./lib/search";
 import { hashForSubject, homePath, subjectFromHash } from "./lib/route";
 import { formulasFor, notationsFor, searchPool, type Subject } from "./lib/subject";
+import { useTextSize } from "./lib/text-size";
 import { useTheme } from "./lib/theme";
 
 const formulas = formulaCatalog as Formula[];
@@ -48,14 +55,20 @@ function pickByIds<T>(ids: string[], lookup: Map<string, T>): T[] {
 
 export function App() {
   const [tab, setTab] = useState<Tab>("formulas");
+  const [page, setPage] = useState<Page | null>(() => pageFromPath(window.location.pathname));
   const [subject, setSubject] = useState<Subject | null>(() => subjectFromHash(window.location.hash));
   const [query, setQuery] = useState("");
   const [topic, setTopic] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
-  const favourites = useFavourites();
-  const { theme, toggle: toggleTheme } = useTheme();
+  const { phase, account, email, remote, signIn, signUp, sendReset, saveClass, signOut, deleteAccount, finishRecovery } =
+    useAccount();
+  const favourites = useFavourites(account?.id ?? null);
+  const profile = account;
+  const { theme, preference, setPreference, toggle: toggleTheme } = useTheme();
+  const { size: textSize, setSize: setTextSize } = useTextSize();
   const subjectRef = useRef(subject);
   subjectRef.current = subject;
+  const paging = useRef(false);
 
   const syncFromHash = useRef(() => {});
   syncFromHash.current = () => {
@@ -87,8 +100,10 @@ export function App() {
     };
 
     const onNavigate = () => {
+      paging.current = false;
       canonicalize();
       syncFromHash.current();
+      setPage(pageFromPath(window.location.pathname));
     };
 
     onNavigate();
@@ -101,10 +116,24 @@ export function App() {
     };
   }, []);
 
-  const subjectFormulas = useMemo(() => (subject ? formulasFor(formulas, subject) : []), [subject]);
-  const subjectNotations = useMemo(() => (subject ? notationsFor(notations, subject) : []), [subject]);
-  const formulaSearchPool = useMemo(() => (subject ? searchPool(formulas, subject) : []), [subject]);
-  const notationSearchPool = useMemo(() => (subject ? searchPool(notations, subject) : []), [subject]);
+  const catalogFormulas = useMemo(() => (profile ? forProfile(formulas, profile) : []), [profile]);
+  const catalogNotations = useMemo(() => (profile ? forProfile(notations, profile) : []), [profile]);
+  const subjectFormulas = useMemo(
+    () => (subject ? formulasFor(catalogFormulas, subject) : []),
+    [catalogFormulas, subject],
+  );
+  const subjectNotations = useMemo(
+    () => (subject ? notationsFor(catalogNotations, subject) : []),
+    [catalogNotations, subject],
+  );
+  const formulaSearchPool = useMemo(
+    () => (subject ? searchPool(catalogFormulas, subject) : []),
+    [catalogFormulas, subject],
+  );
+  const notationSearchPool = useMemo(
+    () => (subject ? searchPool(catalogNotations, subject) : []),
+    [catalogNotations, subject],
+  );
 
   const topics = useMemo(() => topicsOf(subjectFormulas), [subjectFormulas]);
   const categories = useMemo(() => categoriesOf(subjectNotations), [subjectNotations]);
@@ -144,8 +173,120 @@ export function App() {
 
   const savedEmpty = savedFormulas.length === 0 && savedNotations.length === 0;
   const savedCatalogEmpty = favourites.formulaIds.length === 0 && favourites.notationIds.length === 0;
-  const showPicker = !subject && tab !== "saved";
-  const subjectLabel = subject === "physics" ? "Physics" : "Maths";
+  const waiting = phase.status !== "ready";
+  const showPicker = Boolean(profile?.physics) && !subject && tab !== "saved";
+  const subjectLabel = !profile || !subject ? "Maths & Physics" : subject === "physics" ? "Physics" : "Maths";
+  const eyebrow = profile ? `${profile.name} · ${subjectLabel}` : `EB · ${subjectLabel}`;
+  const shellClass = page || waiting ? "shell shell-page" : tab === "ask" && subject ? "shell shell-ask" : "shell";
+
+  useEffect(() => {
+    document.title = page ? `${PAGE_TITLE[page]} · EB Memento` : "EB Memento";
+  }, [page]);
+
+  const profileKey = profile ? `${profile.id}|${profile.year}|${profile.maths}|${profile.advanced}|${profile.physics}` : "";
+  const seenProfile = useRef(profileKey);
+  useEffect(() => {
+    if (seenProfile.current === profileKey) return;
+    const previousId = seenProfile.current.split("|")[0];
+    const nextId = profileKey.split("|")[0];
+    seenProfile.current = profileKey;
+    setTopic(null);
+    setCategory(null);
+    setQuery("");
+    if (previousId && nextId && previousId !== nextId) setTab("formulas");
+  }, [profileKey]);
+
+  useEffect(() => {
+    if (profile || page) return;
+    const hash = window.location.hash;
+    if (hash.includes("access_token") || hash.includes("type=")) return;
+    if (hash) history.replaceState(null, "", homePath());
+    if (subject !== null) {
+      setSubject(null);
+      setTab("formulas");
+    }
+  }, [page, profile, subject]);
+
+  useEffect(() => {
+    if (!profile || profile.physics || page) return;
+    if (subject === "maths" && window.location.hash === "#math") return;
+    if (window.location.hash !== "#math") {
+      history.replaceState(null, "", `${homePath()}#math`);
+    }
+    if (subject !== "maths") {
+      setSubject("maths");
+      setQuery("");
+      setTopic(null);
+      setCategory(null);
+      setTab("formulas");
+    }
+  }, [page, profile, subject]);
+
+  function openPage(next: Page) {
+    if (paging.current || next === page) return;
+    if (next === "settings" && page) {
+      if (showSettingsFromNotice() === "back") {
+        paging.current = true;
+        window.setTimeout(() => {
+          paging.current = false;
+        }, 500);
+        return;
+      }
+      setPage("settings");
+      window.scrollTo(0, 0);
+      return;
+    }
+    pushPage(next);
+    setPage(next);
+    window.scrollTo(0, 0);
+  }
+
+  function backPage() {
+    if (paging.current) return;
+    if (backOne() === "back") {
+      paging.current = true;
+      window.setTimeout(() => {
+        paging.current = false;
+      }, 500);
+      return;
+    }
+    setPage("settings");
+    window.scrollTo(0, 0);
+  }
+
+  function closePage() {
+    if (paging.current) return;
+    if (closeToApp() === "back") {
+      paging.current = true;
+      window.setTimeout(() => {
+        paging.current = false;
+      }, 500);
+      return;
+    }
+    setPage(null);
+    window.scrollTo(0, 0);
+  }
+
+  function onGear() {
+    if (!page) {
+      openPage("settings");
+      return;
+    }
+    if (page === "settings") {
+      closePage();
+      return;
+    }
+    openPage("settings");
+  }
+
+  useEffect(() => {
+    if (!page) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closePage();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [page]);
 
   function selectTab(next: Tab) {
     if (next === tab) return;
@@ -155,23 +296,67 @@ export function App() {
   const tabIndex = TABS.indexOf(tab);
 
   return (
-    <div className={tab === "ask" && subject ? "shell shell-ask" : "shell"}>
+    <div className={shellClass}>
       <header className="top">
         <div className="top-copy">
-          {subject ? (
+          {profile?.physics && subject && !page ? (
             <a className="eyebrow" href={homePath()} aria-label="All subjects">
-              EB · {subjectLabel}
+              {eyebrow}
             </a>
           ) : (
-            <p className="eyebrow">EB · Maths & Physics</p>
+            <p className="eyebrow">{eyebrow}</p>
           )}
           <h1>Memento</h1>
         </div>
-        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        <div className="top-actions">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+          <button
+            type="button"
+            className={page ? "icon-button on" : "icon-button"}
+            aria-label={page === "settings" ? "Close settings" : "Settings"}
+            aria-pressed={page === "settings"}
+            onClick={onGear}
+          >
+            <SettingsIcon />
+          </button>
+        </div>
       </header>
 
       <div className="stage">
-      {tab !== "ask" && !showPicker ? (
+      {page ? (
+        <SettingsScreen
+          page={page}
+          preference={preference}
+          onPreference={setPreference}
+          textSize={textSize}
+          onTextSize={setTextSize}
+          formulaCount={favourites.formulaIds.length}
+          notationCount={favourites.notationIds.length}
+          profile={profile}
+          email={email}
+          onSaveProfile={(next, name, username) => saveClass(name, username, next)}
+          onSignOut={() => {
+            void signOut();
+            closePage();
+          }}
+          onDeleteAccount={async () => {
+            const message = await deleteAccount();
+            if (!message) closePage();
+            return message;
+          }}
+          onClose={closePage}
+          onBack={backPage}
+          onOpen={openPage}
+        />
+      ) : phase.status === "loading" ? (
+        <p className="empty">Opening your account…</p>
+      ) : phase.status === "recovery" ? (
+        <NewPassword onSave={finishRecovery} />
+      ) : phase.status === "needs-class" ? (
+        <ClassGate email={email} ownerId={phase.userId} onSave={saveClass} />
+      ) : phase.status !== "ready" ? (
+        <SignIn remote={remote} onSignIn={signIn} onSignUp={signUp} onReset={sendReset} />
+      ) : tab !== "ask" && !showPicker ? (
         <label className="search">
           <span className="sr-only">{searchLabel}</span>
           <input
@@ -188,6 +373,8 @@ export function App() {
         </label>
       ) : null}
 
+      {page || waiting ? null : (
+      <>
       {showPicker ? <SubjectPicker /> : null}
 
       {subject && tab === "formulas" ? (
@@ -229,8 +416,9 @@ export function App() {
 
       {subject && tab === "ask" ? (
         <AskChat
-          key={subject}
+          key={`${subject}:${profile?.id ?? ""}`}
           subject={subject}
+          accountId={profile?.id ?? ""}
           formulas={formulaSearchPool}
           formulaById={formulaById}
           favourites={favourites}
@@ -300,8 +488,11 @@ export function App() {
           </>
         )
       ) : null}
+      </>
+      )}
       </div>
 
+      {page || waiting ? null : (
       <nav className="tabbar" style={{ "--tab": tabIndex } as CSSProperties} aria-label="Sections">
         <button
           type="button"
@@ -336,6 +527,7 @@ export function App() {
           Favourites
         </button>
       </nav>
+      )}
     </div>
   );
 }

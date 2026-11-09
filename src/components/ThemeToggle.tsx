@@ -13,7 +13,7 @@ export function ThemeToggle({ theme, onToggle }: Props) {
   return (
     <button
       type="button"
-      className="theme-toggle"
+      className="icon-button"
       onClick={onToggle}
       aria-label={toLight ? "Switch to light mode" : "Switch to dark mode"}
       title={toLight ? "Light mode" : "Dark mode"}

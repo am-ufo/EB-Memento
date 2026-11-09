@@ -217,6 +217,7 @@ export async function matchFormulas(
   signal?: AbortSignal,
 ): Promise<MatchAdvice | null> {
   try {
+    // What this sends is described in src/data/notices.ts (SENT). Update that file if the body changes.
     const response = await fetch("/api/match", {
       method: "POST",
       headers: { "content-type": "application/json" },

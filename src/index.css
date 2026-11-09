@@ -92,6 +92,14 @@ body::before {
   padding: 1.25rem 1rem calc(5.25rem + env(safe-area-inset-bottom));
 }
 
+.shell-page {
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+}
+
+html[data-text="large"] {
+  font-size: 115%;
+}
+
 .top {
   display: flex;
   align-items: flex-start;
@@ -104,7 +112,13 @@ body::before {
   min-width: 0;
 }
 
-.theme-toggle {
+.top-actions {
+  display: flex;
+  flex: none;
+  gap: 0.4rem;
+}
+
+.icon-button {
   flex: none;
   display: grid;
   place-items: center;
@@ -118,12 +132,13 @@ body::before {
   color: var(--muted);
 }
 
-.theme-toggle:hover {
+.icon-button:hover,
+.icon-button.on {
   border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
   color: var(--ink);
 }
 
-.theme-toggle svg {
+.icon-button svg {
   display: block;
   width: 1.15rem;
   height: 1.15rem;
@@ -792,6 +807,456 @@ a.eyebrow:focus-visible,
 .search input:focus-visible,
 .composer input:focus-visible {
   border-color: var(--accent);
+}
+
+.pages {
+  overflow-wrap: break-word;
+}
+
+.pages button {
+  font: inherit;
+}
+
+.page-bar {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr 4.5rem;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.page-bar h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.page-bar h2:focus {
+  outline: none;
+}
+
+.page-bar button {
+  padding: 0.45rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.page-bar button:last-child {
+  text-align: right;
+}
+
+.settings-label {
+  margin: 1.15rem 0 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.settings-home > .settings-label:first-child {
+  margin-top: 0;
+}
+
+.class-setup h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+.class-setup .empty {
+  margin-bottom: 0.9rem;
+}
+
+.class-form button {
+  font: inherit;
+}
+
+.class-toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+}
+
+.class-toggle span:last-child {
+  color: var(--muted);
+}
+
+.class-toggle.on span:last-child {
+  color: var(--accent);
+}
+
+.class-note {
+  margin: 0.55rem 0 0;
+}
+
+.class-save {
+  width: 100%;
+  margin-top: 0.85rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--ink);
+  border-radius: 0.9rem;
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.class-save:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.class-cancel {
+  margin-top: 0.65rem;
+}
+
+.name-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.name-field input {
+  width: 100%;
+  font: inherit;
+  font-size: 1.15rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: var(--card);
+  color: var(--ink);
+}
+
+.name-field input:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+}
+
+.secret-field {
+  position: relative;
+  display: block;
+}
+
+.secret-field input {
+  padding-right: 4.5rem;
+}
+
+.secret-field .text-button {
+  position: absolute;
+  right: 0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.form-error {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+}
+
+.sign-in-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 0.85rem;
+}
+
+.account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.account-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--card);
+  color: var(--ink);
+  text-align: left;
+  box-shadow: var(--shadow);
+  font: inherit;
+}
+
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.95rem;
+}
+
+.account-copy {
+  min-width: 0;
+}
+
+.account-name,
+.account-class {
+  display: block;
+}
+
+.account-name {
+  font-size: 1.05rem;
+}
+
+.account-class {
+  margin-top: 0.12rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.sign-in-add {
+  background: transparent;
+  color: var(--ink);
+}
+
+.signed-in {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.settings-card {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.settings-block + .settings-block {
+  border-top: 1px solid var(--line);
+}
+
+.settings-choice,
+.settings-row {
+  padding: 0.85rem 1rem;
+}
+
+.settings-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settings-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.settings-row > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.settings-name {
+  margin: 0;
+}
+
+.settings-hint,
+.settings-status {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.settings-status,
+.settings-note {
+  margin: 0.55rem 0 0;
+}
+
+.settings-copy {
+  padding: 0.9rem 1rem 1rem;
+}
+
+.settings-copy p {
+  margin: 0 0 0.65rem;
+  line-height: 1.45;
+}
+
+.settings-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.segment {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--bg);
+}
+
+.segment button {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.4rem;
+  border: 0;
+  border-radius: 0.65rem;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.segment button.on {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.text-button,
+.settings-confirm button {
+  flex: none;
+  padding: 0.2rem 0;
+  border: 0;
+  background: transparent;
+  font-size: 0.92rem;
+}
+
+.text-button,
+.settings-confirm button.danger {
+  color: var(--accent);
+}
+
+.text-button:disabled {
+  color: var(--muted);
+}
+
+.settings-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.settings-confirm button.quiet {
+  color: var(--muted);
+}
+
+.settings-link {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+}
+
+.settings-link-title,
+.settings-link-hint {
+  display: block;
+}
+
+.settings-link-hint {
+  margin-top: 0.12rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.settings-chevron {
+  color: var(--muted);
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.notice-updated {
+  margin: 0 0 0.9rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.settings-home > .notice-updated {
+  margin: 0.7rem 0 0;
+}
+
+.notice-section h3 {
+  margin: 1.15rem 0 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.notice-section p {
+  margin: 0 0 0.7rem;
+  line-height: 1.45;
+}
+
+.notice-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0 0 0.85rem;
+  padding: 0;
+  list-style: none;
+}
+
+.notice-item {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: var(--card);
+}
+
+.notice-item h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.notice-item p {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.notice-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.9rem;
+  margin-top: 0.4rem;
+}
+
+.notice-nav button {
+  padding: 0.2rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.95rem;
+}
+
+html[data-text="large"] .tabbar button {
+  font-size: 0.78rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

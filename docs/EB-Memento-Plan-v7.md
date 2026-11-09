@@ -82,7 +82,7 @@ TypeScript + Vite + React + KaTeX, content as static JSON, PWA via `vite-plugin-
 2. ~~Routing for #math & physics~~ — done
 3. ~~Deployment with Vercel~~ — done
 4. Own Custom Domain name `ebmemento.eu` (namecheap.com) - make virtual card
-5. Privacy Policy (short, human redable)
+5. ~~Privacy, cookies, terms, settings~~ — done (`src/data/notices.ts`; edit that file when storage, cookies, accounts, or Ask data change)
 6. Fast Feedback btn (resent.com) SMTP `feedback@ebmemento.eu`
 7. To think about Premium features aka AI search and Subscription (Strapi) plan
 8. PWA app to pack for Google Store

@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FAVOURITES_KEY } from "../data/notices";
+import { pullFavourites, pushFavourites } from "./cloud";
+import { clearedIds, DEVICE_CLEARED } from "./storage";
 
-const STORAGE_KEY = "memento:favourites";
+export const FAVOURITES_SYNCED = "memento-favourites-synced";
+
+const STORAGE_KEY = FAVOURITES_KEY;
 
 export type FavouritesState = {
   formulas: string[];
@@ -13,9 +18,14 @@ function isIdList(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((item) => typeof item === "string");
 }
 
-export function loadFavourites(): FavouritesState {
+export function favouritesStorageKey(accountId: string): string {
+  return `${STORAGE_KEY}:${accountId}`;
+}
+
+export function loadFavourites(accountId: string | null): FavouritesState {
+  if (!accountId) return empty;
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(favouritesStorageKey(accountId));
     if (!raw) return empty;
     const parsed: unknown = JSON.parse(raw);
     if (!parsed || typeof parsed !== "object") return empty;
@@ -29,12 +39,39 @@ export function loadFavourites(): FavouritesState {
   }
 }
 
-function saveFavourites(state: FavouritesState) {
+function saveFavourites(accountId: string, state: FavouritesState) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(favouritesStorageKey(accountId), JSON.stringify(state));
   } catch {
     // Quota or private mode — keep in-memory state.
   }
+}
+
+export function replaceFavourites(accountId: string, state: FavouritesState) {
+  saveFavourites(accountId, state);
+  window.dispatchEvent(new CustomEvent(FAVOURITES_SYNCED, { detail: accountId }));
+}
+
+export function adoptStars(fromId: string, toId: string) {
+  if (fromId === toId) return;
+  const current = loadFavourites(toId);
+  if (current.formulas.length > 0 || current.notations.length > 0) return;
+  const previous = loadFavourites(fromId);
+  if (previous.formulas.length === 0 && previous.notations.length === 0) return;
+  replaceFavourites(toId, previous);
+}
+
+export async function hydrateFavourites(accountId: string) {
+  const remote = await pullFavourites(accountId);
+  const local = loadFavourites(accountId);
+  if (remote === "offline") return;
+  if (!remote) {
+    if (local.formulas.length > 0 || local.notations.length > 0) {
+      await pushFavourites(accountId, local.formulas, local.notations);
+    }
+    return;
+  }
+  replaceFavourites(accountId, remote);
 }
 
 function toggleId(ids: string[], id: string): string[] {
@@ -42,12 +79,37 @@ function toggleId(ids: string[], id: string): string[] {
   return [id, ...ids];
 }
 
-export function useFavourites() {
-  const [state, setState] = useState(loadFavourites);
+export function useFavourites(accountId: string | null) {
+  const [state, setState] = useState(() => loadFavourites(accountId));
+
+  useEffect(() => {
+    setState(loadFavourites(accountId));
+  }, [accountId]);
+
+  useEffect(() => {
+    const onSynced = (event: Event) => {
+      if (!(event instanceof CustomEvent) || event.detail !== accountId) return;
+      setState(loadFavourites(accountId));
+    };
+    window.addEventListener(FAVOURITES_SYNCED, onSynced);
+    return () => window.removeEventListener(FAVOURITES_SYNCED, onSynced);
+  }, [accountId]);
+
+  useEffect(() => {
+    const onCleared = (event: Event) => {
+      const ids = clearedIds(event);
+      if (ids && !ids.includes("favourites")) return;
+      setState(loadFavourites(accountId));
+    };
+    window.addEventListener(DEVICE_CLEARED, onCleared);
+    return () => window.removeEventListener(DEVICE_CLEARED, onCleared);
+  }, [accountId]);
 
   const persist = (next: FavouritesState) => {
     setState(next);
-    saveFavourites(next);
+    if (!accountId) return;
+    saveFavourites(accountId, next);
+    void pushFavourites(accountId, next.formulas, next.notations);
   };
 
   return {

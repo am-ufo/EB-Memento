@@ -1,8 +1,8 @@
 # EB Memento
 
-Syllabus-exact maths formulas for European Baccalaureate students. Flick it open mid-homework, take one answer, close. Offline, no login, no backend.
+Syllabus-exact maths formulas for European Baccalaureate students. Flick it open mid-homework, take one answer, close. After the first sign-in the sheet still opens offline.
 
-Catalog: syllabus-exact formulas from the five EB programmes in `docs/eb-curriculumn/`, each tagged with a course. There is no course picker yet — search by title, topic, or course tag (e.g. `S5`, `physics`).
+Catalog: syllabus-exact formulas from the five EB programmes in `docs/eb-curriculumn/`, each tagged with a course. Sign-in picks the year and maths course, then you can still search by title, topic, or course tag (e.g. `S5`, `physics`).
 
 On the **Ask** tab, describe a problem in chat (e.g. “I know the area of a circle and need the circumference”). Memento walks through which syllabus formulas to use, in order, and what to substitute. Follow-up messages stay on the same problem until you start a new one. You still do the arithmetic. The Formulas search bar stays keyword search. Online, Ask calls a Cloudflare Pages Function (`/api/match`, Workers AI). `npm run dev` uses that same model when Wrangler is logged in (`npx wrangler login`); those local calls count as Workers AI usage. Offline, or if the model is unavailable, Ask falls back to a local suggestion. Cards always come from `formulas.json` — the model only picks IDs.
 
@@ -29,6 +29,12 @@ Build command: `npm run build`
 Output directory: `dist`
 
 Ask on the deployed site uses the on-device suggestion. The Workers AI path still runs locally with `npm run preview:cf`.
+
+## Accounts
+
+Sign-in works in the browser with no extra setup. The email and a hash of the password stay on the device, with the name, a unique username, the class, and the stars. First names can match. Usernames cannot.
+
+To use that same login on another device, copy `.env.example` to `.env` and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (the anon key only). In the Supabase SQL editor, run `supabase/schema.sql` once. Under Authentication → URL configuration, add `http://localhost:5173` and the Vercel site URL so password-reset links can return. Put the same two variables in the Vercel project. The service-role key stays out of the app.
 
 ## Layout
 

@@ -10,6 +10,7 @@ import {
 } from "../lib/ask";
 import { rankAskCandidates } from "../lib/search";
 import type { Subject } from "../lib/subject";
+import { askStorageKey } from "../lib/storage";
 import { FormulaCard } from "./FormulaCard";
 
 type Favourites = {
@@ -19,6 +20,7 @@ type Favourites = {
 
 type Props = {
   subject: Subject;
+  accountId: string;
   formulas: Formula[];
   formulaById: Map<string, Formula>;
   favourites: Favourites;
@@ -43,8 +45,8 @@ const EXAMPLES = [
 
 const MAX_STORED = 40;
 
-function storageKey(subject: Subject): string {
-  return `memento-ask:${subject}`;
+function storageKey(subject: Subject, accountId: string): string {
+  return askStorageKey(subject, accountId);
 }
 
 function pickFormulas(ids: string[], lookup: Map<string, Formula>): Formula[] {
@@ -136,10 +138,11 @@ function readMessage(value: unknown, allowed: Set<string>): Message | null {
 
 function loadThread(
   subject: Subject,
+  accountId: string,
   allowed: Set<string>,
 ): { messages: Message[]; memory: ProblemMemory | null } {
   try {
-    const raw = sessionStorage.getItem(storageKey(subject));
+    const raw = sessionStorage.getItem(storageKey(subject, accountId));
     if (!raw) return { messages: [], memory: null };
     const parsed = JSON.parse(raw) as { messages?: unknown; memory?: unknown };
     const messages = Array.isArray(parsed.messages)
@@ -157,8 +160,8 @@ function loadThread(
   }
 }
 
-export function AskChat({ subject, formulas, formulaById, favourites }: Props) {
-  const [thread] = useState(() => loadThread(subject, new Set(formulaById.keys())));
+export function AskChat({ subject, accountId, formulas, formulaById, favourites }: Props) {
+  const [thread] = useState(() => loadThread(subject, accountId, new Set(formulaById.keys())));
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<Message[]>(thread.messages);
   const [memory, setMemory] = useState<ProblemMemory | null>(thread.memory);
@@ -172,8 +175,15 @@ export function AskChat({ subject, formulas, formulaById, favourites }: Props) {
   }, [messages, pending]);
 
   useEffect(() => {
+    return () => {
+      requestRef.current += 1;
+      abortRef.current?.abort();
+    };
+  }, []);
+
+  useEffect(() => {
     try {
-      const key = storageKey(subject);
+      const key = storageKey(subject, accountId);
       if (messages.length === 0 && !memory) {
         sessionStorage.removeItem(key);
         return;
@@ -185,7 +195,7 @@ export function AskChat({ subject, formulas, formulaById, favourites }: Props) {
     } catch {
       return;
     }
-  }, [memory, messages, subject]);
+  }, [accountId, memory, messages, subject]);
 
   function clearProblem() {
     abortRef.current?.abort();
