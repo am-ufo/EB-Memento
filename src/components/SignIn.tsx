@@ -1,8 +1,10 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { findLocalEmail } from "../lib/local-auth";
 import { deviceDraftFor, type Profile } from "../lib/profile";
 import { validEmail } from "../lib/cloud";
+import { attemptPause, passwordsReady, pauseMessage } from "../lib/password";
 import { ClassForm } from "./ClassForm";
+import { PasswordChecklist, PasswordField } from "./PasswordField";
 
 type AuthFns = {
   onSignIn: (email: string, password: string) => Promise<string | null>;
@@ -10,17 +12,42 @@ type AuthFns = {
   onReset: (email: string) => Promise<string | null>;
 };
 
+const LOCAL_RESET_NOTICE = "If that email is on this device, you can set a new password. Nothing was sent.";
+
 export function SignIn({ remote, onSignIn, onSignUp, onReset }: AuthFns & { remote: boolean }) {
   const [mode, setMode] = useState<"sign-in" | "create" | "forgot">("sign-in");
+  const [resetStep, setResetStep] = useState<"email" | "warn">("email");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [confirm, setConfirm] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [tick, setTick] = useState(0);
 
   const emailOk = validEmail(email);
-  const passwordOk = password.length >= 8;
+  const creating = mode === "create";
+  const ready = creating ? passwordsReady(password, confirm, email) : password.length >= 8;
+  const paused = mode === "sign-in" && !remote && attemptPause(email) > 0;
+
+  useEffect(() => {
+    if (mode !== "sign-in" || remote) return;
+    let timer = 0;
+    const paint = () => {
+      const left = attemptPause(email);
+      if (left <= 0) {
+        setError((current) => (current.startsWith("Too many tries") ? "" : current));
+        return false;
+      }
+      setError(pauseMessage(left));
+      return true;
+    };
+    if (!paint()) return;
+    timer = window.setInterval(() => {
+      if (!paint()) window.clearInterval(timer);
+    }, 400);
+    return () => window.clearInterval(timer);
+  }, [mode, remote, email, tick]);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -31,25 +58,32 @@ export function SignIn({ remote, onSignIn, onSignUp, onReset }: AuthFns & { remo
       setError("That email does not look right.");
       return;
     }
-    if (mode !== "forgot" && !passwordOk) {
-      setError("Use at least 8 characters.");
+    if (mode === "forgot") {
+      if (remote) {
+        setBusy(true);
+        const message = await onReset(email);
+        setBusy(false);
+        if (message) setError(message);
+        else setNotice("If that email has an account, a reset link is on its way.");
+        return;
+      }
+      if (!findLocalEmail(email)) {
+        setNotice(LOCAL_RESET_NOTICE);
+        return;
+      }
+      setResetStep("warn");
+      return;
+    }
+    if (mode === "sign-in" && !remote && attemptPause(email) > 0) {
+      setError(pauseMessage(attemptPause(email)));
+      return;
+    }
+    if (!ready) {
+      setError(creating ? "Check the password rules." : "Use at least 8 characters.");
       return;
     }
     setBusy(true);
-    if (mode === "forgot") {
-      const message = await onReset(email);
-      setBusy(false);
-      if (message) setError(message);
-      else {
-        setNotice(
-          remote
-            ? "If that email has an account, a reset link is on its way."
-            : "If that email is on this device, you can set a new password. Nothing was sent.",
-        );
-      }
-      return;
-    }
-    if (mode === "create") {
+    if (creating) {
       const result = await onSignUp(email, password);
       setBusy(false);
       if (result.error) setError(result.error);
@@ -58,96 +92,146 @@ export function SignIn({ remote, onSignIn, onSignUp, onReset }: AuthFns & { remo
     }
     const message = await onSignIn(email, password);
     setBusy(false);
+    if (message) {
+      setError(message);
+      if (message.startsWith("Too many tries")) setTick((value) => value + 1);
+    }
+  }
+
+  async function confirmReset() {
+    if (busy) return;
+    setBusy(true);
+    setError("");
+    const message = await onReset(email);
+    setBusy(false);
     if (message) setError(message);
   }
 
   const title = mode === "create" ? "Create account" : mode === "forgot" ? "Reset password" : "Sign in";
+  const lead = remote
+    ? "Your email opens the same class and the same stars on another device. The sheet still opens offline after that."
+    : "Your email and password stay on this device. The sheet opens offline.";
 
   return (
-    <section className="class-setup sign-in" aria-labelledby="sign-in-title">
+    <section className="auth-card" aria-labelledby="sign-in-title">
       <h2 id="sign-in-title">{title}</h2>
-      <p className="empty">
-        {remote
-          ? "Your email opens the same class and the same stars on another device. The sheet still opens offline after that."
-          : "Your email and password stay on this device. The sheet opens offline."}
-      </p>
-      <form className="class-form" onSubmit={(event) => void submit(event)}>
-        <label className="name-field">
-          Email
-          <input
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            type="email"
-            autoComplete="email"
-            autoCapitalize="none"
-            autoCorrect="off"
-            inputMode="email"
-            required
-          />
-        </label>
-        {mode === "forgot" ? null : (
-          <label className="name-field">
-            Password
-            <span className="secret-field">
-              <input
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                type={showPassword ? "text" : "password"}
-                autoComplete={mode === "create" ? "new-password" : "current-password"}
-                minLength={8}
-                required
-              />
-              <button type="button" className="text-button" onClick={() => setShowPassword((value) => !value)}>
-                {showPassword ? "Hide" : "Show"}
-              </button>
-            </span>
-          </label>
-        )}
-        {error ? <p className="form-error">{error}</p> : null}
-        {notice ? <p className="empty">{notice}</p> : null}
-        <button
-          type="submit"
-          className="class-save"
-          disabled={busy || !emailOk || (mode !== "forgot" && !passwordOk)}
-        >
-          {busy ? "Please wait…" : mode === "create" ? "Create account" : mode === "forgot" ? (remote ? "Send reset link" : "Set a new password") : "Sign in"}
-        </button>
-      </form>
-      {mode === "sign-in" ? (
-        <div className="sign-in-links">
-          <button type="button" className="text-button" onClick={() => switchMode("create")}>
-            Create account
+      <p className="auth-lead">{lead}</p>
+      {mode === "forgot" && !remote && resetStep === "warn" ? (
+        <div className="auth-warning-block">
+          <p className="auth-warning">
+            This phone cannot email a reset link. Anyone using it can set a new password for {email}. The class and stars
+            stay.
+          </p>
+          {error ? (
+            <p className="form-error" role="alert">
+              {error}
+            </p>
+          ) : null}
+          <button type="button" className="class-save" disabled={busy} onClick={() => void confirmReset()}>
+            {busy ? "Please wait…" : "Set a new password"}
           </button>
-          <button type="button" className="text-button" onClick={() => switchMode("forgot")}>
-            Forgot password
+          <button type="button" className="text-button class-cancel" onClick={() => switchMode("sign-in")}>
+            Back to sign in
           </button>
         </div>
       ) : (
-        <button type="button" className="text-button class-cancel" onClick={() => switchMode("sign-in")}>
-          Back to sign in
-        </button>
+        <>
+          <form className="class-form" onSubmit={(event) => void submit(event)}>
+            <label className="name-field">
+              Email
+              <input
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                type="email"
+                autoComplete="email"
+                autoCapitalize="none"
+                autoCorrect="off"
+                inputMode="email"
+                spellCheck={false}
+                required
+              />
+            </label>
+            {mode === "forgot" ? null : (
+              <PasswordField
+                label="Password"
+                value={password}
+                onChange={setPassword}
+                autoComplete={creating ? "new-password" : "current-password"}
+              />
+            )}
+            {creating ? (
+              <>
+                <PasswordField
+                  label="Confirm password"
+                  value={confirm}
+                  onChange={setConfirm}
+                  autoComplete="new-password"
+                />
+                <PasswordChecklist password={password} confirm={confirm} email={email} />
+              </>
+            ) : null}
+            {error ? (
+              <p className="form-error" role="alert">
+                {error}
+              </p>
+            ) : null}
+            {notice ? <p className="auth-notice">{notice}</p> : null}
+            <button
+              type="submit"
+              className="class-save"
+              disabled={busy || !emailOk || (mode !== "forgot" && !ready) || (mode === "sign-in" && paused)}
+            >
+              {busy
+                ? "Please wait…"
+                : creating
+                  ? "Create account"
+                  : mode === "forgot"
+                    ? remote
+                      ? "Send reset link"
+                      : "Continue"
+                    : "Sign in"}
+            </button>
+          </form>
+          {mode === "sign-in" ? (
+            <div className="sign-in-links">
+              <button type="button" className="text-button" onClick={() => switchMode("create")}>
+                Create account
+              </button>
+              <button type="button" className="text-button" onClick={() => switchMode("forgot")}>
+                Forgot password
+              </button>
+            </div>
+          ) : (
+            <button type="button" className="text-button class-cancel" onClick={() => switchMode("sign-in")}>
+              Back to sign in
+            </button>
+          )}
+        </>
       )}
     </section>
   );
 
   function switchMode(next: "sign-in" | "create" | "forgot") {
     setMode(next);
+    setResetStep("email");
+    setPassword("");
+    setConfirm("");
     setError("");
     setNotice("");
   }
 }
 
-export function NewPassword({ onSave }: { onSave: (password: string) => Promise<string | null> }) {
+export function NewPassword({ email, onSave }: { email: string; onSave: (password: string) => Promise<string | null> }) {
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [confirm, setConfirm] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const ready = password.length >= 8;
+  const ready = passwordsReady(password, confirm, email);
 
   return (
-    <section className="class-setup sign-in" aria-labelledby="new-password-title">
+    <section className="auth-card" aria-labelledby="new-password-title">
       <h2 id="new-password-title">New password</h2>
-      <p className="empty">Choose a password of at least 8 characters.</p>
+      <p className="auth-lead">This replaces the password for {email || "your account"}.</p>
       <form
         className="class-form"
         onSubmit={(event) => {
@@ -161,23 +245,14 @@ export function NewPassword({ onSave }: { onSave: (password: string) => Promise<
           });
         }}
       >
-        <label className="name-field">
-          Password
-          <span className="secret-field">
-            <input
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              type={showPassword ? "text" : "password"}
-              autoComplete="new-password"
-              minLength={8}
-              required
-            />
-            <button type="button" className="text-button" onClick={() => setShowPassword((value) => !value)}>
-              {showPassword ? "Hide" : "Show"}
-            </button>
-          </span>
-        </label>
-        {error ? <p className="form-error">{error}</p> : null}
+        <PasswordField label="Password" value={password} onChange={setPassword} autoComplete="new-password" />
+        <PasswordField label="Confirm password" value={confirm} onChange={setConfirm} autoComplete="new-password" />
+        <PasswordChecklist password={password} confirm={confirm} email={email} />
+        {error ? (
+          <p className="form-error" role="alert">
+            {error}
+          </p>
+        ) : null}
         <button type="submit" className="class-save" disabled={!ready || busy}>
           {busy ? "Please wait…" : "Save password"}
         </button>
@@ -200,13 +275,17 @@ export function ClassGate({
   const [error, setError] = useState("");
 
   return (
-    <section className="class-setup sign-in" aria-labelledby="class-gate-title">
+    <section className="auth-card" aria-labelledby="class-gate-title">
       <h2 id="class-gate-title">Your class</h2>
-      <p className="empty">
+      <p className="auth-lead">
         {email ? `Signed in as ${email}. ` : ""}
         This chooses the sheet. You can change it later in Settings.
       </p>
-      {error ? <p className="form-error">{error}</p> : null}
+      {error ? (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
+      ) : null}
       <ClassForm
         initial={local?.profile ?? draft}
         initialName={local?.name || draft?.name || ""}

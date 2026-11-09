@@ -6,11 +6,15 @@ function storedUsername(value: string): string {
   return /^[A-Za-z][A-Za-z0-9_]{2,15}$/.test(username) ? username : "";
 }
 
+const LEGACY_ITERATIONS = 100_000;
+const PASSWORD_ITERATIONS = 600_000;
+
 export type LocalAccount = {
   id: string;
   email: string;
   salt: string;
   hash: string;
+  iterations: number;
   name: string;
   username: string;
   profile: Profile | null;
@@ -64,10 +68,18 @@ function readAccount(value: unknown): LocalAccount | null {
     email: row.email,
     salt: row.salt,
     hash: row.hash,
+    iterations: readIterations(row.iterations),
     name: typeof row.name === "string" ? row.name : "",
     username: typeof row.username === "string" ? storedUsername(row.username) : "",
     profile: readProfile(row.profile),
   };
+}
+
+function readIterations(value: unknown): number {
+  if (typeof value !== "number" || !Number.isFinite(value)) return LEGACY_ITERATIONS;
+  const count = Math.floor(value);
+  if (count < LEGACY_ITERATIONS || count > 2_000_000) return LEGACY_ITERATIONS;
+  return count;
 }
 
 function readProfile(value: unknown): Profile | null {
@@ -95,14 +107,25 @@ function bytesFromHex(hexText: string): Uint8Array<ArrayBuffer> {
   return bytes;
 }
 
-async function passwordHash(password: string, salt: string): Promise<string> {
+async function passwordHash(password: string, salt: string, iterations: number): Promise<string> {
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
   const bits = await crypto.subtle.deriveBits(
-    { name: "PBKDF2", salt: bytesFromHex(salt), iterations: 100_000, hash: "SHA-256" },
+    { name: "PBKDF2", salt: bytesFromHex(salt), iterations, hash: "SHA-256" },
     key,
     256,
   );
   return hex(new Uint8Array(bits));
+}
+
+function hashesMatch(left: string, right: string): boolean {
+  const length = Math.max(left.length, right.length);
+  let diff = left.length ^ right.length;
+  for (let index = 0; index < length; index += 1) {
+    const leftCode = index < left.length ? left.charCodeAt(index) : 0;
+    const rightCode = index < right.length ? right.charCodeAt(index) : 0;
+    diff |= leftCode ^ rightCode;
+  }
+  return diff === 0;
 }
 
 export function isStoredAccount(id: string): boolean {
@@ -131,7 +154,8 @@ export async function registerLocal(email: string, password: string): Promise<{ 
     id: crypto.randomUUID(),
     email: clean,
     salt,
-    hash: await passwordHash(password, salt),
+    hash: await passwordHash(password, salt, PASSWORD_ITERATIONS),
+    iterations: PASSWORD_ITERATIONS,
     name: "",
     username: "",
     profile: null,
@@ -147,11 +171,25 @@ export async function matchLocal(email: string, password: string): Promise<Local
   const store = readStore();
   const account = store.accounts.find((item) => item.email === clean);
   const salt = account?.salt ?? hex(crypto.getRandomValues(new Uint8Array(16)));
-  const hash = await passwordHash(password, salt);
-  if (!account || hash !== account.hash) return "wrong";
+  const iterations = account?.iterations ?? PASSWORD_ITERATIONS;
+  const hash = await passwordHash(password, salt, iterations);
+  if (!account || !hashesMatch(hash, account.hash)) return "wrong";
+  if (account.iterations < PASSWORD_ITERATIONS) {
+    account.salt = hex(crypto.getRandomValues(new Uint8Array(16)));
+    account.iterations = PASSWORD_ITERATIONS;
+    account.hash = await passwordHash(password, account.salt, PASSWORD_ITERATIONS);
+  }
   store.activeId = account.id;
   writeStore(store);
   return account;
+}
+
+export async function verifyLocalPassword(email: string, password: string): Promise<boolean> {
+  const clean = normalEmail(email);
+  const account = readStore().accounts.find((item) => item.email === clean);
+  if (!account) return false;
+  const hash = await passwordHash(password, account.salt, account.iterations);
+  return hashesMatch(hash, account.hash);
 }
 
 export async function setLocalPassword(id: string, password: string): Promise<LocalAccount | null> {
@@ -159,7 +197,8 @@ export async function setLocalPassword(id: string, password: string): Promise<Lo
   const account = store.accounts.find((item) => item.id === id);
   if (!account) return null;
   account.salt = hex(crypto.getRandomValues(new Uint8Array(16)));
-  account.hash = await passwordHash(password, account.salt);
+  account.iterations = PASSWORD_ITERATIONS;
+  account.hash = await passwordHash(password, account.salt, PASSWORD_ITERATIONS);
   store.activeId = account.id;
   writeStore(store);
   return account;

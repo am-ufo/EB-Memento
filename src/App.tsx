@@ -60,8 +60,20 @@ export function App() {
   const [query, setQuery] = useState("");
   const [topic, setTopic] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
-  const { phase, account, email, remote, signIn, signUp, sendReset, saveClass, signOut, deleteAccount, finishRecovery } =
-    useAccount();
+  const {
+    phase,
+    account,
+    email,
+    remote,
+    signIn,
+    signUp,
+    sendReset,
+    saveClass,
+    signOut,
+    changePassword,
+    deleteAccount,
+    finishRecovery,
+  } = useAccount();
   const favourites = useFavourites(account?.id ?? null);
   const profile = account;
   const { theme, preference, setPreference, toggle: toggleTheme } = useTheme();
@@ -342,8 +354,9 @@ export function App() {
             void signOut();
             closePage();
           }}
-          onDeleteAccount={async () => {
-            const message = await deleteAccount();
+          onChangePassword={changePassword}
+          onDeleteAccount={async (password) => {
+            const message = await deleteAccount(password);
             if (!message) closePage();
             return message;
           }}
@@ -354,7 +367,7 @@ export function App() {
       ) : phase.status === "loading" ? (
         <p className="empty">Opening your account…</p>
       ) : phase.status === "recovery" ? (
-        <NewPassword onSave={finishRecovery} />
+        <NewPassword email={email} onSave={finishRecovery} />
       ) : phase.status === "needs-class" ? (
         <ClassGate email={email} ownerId={phase.userId} onSave={saveClass} />
       ) : phase.status !== "ready" ? (

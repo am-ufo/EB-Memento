@@ -5,8 +5,10 @@ import { coversNote, initials, profileLabel, type Account, type Profile } from "
 import { clearDevice, hasAskThread, hasDeviceData } from "../lib/storage";
 import type { TextSize } from "../lib/text-size";
 import type { ThemePreference } from "../lib/theme";
+import { passwordsReady } from "../lib/password";
 import { ClassForm } from "./ClassForm";
 import { NoticeBody } from "./NoticeBody";
+import { PasswordChecklist, PasswordField } from "./PasswordField";
 
 type Props = {
   page: Page;
@@ -20,7 +22,8 @@ type Props = {
   email: string;
   onSaveProfile: (profile: Profile, name: string, username: string) => Promise<string | null>;
   onSignOut: () => void;
-  onDeleteAccount: () => Promise<string | null>;
+  onChangePassword: (current: string, next: string) => Promise<string | null>;
+  onDeleteAccount: (password: string) => Promise<string | null>;
   onClose: () => void;
   onBack: () => void;
   onOpen: (page: Page) => void;
@@ -51,6 +54,7 @@ export function SettingsScreen({
   email,
   onSaveProfile,
   onSignOut,
+  onChangePassword,
   onDeleteAccount,
   onClose,
   onBack,
@@ -91,6 +95,7 @@ export function SettingsScreen({
           email={email}
           onSaveProfile={onSaveProfile}
           onSignOut={onSignOut}
+          onChangePassword={onChangePassword}
           onDeleteAccount={onDeleteAccount}
           onOpen={onOpen}
         />
@@ -112,11 +117,21 @@ function SettingsHome({
   email,
   onSaveProfile,
   onSignOut,
+  onChangePassword,
   onDeleteAccount,
   onOpen,
 }: Omit<Props, "page" | "onClose" | "onBack">) {
   const [pending, setPending] = useState<PendingClear | null>(null);
   const [editingClass, setEditingClass] = useState(false);
+  const [editingPassword, setEditingPassword] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [nextPassword, setNextPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordBusy, setPasswordBusy] = useState(false);
+  const [deletePassword, setDeletePassword] = useState("");
+  const [deleteError, setDeleteError] = useState("");
+  const [deleteBusy, setDeleteBusy] = useState(false);
   const [status, setStatus] = useState("");
   const [, setRevision] = useState(0);
   const askOpen = hasAskThread(profile?.id ?? null);
@@ -163,6 +178,7 @@ function SettingsHome({
                 onClick={() => {
                   setStatus("");
                   setPending(null);
+                  setEditingPassword(false);
                   setEditingClass(true);
                 }}
               >
@@ -173,23 +189,127 @@ function SettingsHome({
           <div className="settings-block">
             <div className="settings-row">
               <div>
+                <p className="settings-name">Password</p>
+                <p className="settings-hint">Change the password for this email.</p>
+              </div>
+              {editingPassword ? null : (
+                <button
+                  type="button"
+                  className="text-button"
+                  onClick={() => {
+                    setStatus("");
+                    setPending(null);
+                    setPasswordError("");
+                    setCurrentPassword("");
+                    setNextPassword("");
+                    setConfirmPassword("");
+                    setEditingPassword(true);
+                  }}
+                >
+                  Change
+                </button>
+              )}
+            </div>
+            {editingPassword ? (
+              <form
+                className="settings-password"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  if (passwordBusy || !currentPassword || !passwordsReady(nextPassword, confirmPassword, email)) return;
+                  setPasswordBusy(true);
+                  setPasswordError("");
+                  void onChangePassword(currentPassword, nextPassword).then((message) => {
+                    setPasswordBusy(false);
+                    if (message) {
+                      setPasswordError(message);
+                      return;
+                    }
+                    setEditingPassword(false);
+                    setCurrentPassword("");
+                    setNextPassword("");
+                    setConfirmPassword("");
+                    setStatus("Password saved.");
+                  });
+                }}
+              >
+                <PasswordField
+                  label="Current password"
+                  value={currentPassword}
+                  onChange={setCurrentPassword}
+                  autoComplete="current-password"
+                />
+                <PasswordField
+                  label="New password"
+                  value={nextPassword}
+                  onChange={setNextPassword}
+                  autoComplete="new-password"
+                />
+                <PasswordField
+                  label="Confirm password"
+                  value={confirmPassword}
+                  onChange={setConfirmPassword}
+                  autoComplete="new-password"
+                />
+                <PasswordChecklist password={nextPassword} confirm={confirmPassword} email={email} />
+                {passwordError ? (
+                  <p className="form-error" role="alert">
+                    {passwordError}
+                  </p>
+                ) : null}
+                <button
+                  type="submit"
+                  className="class-save"
+                  disabled={passwordBusy || !currentPassword || !passwordsReady(nextPassword, confirmPassword, email)}
+                >
+                  {passwordBusy ? "Please wait…" : "Save password"}
+                </button>
+                <button
+                  type="button"
+                  className="text-button class-cancel"
+                  onClick={() => {
+                    setEditingPassword(false);
+                    setPasswordError("");
+                  }}
+                >
+                  Keep this password
+                </button>
+              </form>
+            ) : null}
+          </div>
+          <div className="settings-block">
+            <div className="settings-row">
+              <div>
                 <p className="settings-name">Delete account</p>
                 <p className="settings-hint">Deletes the email, the class, and the stars. This cannot be undone.</p>
                 {pending === "person" ? (
                   <Confirm
-                    prompt={`Delete ${profile.name || "this account"}${email ? ` (${email})` : ""}?`}
+                    prompt={`Delete ${profile.name || "this account"}${email ? ` (${email})` : ""}? Enter your password.`}
                     confirmLabel="Delete account"
+                    password={deletePassword}
+                    onPassword={(value) => {
+                      setDeletePassword(value);
+                      setDeleteError("");
+                    }}
+                    error={deleteError}
+                    busy={deleteBusy}
                     onConfirm={() => {
-                      void onDeleteAccount().then((message) => {
+                      if (deleteBusy || !deletePassword) return;
+                      setDeleteBusy(true);
+                      setDeleteError("");
+                      void onDeleteAccount(deletePassword).then((message) => {
+                        setDeleteBusy(false);
                         if (message) {
-                          setPending(null);
-                          setStatus(message);
+                          setDeleteError(message);
                           return;
                         }
                         finish("Account deleted.");
                       });
                     }}
-                    onCancel={() => setPending(null)}
+                    onCancel={() => {
+                      setPending(null);
+                      setDeleteError("");
+                      setDeletePassword("");
+                    }}
                   />
                 ) : null}
               </div>
@@ -199,6 +319,9 @@ function SettingsHome({
                   className="text-button"
                   onClick={() => {
                     setStatus("");
+                    setEditingPassword(false);
+                    setDeletePassword("");
+                    setDeleteError("");
                     setPending("person");
                   }}
                 >
@@ -432,23 +555,41 @@ function Choice<T extends string>({
 function Confirm({
   prompt,
   confirmLabel,
+  password,
+  onPassword,
+  error,
+  busy = false,
   onConfirm,
   onCancel,
 }: {
   prompt: string;
   confirmLabel: string;
+  password?: string;
+  onPassword?: (value: string) => void;
+  error?: string;
+  busy?: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }) {
   return (
-    <div className="settings-confirm">
+    <div className={onPassword ? "settings-confirm has-secret" : "settings-confirm"}>
       <span>{prompt}</span>
-      <button type="button" className="danger" onClick={onConfirm}>
-        {confirmLabel}
-      </button>
-      <button type="button" className="quiet" onClick={onCancel}>
-        Keep
-      </button>
+      {onPassword ? (
+        <PasswordField label="Password" value={password ?? ""} onChange={onPassword} autoComplete="current-password" />
+      ) : null}
+      {error ? (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
+      ) : null}
+      <span className="settings-confirm-actions">
+        <button type="button" className="danger" disabled={busy || (onPassword ? !password : false)} onClick={onConfirm}>
+          {busy ? "Please wait…" : confirmLabel}
+        </button>
+        <button type="button" className="quiet" onClick={onCancel}>
+          Keep
+        </button>
+      </span>
     </div>
   );
 }

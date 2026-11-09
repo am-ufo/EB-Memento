@@ -33,6 +33,7 @@ export const THEME_KEY = "memento:theme";
 export const TEXT_KEY = "memento:text";
 export const PROFILE_KEY = "memento:profile";
 export const ACCOUNTS_KEY = "memento:accounts";
+export const AUTH_ATTEMPTS_KEY = "memento:auth-attempts";
 export const FAVOURITES_KEY = "memento:favourites";
 
 /** One Ask thread per subject. Add a key here when a new subject stores a thread. */
@@ -74,6 +75,14 @@ export const DEVICE = [
     name: "Sign-in",
     holds: "Your email, a hash of the password, your name, your username, your class, and who is signed in. The password itself is not kept. A connected copy also keeps a Supabase session.",
     lasts: "Stays until you delete the account or clear data in Settings. Sign out leaves the account on this device.",
+  },
+  {
+    id: "auth-attempts",
+    keys: [AUTH_ATTEMPTS_KEY],
+    area: "session",
+    name: "Sign-in tries",
+    holds: "How many wrong passwords were tried for an email in this tab, so sign-in can pause. The password is not saved.",
+    lasts: "Stays until the pause ends, you close the tab, or you clear data in Settings.",
   },
   {
     id: "favourites",
@@ -138,7 +147,7 @@ export const SENT: readonly SentRecord[] = [
   {
     id: "account",
     name: "Account",
-    when: "You create an account, sign in, reset a password, change your class, star something, or delete the account.",
+    when: "You create an account, sign in, reset a password, change your password, change your class, star something, or delete the account.",
     sends:
       "Your email and a hash of the password stay on this device, with your name, your username, year, maths course, Advanced, physics, and the ids you star. The username is unique. The first name can be the same as someone else's. When this copy is connected to Supabase, that same information is saved there. Ask questions are not attached to the email or the username.",
     kept: "The account stays until you delete it in Settings or clear data on this device. On a connected copy, Supabase keeps it until Delete account. The password is stored as a hash.",
@@ -166,7 +175,7 @@ export type OptionalNotice = { exists: false } | { exists: true; summary: string
 export const ACCOUNT: OptionalNotice = {
   exists: true,
   summary:
-    "You sign in with an email and a password. On this device the account holds your email, a hash of the password, your name, your username, your class, and your stars, so the sheet opens offline. The username is unique, so it can be used later to find a friend or someone from your school. The first name can be shared. Memento does not see the password. When this copy is connected to Supabase, the same account is saved there and opens on another device. Sign out leaves the account in place. Delete account removes it.",
+    "You sign in with an email and a password. On this device the account holds your email, a hash of the password, your name, your username, your class, and your stars, so the sheet opens offline. The username is unique, so it can be used later to find a friend or someone from your school. The first name can be shared. Memento does not see the password. A run of wrong passwords pauses sign-in on this device for this tab only. When this copy is connected to Supabase, the same account is saved there and opens on another device. Sign out leaves the account in place. Delete account removes it.",
 };
 export const PAYMENT: OptionalNotice = { exists: false };
 export const CONTACT: OptionalNotice = { exists: false };
@@ -289,7 +298,7 @@ export function termsBlocks(): readonly NoticeBlock[] {
     {
       heading: "Sign-in",
       paragraphs: [
-        "You sign in with an email and a password. The account stores your first name, a unique username, year, maths course, and whether physics is on, so the sheet shows that syllabus. Stars stay with that email. The account lives on this device, and on a connected copy it is also saved so the same login opens on another device. After sign-in the sheet still opens with no connection. Delete account removes the email, the username, the class, and the stars.",
+        "You sign in with an email and a password. The account stores your first name, a unique username, year, maths course, and whether physics is on, so the sheet shows that syllabus. Stars stay with that email. The account lives on this device, and on a connected copy it is also saved so the same login opens on another device. After sign-in the sheet still opens with no connection. A run of wrong passwords pauses sign-in on this device for this tab only. Delete account removes the email, the username, the class, and the stars.",
       ],
     },
     {

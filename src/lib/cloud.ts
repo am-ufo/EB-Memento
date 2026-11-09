@@ -151,11 +151,24 @@ export async function sendPasswordReset(email: string): Promise<string | null> {
   return error ? plainAuthError(error.message) : null;
 }
 
+export async function confirmPassword(email: string, password: string): Promise<string | null> {
+  const supabase = getSupabase();
+  if (!supabase) return "Email accounts are not connected on this copy.";
+  const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+  if (!error) return null;
+  const text = error.message.toLowerCase();
+  if (text.includes("invalid login") || text.includes("invalid credentials")) return "Current password is wrong.";
+  return plainAuthError(error.message);
+}
+
 export async function updatePassword(password: string): Promise<string | null> {
   const supabase = getSupabase();
   if (!supabase) return "Email accounts are not connected on this copy.";
   const { error } = await supabase.auth.updateUser({ password });
-  return error ? plainAuthError(error.message) : null;
+  if (!error) return null;
+  const text = error.message.toLowerCase();
+  if (text.includes("different") || text.includes("same")) return "Choose a different password.";
+  return plainAuthError(error.message);
 }
 
 export async function deleteRemoteAccount(): Promise<string | null> {

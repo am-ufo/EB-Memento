@@ -6,6 +6,7 @@ import {
   fetchProfile,
   saveProfile,
   sendPasswordReset,
+  confirmPassword,
   signInWithEmail,
   signOutRemote,
   signUpWithEmail,
@@ -32,8 +33,10 @@ import {
   saveLocalClass,
   setLocalPassword,
   signOutLocal,
+  verifyLocalPassword,
   type LocalAccount,
 } from "./local-auth";
+import { attemptPause, clearAttempts, noteFailedAttempt, passwordIssue, pauseMessage } from "./password";
 import { clearedIds, DEVICE_CLEARED } from "./storage";
 
 export type AuthPhase =
@@ -158,9 +161,28 @@ export function useAccount() {
     setPhase({ status: "signed-out" });
   }
 
-  async function deleteAccount(): Promise<string | null> {
-    if (!account) return "Sign in first.";
+  async function changePassword(current: string, next: string): Promise<string | null> {
+    if (phase.status !== "ready") return "Sign in first.";
+    const issue = passwordIssue(next, email);
+    if (issue) return issue;
+    if (next === current) return "Choose a different password.";
     if (!accountsConfigured()) {
+      const ok = await verifyLocalPassword(email, current);
+      if (!ok) return "Current password is wrong.";
+      const saved = await setLocalPassword(phase.account.id, next);
+      return saved ? null : "That did not work. Try again.";
+    }
+    const confirmed = await confirmPassword(email, current);
+    if (confirmed) return confirmed;
+    return updatePassword(next);
+  }
+
+  async function deleteAccount(password: string): Promise<string | null> {
+    if (!account) return "Sign in first.";
+    if (!password) return "Enter your password.";
+    if (!accountsConfigured()) {
+      const ok = await verifyLocalPassword(email, password);
+      if (!ok) return "Current password is wrong.";
       deleteLocal(account.id);
       try {
         localStorage.removeItem(favouritesStorageKey(account.id));
@@ -171,6 +193,8 @@ export function useAccount() {
       setPhase({ status: "signed-out" });
       return null;
     }
+    const confirmed = await confirmPassword(email, password);
+    if (confirmed) return confirmed;
     const error = await deleteRemoteAccount();
     if (error) return error;
     try {
@@ -184,9 +208,10 @@ export function useAccount() {
   }
 
   async function finishRecovery(password: string): Promise<string | null> {
+    const issue = passwordIssue(password, "email" in phase ? phase.email : "");
+    if (issue) return issue;
     if (!accountsConfigured()) {
       if (phase.status !== "recovery") return null;
-      if (password.length < 8) return "Use at least 8 characters.";
       const saved = await setLocalPassword(phase.userId, password);
       if (!saved) return "That did not work. Try again.";
       setPhase(phaseFor(saved));
@@ -208,16 +233,23 @@ export function useAccount() {
 
   async function signIn(emailAddress: string, password: string): Promise<string | null> {
     if (accountsConfigured()) return signInWithEmail(emailAddress, password);
+    const wait = attemptPause(emailAddress);
+    if (wait > 0) return pauseMessage(wait);
     if (password.length < 8) return "Use at least 8 characters.";
     const match = await matchLocal(emailAddress, password);
-    if (match === "wrong") return "That email or password is wrong.";
+    if (match === "wrong") {
+      const again = noteFailedAttempt(emailAddress);
+      return again > 0 ? pauseMessage(again) : "That email or password is wrong.";
+    }
+    clearAttempts(emailAddress);
     setPhase(phaseFor(match));
     return null;
   }
 
   async function signUp(emailAddress: string, password: string): Promise<{ error: string | null; confirm: boolean }> {
+    const issue = passwordIssue(password, emailAddress);
+    if (issue) return { error: issue, confirm: false };
     if (accountsConfigured()) return signUpWithEmail(emailAddress, password);
-    if (password.length < 8) return { error: "Use at least 8 characters.", confirm: false };
     const result = await registerLocal(emailAddress, password);
     if (result.error || !result.account) return { error: result.error ?? "That did not work. Try again.", confirm: false };
     setPhase({ status: "needs-class", userId: result.account.id, email: result.account.email });
@@ -241,6 +273,7 @@ export function useAccount() {
     sendReset,
     saveClass,
     signOut,
+    changePassword,
     deleteAccount,
     finishRecovery,
   };

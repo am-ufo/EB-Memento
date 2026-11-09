@@ -997,14 +997,64 @@ a.eyebrow:focus-visible,
   margin-top: 0;
 }
 
-.class-setup h2 {
-  margin: 0 0 0.35rem;
-  font-size: 1.15rem;
-  font-weight: 400;
+.auth-card {
+  margin-top: 0.35rem;
+  padding: 1.2rem 1.05rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 1.15rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
 }
 
-.class-setup .empty {
-  margin-bottom: 0.9rem;
+.auth-card h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.65rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.auth-lead,
+.auth-notice {
+  margin: 0 0 1.05rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.auth-notice {
+  margin-bottom: 0.85rem;
+}
+
+.auth-warning {
+  margin: 0 0 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, var(--accent) 12%, var(--card));
+  line-height: 1.45;
+}
+
+.auth-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  margin: 0 0 0.9rem;
+  padding: 0;
+  list-style: none;
+}
+
+.auth-checklist li {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.auth-checklist li.met {
+  color: var(--ink);
+}
+
+.auth-checklist li span[aria-hidden="true"] {
+  display: inline-block;
+  width: 1.1rem;
 }
 
 .class-form button {
@@ -1121,8 +1171,30 @@ a.eyebrow:focus-visible,
 .sign-in-links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 0.75rem 1.25rem;
-  margin-top: 0.85rem;
+  margin-top: 0.95rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+
+.settings-password {
+  padding: 0 1rem 1rem;
+}
+
+.settings-password .class-save {
+  margin-top: 0.35rem;
+}
+
+.settings-confirm.has-secret {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.settings-confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
 }
 
 .account-list {
@@ -1310,7 +1382,8 @@ a.eyebrow:focus-visible,
   margin-top: 0.4rem;
 }
 
-.settings-confirm button.quiet {
+.settings-confirm button.quiet,
+.settings-confirm button:disabled {
   color: var(--muted);
 }
 
