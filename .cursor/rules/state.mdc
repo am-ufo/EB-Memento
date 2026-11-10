@@ -1,0 +1,17 @@
+---
+description: When to propose Zustand instead of the current React state hooks
+alwaysApply: true
+---
+
+# State
+
+Keep the current setup. Screen state stays in `useState` in `App`. Lasting data stays in `useAccount`, `useFavourites`, `useCardNotes`, `useRecent`, `useTheme`, and `useTextSize`, with `localStorage` or `sessionStorage` and the existing Supabase sync. Do not add Zustand, Context, or another store as part of an unrelated change.
+
+Propose Zustand when either of these is true in the work at hand:
+
+- Several distant screens need the same slice, and passing it down from `App` is getting in the way.
+- `App` re-renders are a real bottleneck because unrelated subtrees all update from that one parent.
+
+Say which hooks the store would replace, and wait for a yes before adding the dependency. Account-scoped storage keys, Supabase sync, and the device-clear reload stay custom either way.
+
+`AskChat` calls `useCardNotes` while `App` already owns that hook and passes favourites down as props. If that overlap is the problem, propose passing notes the same way before proposing a store.
