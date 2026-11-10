@@ -105,18 +105,24 @@ function haystack(formula: Formula): string {
     formula.useWhen,
     ...formula.variables.map((variable) => variable.meaning),
   ];
-  return fold(parts.join(" "));
+  const equation = formulaWords(
+    [formula.katex, ...formula.variables.map((variable) => variable.symbol), ...formula.aliases].join(" "),
+  );
+  return `${fold(parts.join(" "))} ${equation}`;
 }
 
 function formulaWords(value: string): string {
   const spelled = value
+    .replace(/π/g, "\\pi")
+    .replace(/²/g, "^{2}")
+    .replace(/³/g, "^{3}")
     .replace(/\^\{2\}/g, " squared ")
     .replace(/\^2(?![0-9])/g, " squared ")
     .replace(/\^\{3\}/g, " cubed ")
     .replace(/\^3(?![0-9])/g, " cubed ")
     .replace(/\\([a-zA-Z]+)/g, " $1 ")
-    .replace(/[{}_^\\]/g, " ");
-  return fold(spelled);
+    .replace(/[=+*/()[\]{}|,;:×·−–—_^\\-]/g, " ");
+  return fold(spelled).replace(/\s+/g, " ").trim();
 }
 
 function wordSet(value: string): Set<string> {
@@ -150,17 +156,24 @@ function scoreFormula(formula: Formula, tokens: string[]): number {
   return score;
 }
 
-export function searchFormulas(formulas: Formula[], query: string): Formula[] {
-  const q = fold(query.trim());
+export function searchFormulas(
+  formulas: Formula[],
+  query: string,
+  notes?: Readonly<Record<string, string>>,
+): Formula[] {
+  const raw = query.trim();
+  const q = formulaWords(raw);
   if (!q) return formulas;
 
   const tokens = q.split(/\s+/).filter(Boolean);
 
   return formulas
     .map((formula) => {
-      const text = haystack(formula);
-      const titleHit = fold(formula.title).includes(q);
-      const allTokens = tokens.every((token) => text.includes(token));
+      const note = notes?.[formula.id] ? fold(notes[formula.id]) : "";
+      const text = note ? `${haystack(formula)} ${note}` : haystack(formula);
+      const title = fold(formula.title);
+      const titleHit = title.includes(fold(raw)) || title.includes(q);
+      const allTokens = tokens.every((token) => fieldHas(text, token));
       if (!allTokens) return null;
       return { formula, rank: titleHit ? 0 : 1 };
     })

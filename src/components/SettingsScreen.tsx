@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { SITE, cookieSettingsHint, updatedLine } from "../data/notices";
+import { FEEDBACK_EMAIL, SITE, cookieSettingsHint, updatedLine } from "../data/notices";
 import { PAGE_HEADING, type Page } from "../lib/pages";
 import { coversNote, initials, profileLabel, type Account, type Profile } from "../lib/profile";
+import { cardNoteCount } from "../lib/card-notes";
+import { pushCardNotes } from "../lib/cloud";
+import { loadRecent } from "../lib/recent";
 import { clearDevice, hasAskThread, hasDeviceData } from "../lib/storage";
 import type { TextSize } from "../lib/text-size";
 import type { ThemePreference } from "../lib/theme";
@@ -29,7 +32,7 @@ type Props = {
   onOpen: (page: Page) => void;
 };
 
-type PendingClear = "favourites" | "ask" | "all" | "person";
+type PendingClear = "favourites" | "notes" | "recent" | "ask" | "all" | "person";
 
 const THEMES: { id: ThemePreference; label: string }[] = [
   { id: "system", label: "System" },
@@ -137,7 +140,9 @@ function SettingsHome({
   const askOpen = hasAskThread(profile?.id ?? null);
   const stored = hasDeviceData();
   const starred = formulaCount + notationCount;
-  const nothing = starred === 0 && !askOpen && !stored;
+  const noteCount = cardNoteCount(profile?.id ?? null);
+  const recentCount = loadRecent(profile?.id ?? null).length;
+  const nothing = starred === 0 && recentCount === 0 && !askOpen && !stored;
   const installed = useInstalled();
 
   function finish(next: string) {
@@ -170,7 +175,10 @@ function SettingsHome({
             <div className="settings-row">
               <div>
                 <p className="settings-name">{profileLabel(profile)}</p>
-                <p className="settings-hint">{coversNote(profile) ?? "The sheet for this sign-in."}</p>
+                <p className="settings-hint">
+                  {coversNote(profile) ??
+                    "Marks formulas from this class. The sheet still shows every formula in the subject."}
+                </p>
               </div>
               <button
                 type="button"
@@ -280,7 +288,9 @@ function SettingsHome({
             <div className="settings-row">
               <div>
                 <p className="settings-name">Delete account</p>
-                <p className="settings-hint">Deletes the email, the class, and the stars. This cannot be undone.</p>
+                <p className="settings-hint">
+                  Deletes the email, the class, the stars, and the formula notes. This cannot be undone.
+                </p>
                 {pending === "person" ? (
                   <Confirm
                     prompt={`Delete ${profile.name || "this account"}${email ? ` (${email})` : ""}? Enter your password.`}
@@ -408,6 +418,75 @@ function SettingsHome({
         <div className="settings-block">
           <div className="settings-row">
             <div>
+              <p className="settings-name">Notes</p>
+              <p className="settings-hint">
+                {noteCount === 0 ? "None yet." : `${noteCount} formula note${noteCount === 1 ? "" : "s"}`}
+              </p>
+              {pending === "notes" ? (
+                <Confirm
+                  prompt="Remove the notes on your formulas?"
+                  confirmLabel="Remove"
+                  onConfirm={() => {
+                    clearDevice(["card-notes"]);
+                    if (profile) void pushCardNotes(profile.id, {});
+                    finish("Notes cleared.");
+                  }}
+                  onCancel={() => setPending(null)}
+                />
+              ) : null}
+            </div>
+            {pending === "notes" ? null : (
+              <button
+                type="button"
+                className="text-button"
+                disabled={noteCount === 0}
+                onClick={() => {
+                  setStatus("");
+                  setPending("notes");
+                }}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="settings-block">
+          <div className="settings-row">
+            <div>
+              <p className="settings-name">Recent</p>
+              <p className="settings-hint">
+                {recentCount === 0 ? "None yet." : `${recentCount} formula${recentCount === 1 ? "" : "s"}`}
+              </p>
+              {pending === "recent" ? (
+                <Confirm
+                  prompt="Forget the formulas you opened?"
+                  confirmLabel="Forget"
+                  onConfirm={() => {
+                    clearDevice(["recent"]);
+                    finish("Recent formulas cleared.");
+                  }}
+                  onCancel={() => setPending(null)}
+                />
+              ) : null}
+            </div>
+            {pending === "recent" ? null : (
+              <button
+                type="button"
+                className="text-button"
+                disabled={recentCount === 0}
+                onClick={() => {
+                  setStatus("");
+                  setPending("recent");
+                }}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="settings-block">
+          <div className="settings-row">
+            <div>
               <p className="settings-name">Ask</p>
               <p className="settings-hint">
                 {askOpen ? "A problem is open in this tab." : "Nothing open in this tab."}
@@ -444,7 +523,7 @@ function SettingsHome({
             <div>
               <p className="settings-name">Everything</p>
               <p className="settings-hint">
-                {nothing ? "Nothing stored yet." : "Sign-in on this device, theme, text size, stars, and Ask."}
+                {nothing ? "Nothing stored yet." : "Sign-in on this device, theme, text size, stars, recent formulas, notes, and Ask."}
               </p>
               {pending === "all" ? (
                 <Confirm
@@ -497,6 +576,15 @@ function SettingsHome({
           <p>Made by {SITE.makers}. Not an official European Schools app.</p>
           <p className="settings-hint">Version {SITE.version}</p>
         </div>
+        <a className="settings-link feedback-link" href={`mailto:${FEEDBACK_EMAIL}?subject=EB%20Memento`}>
+          <span>
+            <span className="settings-link-title">Send feedback</span>
+            <span className="settings-link-hint">{FEEDBACK_EMAIL}</span>
+          </span>
+          <span className="settings-chevron" aria-hidden="true">
+            ›
+          </span>
+        </a>
       </div>
 
       <h3 className="settings-label">Policies</h3>

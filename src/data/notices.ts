@@ -26,7 +26,7 @@ export const SITE = {
   host: "Vercel",
   /** Shown in Settings. Keep this in step with package.json when you release. */
   version: "0.1.0",
-  updated: "9 November 2026",
+  updated: "10 November 2026",
 } as const;
 
 export const THEME_KEY = "memento:theme";
@@ -35,6 +35,9 @@ export const PROFILE_KEY = "memento:profile";
 export const ACCOUNTS_KEY = "memento:accounts";
 export const AUTH_ATTEMPTS_KEY = "memento:auth-attempts";
 export const FAVOURITES_KEY = "memento:favourites";
+export const RECENT_KEY = "memento:recent";
+export const CARD_NOTES_KEY = "memento:card-notes";
+export const FEEDBACK_EMAIL = "feedback@ebmemento.eu";
 
 /** One Ask thread per subject. Add a key here when a new subject stores a thread. */
 export const ASK_KEYS: Record<Subject, string> = {
@@ -100,6 +103,22 @@ export const DEVICE = [
     holds: "The problem you are in the middle of, so a follow-up stays on the same question. Each person, and maths and physics, keep their own thread.",
     lasts: "Stays until you close the tab, start a new problem, or clear it in Settings. Closing the tab removes it.",
   },
+  {
+    id: "recent",
+    keys: [RECENT_KEY],
+    area: "local",
+    name: "Recent formulas",
+    holds: "The last few formulas you opened, kept with the signed-in email.",
+    lasts: "Stays until you clear data in Settings, or delete the account. Only the latest five are kept.",
+  },
+  {
+    id: "card-notes",
+    keys: [CARD_NOTES_KEY],
+    area: "local",
+    name: "Formula notes",
+    holds: "The short note you write on a formula, kept with the signed-in email. A connected copy also saves that text on the account.",
+    lasts: "Stays until you clear the note, clear notes in Settings, or delete the account.",
+  },
 ] as const satisfies readonly DeviceRecord[];
 
 export type DeviceId = (typeof DEVICE)[number]["id"];
@@ -123,7 +142,7 @@ export const THIRD_PARTIES: readonly ThirdParty[] = [
   {
     name: "Supabase",
     receives:
-      "Only when this copy is connected to Supabase: your email and password, your name, your username, your class, and the ids of starred formulas. The password is stored as a hash. Memento does not see the password.",
+      "Only when this copy is connected to Supabase: your email and password, your name, your username, your class, the ids of starred formulas, and the notes you write on formulas. The password is stored as a hash. Memento does not see the password.",
   },
 ];
 
@@ -147,9 +166,9 @@ export const SENT: readonly SentRecord[] = [
   {
     id: "account",
     name: "Account",
-    when: "You create an account, sign in, reset a password, change your password, change your class, star something, or delete the account.",
+    when: "You create an account, sign in, reset a password, change your password, change your class, star something, write a note on a formula, or delete the account.",
     sends:
-      "Your email and a hash of the password stay on this device, with your name, your username, year, maths course, Advanced, physics, and the ids you star. The username is unique. The first name can be the same as someone else's. When this copy is connected to Supabase, that same information is saved there. Ask questions are not attached to the email or the username.",
+      "Your email and a hash of the password stay on this device, with your name, your username, year, maths course, Advanced, physics, the ids you star, and the notes you write on formulas. The username is unique. The first name can be the same as someone else's. When this copy is connected to Supabase, that same information, including the formula notes, is saved there. Ask questions are not attached to the email or the username.",
     kept: "The account stays until you delete it in Settings or clear data on this device. On a connected copy, Supabase keeps it until Delete account. The password is stored as a hash.",
   },
 ];
@@ -165,7 +184,7 @@ export const TECHNICAL: readonly TechnicalRecord[] = [
   {
     id: "offline-copy",
     name: "Offline copy",
-    holds: "The app itself — pages, formulas, and styles — so Memento opens with no connection. Not your stars, your theme, or what you typed in Ask.",
+    holds: "The app itself — pages, formulas, and styles — so Memento opens with no connection. Not your stars, your notes, your theme, or what you typed in Ask.",
     lasts: "Stays until a new version is saved, or you clear site data for Memento in the browser.",
   },
 ];
@@ -175,10 +194,13 @@ export type OptionalNotice = { exists: false } | { exists: true; summary: string
 export const ACCOUNT: OptionalNotice = {
   exists: true,
   summary:
-    "You sign in with an email and a password. On this device the account holds your email, a hash of the password, your name, your username, your class, and your stars, so the sheet opens offline. The username is unique, so it can be used later to find a friend or someone from your school. The first name can be shared. Memento does not see the password. A run of wrong passwords pauses sign-in on this device for this tab only. When this copy is connected to Supabase, the same account is saved there and opens on another device. Sign out leaves the account in place. Delete account removes it.",
+    "You sign in with an email and a password. On this device the account holds your email, a hash of the password, your name, your username, your class, your stars, and the notes you write on formulas, so the sheet opens offline. The username is unique, so it can be used later to find a friend or someone from your school. The first name can be shared. Memento does not see the password. A run of wrong passwords pauses sign-in on this device for this tab only. When this copy is connected to Supabase, the same account, including those formula notes, is saved there and opens on another device. Sign out leaves the account in place. Delete account removes it, including the formula notes.",
 };
 export const PAYMENT: OptionalNotice = { exists: false };
-export const CONTACT: OptionalNotice = { exists: false };
+export const CONTACT: OptionalNotice = {
+  exists: true,
+  summary: `Feedback goes to ${FEEDBACK_EMAIL}. Send feedback opens your own mail app. Memento does not receive the message and does not keep a copy.`,
+};
 
 export type NoticeBlock = {
   heading: string;
@@ -232,7 +254,7 @@ export const NOT_A_COOKIE_NOTE =
   "The list below is easy to confuse with cookies. A copy stays on this device so the sheet opens offline. It is not a cookie. The account copy goes to Supabase, listed under Other tools.";
 
 export const CLEAR_NOTE =
-  "Settings can clear the accounts on this device, theme, text size, stars, and Ask. Delete account removes one email. On a connected copy, clearing this device signs you out here and the Supabase account stays until Delete account. To remove the offline copy as well, clear site data for Memento in the browser.";
+  "Settings can clear the accounts on this device, theme, text size, stars, recent formulas, notes, and Ask. Delete account removes one email. On a connected copy, clearing this device signs you out here and the Supabase account stays until Delete account. To remove the offline copy as well, clear site data for Memento in the browser.";
 
 export function sentEmptyParagraph(): string {
   return "Nothing you type is sent to a server. The sheet stays on your device.";
@@ -298,7 +320,7 @@ export function termsBlocks(): readonly NoticeBlock[] {
     {
       heading: "Sign-in",
       paragraphs: [
-        "You sign in with an email and a password. The account stores your first name, a unique username, year, maths course, and whether physics is on, so the sheet shows that syllabus. Stars stay with that email. The account lives on this device, and on a connected copy it is also saved so the same login opens on another device. After sign-in the sheet still opens with no connection. A run of wrong passwords pauses sign-in on this device for this tab only. Delete account removes the email, the username, the class, and the stars.",
+        "You sign in with an email and a password. The account stores your first name, a unique username, year, maths course, and whether physics is on, so those formulas are marked as yours. Maths and Physics each show every formula. Stars and the notes you write on formulas stay with that email. The account lives on this device, and on a connected copy it is also saved so the same login opens on another device. After sign-in the sheet still opens with no connection. A run of wrong passwords pauses sign-in on this device for this tab only. Delete account removes the email, the username, the class, the stars, and the formula notes.",
       ],
     },
     {

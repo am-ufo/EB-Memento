@@ -68,3 +68,30 @@ $$;
 
 revoke all on function public.delete_own_account() from public;
 grant execute on function public.delete_own_account() to authenticated;
+
+-- Formula notes. Deleting the auth user removes this row (on delete cascade).
+
+create table if not exists public.card_notes (
+  user_id uuid primary key references auth.users (id) on delete cascade,
+  notes jsonb not null default '{}'::jsonb
+);
+
+alter table public.card_notes enable row level security;
+
+grant select, insert, update, delete on public.card_notes to authenticated;
+
+drop policy if exists "read own notes" on public.card_notes;
+create policy "read own notes" on public.card_notes
+  for select to authenticated using (auth.uid() = user_id);
+
+drop policy if exists "insert own notes" on public.card_notes;
+create policy "insert own notes" on public.card_notes
+  for insert to authenticated with check (auth.uid() = user_id);
+
+drop policy if exists "update own notes" on public.card_notes;
+create policy "update own notes" on public.card_notes
+  for update to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+drop policy if exists "delete own notes" on public.card_notes;
+create policy "delete own notes" on public.card_notes
+  for delete to authenticated using (auth.uid() = user_id);

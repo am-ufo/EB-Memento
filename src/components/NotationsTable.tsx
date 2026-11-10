@@ -5,10 +5,11 @@ import { Katex } from "./Katex";
 type Props = {
   notations: Notation[];
   isSaved: (id: string) => boolean;
+  yours: (notation: Notation) => boolean;
   onToggleSaved: (id: string) => void;
 };
 
-export function NotationsTable({ notations, isSaved, onToggleSaved }: Props) {
+export function NotationsTable({ notations, isSaved, yours, onToggleSaved }: Props) {
   if (notations.length === 0) {
     return <p className="empty">No match. Try another word, or a category.</p>;
   }
@@ -36,6 +37,7 @@ export function NotationsTable({ notations, isSaved, onToggleSaved }: Props) {
               <td className="sheet-name">
                 {row.name}
                 <span className="sheet-course">
+                  {yours(row) ? <span className="your-course">Your course · </span> : null}
                   {row.courses.map((course) => course.replaceAll("-", " ")).join(" · ")}
                 </span>
               </td>

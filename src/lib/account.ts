@@ -23,7 +23,9 @@ import {
   type Account,
   type Profile,
 } from "./profile";
+import { forgetCardNotes, hydrateCardNotes } from "./card-notes";
 import { adoptStars, favouritesStorageKey, hydrateFavourites } from "./favourites";
+import { recentStorageKey } from "./recent";
 import {
   deleteLocal,
   findLocalEmail,
@@ -91,6 +93,7 @@ export function useAccount() {
         rememberDeviceAccount(account, email);
         setPhase({ status: "ready", account, email });
         void hydrateFavourites(user.id);
+        void hydrateCardNotes(user.id);
         return;
       }
       if (remote === "offline") {
@@ -150,6 +153,7 @@ export function useAccount() {
     const next = accountFrom(userId, clean, handle, profile);
     rememberDeviceAccount(next, email);
     void hydrateFavourites(userId);
+    void hydrateCardNotes(userId);
     setPhase({ status: "ready", account: next, email });
     return null;
   }
@@ -186,9 +190,11 @@ export function useAccount() {
       deleteLocal(account.id);
       try {
         localStorage.removeItem(favouritesStorageKey(account.id));
+        localStorage.removeItem(recentStorageKey(account.id));
       } catch {
         // The account record is already gone.
       }
+      forgetCardNotes(account.id);
       forgetDeviceAccount();
       setPhase({ status: "signed-out" });
       return null;
@@ -199,9 +205,11 @@ export function useAccount() {
     if (error) return error;
     try {
       localStorage.removeItem(favouritesStorageKey(account.id));
+      localStorage.removeItem(recentStorageKey(account.id));
     } catch {
       // The server account is already gone.
     }
+    forgetCardNotes(account.id);
     forgetDeviceAccount();
     setPhase({ status: "signed-out" });
     return null;

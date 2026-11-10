@@ -49,6 +49,8 @@ function keysStarting(area: "local" | "session", prefix: string): string[] {
 
 function keysFor(row: (typeof DEVICE)[number]): string[] {
   if (row.id === "favourites") return matchingKeys(row.area, row.keys, row.keys[0] ?? "memento:favourites");
+  if (row.id === "recent") return matchingKeys(row.area, row.keys, row.keys[0] ?? "memento:recent");
+  if (row.id === "card-notes") return matchingKeys(row.area, row.keys, row.keys[0] ?? "memento:card-notes");
   if (row.id === "ask") return matchingKeys(row.area, row.keys, "memento-ask");
   if (row.id === "profile") return [...row.keys, ...keysStarting("local", "sb-")];
   return [...row.keys];

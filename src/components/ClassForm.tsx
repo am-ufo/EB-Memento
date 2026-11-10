@@ -193,6 +193,7 @@ export function ClassForm({
           <span>Physics</span>
           <span>{physics ? "On" : "Off"}</span>
         </button>
+        <p className="settings-hint">Marks your physics course. The Physics sheet stays open either way.</p>
       </div>
 
       {note ? <p className="settings-hint class-note">{note}</p> : null}

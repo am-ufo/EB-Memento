@@ -3515,7 +3515,8 @@
     "topic": "Interactions",
     "title": "Velocity against time",
     "aliases": [
-      "v = v0 + at"
+      "v = v0 + at",
+      "v = u + at"
     ],
     "katex": "v(t) = v_{0} + at",
     "useWhen": "Speed against time when acceleration is constant, from a starting v0.",

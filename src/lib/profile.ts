@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ASK_KEYS, FAVOURITES_KEY, PROFILE_KEY } from "../data/notices";
+import { ASK_KEYS, FAVOURITES_KEY, PROFILE_KEY, RECENT_KEY } from "../data/notices";
 import { isStoredAccount } from "./local-auth";
 import { clearedIds, DEVICE_CLEARED } from "./storage";
 
@@ -62,9 +62,10 @@ export function courseTags(profile: Profile): string[] {
   return tags;
 }
 
-export function forProfile<T extends { courses: string[] }>(items: T[], profile: Profile): T[] {
+/** True when the card belongs to the saved class. The sheet still shows every formula. */
+export function onCourse(item: { courses: string[] }, profile: Profile): boolean {
   const tags = new Set(courseTags(profile));
-  return items.filter((item) => item.courses.some((course) => tags.has(course)));
+  return item.courses.some((course) => tags.has(course));
 }
 
 export function profileLabel(profile: Profile): string {
@@ -74,13 +75,13 @@ export function profileLabel(profile: Profile): string {
   return parts.join(" · ");
 }
 
-/** Why a shorter maths course still shows the longer syllabus. */
+/** Why a shorter maths course still marks the longer syllabus. */
 export function coversNote(profile: Profile): string | null {
   if (!isUpper(profile.year) && profile.maths === "4") {
-    return "4 period sits inside the 6 period syllabus, so this sheet includes the 6 period formulas.";
+    return "4 period sits inside the 6 period syllabus, so 6 period formulas are marked as yours. The sheet still shows every formula.";
   }
   if (isUpper(profile.year) && profile.maths === "3") {
-    return "3 period sits inside the 5 period syllabus, so this sheet includes the 5 period formulas.";
+    return "3 period sits inside the 5 period syllabus, so 5 period formulas are marked as yours. The sheet still shows every formula.";
   }
   return null;
 }
@@ -262,6 +263,7 @@ export function forgetDeviceAccount() {
 function removeAccountData(id: string) {
   try {
     localStorage.removeItem(`${FAVOURITES_KEY}:${id}`);
+    localStorage.removeItem(`${RECENT_KEY}:${id}`);
     sessionStorage.removeItem(`${ASK_KEYS.maths}:${id}`);
     sessionStorage.removeItem(`${ASK_KEYS.physics}:${id}`);
   } catch {

@@ -2,7 +2,7 @@
 
 Offline PWA: syllabus-exact maths and physics formulas for European Baccalaureate students. Open, search, take one answer, close. Sign-in is an email and password. On this device the account is an email plus a password hash, a unique username, the class, and the stars, so the sheet still opens offline. First names can match. Usernames cannot, and matching ignores case. Capitals in a username are kept. When `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set, that same account is stored in Supabase instead. Do not add a second login provider. Never put the Supabase service-role key in the client.
 
-The catalog covers the five EB syllabi in `docs/eb-curriculumn/`. Every formula and notation is tagged with `courses[]`. After email sign-in, the class screen asks for a name, year, and maths course, then a Maths / Physics subject picker when physics is on. Tabs: Formulas | Ask | Notations | Favourites. Light/dark theme (warm charcoal dark); preference in `localStorage` (`memento:theme`).
+The catalog covers the five EB syllabi in `docs/eb-curriculumn/`. Every formula and notation is tagged with `courses[]`. After email sign-in, the class screen asks for a name, year, and maths course, then a Maths / Physics subject picker. The class marks matching cards. It does not hide the rest of that subject. Tabs: Formulas | Ask | Notations | Favourites. Light/dark theme (warm charcoal dark); preference in `localStorage` (`memento:theme`).
 
 ## Commands
 
@@ -48,7 +48,7 @@ Production: Vercel, output `dist` (`vercel.json`). Ask online uses `functions/ap
 
 Set `courses` to the year-programme tags in [docs/curriculum/README.md](docs/curriculum/README.md). Each entry needs a stable `id`, `topic`, `title`, search `aliases`, KaTeX in `katex`, a one-sentence `useWhen` cue (givens/unknown, not a restatement of the formula), and `variables` with symbol + meaning. Match the EB syllabus; do not invent “helpful” extras. Use syllabus topic names (Algebra, Geometry, Fields, …), not invented ones.
 
-Stay client-first. Email accounts work on the device with no server. When the Supabase keys from the README are set, accounts are stored there instead. Do not add another backend, and do not send the email to `/api/match`. The other server surface is the optional Cloudflare Pages Function for Ask. Filter the catalog with `forProfile` before the maths/physics split. Favourites are not filtered by class. 4 period uses the 6P tags and 3 period uses the 5P tags, because those shorter courses have no tags of their own. Advanced is the extra S6/S7 course, on top of 3 or 5 period.
+Stay client-first. Email accounts work on the device with no server. When the Supabase keys from the README are set, accounts are stored there instead. Do not add another backend, and do not send the email to `/api/match`. The other server surface is the optional Cloudflare Pages Function for Ask. The sheet shows every formula in the chosen subject. `onCourse` marks cards from the saved class. Favourites are not filtered by class. 4 period uses the 6P tags and 3 period uses the 5P tags, because those shorter courses have no tags of their own. Advanced is the extra S6/S7 course, on top of 3 or 5 period.
 
 ## Notices
 

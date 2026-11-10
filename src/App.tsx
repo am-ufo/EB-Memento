@@ -12,12 +12,15 @@ import { ThemeToggle } from "./components/ThemeToggle";
 import formulaCatalog from "./data/formulas.json" with { type: "json" };
 import notationCatalog from "./data/notations.json" with { type: "json" };
 import { useAccount } from "./lib/account";
+import { useCardNotes } from "./lib/card-notes";
+import { formulaHref, formulaIdFromPath, subjectForFormula } from "./lib/formula-link";
 import { useFavourites } from "./lib/favourites";
-import { forProfile } from "./lib/profile";
+import { onCourse } from "./lib/profile";
 import { backOne, closeToApp, PAGE_TITLE, pageFromPath, pushPage, showSettingsFromNotice, type Page } from "./lib/pages";
+import { useRecent } from "./lib/recent";
 import { categoriesOf, searchFormulas, searchNotations, topicsOf } from "./lib/search";
 import { hashForSubject, homePath, subjectFromHash } from "./lib/route";
-import { formulasFor, notationsFor, searchPool, type Subject } from "./lib/subject";
+import { formulasFor, isMaths, isPhysics, notationsFor, searchPool, type Subject } from "./lib/subject";
 import { useTextSize } from "./lib/text-size";
 import { useTheme } from "./lib/theme";
 
@@ -26,6 +29,17 @@ const notations = notationCatalog as Notation[];
 
 const formulaById = new Map(formulas.map((formula) => [formula.id, formula]));
 const notationById = new Map(notations.map((notation) => [notation.id, notation]));
+
+function initialSubject(): Subject | null {
+  const fromHash = subjectFromHash(window.location.hash);
+  if (fromHash) return fromHash;
+  const id = formulaIdFromPath(window.location.pathname);
+  const formula = id ? formulaById.get(id) : undefined;
+  if (!formula) return null;
+  if (isPhysics(formula) && !isMaths(formula)) return "physics";
+  if (isMaths(formula)) return "maths";
+  return null;
+}
 
 type Tab = "formulas" | "ask" | "notations" | "saved";
 
@@ -56,7 +70,8 @@ function pickByIds<T>(ids: string[], lookup: Map<string, T>): T[] {
 export function App() {
   const [tab, setTab] = useState<Tab>("formulas");
   const [page, setPage] = useState<Page | null>(() => pageFromPath(window.location.pathname));
-  const [subject, setSubject] = useState<Subject | null>(() => subjectFromHash(window.location.hash));
+  const [subject, setSubject] = useState<Subject | null>(initialSubject);
+  const [linkedId, setLinkedId] = useState<string | null>(() => formulaIdFromPath(window.location.pathname));
   const [query, setQuery] = useState("");
   const [topic, setTopic] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
@@ -75,6 +90,8 @@ export function App() {
     finishRecovery,
   } = useAccount();
   const favourites = useFavourites(account?.id ?? null);
+  const cardNotes = useCardNotes(account?.id ?? null);
+  const recent = useRecent(account?.id ?? null);
   const profile = account;
   const { theme, preference, setPreference, toggle: toggleTheme } = useTheme();
   const { size: textSize, setSize: setTextSize } = useTextSize();
@@ -82,6 +99,9 @@ export function App() {
   subjectRef.current = subject;
   const pageRef = useRef(page);
   pageRef.current = page;
+  const linkedRef = useRef(linkedId);
+  linkedRef.current = linkedId;
+  const searchRef = useRef<HTMLInputElement>(null);
   const paging = useRef(false);
 
   useEffect(() => {
@@ -104,11 +124,14 @@ export function App() {
       canonicalize();
       const nextSubject = subjectFromHash(window.location.hash);
       const nextPage = pageFromPath(window.location.pathname);
+      const nextLinked = formulaIdFromPath(window.location.pathname);
       const subjectChanged = nextSubject !== subjectRef.current;
       const pageChanged = nextPage !== pageRef.current;
-      if (!subjectChanged && !pageChanged) return;
+      const linkChanged = nextLinked !== linkedRef.current;
+      if (!subjectChanged && !pageChanged && !linkChanged) return;
       if (subjectChanged) subjectRef.current = nextSubject;
       if (pageChanged) pageRef.current = nextPage;
+      if (linkChanged) linkedRef.current = nextLinked;
       withTransition(() => {
         if (subjectChanged) {
           setSubject(nextSubject);
@@ -118,6 +141,14 @@ export function App() {
           setTab("formulas");
         }
         if (pageChanged) setPage(nextPage);
+        if (linkChanged) {
+          setLinkedId(nextLinked);
+          if (nextLinked) {
+            setQuery("");
+            setTopic(null);
+            setTab("formulas");
+          }
+        }
       });
     };
 
@@ -131,34 +162,20 @@ export function App() {
     };
   }, []);
 
-  const catalogFormulas = useMemo(() => (profile ? forProfile(formulas, profile) : []), [profile]);
-  const catalogNotations = useMemo(() => (profile ? forProfile(notations, profile) : []), [profile]);
-  const subjectFormulas = useMemo(
-    () => (subject ? formulasFor(catalogFormulas, subject) : []),
-    [catalogFormulas, subject],
-  );
-  const subjectNotations = useMemo(
-    () => (subject ? notationsFor(catalogNotations, subject) : []),
-    [catalogNotations, subject],
-  );
-  const formulaSearchPool = useMemo(
-    () => (subject ? searchPool(catalogFormulas, subject) : []),
-    [catalogFormulas, subject],
-  );
-  const notationSearchPool = useMemo(
-    () => (subject ? searchPool(catalogNotations, subject) : []),
-    [catalogNotations, subject],
-  );
+  const subjectFormulas = useMemo(() => (subject ? formulasFor(formulas, subject) : []), [subject]);
+  const subjectNotations = useMemo(() => (subject ? notationsFor(notations, subject) : []), [subject]);
+  const formulaSearchPool = useMemo(() => (subject ? searchPool(formulas, subject) : []), [subject]);
+  const notationSearchPool = useMemo(() => (subject ? searchPool(notations, subject) : []), [subject]);
 
   const topics = useMemo(() => topicsOf(subjectFormulas), [subjectFormulas]);
   const categories = useMemo(() => categoriesOf(subjectNotations), [subjectNotations]);
 
   const formulaResults = useMemo(() => {
     const pool = query.trim() ? formulaSearchPool : subjectFormulas;
-    const found = searchFormulas(pool, query);
+    const found = searchFormulas(pool, query, cardNotes.notes);
     if (!topic || query.trim()) return found;
     return found.filter((formula) => formula.topic === topic);
-  }, [formulaSearchPool, query, subjectFormulas, topic]);
+  }, [cardNotes.notes, formulaSearchPool, query, subjectFormulas, topic]);
 
   const notationResults = useMemo(() => {
     const pool = query.trim() ? notationSearchPool : subjectNotations;
@@ -168,8 +185,8 @@ export function App() {
   }, [category, notationSearchPool, query, subjectNotations]);
 
   const savedFormulas = useMemo(
-    () => searchFormulas(pickByIds(favourites.formulaIds, formulaById), query),
-    [favourites.formulaIds, query],
+    () => searchFormulas(pickByIds(favourites.formulaIds, formulaById), query, cardNotes.notes),
+    [cardNotes.notes, favourites.formulaIds, query],
   );
 
   const savedNotations = useMemo(
@@ -189,10 +206,28 @@ export function App() {
   const savedEmpty = savedFormulas.length === 0 && savedNotations.length === 0;
   const savedCatalogEmpty = favourites.formulaIds.length === 0 && favourites.notationIds.length === 0;
   const waiting = phase.status !== "ready";
-  const showPicker = Boolean(profile?.physics) && !subject && tab !== "saved";
+  const showPicker = Boolean(profile) && !subject && tab !== "saved";
   const subjectLabel = !profile || !subject ? "Maths & Physics" : subject === "physics" ? "Physics" : "Maths";
   const eyebrow = profile ? `${profile.name} · ${subjectLabel}` : `EB · ${subjectLabel}`;
   const shellClass = page || waiting ? "shell shell-page" : tab === "ask" && subject ? "shell shell-ask" : "shell";
+
+  const linkedFormula = linkedId ? (formulaById.get(linkedId) ?? null) : null;
+  const linkedMissing = Boolean(linkedId) && !linkedFormula;
+  const formulaCards =
+    linkedMissing
+      ? []
+      : linkedFormula && !formulaResults.some((item) => item.id === linkedFormula.id)
+        ? [linkedFormula, ...formulaResults]
+        : formulaResults;
+  const recentFormulas = recent.ids.flatMap((id) => {
+    const formula = formulaById.get(id);
+    return formula ? [formula] : [];
+  });
+
+  function coursesVisible(formula: Formula) {
+    if (tab === "saved") return true;
+    return !subjectFormulas.some((item) => item.id === formula.id);
+  }
 
   useEffect(() => {
     document.title = page ? `${PAGE_TITLE[page]} · EB Memento` : "EB Memento";
@@ -215,6 +250,7 @@ export function App() {
     if (profile || page) return;
     const hash = window.location.hash;
     if (hash.includes("access_token") || hash.includes("type=")) return;
+    if (linkedRef.current) return;
     if (hash) history.replaceState(null, "", homePath());
     if (subject !== null) {
       setSubject(null);
@@ -223,19 +259,63 @@ export function App() {
   }, [page, profile, subject]);
 
   useEffect(() => {
-    if (!profile || profile.physics || page) return;
-    if (subject === "maths" && window.location.hash === "#math") return;
-    if (window.location.hash !== "#math") {
-      history.replaceState(null, "", `${homePath()}#math`);
-    }
-    if (subject !== "maths") {
-      setSubject("maths");
+    if (!profile || page || !linkedId) return;
+    const formula = formulaById.get(linkedId);
+    if (!formula) return;
+    const next = subjectForFormula(formula);
+    const subjectNow = next ?? subjectRef.current;
+    if (!subjectNow) return;
+    const path = formulaHref(linkedId, subjectNow);
+    const here = `${window.location.pathname}${window.location.hash}`;
+    if (here !== path) history.replaceState(null, "", path);
+    if (next && next !== subject) {
+      subjectRef.current = next;
+      setSubject(next);
       setQuery("");
       setTopic(null);
       setCategory(null);
       setTab("formulas");
     }
-  }, [page, profile, subject]);
+  }, [page, profile, linkedId, subject]);
+
+  useEffect(() => {
+    if (!profile || !linkedId || !formulaById.has(linkedId)) return;
+    recent.remember(linkedId);
+  }, [linkedId, profile, recent.remember]);
+
+  useEffect(() => {
+    if (page || waiting || showPicker || tab !== "formulas" || linkedRef.current) return;
+    searchRef.current?.focus();
+  }, [page, showPicker, tab, waiting]);
+
+  function clearFormulaPath() {
+    const hash = hashForSubject(subjectRef.current);
+    if (formulaIdFromPath(window.location.pathname)) {
+      history.replaceState(null, "", `/${hash}`);
+    }
+    linkedRef.current = null;
+    setLinkedId(null);
+  }
+
+  function openFormula(id: string) {
+    const formula = formulaById.get(id);
+    if (!formula || !profile) return;
+    const next = subjectForFormula(formula);
+    const subjectNow = next ?? subjectRef.current ?? "maths";
+    history.replaceState(null, "", formulaHref(id, subjectNow));
+    linkedRef.current = id;
+    withTransition(() => {
+      setLinkedId(id);
+      setQuery("");
+      setTopic(null);
+      setCategory(null);
+      setTab("formulas");
+      if (next && next !== subjectRef.current) {
+        subjectRef.current = next;
+        setSubject(next);
+      }
+    });
+  }
 
   function openPage(next: Page) {
     if (paging.current || next === page) return;
@@ -314,7 +394,7 @@ export function App() {
     <div className={shellClass}>
       <header className="top">
         <div className="top-copy">
-          {profile?.physics && subject && !page ? (
+          {subject && !page ? (
             <a className="eyebrow" href={homePath()} aria-label="All subjects">
               {eyebrow}
             </a>
@@ -376,9 +456,12 @@ export function App() {
         <label className="search">
           <span className="sr-only">{searchLabel}</span>
           <input
+            ref={searchRef}
             value={query}
             onChange={(event) => {
-              setQuery(event.target.value);
+              const value = event.target.value;
+              setQuery(value);
+              if (value.trim() && linkedRef.current) clearFormulaPath();
             }}
             placeholder={searchPlaceholder}
             autoCapitalize="none"
@@ -395,9 +478,34 @@ export function App() {
 
       {subject && tab === "formulas" ? (
         <>
+          {!query.trim() && recentFormulas.length > 0 ? (
+            <div className="recent-row">
+              <p className="recent-label">Recent</p>
+              <div className="recent">
+                {recentFormulas.map((formula) => (
+                  <button
+                    key={formula.id}
+                    type="button"
+                    className={formula.id === linkedId ? "on" : undefined}
+                    onClick={() => openFormula(formula.id)}
+                  >
+                    {formula.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
           {!query.trim() ? (
             <nav className="topics" aria-label="Topics">
-              <button type="button" className={!topic ? "on" : undefined} onClick={() => setTopic(null)}>
+              <button
+                type="button"
+                className={!topic ? "on" : undefined}
+                onClick={() => {
+                  setTopic(null);
+                  if (linkedRef.current) clearFormulaPath();
+                }}
+              >
                 All
               </button>
               {topics.map((name) => (
@@ -405,7 +513,10 @@ export function App() {
                   key={name}
                   type="button"
                   className={topic === name ? "on" : undefined}
-                  onClick={() => setTopic(name === topic ? null : name)}
+                  onClick={() => {
+                    setTopic(name === topic ? null : name);
+                    if (linkedRef.current) clearFormulaPath();
+                  }}
                 >
                   {name}
                 </button>
@@ -414,15 +525,23 @@ export function App() {
           ) : null}
 
           <section className="results">
-            {formulaResults.length === 0 ? (
+            {linkedMissing ? (
+              <p className="empty">That formula is not in the sheet.</p>
+            ) : formulaCards.length === 0 ? (
               <p className="empty">No match. Try another word, or a topic.</p>
             ) : (
-              formulaResults.map((formula) => (
+              formulaCards.map((formula) => (
                 <FormulaCard
                   key={formula.id}
                   formula={formula}
                   saved={favourites.isFormulaSaved(formula.id)}
+                  showCourses={coursesVisible(formula)}
+                  yours={profile ? onCourse(formula, profile) : false}
+                  symbolsOpen={formula.id === linkedId}
+                  note={cardNotes.noteFor(formula.id)}
+                  onNote={(text) => cardNotes.setNote(formula.id, text)}
                   onToggleSaved={() => favourites.toggleFormula(formula.id)}
+                  onSymbolsOpen={() => recent.remember(formula.id)}
                 />
               ))
             )}
@@ -437,7 +556,9 @@ export function App() {
           accountId={profile?.id ?? ""}
           formulas={formulaSearchPool}
           formulaById={formulaById}
+          isOnCourse={(formula) => (profile ? onCourse(formula, profile) : false)}
           favourites={favourites}
+          onOpenFormula={recent.remember}
         />
       ) : null}
 
@@ -466,6 +587,7 @@ export function App() {
           <NotationsTable
             notations={notationResults}
             isSaved={favourites.isNotationSaved}
+            yours={(row) => (profile ? onCourse(row, profile) : false)}
             onToggleSaved={favourites.toggleNotation}
           />
         </>
@@ -487,7 +609,13 @@ export function App() {
                     key={formula.id}
                     formula={formula}
                     saved={favourites.isFormulaSaved(formula.id)}
+                    showCourses
+                    yours={profile ? onCourse(formula, profile) : false}
+                    symbolsOpen={false}
+                    note={cardNotes.noteFor(formula.id)}
+                    onNote={(text) => cardNotes.setNote(formula.id, text)}
                     onToggleSaved={() => favourites.toggleFormula(formula.id)}
+                    onSymbolsOpen={() => recent.remember(formula.id)}
                   />
                 ))}
               </section>
@@ -497,6 +625,7 @@ export function App() {
                 <NotationsTable
                   notations={savedNotations}
                   isSaved={favourites.isNotationSaved}
+                  yours={(row) => (profile ? onCourse(row, profile) : false)}
                   onToggleSaved={favourites.toggleNotation}
                 />
               </section>

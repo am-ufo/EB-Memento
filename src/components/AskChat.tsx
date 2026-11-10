@@ -10,6 +10,7 @@ import {
 } from "../lib/ask";
 import { rankAskCandidates } from "../lib/search";
 import type { Subject } from "../lib/subject";
+import { useCardNotes } from "../lib/card-notes";
 import { askStorageKey } from "../lib/storage";
 import { FormulaCard } from "./FormulaCard";
 
@@ -23,7 +24,9 @@ type Props = {
   accountId: string;
   formulas: Formula[];
   formulaById: Map<string, Formula>;
+  isOnCourse: (formula: Formula) => boolean;
   favourites: Favourites;
+  onOpenFormula: (id: string) => void;
 };
 
 type StepView = {
@@ -160,7 +163,8 @@ function loadThread(
   }
 }
 
-export function AskChat({ subject, accountId, formulas, formulaById, favourites }: Props) {
+export function AskChat({ subject, accountId, formulas, formulaById, isOnCourse, favourites, onOpenFormula }: Props) {
+  const cardNotes = useCardNotes(accountId);
   const [thread] = useState(() => loadThread(subject, accountId, new Set(formulaById.keys())));
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<Message[]>(thread.messages);
@@ -297,7 +301,13 @@ export function AskChat({ subject, accountId, formulas, formulaById, favourites 
                               key={formula.id}
                               formula={formula}
                               saved={favourites.isFormulaSaved(formula.id)}
+                              showCourses={false}
+                              yours={isOnCourse(formula)}
+                              symbolsOpen={false}
+                              note={cardNotes.noteFor(formula.id)}
+                              onNote={(text) => cardNotes.setNote(formula.id, text)}
                               onToggleSaved={() => favourites.toggleFormula(formula.id)}
+                              onSymbolsOpen={() => onOpenFormula(formula.id)}
                             />
                           ))}
                         </div>

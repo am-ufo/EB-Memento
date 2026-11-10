@@ -124,6 +124,37 @@ export async function pushFavourites(userId: string, formulas: string[], notatio
   });
 }
 
+function cardNoteMap(value: unknown): Record<string, string> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  const notes: Record<string, string> = {};
+  for (const [id, text] of Object.entries(value as Record<string, unknown>)) {
+    if (typeof text !== "string") continue;
+    const clean = text.replace(/\r\n/g, "\n").trim().slice(0, 240);
+    if (!id || !clean) continue;
+    notes[id] = clean;
+  }
+  return notes;
+}
+
+export async function pullCardNotes(userId: string): Promise<Record<string, string> | null | "offline"> {
+  const supabase = getSupabase();
+  if (!supabase) return "offline";
+  const { data, error } = await supabase.from("card_notes").select("notes").eq("user_id", userId).maybeSingle();
+  if (error) return "offline";
+  if (!data) return null;
+  const row = data as { notes?: unknown };
+  return cardNoteMap(row.notes);
+}
+
+export async function pushCardNotes(userId: string, notes: Record<string, string>): Promise<void> {
+  const supabase = getSupabase();
+  if (!supabase) return;
+  await supabase.from("card_notes").upsert({
+    user_id: userId,
+    notes,
+  });
+}
+
 export async function signInWithEmail(email: string, password: string): Promise<string | null> {
   const supabase = getSupabase();
   if (!supabase) return "Email accounts are not connected on this copy.";

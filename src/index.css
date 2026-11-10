@@ -434,6 +434,10 @@ h1 {
   color: var(--muted);
 }
 
+.your-course {
+  color: var(--accent);
+}
+
 .card h2 {
   margin: 0.2rem 0 0.65rem;
   font-size: 1.05rem;
@@ -445,33 +449,11 @@ h1 {
   padding: 0.15rem 0 0.35rem;
 }
 
-.use-when-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 280ms var(--ease);
-}
-
-.use-when-wrap.open {
-  grid-template-rows: 1fr;
-}
-
-.use-when-clip {
-  overflow: hidden;
-  min-height: 0;
-}
-
 .use-when {
-  margin: 0;
-  padding-top: 0.65rem;
+  margin: 0.7rem 0 0;
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.35;
-  opacity: 0;
-  transition: opacity 200ms var(--ease);
-}
-
-.use-when-wrap.open .use-when {
-  opacity: 1;
 }
 
 .use-when-label {
@@ -480,6 +462,90 @@ h1 {
   font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.card-toggles {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.45rem;
+}
+
+.card-note {
+  display: block;
+  margin-top: 0.55rem;
+}
+
+.card-note textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  padding: 0.45rem 0.6rem;
+  resize: vertical;
+}
+
+.your-note {
+  margin: 0.55rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  white-space: pre-wrap;
+}
+
+.symbols-toggle {
+  padding: 0.15rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.symbols-toggle.on {
+  color: var(--ink);
+}
+
+.recent-row {
+  margin-bottom: 0.85rem;
+}
+
+.recent-label {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.recent {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 0.15rem;
+}
+
+.recent button {
+  flex: none;
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+}
+
+.recent button.on {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
 }
 
 .empty,
@@ -930,6 +996,7 @@ button:active:not(:disabled) {
 button:focus-visible,
 a.subject-card:focus-visible,
 a.eyebrow:focus-visible,
+a.settings-link:focus-visible,
 .search input:focus-visible,
 .composer input:focus-visible,
 .name-field input:focus-visible {
@@ -1387,6 +1454,10 @@ a.eyebrow:focus-visible,
   color: var(--muted);
 }
 
+a.settings-link {
+  text-decoration: none;
+}
+
 .settings-link {
   display: flex;
   width: 100%;
@@ -1399,6 +1470,10 @@ a.eyebrow:focus-visible,
   color: var(--ink);
   text-align: left;
   transition: background-color 180ms var(--ease), transform 160ms var(--ease);
+}
+
+a.feedback-link {
+  border-top: 1px solid var(--line);
 }
 
 .settings-link:hover {
@@ -1496,6 +1571,7 @@ a.eyebrow:focus-visible,
 html[data-text="large"] .tabbar button {
   font-size: 0.78rem;
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   *,
