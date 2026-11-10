@@ -114,9 +114,16 @@ export async function pullFavourites(
   return { formulas, notations };
 }
 
+async function signedInAs(userId: string): Promise<boolean> {
+  const supabase = getSupabase();
+  if (!supabase) return false;
+  const { data } = await supabase.auth.getSession();
+  return data.session?.user.id === userId;
+}
+
 export async function pushFavourites(userId: string, formulas: string[], notations: string[]): Promise<void> {
   const supabase = getSupabase();
-  if (!supabase) return;
+  if (!supabase || !(await signedInAs(userId))) return;
   await supabase.from("favourites").upsert({
     user_id: userId,
     formulas,
@@ -148,7 +155,7 @@ export async function pullCardNotes(userId: string): Promise<Record<string, stri
 
 export async function pushCardNotes(userId: string, notes: Record<string, string>): Promise<void> {
   const supabase = getSupabase();
-  if (!supabase) return;
+  if (!supabase || !(await signedInAs(userId))) return;
   await supabase.from("card_notes").upsert({
     user_id: userId,
     notes,

@@ -60,6 +60,15 @@ export function replaceCardNotes(accountId: string, notes: CardNotes) {
   window.dispatchEvent(new CustomEvent(CARD_NOTES_SYNCED, { detail: accountId }));
 }
 
+/** Copy this device's formula notes onto an account that does not have any yet. */
+export function adoptCardNotes(fromId: string, toId: string) {
+  if (fromId === toId) return;
+  if (Object.keys(loadCardNotes(toId)).length > 0) return;
+  const previous = loadCardNotes(fromId);
+  if (Object.keys(previous).length === 0) return;
+  replaceCardNotes(toId, previous);
+}
+
 export function forgetCardNotes(accountId: string) {
   try {
     localStorage.removeItem(storageKey(accountId));

@@ -76,8 +76,8 @@ export const DEVICE = [
     keys: [PROFILE_KEY, ACCOUNTS_KEY],
     area: "local",
     name: "Sign-in",
-    holds: "Your email, a hash of the password, your name, your username, your class, and who is signed in. The password itself is not kept. A connected copy also keeps a Supabase session.",
-    lasts: "Stays until you delete the account or clear data in Settings. Sign out leaves the account on this device.",
+    holds: "A device id and the class you set before sign-in. If you sign in, also your email, a hash of the password, your name, your username, your class, and who is signed in. The password itself is not kept. A connected copy also keeps a Supabase session.",
+    lasts: "Stays until you clear data in Settings. Sign out leaves the account on this device. Delete account removes that email.",
   },
   {
     id: "auth-attempts",
@@ -92,7 +92,7 @@ export const DEVICE = [
     keys: [FAVOURITES_KEY],
     area: "local",
     name: "Favourites",
-    holds: "The formulas and notations you star, kept with the signed-in email. A connected copy also saves that list on the account.",
+    holds: "The formulas and notations you star. Before sign-in they stay on this device. After sign-in they stay with that email. A connected copy also saves that list on the account.",
     lasts: "Stays until you unstar them, clear data in Settings, or delete the account.",
   },
   {
@@ -108,7 +108,7 @@ export const DEVICE = [
     keys: [RECENT_KEY],
     area: "local",
     name: "Recent formulas",
-    holds: "The last few formulas you opened, kept with the signed-in email.",
+    holds: "The last few formulas you opened. Before sign-in they stay on this device. After sign-in they stay with that email.",
     lasts: "Stays until you clear data in Settings, or delete the account. Only the latest five are kept.",
   },
   {
@@ -116,7 +116,7 @@ export const DEVICE = [
     keys: [CARD_NOTES_KEY],
     area: "local",
     name: "Formula notes",
-    holds: "The short note you write on a formula, kept with the signed-in email. A connected copy also saves that text on the account.",
+    holds: "The short note you write on a formula. Before sign-in it stays on this device. After sign-in it stays with that email. A connected copy also saves that text on the account.",
     lasts: "Stays until you clear the note, clear notes in Settings, or delete the account.",
   },
 ] as const satisfies readonly DeviceRecord[];
@@ -142,7 +142,7 @@ export const THIRD_PARTIES: readonly ThirdParty[] = [
   {
     name: "Supabase",
     receives:
-      "Only when this copy is connected to Supabase: your email and password, your name, your username, your class, the ids of starred formulas, and the notes you write on formulas. The password is stored as a hash. Memento does not see the password.",
+      "Only when this copy is connected to Supabase and you sign in: your email and password, your name, your username, your class, the ids of starred formulas, and the notes you write on formulas. The password is stored as a hash. Memento does not see the password. Before sign-in, nothing from the sheet is sent.",
   },
 ];
 
@@ -166,9 +166,9 @@ export const SENT: readonly SentRecord[] = [
   {
     id: "account",
     name: "Account",
-    when: "You create an account, sign in, reset a password, change your password, change your class, star something, write a note on a formula, or delete the account.",
+    when: "You create an account, sign in, reset a password, change your password, change your class while signed in, star something while signed in, write a note on a formula while signed in, or delete the account.",
     sends:
-      "Your email and a hash of the password stay on this device, with your name, your username, year, maths course, Advanced, physics, the ids you star, and the notes you write on formulas. The username is unique. The first name can be the same as someone else's. When this copy is connected to Supabase, that same information, including the formula notes, is saved there. Ask questions are not attached to the email or the username.",
+      "Nothing is sent until you sign in. Then your email and a hash of the password, with your name, your username, year, maths course, Advanced, physics, the ids you star, and the notes you write on formulas. The username is unique. The first name can be the same as someone else's. On this device that stays in the browser. When this copy is connected to Supabase, the same information, including the formula notes, is saved there. Class, stars, and notes chosen before sign-in stay on this device until then. Ask questions are not attached to the email or the username.",
     kept: "The account stays until you delete it in Settings or clear data on this device. On a connected copy, Supabase keeps it until Delete account. The password is stored as a hash.",
   },
 ];
@@ -194,7 +194,7 @@ export type OptionalNotice = { exists: false } | { exists: true; summary: string
 export const ACCOUNT: OptionalNotice = {
   exists: true,
   summary:
-    "You sign in with an email and a password. On this device the account holds your email, a hash of the password, your name, your username, your class, your stars, and the notes you write on formulas, so the sheet opens offline. The username is unique, so it can be used later to find a friend or someone from your school. The first name can be shared. Memento does not see the password. A run of wrong passwords pauses sign-in on this device for this tab only. When this copy is connected to Supabase, the same account, including those formula notes, is saved there and opens on another device. Sign out leaves the account in place. Delete account removes it, including the formula notes.",
+    "The sheet opens with no account. Stars, notes, recent formulas, and your class stay on this device until you choose Sign in. Sign-in is an email and a password. The account then holds your email, a hash of the password, your name, your username, your class, your stars, and the notes you write on formulas. The username is unique, so it can be used later to find a friend or someone from your school. The first name can be shared. Memento does not see the password. A run of wrong passwords pauses sign-in on this device for this tab only. When this copy is connected to Supabase, the same account, including those formula notes, is saved there and opens on another device. Sign out leaves the account in place and returns to this device's copy. Delete account removes the email, including the formula notes saved with it.",
 };
 export const PAYMENT: OptionalNotice = { exists: false };
 export const CONTACT: OptionalNotice = {
@@ -283,7 +283,7 @@ export function privacyClosing(): readonly NoticeBlock[] {
     {
       heading: "Your name",
       paragraphs: [
-        "Memento is for students, including under 18. The account asks for your first name and a username. The first name can match someone else's. The username cannot, so a friend or someone from your school matches one person. Don't type your school, or a classmate's name, into Ask.",
+        "Memento is for students, including under 18. You can open the sheet without giving a name. If you create an account, it asks for your first name and a username. The first name can match someone else's. The username cannot, so a friend or someone from your school matches one person. Don't type your school, or a classmate's name, into Ask.",
       ],
     },
     {
@@ -320,7 +320,7 @@ export function termsBlocks(): readonly NoticeBlock[] {
     {
       heading: "Sign-in",
       paragraphs: [
-        "You sign in with an email and a password. The account stores your first name, a unique username, year, maths course, and whether physics is on, so those formulas are marked as yours. Maths and Physics each show every formula. Stars and the notes you write on formulas stay with that email. The account lives on this device, and on a connected copy it is also saved so the same login opens on another device. After sign-in the sheet still opens with no connection. A run of wrong passwords pauses sign-in on this device for this tab only. Delete account removes the email, the username, the class, the stars, and the formula notes.",
+        "The sheet opens with no account. You can set a class in Settings so formulas from that year are marked, and the sheet still shows every formula. Sign-in is optional. It uses an email and a password, and the account stores your first name, a unique username, year, maths course, and whether physics is on. Stars and the notes you write on formulas stay on this device until you sign in, then they stay with that email. On a connected copy the same login opens on another device. After that the sheet still opens with no connection. A run of wrong passwords pauses sign-in on this device for this tab only. Sign out returns to this device's copy. Delete account removes the email, the username, the class, the stars, and the formula notes saved with that email.",
       ],
     },
     {

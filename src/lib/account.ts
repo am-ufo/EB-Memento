@@ -17,15 +17,18 @@ import {
   cleanName,
   cleanUsername,
   cachedAccount,
-  deviceDraftFor,
+  deviceOwnerId,
   forgetDeviceAccount,
+  guestAccount,
+  releaseSignedInCache,
   rememberDeviceAccount,
+  saveGuestClass,
   type Account,
   type Profile,
 } from "./profile";
-import { forgetCardNotes, hydrateCardNotes } from "./card-notes";
+import { adoptCardNotes, forgetCardNotes, hydrateCardNotes } from "./card-notes";
 import { adoptStars, favouritesStorageKey, hydrateFavourites } from "./favourites";
-import { recentStorageKey } from "./recent";
+import { adoptRecent, recentStorageKey } from "./recent";
 import {
   deleteLocal,
   findLocalEmail,
@@ -43,21 +46,39 @@ import { clearedIds, DEVICE_CLEARED } from "./storage";
 
 export type AuthPhase =
   | { status: "loading" }
-  | { status: "signed-out" }
   | { status: "recovery"; userId: string; email: string }
   | { status: "needs-class"; userId: string; email: string }
-  | { status: "ready"; account: Account; email: string };
+  | { status: "ready"; account: Account | null; email: string; ownerId: string };
+
+function guestPhase(): AuthPhase {
+  const ownerId = deviceOwnerId();
+  return { status: "ready", account: guestAccount(), email: "", ownerId };
+}
+
+/** Move stars, notes, and recent formulas onto the account when that account's copies are empty. */
+function adoptDevice(userId: string) {
+  const from = deviceOwnerId();
+  adoptStars(from, userId);
+  adoptCardNotes(from, userId);
+  adoptRecent(from, userId);
+}
+
+function readySignedIn(userId: string, email: string, account: Account | null): AuthPhase {
+  adoptDevice(userId);
+  return { status: "ready", account, email, ownerId: userId };
+}
 
 function phaseFor(local: LocalAccount | null): AuthPhase {
-  if (!local) return { status: "signed-out" };
+  if (!local) return guestPhase();
   const name = cleanName(local.name);
   const username = cleanUsername(local.username);
   if (local.profile && name && username) {
     const account = accountFrom(local.id, name, username, local.profile);
     rememberDeviceAccount(account, local.email);
-    return { status: "ready", account, email: local.email };
+    return readySignedIn(local.id, local.email, account);
   }
-  return { status: "needs-class", userId: local.id, email: local.email };
+  const partial = local.profile ? accountFrom(local.id, name ?? "", username ?? "", local.profile) : null;
+  return readySignedIn(local.id, local.email, partial);
 }
 
 function accountFrom(userId: string, name: string, username: string, profile: Profile): Account {
@@ -65,7 +86,9 @@ function accountFrom(userId: string, name: string, username: string, profile: Pr
 }
 
 export function useAccount() {
-  const [phase, setPhase] = useState<AuthPhase>({ status: "loading" });
+  const [phase, setPhase] = useState<AuthPhase>(() =>
+    accountsConfigured() ? { status: "loading" } : phaseFor(localSession()),
+  );
 
   useEffect(() => {
     if (!accountsConfigured()) {
@@ -78,7 +101,7 @@ export function useAccount() {
     async function settle(user: User | null, recovery: boolean) {
       if (cancel) return;
       if (!user) {
-        setPhase({ status: "signed-out" });
+        setPhase(guestPhase());
         return;
       }
       const email = user.email ?? "";
@@ -91,19 +114,20 @@ export function useAccount() {
       if (remote && remote !== "offline" && cleanName(remote.name) && cleanUsername(remote.username)) {
         const account = accountFrom(user.id, cleanName(remote.name) ?? remote.name, cleanUsername(remote.username) ?? remote.username, remote);
         rememberDeviceAccount(account, email);
-        setPhase({ status: "ready", account, email });
+        adoptDevice(user.id);
+        setPhase({ status: "ready", account, email, ownerId: user.id });
         void hydrateFavourites(user.id);
         void hydrateCardNotes(user.id);
         return;
       }
       if (remote === "offline") {
         const cached = cachedAccount();
-        if (cached && cached.id === user.id && cleanName(cached.name) && cleanUsername(cached.username)) {
-          setPhase({ status: "ready", account: cached, email: email || "" });
+        if (cached && cached.id === user.id) {
+          setPhase(readySignedIn(user.id, email || "", cached));
           return;
         }
       }
-      setPhase({ status: "needs-class", userId: user.id, email });
+      setPhase(readySignedIn(user.id, email, null));
     }
 
     const stop = watchAuth((event, user) => {
@@ -120,8 +144,9 @@ export function useAccount() {
     const onCleared = (event: Event) => {
       const ids = clearedIds(event);
       if (ids && !ids.includes("profile")) return;
+      forgetDeviceAccount();
       if (accountsConfigured()) void signOutRemote();
-      setPhase({ status: "signed-out" });
+      setPhase(guestPhase());
     };
     window.addEventListener(DEVICE_CLEARED, onCleared);
     return () => window.removeEventListener(DEVICE_CLEARED, onCleared);
@@ -129,44 +154,51 @@ export function useAccount() {
 
   const account = phase.status === "ready" ? phase.account : null;
   const email = "email" in phase ? phase.email : "";
+  const ownerId = phase.status === "ready" ? phase.ownerId : null;
 
   async function saveClass(name: string, username: string, profile: Profile): Promise<string | null> {
     if (phase.status !== "needs-class" && phase.status !== "ready") return "Sign in first.";
+    if (phase.status === "ready" && !phase.email) {
+      const saved = saveGuestClass(profile);
+      if (!saved) return "Choose a year and a maths course.";
+      setPhase(guestPhase());
+      return null;
+    }
     const clean = cleanName(name);
     const handle = cleanUsername(username);
     if (!clean) return "Add your name.";
     if (!handle) return "Use 3–16 letters, numbers, or _. Start with a letter.";
-    const userId = phase.status === "ready" ? phase.account.id : phase.userId;
-    const previous = deviceDraftFor(email);
-    if (previous && previous.id !== userId) adoptStars(previous.id, userId);
+    const userId = phase.status === "ready" ? phase.account?.id ?? phase.ownerId : phase.userId;
     if (!accountsConfigured()) {
       const saved = saveLocalClass(userId, clean, handle, profile);
       if (saved === "taken") return "That username is taken.";
       if (!saved) return "Sign in first.";
       const next = accountFrom(userId, clean, handle, profile);
       rememberDeviceAccount(next, saved.email);
-      setPhase({ status: "ready", account: next, email: saved.email });
+      adoptDevice(userId);
+      setPhase({ status: "ready", account: next, email: saved.email, ownerId: userId });
       return null;
     }
     const error = await saveProfile(userId, clean, handle, profile);
     if (error) return error;
     const next = accountFrom(userId, clean, handle, profile);
     rememberDeviceAccount(next, email);
+    adoptDevice(userId);
     void hydrateFavourites(userId);
     void hydrateCardNotes(userId);
-    setPhase({ status: "ready", account: next, email });
+    setPhase({ status: "ready", account: next, email, ownerId: userId });
     return null;
   }
 
   async function signOut() {
     if (accountsConfigured()) await signOutRemote();
     else signOutLocal();
-    forgetDeviceAccount();
-    setPhase({ status: "signed-out" });
+    releaseSignedInCache();
+    setPhase(guestPhase());
   }
 
   async function changePassword(current: string, next: string): Promise<string | null> {
-    if (phase.status !== "ready") return "Sign in first.";
+    if (phase.status !== "ready" || !phase.email || !phase.account) return "Sign in first.";
     const issue = passwordIssue(next, email);
     if (issue) return issue;
     if (next === current) return "Choose a different password.";
@@ -182,21 +214,22 @@ export function useAccount() {
   }
 
   async function deleteAccount(password: string): Promise<string | null> {
-    if (!account) return "Sign in first.";
+    if (phase.status !== "ready" || !phase.email || !phase.account) return "Sign in first.";
+    const signedIn = phase.account;
     if (!password) return "Enter your password.";
     if (!accountsConfigured()) {
       const ok = await verifyLocalPassword(email, password);
       if (!ok) return "Current password is wrong.";
-      deleteLocal(account.id);
+      deleteLocal(signedIn.id);
       try {
-        localStorage.removeItem(favouritesStorageKey(account.id));
-        localStorage.removeItem(recentStorageKey(account.id));
+        localStorage.removeItem(favouritesStorageKey(signedIn.id));
+        localStorage.removeItem(recentStorageKey(signedIn.id));
       } catch {
         // The account record is already gone.
       }
-      forgetCardNotes(account.id);
-      forgetDeviceAccount();
-      setPhase({ status: "signed-out" });
+      forgetCardNotes(signedIn.id);
+      releaseSignedInCache();
+      setPhase(guestPhase());
       return null;
     }
     const confirmed = await confirmPassword(email, password);
@@ -204,14 +237,14 @@ export function useAccount() {
     const error = await deleteRemoteAccount();
     if (error) return error;
     try {
-      localStorage.removeItem(favouritesStorageKey(account.id));
-      localStorage.removeItem(recentStorageKey(account.id));
+      localStorage.removeItem(favouritesStorageKey(signedIn.id));
+      localStorage.removeItem(recentStorageKey(signedIn.id));
     } catch {
       // The server account is already gone.
     }
-    forgetCardNotes(account.id);
-    forgetDeviceAccount();
-    setPhase({ status: "signed-out" });
+    forgetCardNotes(signedIn.id);
+    releaseSignedInCache();
+    setPhase(guestPhase());
     return null;
   }
 
@@ -232,10 +265,13 @@ export function useAccount() {
     if (remote && remote !== "offline" && cleanName(remote.name) && cleanUsername(remote.username)) {
       const next = accountFrom(phase.userId, cleanName(remote.name) ?? remote.name, cleanUsername(remote.username) ?? remote.username, remote);
       rememberDeviceAccount(next, phase.email);
-      setPhase({ status: "ready", account: next, email: phase.email });
+      adoptDevice(phase.userId);
+      setPhase({ status: "ready", account: next, email: phase.email, ownerId: phase.userId });
+      void hydrateFavourites(phase.userId);
+      void hydrateCardNotes(phase.userId);
       return null;
     }
-    setPhase({ status: "needs-class", userId: phase.userId, email: phase.email });
+    setPhase(readySignedIn(phase.userId, phase.email, null));
     return null;
   }
 
@@ -260,7 +296,7 @@ export function useAccount() {
     if (accountsConfigured()) return signUpWithEmail(emailAddress, password);
     const result = await registerLocal(emailAddress, password);
     if (result.error || !result.account) return { error: result.error ?? "That did not work. Try again.", confirm: false };
-    setPhase({ status: "needs-class", userId: result.account.id, email: result.account.email });
+    setPhase(phaseFor(result.account));
     return { error: null, confirm: false };
   }
 
@@ -275,6 +311,7 @@ export function useAccount() {
     phase,
     account,
     email,
+    ownerId,
     remote: accountsConfigured(),
     signIn,
     signUp,

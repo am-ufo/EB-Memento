@@ -12,6 +12,7 @@ import { passwordsReady } from "../lib/password";
 import { ClassForm } from "./ClassForm";
 import { NoticeBody } from "./NoticeBody";
 import { PasswordChecklist, PasswordField } from "./PasswordField";
+import { SignIn } from "./SignIn";
 
 type Props = {
   page: Page;
@@ -23,7 +24,12 @@ type Props = {
   notationCount: number;
   profile: Account | null;
   email: string;
+  ownerId: string | null;
+  remote: boolean;
   onSaveProfile: (profile: Profile, name: string, username: string) => Promise<string | null>;
+  onSignIn: (email: string, password: string) => Promise<string | null>;
+  onSignUp: (email: string, password: string) => Promise<{ error: string | null; confirm: boolean }>;
+  onReset: (email: string) => Promise<string | null>;
   onSignOut: () => void;
   onChangePassword: (current: string, next: string) => Promise<string | null>;
   onDeleteAccount: (password: string) => Promise<string | null>;
@@ -55,7 +61,12 @@ export function SettingsScreen({
   notationCount,
   profile,
   email,
+  ownerId,
+  remote,
   onSaveProfile,
+  onSignIn,
+  onSignUp,
+  onReset,
   onSignOut,
   onChangePassword,
   onDeleteAccount,
@@ -96,7 +107,12 @@ export function SettingsScreen({
           notationCount={notationCount}
           profile={profile}
           email={email}
+          ownerId={ownerId}
+          remote={remote}
           onSaveProfile={onSaveProfile}
+          onSignIn={onSignIn}
+          onSignUp={onSignUp}
+          onReset={onReset}
           onSignOut={onSignOut}
           onChangePassword={onChangePassword}
           onDeleteAccount={onDeleteAccount}
@@ -118,7 +134,12 @@ function SettingsHome({
   notationCount,
   profile,
   email,
+  ownerId,
+  remote,
   onSaveProfile,
+  onSignIn,
+  onSignUp,
+  onReset,
   onSignOut,
   onChangePassword,
   onDeleteAccount,
@@ -126,6 +147,7 @@ function SettingsHome({
 }: Omit<Props, "page" | "onClose" | "onBack">) {
   const [pending, setPending] = useState<PendingClear | null>(null);
   const [editingClass, setEditingClass] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
   const [editingPassword, setEditingPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
   const [nextPassword, setNextPassword] = useState("");
@@ -137,11 +159,16 @@ function SettingsHome({
   const [deleteBusy, setDeleteBusy] = useState(false);
   const [status, setStatus] = useState("");
   const [, setRevision] = useState(0);
-  const askOpen = hasAskThread(profile?.id ?? null);
+  const askOpen = hasAskThread(ownerId);
   const stored = hasDeviceData();
   const starred = formulaCount + notationCount;
-  const noteCount = cardNoteCount(profile?.id ?? null);
-  const recentCount = loadRecent(profile?.id ?? null).length;
+  const noteCount = cardNoteCount(ownerId);
+  const recentCount = loadRecent(ownerId).length;
+  const signedIn = Boolean(email);
+
+  useEffect(() => {
+    if (email) setShowSignIn(false);
+  }, [email]);
   const nothing = starred === 0 && recentCount === 0 && !askOpen && !stored;
   const installed = useInstalled();
 
@@ -153,18 +180,52 @@ function SettingsHome({
 
   return (
     <div className="settings-home">
-      <h3 className="settings-label">Signed in</h3>
-      {profile && !editingClass ? (
+      <h3 className="settings-label">{signedIn ? "Signed in" : "Account"}</h3>
+      {showSignIn && !signedIn ? (
+        <SignIn
+          remote={remote}
+          onSignIn={onSignIn}
+          onSignUp={onSignUp}
+          onReset={onReset}
+          onCancel={() => setShowSignIn(false)}
+          cancelLabel="Not now"
+        />
+      ) : editingClass ? (
+        <>
+          <ClassForm
+            key={profile ? profileLabel(profile) : "class"}
+            initial={profile}
+            initialName={signedIn ? profile?.name ?? "" : ""}
+            initialUsername={signedIn ? profile?.username ?? "" : ""}
+            ownerId={ownerId}
+            showName={signedIn}
+            onSave={(next, name, username) => {
+              void onSaveProfile(next, name, username).then((message) => {
+                if (message) {
+                  setStatus(message);
+                  return;
+                }
+                setEditingClass(false);
+                setStatus("Class saved.");
+              });
+            }}
+            submitLabel="Save"
+          />
+          <button type="button" className="text-button class-cancel" onClick={() => setEditingClass(false)}>
+            {profile ? "Keep this class" : "Not now"}
+          </button>
+        </>
+      ) : signedIn ? (
         <div className="settings-card">
           <div className="settings-row">
             <div className="signed-in">
               <span className="avatar" aria-hidden="true">
-                {initials(profile.name)}
+                {initials(profile?.name || email)}
               </span>
               <div>
-                <p className="settings-name">{profile.name || "Add your name"}</p>
-                <p className="settings-hint">{profile.username ? `@${profile.username}` : "Add a username"}</p>
-                <p className="settings-hint">{email ? `Signed in as ${email}` : "Signed in"}</p>
+                <p className="settings-name">{profile?.name || "Add your name"}</p>
+                <p className="settings-hint">{profile?.username ? `@${profile.username}` : "Add a username"}</p>
+                <p className="settings-hint">{`Signed in as ${email}`}</p>
               </div>
             </div>
             <button type="button" className="text-button" onClick={onSignOut}>
@@ -174,10 +235,12 @@ function SettingsHome({
           <div className="settings-block">
             <div className="settings-row">
               <div>
-                <p className="settings-name">{profileLabel(profile)}</p>
+                <p className="settings-name">{profile ? profileLabel(profile) : "Your class"}</p>
                 <p className="settings-hint">
-                  {coversNote(profile) ??
-                    "Marks formulas from this class. The sheet still shows every formula in the subject."}
+                  {profile
+                    ? coversNote(profile) ??
+                      "Marks formulas from this class. The sheet still shows every formula in the subject."
+                    : "Set a year and course to mark formulas. The sheet still shows every formula."}
                 </p>
               </div>
               <button
@@ -190,7 +253,7 @@ function SettingsHome({
                   setEditingClass(true);
                 }}
               >
-                Change
+                {profile ? "Change" : "Set"}
               </button>
             </div>
           </div>
@@ -293,7 +356,7 @@ function SettingsHome({
                 </p>
                 {pending === "person" ? (
                   <Confirm
-                    prompt={`Delete ${profile.name || "this account"}${email ? ` (${email})` : ""}? Enter your password.`}
+                    prompt={`Delete ${profile?.name || "this account"}${email ? ` (${email})` : ""}? Enter your password.`}
                     confirmLabel="Delete account"
                     password={deletePassword}
                     onPassword={(value) => {
@@ -341,33 +404,46 @@ function SettingsHome({
             </div>
           </div>
         </div>
-      ) : profile ? (
-        <>
-          <ClassForm
-            key={profileLabel(profile)}
-            initial={profile}
-            initialName={profile.name}
-            initialUsername={profile.username}
-            ownerId={profile.id}
-            showName
-            onSave={(next, name, username) => {
-              void onSaveProfile(next, name, username).then((message) => {
-                if (message) {
-                  setStatus(message);
-                  return;
-                }
-                setEditingClass(false);
-                setStatus("Class saved.");
-              });
-            }}
-            submitLabel="Save"
-          />
-          <button type="button" className="text-button class-cancel" onClick={() => setEditingClass(false)}>
-            Keep this class
-          </button>
-        </>
       ) : (
-        <p className="settings-hint settings-note">Signed out. Close this page to sign in.</p>
+        <div className="settings-card">
+          <div className="settings-row">
+            <div>
+              <p className="settings-name">Not signed in</p>
+              <p className="settings-hint">
+                {remote
+                  ? "Optional. The same email opens this class, these stars, and these notes on another device."
+                  : "Optional. Your class, stars, and notes stay on this device until you sign in."}
+              </p>
+            </div>
+            <button type="button" className="text-button" onClick={() => setShowSignIn(true)}>
+              Sign in
+            </button>
+          </div>
+          <div className="settings-block">
+            <div className="settings-row">
+              <div>
+                <p className="settings-name">{profile ? profileLabel(profile) : "Your class"}</p>
+                <p className="settings-hint">
+                  {profile
+                    ? coversNote(profile) ??
+                      "Marks formulas from this class. The sheet still shows every formula in the subject."
+                    : "Set a year and course to mark formulas. The sheet still shows every formula."}
+                </p>
+              </div>
+              <button
+                type="button"
+                className="text-button"
+                onClick={() => {
+                  setStatus("");
+                  setPending(null);
+                  setEditingClass(true);
+                }}
+              >
+                {profile ? "Change" : "Set"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       <h3 className="settings-label">Appearance</h3>
@@ -400,11 +476,10 @@ function SettingsHome({
                 />
               ) : null}
             </div>
-            {pending === "favourites" ? null : (
+            {pending === "favourites" || starred === 0 ? null : (
               <button
                 type="button"
                 className="text-button"
-                disabled={starred === 0}
                 onClick={() => {
                   setStatus("");
                   setPending("favourites");
@@ -428,18 +503,17 @@ function SettingsHome({
                   confirmLabel="Remove"
                   onConfirm={() => {
                     clearDevice(["card-notes"]);
-                    if (profile) void pushCardNotes(profile.id, {});
+                    if (ownerId && email) void pushCardNotes(ownerId, {});
                     finish("Notes cleared.");
                   }}
                   onCancel={() => setPending(null)}
                 />
               ) : null}
             </div>
-            {pending === "notes" ? null : (
+            {pending === "notes" || noteCount === 0 ? null : (
               <button
                 type="button"
                 className="text-button"
-                disabled={noteCount === 0}
                 onClick={() => {
                   setStatus("");
                   setPending("notes");
@@ -469,11 +543,10 @@ function SettingsHome({
                 />
               ) : null}
             </div>
-            {pending === "recent" ? null : (
+            {pending === "recent" || recentCount === 0 ? null : (
               <button
                 type="button"
                 className="text-button"
-                disabled={recentCount === 0}
                 onClick={() => {
                   setStatus("");
                   setPending("recent");
@@ -503,11 +576,10 @@ function SettingsHome({
                 />
               ) : null}
             </div>
-            {pending === "ask" ? null : (
+            {pending === "ask" || !askOpen ? null : (
               <button
                 type="button"
                 className="text-button"
-                disabled={!askOpen}
                 onClick={() => {
                   setStatus("");
                   setPending("ask");
@@ -537,11 +609,10 @@ function SettingsHome({
                 />
               ) : null}
             </div>
-            {pending === "all" ? null : (
+            {pending === "all" || nothing ? null : (
               <button
                 type="button"
                 className="text-button"
-                disabled={nothing}
                 onClick={() => {
                   setStatus("");
                   setPending("all");

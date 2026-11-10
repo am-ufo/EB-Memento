@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { flushSync } from "react-dom";
 import type { Formula, Notation } from "./types";
 import { AskChat } from "./components/AskChat";
-import { ClassGate, NewPassword, SignIn } from "./components/SignIn";
+import { NewPassword } from "./components/SignIn";
 import { FormulaCard } from "./components/FormulaCard";
 import { SettingsIcon } from "./components/icons/SettingsIcon";
 import { NotationsTable } from "./components/NotationsTable";
@@ -79,6 +79,7 @@ export function App() {
     phase,
     account,
     email,
+    ownerId,
     remote,
     signIn,
     signUp,
@@ -89,9 +90,9 @@ export function App() {
     deleteAccount,
     finishRecovery,
   } = useAccount();
-  const favourites = useFavourites(account?.id ?? null);
-  const cardNotes = useCardNotes(account?.id ?? null);
-  const recent = useRecent(account?.id ?? null);
+  const favourites = useFavourites(ownerId);
+  const cardNotes = useCardNotes(ownerId);
+  const recent = useRecent(ownerId);
   const profile = account;
   const { theme, preference, setPreference, toggle: toggleTheme } = useTheme();
   const { size: textSize, setSize: setTextSize } = useTextSize();
@@ -205,10 +206,10 @@ export function App() {
 
   const savedEmpty = savedFormulas.length === 0 && savedNotations.length === 0;
   const savedCatalogEmpty = favourites.formulaIds.length === 0 && favourites.notationIds.length === 0;
-  const waiting = phase.status !== "ready";
-  const showPicker = Boolean(profile) && !subject && tab !== "saved";
-  const subjectLabel = !profile || !subject ? "Maths & Physics" : subject === "physics" ? "Physics" : "Maths";
-  const eyebrow = profile ? `${profile.name} · ${subjectLabel}` : `EB · ${subjectLabel}`;
+  const waiting = phase.status === "loading" || phase.status === "recovery";
+  const showPicker = !subject && tab !== "saved";
+  const subjectLabel = !subject ? "Maths & Physics" : subject === "physics" ? "Physics" : "Maths";
+  const eyebrow = profile?.name ? `${profile.name} · ${subjectLabel}` : `EB · ${subjectLabel}`;
   const shellClass = page || waiting ? "shell shell-page" : tab === "ask" && subject ? "shell shell-ask" : "shell";
 
   const linkedFormula = linkedId ? (formulaById.get(linkedId) ?? null) : null;
@@ -233,7 +234,7 @@ export function App() {
     document.title = page ? `${PAGE_TITLE[page]} · EB Memento` : "EB Memento";
   }, [page]);
 
-  const profileKey = profile ? `${profile.id}|${profile.year}|${profile.maths}|${profile.advanced}|${profile.physics}` : "";
+  const profileKey = `${ownerId ?? ""}|${profile?.year ?? ""}|${profile?.maths ?? ""}|${profile?.advanced ?? ""}|${profile?.physics ?? ""}`;
   const seenProfile = useRef(profileKey);
   useEffect(() => {
     if (seenProfile.current === profileKey) return;
@@ -247,19 +248,7 @@ export function App() {
   }, [profileKey]);
 
   useEffect(() => {
-    if (profile || page) return;
-    const hash = window.location.hash;
-    if (hash.includes("access_token") || hash.includes("type=")) return;
-    if (linkedRef.current) return;
-    if (hash) history.replaceState(null, "", homePath());
-    if (subject !== null) {
-      setSubject(null);
-      setTab("formulas");
-    }
-  }, [page, profile, subject]);
-
-  useEffect(() => {
-    if (!profile || page || !linkedId) return;
+    if (page || !linkedId) return;
     const formula = formulaById.get(linkedId);
     if (!formula) return;
     const next = subjectForFormula(formula);
@@ -276,15 +265,16 @@ export function App() {
       setCategory(null);
       setTab("formulas");
     }
-  }, [page, profile, linkedId, subject]);
+  }, [page, linkedId, subject]);
 
   useEffect(() => {
-    if (!profile || !linkedId || !formulaById.has(linkedId)) return;
+    if (!ownerId || !linkedId || !formulaById.has(linkedId)) return;
     recent.remember(linkedId);
-  }, [linkedId, profile, recent.remember]);
+  }, [linkedId, ownerId, recent.remember]);
 
   useEffect(() => {
     if (page || waiting || showPicker || tab !== "formulas" || linkedRef.current) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
     searchRef.current?.focus();
   }, [page, showPicker, tab, waiting]);
 
@@ -299,7 +289,7 @@ export function App() {
 
   function openFormula(id: string) {
     const formula = formulaById.get(id);
-    if (!formula || !profile) return;
+    if (!formula) return;
     const next = subjectForFormula(formula);
     const subjectNow = next ?? subjectRef.current ?? "maths";
     history.replaceState(null, "", formulaHref(id, subjectNow));
@@ -418,7 +408,11 @@ export function App() {
       </header>
 
       <div className="stage">
-      {page ? (
+      {phase.status === "loading" ? (
+        <p className="empty">Opening…</p>
+      ) : phase.status === "recovery" ? (
+        <NewPassword email={email} onSave={finishRecovery} />
+      ) : page ? (
         <SettingsScreen
           page={page}
           preference={preference}
@@ -429,7 +423,12 @@ export function App() {
           notationCount={favourites.notationIds.length}
           profile={profile}
           email={email}
+          ownerId={ownerId}
+          remote={remote}
           onSaveProfile={(next, name, username) => saveClass(name, username, next)}
+          onSignIn={signIn}
+          onSignUp={signUp}
+          onReset={sendReset}
           onSignOut={() => {
             void signOut();
             closePage();
@@ -444,14 +443,6 @@ export function App() {
           onBack={backPage}
           onOpen={openPage}
         />
-      ) : phase.status === "loading" ? (
-        <p className="empty">Opening your account…</p>
-      ) : phase.status === "recovery" ? (
-        <NewPassword email={email} onSave={finishRecovery} />
-      ) : phase.status === "needs-class" ? (
-        <ClassGate email={email} ownerId={phase.userId} onSave={saveClass} />
-      ) : phase.status !== "ready" ? (
-        <SignIn remote={remote} onSignIn={signIn} onSignUp={signUp} onReset={sendReset} />
       ) : tab !== "ask" && !showPicker ? (
         <label className="search">
           <span className="sr-only">{searchLabel}</span>
@@ -497,7 +488,7 @@ export function App() {
           ) : null}
 
           {!query.trim() ? (
-            <nav className="topics" aria-label="Topics">
+            <ChipRow label="Topics">
               <button
                 type="button"
                 className={!topic ? "on" : undefined}
@@ -521,7 +512,7 @@ export function App() {
                   {name}
                 </button>
               ))}
-            </nav>
+            </ChipRow>
           ) : null}
 
           <section className="results">
@@ -551,9 +542,9 @@ export function App() {
 
       {subject && tab === "ask" ? (
         <AskChat
-          key={`${subject}:${profile?.id ?? ""}`}
+          key={`${subject}:${ownerId ?? ""}`}
           subject={subject}
-          accountId={profile?.id ?? ""}
+          accountId={ownerId ?? ""}
           formulas={formulaSearchPool}
           formulaById={formulaById}
           isOnCourse={(formula) => (profile ? onCourse(formula, profile) : false)}
@@ -564,7 +555,7 @@ export function App() {
 
       {subject && tab === "notations" ? (
         <>
-          <nav className="topics" aria-label="Categories">
+          <ChipRow label="Categories">
             <button
               type="button"
               className={!category ? "on" : undefined}
@@ -581,8 +572,8 @@ export function App() {
               >
                 {name}
               </button>
-            ))}
-          </nav>
+              ))}
+          </ChipRow>
 
           <NotationsTable
             notations={notationResults}
@@ -674,5 +665,34 @@ export function App() {
       </nav>
       )}
     </div>
+  );
+}
+
+function ChipRow({ label, children }: { label: string; children: ReactNode }) {
+  const ref = useRef<HTMLElement>(null);
+  const [more, setMore] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const update = () => {
+      const leftover = node.scrollWidth - node.clientWidth - node.scrollLeft;
+      setMore(leftover > 2);
+    };
+    update();
+    node.addEventListener("scroll", update, { passive: true });
+    const observer = new ResizeObserver(update);
+    observer.observe(node);
+    return () => {
+      node.removeEventListener("scroll", update);
+      observer.disconnect();
+    };
+  }, [children]);
+
+  return (
+    <nav ref={ref} className={more ? "topics has-more" : "topics"} aria-label={label}>
+      {children}
+      <span className="topic-fade" aria-hidden="true" />
+    </nav>
   );
 }

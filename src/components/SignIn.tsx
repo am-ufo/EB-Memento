@@ -14,7 +14,14 @@ type AuthFns = {
 
 const LOCAL_RESET_NOTICE = "If that email is on this device, you can set a new password. Nothing was sent.";
 
-export function SignIn({ remote, onSignIn, onSignUp, onReset }: AuthFns & { remote: boolean }) {
+export function SignIn({
+  remote,
+  onSignIn,
+  onSignUp,
+  onReset,
+  onCancel,
+  cancelLabel = "Back to the sheet",
+}: AuthFns & { remote: boolean; onCancel?: () => void; cancelLabel?: string }) {
   const [mode, setMode] = useState<"sign-in" | "create" | "forgot">("sign-in");
   const [resetStep, setResetStep] = useState<"email" | "warn">("email");
   const [email, setEmail] = useState("");
@@ -109,7 +116,7 @@ export function SignIn({ remote, onSignIn, onSignUp, onReset }: AuthFns & { remo
 
   const title = mode === "create" ? "Create account" : mode === "forgot" ? "Reset password" : "Sign in";
   const lead = remote
-    ? "Your email opens the same class and the same stars on another device. The sheet still opens offline after that."
+    ? "Your email opens the same class, stars, and notes on another device. The sheet still opens offline after that."
     : "Your email and password stay on this device. The sheet opens offline.";
 
   return (
@@ -133,6 +140,11 @@ export function SignIn({ remote, onSignIn, onSignUp, onReset }: AuthFns & { remo
           <button type="button" className="text-button class-cancel" onClick={() => switchMode("sign-in")}>
             Back to sign in
           </button>
+          {onCancel ? (
+            <button type="button" className="text-button class-cancel" onClick={onCancel}>
+              {cancelLabel}
+            </button>
+          ) : null}
         </div>
       ) : (
         <>
@@ -206,6 +218,11 @@ export function SignIn({ remote, onSignIn, onSignUp, onReset }: AuthFns & { remo
               Back to sign in
             </button>
           )}
+          {onCancel ? (
+            <button type="button" className="text-button class-cancel" onClick={onCancel}>
+              {cancelLabel}
+            </button>
+          ) : null}
         </>
       )}
     </section>
@@ -279,7 +296,7 @@ export function ClassGate({
       <h2 id="class-gate-title">Your class</h2>
       <p className="auth-lead">
         {email ? `Signed in as ${email}. ` : ""}
-        This chooses the sheet. You can change it later in Settings.
+        This marks formulas from your class. You can change it later in Settings.
       </p>
       {error ? (
         <p className="form-error" role="alert">

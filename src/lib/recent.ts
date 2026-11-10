@@ -33,6 +33,15 @@ function saveRecent(accountId: string, ids: string[]) {
   }
 }
 
+/** Copy this device's recent formulas onto an account that does not have any yet. */
+export function adoptRecent(fromId: string, toId: string) {
+  if (fromId === toId) return;
+  if (loadRecent(toId).length > 0) return;
+  const previous = loadRecent(fromId);
+  if (previous.length === 0) return;
+  saveRecent(toId, previous);
+}
+
 export function useRecent(accountId: string | null) {
   const [ids, setIds] = useState(() => loadRecent(accountId));
 
