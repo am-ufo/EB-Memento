@@ -26,7 +26,7 @@ export const SITE = {
   host: "Vercel",
   /** Shown in Settings. Keep this in step with package.json when you release. */
   version: "0.1.0",
-  updated: "11 November 2026",
+  updated: "17 November 2026",
 } as const;
 
 export const THEME_KEY = "memento:theme";
@@ -38,7 +38,7 @@ export const AUTH_ATTEMPTS_KEY = "memento:auth-attempts";
 export const FAVOURITES_KEY = "memento:favourites";
 export const RECENT_KEY = "memento:recent";
 export const CARD_NOTES_KEY = "memento:card-notes";
-export const FEEDBACK_EMAIL = "feedback@ebmemento.eu";
+export const FEEDBACK_EMAIL = "am.ufo@protonmail.com";
 
 /** One Ask thread per subject. Add a key here when a new subject stores a thread. */
 export const ASK_KEYS: Record<Subject, string> = {
