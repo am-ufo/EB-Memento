@@ -318,7 +318,7 @@ export function AskChat({
         <div className="chat-welcome">
           <p className="empty">
             Describe the problem. I will walk through the formulas in order, and remember the steps if you need more
-            than one.
+            than one
           </p>
           <div className="chat-examples">
             {EXAMPLES.map((example) => (

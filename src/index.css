@@ -114,7 +114,25 @@ html[data-text="large"] {
 }
 
 .top-copy {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
   min-width: 0;
+}
+
+.top-titles {
+  min-width: 0;
+}
+
+.brand-mark {
+  flex: none;
+  width: 2.45rem;
+  height: 2.45rem;
+  border-radius: 0.55rem;
+}
+
+:root[data-theme="dark"] .brand-mark {
+  outline: 1px solid var(--line);
 }
 
 .top-actions {

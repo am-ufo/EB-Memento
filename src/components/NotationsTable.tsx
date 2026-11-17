@@ -11,7 +11,7 @@ type Props = {
 
 export function NotationsTable({ notations, isSaved, yours, onToggleSaved }: Props) {
   if (notations.length === 0) {
-    return <p className="empty">No match. Try another word, or a category.</p>;
+    return <p className="empty">No match. Try another word, or a category</p>;
   }
 
   return (

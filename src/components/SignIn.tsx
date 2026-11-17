@@ -116,8 +116,8 @@ export function SignIn({
 
   const title = mode === "create" ? "Create account" : mode === "forgot" ? "Reset password" : "Sign in";
   const lead = remote
-    ? "Your email opens the same class, stars, and notes on another device. The sheet still opens offline after that."
-    : "Your email and password stay on this device. The sheet opens offline.";
+    ? "Your email opens the same class, stars, and notes on another device. The sheet still opens offline after that"
+    : "Your email and password stay on this device. The sheet opens offline";
 
   return (
     <section className="auth-card" aria-labelledby="sign-in-title">
@@ -248,7 +248,7 @@ export function NewPassword({ email, onSave }: { email: string; onSave: (passwor
   return (
     <section className="auth-card" aria-labelledby="new-password-title">
       <h2 id="new-password-title">New password</h2>
-      <p className="auth-lead">This replaces the password for {email || "your account"}.</p>
+      <p className="auth-lead">This replaces the password for {email || "your account"}</p>
       <form
         className="class-form"
         onSubmit={(event) => {
@@ -296,7 +296,7 @@ export function ClassGate({
       <h2 id="class-gate-title">Your class</h2>
       <p className="auth-lead">
         {email ? `Signed in as ${email}. ` : ""}
-        This marks formulas from your class. You can change it later in Settings.
+        This marks formulas from your class. You can change it later in Settings
       </p>
       {error ? (
         <p className="form-error" role="alert">

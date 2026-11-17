@@ -250,8 +250,8 @@ function SettingsHome({
                 <p className="settings-hint">
                   {profile
                     ? coversNote(profile) ??
-                      "Marks formulas from this class. The sheet still shows every formula in the subject."
-                    : "Set a year and course to mark formulas. The sheet still shows every formula."}
+                      "Marks formulas from this class. The sheet still shows every formula in the subject"
+                    : "Set a year and course to mark formulas. The sheet still shows every formula"}
                 </p>
               </div>
               <button
@@ -272,7 +272,7 @@ function SettingsHome({
             <div className="settings-row">
               <div>
                 <p className="settings-name">Password</p>
-                <p className="settings-hint">Change the password for this email.</p>
+                <p className="settings-hint">Change the password for this email</p>
               </div>
               {editingPassword ? null : (
                 <button
@@ -363,7 +363,7 @@ function SettingsHome({
               <div>
                 <p className="settings-name">Delete account</p>
                 <p className="settings-hint">
-                  Deletes the email, the class, the stars, and the formula notes. This cannot be undone.
+                  Deletes the email, the class, the stars, and the formula notes. This cannot be undone
                 </p>
                 {pending === "person" ? (
                   <Confirm
@@ -422,8 +422,8 @@ function SettingsHome({
               <p className="settings-name">Not signed in</p>
               <p className="settings-hint">
                 {remote
-                  ? "Optional. The same email opens this class, these stars, and these notes on another device."
-                  : "Optional. Your class, stars, and notes stay on this device until you sign in."}
+                  ? "Optional. The same email opens this class, these stars, and these notes on another device"
+                  : "Optional. Your class, stars, and notes stay on this device until you sign in"}
               </p>
             </div>
             <button type="button" className="text-button" onClick={() => setShowSignIn(true)}>
@@ -437,8 +437,8 @@ function SettingsHome({
                 <p className="settings-hint">
                   {profile
                     ? coversNote(profile) ??
-                      "Marks formulas from this class. The sheet still shows every formula in the subject."
-                    : "Set a year and course to mark formulas. The sheet still shows every formula."}
+                      "Marks formulas from this class. The sheet still shows every formula in the subject"
+                    : "Set a year and course to mark formulas. The sheet still shows every formula"}
                 </p>
               </div>
               <button
@@ -507,7 +507,7 @@ function SettingsHome({
             <div>
               <p className="settings-name">Notes</p>
               <p className="settings-hint">
-                {noteCount === 0 ? "None yet." : `${noteCount} formula note${noteCount === 1 ? "" : "s"}`}
+                {noteCount === 0 ? "None yet" : `${noteCount} formula note${noteCount === 1 ? "" : "s"}`}
               </p>
               {pending === "notes" ? (
                 <Confirm
@@ -541,7 +541,7 @@ function SettingsHome({
             <div>
               <p className="settings-name">Recent</p>
               <p className="settings-hint">
-                {recentCount === 0 ? "None yet." : `${recentCount} formula${recentCount === 1 ? "" : "s"}`}
+                {recentCount === 0 ? "None yet" : `${recentCount} formula${recentCount === 1 ? "" : "s"}`}
               </p>
               {pending === "recent" ? (
                 <Confirm
@@ -574,7 +574,7 @@ function SettingsHome({
             <div>
               <p className="settings-name">Ask</p>
               <p className="settings-hint">
-                {askOpen ? "A problem is open in this tab." : "Nothing open in this tab."}
+                {askOpen ? "A problem is open in this tab" : "Nothing open in this tab"}
               </p>
               {pending === "ask" ? (
                 <Confirm
@@ -607,7 +607,7 @@ function SettingsHome({
             <div>
               <p className="settings-name">Everything</p>
               <p className="settings-hint">
-                {nothing ? "Nothing stored yet." : "Sign-in on this device, theme, text size, teacher, stars, recent formulas, notes, and Ask."}
+                {nothing ? "Nothing stored yet" : "Sign-in on this device, theme, text size, teacher, stars, recent formulas, notes, and Ask"}
               </p>
               {pending === "all" ? (
                 <Confirm
@@ -636,7 +636,7 @@ function SettingsHome({
           </div>
         </div>
       </div>
-      <p className="settings-hint settings-note">The offline copy of the app stays until you clear site data in the browser.</p>
+      <p className="settings-hint settings-note">The offline copy of the app stays until you clear site data in the browser</p>
       {status ? (
         <p className="settings-status" role="status">
           {status}
@@ -646,17 +646,14 @@ function SettingsHome({
       <h3 className="settings-label">About</h3>
       <div className="settings-card">
         <div className="settings-copy">
-          <p>
-            A pocket sheet of European Baccalaureate maths and physics formulas. Open it, take one answer, close it.
-            After the first visit it works offline.
-          </p>
-          <p>Formulas follow the syllabus. If a line matters for a mark, check the official syllabus.</p>
+          <p>Every EB maths and physics formula, searchable and offline. Open it, take one answer, close it.</p>
+          <p>Formulas follow the syllabus. Check the official line when a mark depends on it.</p>
           <p>
             {installed
               ? "This copy is on your home screen, so it opens offline."
               : "To keep it offline, add Memento to your home screen from the browser menu."}
           </p>
-          <p>Made by {SITE.makers}. Not an official European Schools app.</p>
+          <p>Made by Artem Murashko, TES student.</p>
           <p className="settings-hint">Version {SITE.version}</p>
         </div>
         <a className="settings-link feedback-link" href={`mailto:${FEEDBACK_EMAIL}?subject=EB%20Memento`}>
@@ -782,7 +779,7 @@ function PolicyLink({ title, hint, onClick }: { title: string; hint: string; onC
 }
 
 function favouriteSummary(formulas: number, notations: number): string {
-  if (formulas === 0 && notations === 0) return "None yet.";
+  if (formulas === 0 && notations === 0) return "None yet";
   const parts: string[] = [];
   if (formulas > 0) parts.push(countLabel(formulas, "formula"));
   if (notations > 0) parts.push(countLabel(notations, "notation"));

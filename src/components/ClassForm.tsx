@@ -96,7 +96,7 @@ export function ClassForm({
             aria-labelledby="sign-in-name-label"
             autoFocus
           />
-          {nameStarted && !cleaned ? <span className="settings-hint">Use your first name.</span> : null}
+          {nameStarted && !cleaned ? <span className="settings-hint">Use your first name</span> : null}
         </label>
       ) : null}
       {showName ? (
@@ -118,13 +118,13 @@ export function ClassForm({
             aria-labelledby="sign-in-username-label"
           />
           {taken ? (
-            <span className="settings-hint">That username is taken.</span>
+            <span className="settings-hint">That username is taken</span>
           ) : usernameStarted && !handle ? (
-            <span className="settings-hint">Use 3–16 letters, numbers, or _. Start with a letter.</span>
+            <span className="settings-hint">Use 3–16 letters, numbers, or _. Start with a letter</span>
           ) : (
             <span className="settings-hint">
               Friends and people at your school find you by this. Capitals stay. {example.hintName} and {example.hintFold}{" "}
-              are the same username.
+              are the same username
             </span>
           )}
         </label>
@@ -168,7 +168,7 @@ export function ClassForm({
               ))}
             </div>
           ) : (
-            <p className="settings-hint">Choose a year first.</p>
+            <p className="settings-hint">Choose a year first</p>
           )}
         </div>
 
@@ -193,12 +193,12 @@ export function ClassForm({
           <span>Physics</span>
           <span>{physics ? "On" : "Off"}</span>
         </button>
-        <p className="settings-hint">Marks your physics course. The Physics sheet stays open either way.</p>
+        <p className="settings-hint">Marks your physics course. The Physics sheet stays open either way</p>
       </div>
 
       {note ? <p className="settings-hint class-note">{note}</p> : null}
       {upper ? (
-        <p className="settings-hint class-note">Advanced is the extra course, on top of 3 or 5 period.</p>
+        <p className="settings-hint class-note">Advanced is the extra course, on top of 3 or 5 period</p>
       ) : null}
 
       <button type="submit" className="class-save" disabled={!draft || !nameReady}>

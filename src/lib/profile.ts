@@ -79,10 +79,10 @@ export function profileLabel(profile: Profile): string {
 /** Why a shorter maths course still marks the longer syllabus. */
 export function coversNote(profile: Profile): string | null {
   if (!isUpper(profile.year) && profile.maths === "4") {
-    return "4 period sits inside the 6 period syllabus, so 6 period formulas are marked as yours. The sheet still shows every formula.";
+    return "4 period sits inside the 6 period syllabus, so 6 period formulas are marked as yours. The sheet still shows every formula";
   }
   if (isUpper(profile.year) && profile.maths === "3") {
-    return "3 period sits inside the 5 period syllabus, so 5 period formulas are marked as yours. The sheet still shows every formula.";
+    return "3 period sits inside the 5 period syllabus, so 5 period formulas are marked as yours. The sheet still shows every formula";
   }
   return null;
 }

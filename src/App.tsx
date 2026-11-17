@@ -404,14 +404,17 @@ export function App() {
     <div className={shellClass}>
       <header className="top">
         <div className="top-copy">
-          {subject && !page ? (
-            <a className="eyebrow" href={homePath()} aria-label="All subjects">
-              {eyebrow}
-            </a>
-          ) : (
-            <p className="eyebrow">{eyebrow}</p>
-          )}
-          <h1>Memento</h1>
+          <img className="brand-mark" src="/logo.svg" alt="" width="40" height="40" />
+          <div className="top-titles">
+            {subject && !page ? (
+              <a className="eyebrow" href={homePath()} aria-label="All subjects">
+                {eyebrow}
+              </a>
+            ) : (
+              <p className="eyebrow">{eyebrow}</p>
+            )}
+            <h1>Memento</h1>
+          </div>
         </div>
         <div className="top-actions">
           <ThemeToggle theme={theme} onToggle={toggleTheme} />
@@ -539,9 +542,9 @@ export function App() {
 
           <section className="results">
             {linkedMissing ? (
-              <p className="empty">That formula is not in the sheet.</p>
+              <p className="empty">That formula is not in the sheet</p>
             ) : formulaCards.length === 0 ? (
-              <p className="empty">No match. Try another word, or a topic.</p>
+              <p className="empty">No match. Try another word, or a topic</p>
             ) : (
               formulaCards.map((formula) => (
                 <FormulaCard
@@ -612,8 +615,8 @@ export function App() {
         savedEmpty ? (
           <p className="empty">
             {savedCatalogEmpty
-              ? "Star a formula or notation to keep it here."
-              : "No match in saved items. Try another word."}
+              ? "Star a formula or notation to keep it here"
+              : "No match in saved items. Try another word"}
           </p>
         ) : (
           <>
