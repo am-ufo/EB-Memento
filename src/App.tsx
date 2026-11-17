@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { flushSync } from "react-dom";
 import type { Formula, Notation } from "./types";
-import { AskChat } from "./components/AskChat";
+import { AskChat, type AskPresence } from "./components/AskChat";
+import { TeacherDock } from "./components/TeacherDock";
 import { NewPassword } from "./components/SignIn";
 import { FormulaCard } from "./components/FormulaCard";
 import { SettingsIcon } from "./components/icons/SettingsIcon";
@@ -22,7 +23,9 @@ import { categoriesOf, searchFormulas, searchNotations, topicsOf } from "./lib/s
 import { hashForSubject, homePath, subjectFromHash } from "./lib/route";
 import { formulasFor, isMaths, isPhysics, notationsFor, searchPool, type Subject } from "./lib/subject";
 import { useTextSize } from "./lib/text-size";
+import { useTeacher } from "./lib/teacher";
 import { useTheme } from "./lib/theme";
+import type { ProfPose } from "./lib/prof";
 
 const formulas = formulaCatalog as Formula[];
 const notations = notationCatalog as Notation[];
@@ -96,6 +99,12 @@ export function App() {
   const profile = account;
   const { theme, preference, setPreference, toggle: toggleTheme } = useTheme();
   const { size: textSize, setSize: setTextSize } = useTextSize();
+  const [teacher, setTeacher] = useTeacher();
+  const [askPresence, setAskPresence] = useState<AskPresence | null>(null);
+  const askExample = useRef<(() => void) | null>(null);
+  const reportPresence = useCallback((presence: AskPresence | null) => {
+    setAskPresence(presence);
+  }, []);
   const subjectRef = useRef(subject);
   subjectRef.current = subject;
   const pageRef = useRef(page);
@@ -220,6 +229,17 @@ export function App() {
       : linkedFormula && !formulaResults.some((item) => item.id === linkedFormula.id)
         ? [linkedFormula, ...formulaResults]
         : formulaResults;
+  const searching = tab !== "ask" && !showPicker && query.trim().length > 0;
+  const searchMiss =
+    searching &&
+    ((tab === "formulas" && formulaCards.length === 0) ||
+      (tab === "notations" && notationResults.length === 0) ||
+      (tab === "saved" && savedEmpty));
+  const browsePose: ProfPose = searchMiss ? "nomatch" : searching ? "typing" : "idle";
+  const onAsk = tab === "ask" && Boolean(subject) && !page && !waiting;
+  const dockPose = onAsk && askPresence ? askPresence.pose : browsePose;
+  const dockSeed = onAsk && askPresence ? askPresence.seed : query.trim() || "browse";
+  const dockPending = Boolean(onAsk && askPresence?.pending);
   const recentFormulas = recent.ids.flatMap((id) => {
     const formula = formulaById.get(id);
     return formula ? [formula] : [];
@@ -419,6 +439,8 @@ export function App() {
           onPreference={setPreference}
           textSize={textSize}
           onTextSize={setTextSize}
+          teacher={teacher}
+          onTeacher={setTeacher}
           formulaCount={favourites.formulaIds.length}
           notationCount={favourites.notationIds.length}
           profile={profile}
@@ -550,6 +572,8 @@ export function App() {
           isOnCourse={(formula) => (profile ? onCourse(formula, profile) : false)}
           favourites={favourites}
           onOpenFormula={recent.remember}
+          onPresence={reportPresence}
+          exampleRef={askExample}
         />
       ) : null}
 
@@ -627,6 +651,17 @@ export function App() {
       </>
       )}
       </div>
+
+      {page || waiting ? null : (
+        <TeacherDock
+          id={teacher}
+          pose={dockPose}
+          seed={dockSeed}
+          pending={dockPending}
+          raised={onAsk}
+          onExample={onAsk ? () => askExample.current?.() : undefined}
+        />
+      )}
 
       {page || waiting ? null : (
       <nav className="tabbar" style={{ "--tab": tabIndex } as CSSProperties} aria-label="Sections">

@@ -94,7 +94,7 @@ body::before {
 .shell {
   max-width: 40rem;
   margin: 0 auto;
-  padding: 1.25rem 1rem calc(5.25rem + env(safe-area-inset-bottom));
+  padding: 1.25rem 1rem calc(9.15rem + env(safe-area-inset-bottom));
 }
 
 .shell-page {
@@ -578,7 +578,7 @@ h1 {
 }
 
 .shell-ask {
-  padding-bottom: calc(12.5rem + env(safe-area-inset-bottom));
+  padding-bottom: calc(16.75rem + env(safe-area-inset-bottom));
 }
 
 .chat-welcome,
@@ -589,7 +589,7 @@ h1 {
 }
 
 .chat-end {
-  scroll-margin-bottom: 11rem;
+  scroll-margin-bottom: 15.25rem;
 }
 
 .chat-examples {
@@ -724,6 +724,453 @@ h1 {
 .chat-step-text {
   margin: 0;
   line-height: 1.45;
+}
+
+.prof-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 3.5rem;
+}
+
+.prof {
+  flex: none;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.7rem;
+  background: transparent;
+  color: var(--ink);
+}
+
+.prof:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.prof-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.prof-face,
+.prof-body,
+.prof-hand {
+  fill: var(--card);
+  stroke: currentColor;
+  stroke-width: 1.7;
+}
+
+.prof-skin {
+  fill: #f0c7a4;
+  stroke: #e2b08a;
+  stroke-width: 0.55;
+}
+
+.prof-neck {
+  stroke: none;
+}
+
+.prof-shoulders {
+  stroke-linecap: round;
+}
+
+.prof-eye {
+  fill: currentColor;
+  stroke: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: prof-blink 5.4s var(--ease) infinite;
+}
+
+.prof-sclera {
+  fill: #fffaf6;
+  stroke: none;
+}
+
+.prof-pupil {
+  fill: #2c211c;
+  stroke: none;
+}
+
+.prof-iris {
+  fill: #6b4a32;
+  stroke: none;
+}
+
+.prof-catch {
+  fill: #fff;
+  stroke: none;
+}
+
+.prof-brow {
+  fill: none;
+  stroke: #3c2c24;
+  stroke-width: 1.15;
+  stroke-linecap: round;
+}
+
+.prof-mouth {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+}
+
+.prof-mouth-flat {
+  opacity: 0;
+}
+
+.prof-hair,
+.prof-moustache {
+  fill: #3c2c24;
+  stroke: none;
+}
+
+.prof-hair-grey {
+  fill: #d5d0c8;
+  stroke: #8f8a82;
+  stroke-width: 0.65;
+}
+
+:root[data-theme="dark"] .prof-hair,
+:root[data-theme="dark"] .prof-moustache {
+  fill: #7d5640;
+}
+
+:root[data-theme="dark"] .prof-hair-grey {
+  fill: #ece7df;
+  stroke: #b7b2a8;
+}
+
+.prof-hair-edge,
+:root[data-theme="dark"] .prof-hair-grey.prof-hair-edge {
+  fill: none;
+}
+
+:root[data-theme="dark"] .teacher-einstein .prof-moustache {
+  fill: #d5d0c8;
+}
+
+.prof-bridge {
+  stroke: none;
+}
+
+.prof-grain {
+  fill: none;
+  stroke: #6b5348;
+  stroke-width: 0.8;
+  stroke-linecap: round;
+  opacity: 0.28;
+}
+
+:root[data-theme="dark"] .prof-grain {
+  stroke: #b08a72;
+  opacity: 0.22;
+}
+
+.teacher-newton .prof-grain,
+.teacher-einstein .prof-grain {
+  stroke: #9a948c;
+  opacity: 0.32;
+}
+
+:root[data-theme="dark"] .teacher-newton .prof-grain,
+:root[data-theme="dark"] .teacher-einstein .prof-grain {
+  stroke: #8d8880;
+  opacity: 0.26;
+}
+
+.teacher-newton .prof-strand,
+.teacher-einstein .prof-strand {
+  stroke: #9a958c;
+}
+
+.prof-strand,
+.prof-brim {
+  fill: none;
+  stroke: #3c2c24;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+
+.prof-cloth {
+  fill: #3a342e;
+  stroke: none;
+}
+
+.prof-shirt {
+  fill: #5d6b78;
+}
+
+.prof-vest {
+  fill: #c4956a;
+}
+
+.prof-collar {
+  fill: #f4efe6;
+  stroke: none;
+}
+
+.teacher-einstein .prof-brow,
+.teacher-newton .prof-brow {
+  stroke: #8d8880;
+}
+
+.teacher-einstein .prof-moustache {
+  fill: #6d6862;
+}
+
+.prof-apple,
+.prof-tongue {
+  fill: var(--accent);
+  stroke: none;
+}
+
+.prof-tongue {
+  opacity: 0;
+}
+
+.prof-stem {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.prof-gaze,
+.prof-drop {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.teacher-dock {
+  position: fixed;
+  left: 50%;
+  bottom: calc(3.75rem + env(safe-area-inset-bottom));
+  z-index: 3;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 40rem;
+  padding: 0.15rem 1rem 0.2rem;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+.teacher-dock-ask {
+  bottom: calc(9.45rem + env(safe-area-inset-bottom));
+}
+
+.prof-head,
+.prof-arm,
+.prof-shoulders {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transition: transform 220ms var(--ease);
+}
+
+.prof-arm {
+  transform-origin: center top;
+}
+
+.pose-typing .prof-head {
+  transform: rotate(8deg);
+}
+
+.pose-thinking .prof-head {
+  transform: rotate(-8deg);
+}
+
+.pose-thinking .prof-arm {
+  transform: rotate(-16deg);
+}
+
+.pose-answer .prof-head {
+  transform: translateY(2px);
+  animation: prof-nod 420ms var(--ease);
+}
+
+.pose-answer .prof-arm {
+  transform: rotate(-8deg);
+}
+
+.pose-nomatch .prof-shoulders {
+  transform: translateY(-3px);
+}
+
+.pose-nomatch .prof-head {
+  transform: rotate(-5deg);
+}
+
+.pose-nomatch .prof-arm {
+  transform: rotate(8deg);
+}
+
+.pose-nomatch .prof-mouth-smile {
+  opacity: 0;
+}
+
+.pose-nomatch .prof-mouth-flat {
+  opacity: 1;
+}
+
+.teacher-veritasium .prof-shirt {
+  fill: #4d7394;
+  stroke: none;
+}
+
+.teacher-veritasium .prof-collar {
+  fill: #6d92b0;
+}
+
+.teacher-veritasium .prof-head {
+  transform: rotate(-4deg);
+}
+
+.teacher-veritasium.pose-thinking .prof-head {
+  transform: rotate(-8deg);
+}
+
+.teacher-veritasium.pose-thinking .prof-gaze {
+  transform: translateY(-1.6px);
+}
+
+.teacher-veritasium.pose-answer .prof-head {
+  transform: rotate(-1deg);
+  animation: none;
+}
+
+.teacher-veritasium.pose-nomatch .prof-head {
+  transform: rotate(3deg);
+}
+
+.teacher-reza.pose-typing .prof-head {
+  transform: rotate(3deg);
+}
+
+.teacher-reza.pose-thinking .prof-head {
+  transform: none;
+}
+
+.teacher-reza.pose-thinking .prof-eye {
+  animation: none;
+  transform: scaleY(0.45);
+}
+
+.teacher-reza.pose-answer .prof-head {
+  transform: translateY(1px);
+  animation: pierre-nod 280ms var(--ease);
+}
+
+.teacher-reza.pose-nomatch .prof-head {
+  transform: rotate(-3deg);
+}
+
+.teacher-newton .prof-head {
+  transform: rotate(-4deg);
+}
+
+.teacher-newton.pose-answer .prof-head {
+  transform: rotate(-2deg);
+  animation: none;
+}
+
+.teacher-newton.pose-answer .prof-mouth-smile {
+  opacity: 1;
+}
+
+.teacher-newton.pose-answer .prof-mouth-flat {
+  opacity: 0;
+}
+
+.teacher-newton.pose-answer .prof-drop {
+  transform: translateY(4px);
+}
+
+.teacher-newton.pose-nomatch .prof-head {
+  transform: rotate(6deg);
+}
+
+.teacher-newton.pose-nomatch .prof-shoulders {
+  transform: none;
+}
+
+.teacher-einstein.pose-thinking .prof-head {
+  transform: none;
+}
+
+.teacher-einstein.pose-thinking .prof-gaze {
+  transform: translateY(-1.8px);
+}
+
+.teacher-einstein.pose-answer .prof-head {
+  transform: none;
+  animation: none;
+}
+
+.teacher-einstein.pose-answer .prof-tongue {
+  opacity: 1;
+}
+
+.prof-line {
+  margin: 0;
+  min-width: 0;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.prof-name {
+  display: block;
+  margin-bottom: 0.1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@keyframes prof-blink {
+  0%,
+  42%,
+  48%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  45% {
+    transform: scaleY(0.12);
+  }
+}
+
+@keyframes prof-nod {
+  0% {
+    transform: translateY(0);
+  }
+
+  45% {
+    transform: translateY(3.5px);
+  }
+
+  100% {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes pierre-nod {
+  0% {
+    transform: translateY(0);
+  }
+
+  45% {
+    transform: translateY(1.5px);
+  }
+
+  100% {
+    transform: translateY(1px);
+  }
 }
 
 .composer {
@@ -1027,6 +1474,7 @@ button:active:not(:disabled) {
 }
 
 button:focus-visible,
+.prof:focus-visible,
 a.subject-card:focus-visible,
 a.eyebrow:focus-visible,
 a.settings-link:focus-visible,
@@ -1438,6 +1886,11 @@ a.settings-link:focus-visible,
   border: 1px solid var(--line);
   border-radius: 0.85rem;
   background: var(--bg);
+}
+
+.segment-wrap {
+  grid-auto-flow: row;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .segment button {

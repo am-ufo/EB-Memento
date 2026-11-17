@@ -26,11 +26,12 @@ export const SITE = {
   host: "Vercel",
   /** Shown in Settings. Keep this in step with package.json when you release. */
   version: "0.1.0",
-  updated: "10 November 2026",
+  updated: "11 November 2026",
 } as const;
 
 export const THEME_KEY = "memento:theme";
 export const TEXT_KEY = "memento:text";
+export const TEACHER_KEY = "memento:teacher";
 export const PROFILE_KEY = "memento:profile";
 export const ACCOUNTS_KEY = "memento:accounts";
 export const AUTH_ATTEMPTS_KEY = "memento:auth-attempts";
@@ -70,6 +71,14 @@ export const DEVICE = [
     name: "Text size",
     holds: "Large text, if you turn it on. The default size is not saved.",
     lasts: "Stays until you switch back to default, or clear data in Settings.",
+  },
+  {
+    id: "teacher",
+    keys: [TEACHER_KEY],
+    area: "local",
+    name: "Teacher",
+    holds: "The teacher who stays with you on the sheet and in Ask.",
+    lasts: "Stays until you choose another, or clear data in Settings.",
   },
   {
     id: "profile",
@@ -184,7 +193,7 @@ export const TECHNICAL: readonly TechnicalRecord[] = [
   {
     id: "offline-copy",
     name: "Offline copy",
-    holds: "The app itself — pages, formulas, and styles — so Memento opens with no connection. Not your stars, your notes, your theme, or what you typed in Ask.",
+    holds: "The app itself — pages, formulas, and styles — so Memento opens with no connection. Not your stars, your notes, your theme, your teacher, or what you typed in Ask.",
     lasts: "Stays until a new version is saved, or you clear site data for Memento in the browser.",
   },
 ];
@@ -254,7 +263,7 @@ export const NOT_A_COOKIE_NOTE =
   "The list below is easy to confuse with cookies. A copy stays on this device so the sheet opens offline. It is not a cookie. The account copy goes to Supabase, listed under Other tools.";
 
 export const CLEAR_NOTE =
-  "Settings can clear the accounts on this device, theme, text size, stars, recent formulas, notes, and Ask. Delete account removes one email. On a connected copy, clearing this device signs you out here and the Supabase account stays until Delete account. To remove the offline copy as well, clear site data for Memento in the browser.";
+  "Settings can clear the accounts on this device, theme, text size, teacher, stars, recent formulas, notes, and Ask. Delete account removes one email. On a connected copy, clearing this device signs you out here and the Supabase account stays until Delete account. To remove the offline copy as well, clear site data for Memento in the browser.";
 
 export function sentEmptyParagraph(): string {
   return "Nothing you type is sent to a server. The sheet stays on your device.";

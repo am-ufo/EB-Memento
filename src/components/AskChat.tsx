@@ -12,7 +12,14 @@ import { rankAskCandidates } from "../lib/search";
 import type { Subject } from "../lib/subject";
 import { useCardNotes } from "../lib/card-notes";
 import { askStorageKey } from "../lib/storage";
+import { profExample, profPose, type ProfPose } from "../lib/prof";
 import { FormulaCard } from "./FormulaCard";
+
+export type AskPresence = {
+  pose: ProfPose;
+  seed: string;
+  pending: boolean;
+};
 
 type Favourites = {
   isFormulaSaved: (id: string) => boolean;
@@ -27,6 +34,8 @@ type Props = {
   isOnCourse: (formula: Formula) => boolean;
   favourites: Favourites;
   onOpenFormula: (id: string) => void;
+  onPresence: (presence: AskPresence | null) => void;
+  exampleRef: { current: (() => void) | null };
 };
 
 type StepView = {
@@ -163,14 +172,27 @@ function loadThread(
   }
 }
 
-export function AskChat({ subject, accountId, formulas, formulaById, isOnCourse, favourites, onOpenFormula }: Props) {
+export function AskChat({
+  subject,
+  accountId,
+  formulas,
+  formulaById,
+  isOnCourse,
+  favourites,
+  onOpenFormula,
+  onPresence,
+  exampleRef,
+}: Props) {
   const cardNotes = useCardNotes(accountId);
   const [thread] = useState(() => loadThread(subject, accountId, new Set(formulaById.keys())));
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<Message[]>(thread.messages);
   const [memory, setMemory] = useState<ProblemMemory | null>(thread.memory);
   const [pending, setPending] = useState(false);
+  const [exampleIndex, setExampleIndex] = useState(0);
+  const [greeting, setGreeting] = useState(0);
   const endRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const requestRef = useRef(0);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -209,6 +231,7 @@ export function AskChat({ subject, accountId, formulas, formulaById, isOnCourse,
     setMessages([]);
     setMemory(null);
     setDraft("");
+    setGreeting((count) => count + 1);
   }
 
   async function send(text: string) {
@@ -259,6 +282,28 @@ export function AskChat({ subject, accountId, formulas, formulaById, isOnCourse,
 
   const note = memory ? workingLine(memory) : "";
   const canClear = messages.length > 0 || memory !== null;
+  const pose = profPose({ pending, draft, messages });
+  const lineSeed = messages.length > 0 ? (messages[messages.length - 1]?.id ?? "") : String(greeting);
+
+  useEffect(() => {
+    exampleRef.current = () => {
+      if (pending) return;
+      setDraft(profExample(exampleIndex));
+      setExampleIndex((index) => index + 1);
+      inputRef.current?.focus();
+    };
+  }, [exampleIndex, exampleRef, pending]);
+
+  useEffect(() => {
+    onPresence({ pose, seed: lineSeed, pending });
+  }, [lineSeed, onPresence, pending, pose]);
+
+  useEffect(() => {
+    return () => {
+      exampleRef.current = null;
+      onPresence(null);
+    };
+  }, [exampleRef, onPresence]);
 
   return (
     <div className="chat">
@@ -337,6 +382,7 @@ export function AskChat({ subject, accountId, formulas, formulaById, isOnCourse,
           <label className="composer-field">
             <span className="sr-only">Your problem</span>
             <input
+              ref={inputRef}
               value={draft}
               onChange={(event) => setDraft(event.target.value)}
               placeholder="I need to find…"

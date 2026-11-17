@@ -7,6 +7,7 @@ import { pushCardNotes } from "../lib/cloud";
 import { loadRecent } from "../lib/recent";
 import { clearDevice, hasAskThread, hasDeviceData } from "../lib/storage";
 import type { TextSize } from "../lib/text-size";
+import { TEACHERS, type TeacherId } from "../lib/teacher";
 import type { ThemePreference } from "../lib/theme";
 import { passwordsReady } from "../lib/password";
 import { ClassForm } from "./ClassForm";
@@ -20,6 +21,8 @@ type Props = {
   onPreference: (value: ThemePreference) => void;
   textSize: TextSize;
   onTextSize: (value: TextSize) => void;
+  teacher: TeacherId;
+  onTeacher: (value: TeacherId) => void;
   formulaCount: number;
   notationCount: number;
   profile: Account | null;
@@ -51,12 +54,16 @@ const SIZES: { id: TextSize; label: string }[] = [
   { id: "large", label: "Large" },
 ];
 
+const TEACHER_OPTIONS = TEACHERS.map((teacher) => ({ id: teacher.id, label: teacher.name }));
+
 export function SettingsScreen({
   page,
   preference,
   onPreference,
   textSize,
   onTextSize,
+  teacher,
+  onTeacher,
   formulaCount,
   notationCount,
   profile,
@@ -103,6 +110,8 @@ export function SettingsScreen({
           onPreference={onPreference}
           textSize={textSize}
           onTextSize={onTextSize}
+          teacher={teacher}
+          onTeacher={onTeacher}
           formulaCount={formulaCount}
           notationCount={notationCount}
           profile={profile}
@@ -130,6 +139,8 @@ function SettingsHome({
   onPreference,
   textSize,
   onTextSize,
+  teacher,
+  onTeacher,
   formulaCount,
   notationCount,
   profile,
@@ -455,6 +466,7 @@ function SettingsHome({
           onChange={onPreference}
         />
         <Choice label="Text size" value={textSize} options={SIZES} onChange={onTextSize} />
+        <Choice label="Teacher" value={teacher} options={TEACHER_OPTIONS} onChange={onTeacher} layout="wrap" />
       </div>
 
       <h3 className="settings-label">On this device</h3>
@@ -595,7 +607,7 @@ function SettingsHome({
             <div>
               <p className="settings-name">Everything</p>
               <p className="settings-hint">
-                {nothing ? "Nothing stored yet." : "Sign-in on this device, theme, text size, stars, recent formulas, notes, and Ask."}
+                {nothing ? "Nothing stored yet." : "Sign-in on this device, theme, text size, teacher, stars, recent formulas, notes, and Ask."}
               </p>
               {pending === "all" ? (
                 <Confirm
@@ -682,11 +694,13 @@ function Choice<T extends string>({
   value,
   options,
   onChange,
+  layout,
 }: {
   label: string;
   value: T;
   options: readonly { id: T; label: string }[];
   onChange: (value: T) => void;
+  layout?: "wrap";
 }) {
   const labelId = `${label.toLowerCase().replace(/\s+/g, "-")}-label`;
   return (
@@ -694,7 +708,7 @@ function Choice<T extends string>({
       <p className="settings-name" id={labelId}>
         {label}
       </p>
-      <div className="segment" role="group" aria-labelledby={labelId}>
+      <div className={layout === "wrap" ? "segment segment-wrap" : "segment"} role="group" aria-labelledby={labelId}>
         {options.map((option) => (
           <button
             key={option.id}
